@@ -19,11 +19,14 @@ namespace Escritorio
         Entidades.Usuarios usuarios = new Entidades.Usuarios();
         Entidades.Empresas empresas = new Entidades.Empresas();
         Entidades.BaseDatos baseDatos = new Entidades.BaseDatos();
+        Entidades.Modulos modulos = new Entidades.Modulos();
+        Entidades.BloqueoUsuarios bloqueoUsuarios = new Entidades.BloqueoUsuarios();
         Logica.DatosEmpresa datosEmpresa = new Logica.DatosEmpresa();
         ProcessStartInfo ejecutarProgramaPrincipal = new ProcessStartInfo();
         public int numeroEmpresa;
         public bool ocupaParametros;
         public bool esInicioSesion = true;
+        public int idEmpresaSesion = 0; public int idUsuarioSesion = 0; public int idModuloSesion = 1;
                      
         #region Eventos
 
@@ -51,20 +54,19 @@ namespace Escritorio
 
             if (this.ocupaParametros)
             {
-                ejecutarProgramaPrincipal.UseShellExecute = true;
-                ejecutarProgramaPrincipal.FileName = "Tarimas.exe";
-                ejecutarProgramaPrincipal.WorkingDirectory = Directory.GetCurrentDirectory();
-                ejecutarProgramaPrincipal.Arguments = datosEmpresa.Numero.ToString().Trim().Replace(" ", "|") + " " + datosEmpresa.Nombre.Trim().Replace(" ", "|") + " " + datosEmpresa.Descripcion.Trim().Replace(" ", "|") + " " + datosEmpresa.Domicilio.Trim().Replace(" ", "|") + " " + datosEmpresa.Localidad.Trim().Replace(" ", "|") + " " + datosEmpresa.Rfc.Trim().Replace(" ", "|") + " " + datosEmpresa.Directorio.Trim().Replace(" ", "|") + " " + datosEmpresa.Logo.Trim().Replace(" ", "|") + " " + datosEmpresa.Activa.ToString().Trim().Replace(" ", "|") + " " + datosEmpresa.Equipo.Trim().Replace(" ", "|") + " " + "Aquí terminan ;)".Replace(" ", "|");
-                //MessageBox.Show(ejecutarProgramaPrincipal.Arguments);
-                try
-                {
-                    Process.Start(ejecutarProgramaPrincipal);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("No se puede abrir el programa principal en la ruta : " + ejecutarProgramaPrincipal.WorkingDirectory + " " + ex.Message, "Error.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                
+                //ejecutarProgramaPrincipal.UseShellExecute = true;
+                //ejecutarProgramaPrincipal.FileName = "Tarimas.exe";
+                //ejecutarProgramaPrincipal.WorkingDirectory = Directory.GetCurrentDirectory();
+                //ejecutarProgramaPrincipal.Arguments = datosEmpresa.Numero.ToString().Trim().Replace(" ", "|") + " " + datosEmpresa.Nombre.Trim().Replace(" ", "|") + " " + datosEmpresa.Descripcion.Trim().Replace(" ", "|") + " " + datosEmpresa.Domicilio.Trim().Replace(" ", "|") + " " + datosEmpresa.Localidad.Trim().Replace(" ", "|") + " " + datosEmpresa.Rfc.Trim().Replace(" ", "|") + " " + datosEmpresa.Directorio.Trim().Replace(" ", "|") + " " + datosEmpresa.Logo.Trim().Replace(" ", "|") + " " + datosEmpresa.Activa.ToString().Trim().Replace(" ", "|") + " " + datosEmpresa.Equipo.Trim().Replace(" ", "|") + " " + "Aquí terminan ;)".Replace(" ", "|");
+                ////MessageBox.Show(ejecutarProgramaPrincipal.Arguments);
+                //try
+                //{
+                //    Process.Start(ejecutarProgramaPrincipal);
+                //}
+                //catch (Exception ex)
+                //{
+                //    MessageBox.Show("No se puede abrir el programa principal en la ruta : " + ejecutarProgramaPrincipal.WorkingDirectory + " " + ex.Message, "Error.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //}                
             }
             else
             {
@@ -80,13 +82,22 @@ namespace Escritorio
             string[] nombres = nombre.Split('_');
             int idModulo = Convert.ToInt32(nombres[1]);
             int idPrograma = Convert.ToInt32(nombres[2]);
-            bool acceso = ValidarAccesso(idModulo, idPrograma);
-            if (!acceso)
-            {                 
+            bool bloqueado = ValidarAccesso(idModulo, idPrograma);
+            if (bloqueado)
+            {
                 Panel objetoPanel = new Panel();
                 objetoPanel = (Panel)(pnlMenu.Controls[nombre]);
                 objetoPanel.Enabled = false;
                 MessageBox.Show("No tienes permisos para acceder a este programa.", "No permitido.", MessageBoxButtons.OK);
+            }
+            else
+            {
+                List<Entidades.Modulos> lista = new List<Entidades.Modulos>();
+                modulos.Id = this.idModuloSesion;
+                lista = modulos.ObtenerListadoPorId();
+                string nombreModulo = lista[0].Prefijo; 
+                string nombrePrograma = nombreModulo + idPrograma.ToString().PadLeft(2, '0');  
+                AbrirPrograma(nombrePrograma);
             }
              
         }
@@ -166,6 +177,19 @@ namespace Escritorio
 
         #region Metodos Privados
 
+        private bool ValidarAccesso(int idModulo, int idPrograma)
+        { 
+        
+            bool valor = false;
+            bloqueoUsuarios.IdEmpresa = this.idEmpresaSesion;
+            bloqueoUsuarios.IdUsuario = this.idUsuarioSesion;
+            bloqueoUsuarios.IdModulo = idModulo;
+            bloqueoUsuarios.IdPrograma = idPrograma;
+            valor = bloqueoUsuarios.ValidarPorNumero();
+            return valor;
+
+        }
+
         private void ValidarSesion()
         { 
             
@@ -189,6 +213,8 @@ namespace Escritorio
                         pnlIniciarSesion.Visible = false; Application.DoEvents();
                         pnlMenu.Visible = true; Application.DoEvents();
                         this.esInicioSesion = false;
+                        this.idEmpresaSesion = Convert.ToInt32(datos[0]);
+                        this.idUsuarioSesion = Convert.ToInt32(datos[1]);
                         GenerarMenu();
                     }
                     else
@@ -271,7 +297,7 @@ namespace Escritorio
         private void ConsultarInformacionEmpresa()
         {
 
-            string[] datos = empresas.ObtenerPredeterminada().Split('|');
+            string[] datos = empresas.ObtenerPredeterminada().Split('|');            
             datosEmpresa.Numero = Convert.ToInt32(datos[0]);
             datosEmpresa.Nombre = datos[1];
             datosEmpresa.Descripcion = datos[2];
@@ -367,6 +393,24 @@ namespace Escritorio
 
             lblEncabezadoPrograma.Text = "Programa: " + this.Text;
             lblEncabezadoEmpresa.Text = "Empresa: " + datosEmpresa.Nombre;
+
+        }
+
+        private void AbrirPrograma(string nombre)
+        {
+
+            ejecutarProgramaPrincipal.UseShellExecute = true;
+            ejecutarProgramaPrincipal.FileName = nombre + ".exe";
+            ejecutarProgramaPrincipal.WorkingDirectory = Directory.GetCurrentDirectory();
+            ejecutarProgramaPrincipal.Arguments = datosEmpresa.Numero.ToString().Trim().Replace(" ", "|") + " " + datosEmpresa.Nombre.Trim().Replace(" ", "|") + " " + datosEmpresa.Descripcion.Trim().Replace(" ", "|") + " " + datosEmpresa.Domicilio.Trim().Replace(" ", "|") + " " + datosEmpresa.Localidad.Trim().Replace(" ", "|") + " " + datosEmpresa.Rfc.Trim().Replace(" ", "|") + " " + datosEmpresa.Directorio.Trim().Replace(" ", "|") + " " + datosEmpresa.Logo.Trim().Replace(" ", "|") + " " + datosEmpresa.Activa.ToString().Trim().Replace(" ", "|") + " " + datosEmpresa.Equipo.Trim().Replace(" ", "|") + " " + "Aquí terminan ;)".Replace(" ", "|");
+            try
+            {
+                Process.Start(ejecutarProgramaPrincipal);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se puede abrir el programa principal en la ruta : " + ejecutarProgramaPrincipal.WorkingDirectory + "\\" + nombre + Environment.NewLine + Environment.NewLine + ex.Message, "Error.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }    
 
         }
 

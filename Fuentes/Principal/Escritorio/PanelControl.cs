@@ -120,7 +120,7 @@ namespace Escritorio
             string empresa = cbEmpresas.SelectedValue.ToString();
             string numero = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["numero"].Index].Text;
             string nombre = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["nombre"].Index].Text;
-            string contrasena = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["contrasena"].Index].Text;
+            string contrasena = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["contrasena"].Index].Value.ToString();
             string nivel = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["nivel"].Index].Text;
             bool accesoTotal = Convert.ToBoolean(spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["accesoTotal"].Index].Value);
             string idArea = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["idArea"].Index].Text;

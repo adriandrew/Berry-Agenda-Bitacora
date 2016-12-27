@@ -134,5 +134,42 @@ namespace Entidades
 
         }
 
+        public bool ValidarPorNumero()
+        {
+
+            try
+            {
+                bool resultado = false;
+                SqlCommand comando = new SqlCommand();
+                comando.Connection = BaseDatos.conexionInformacion;
+                comando.CommandText = "SELECT * FROM BloqueoUsuarios WHERE IdEmpresa=@idEmpresa AND IdUsuario=@idUsuario AND IdModulo=@idModulo AND IdPrograma=@idPrograma";
+                comando.Parameters.AddWithValue("@idEmpresa", this.IdEmpresa);
+                comando.Parameters.AddWithValue("@idUsuario", this.IdUsuario);
+                comando.Parameters.AddWithValue("@idModulo", this.IdModulo);
+                comando.Parameters.AddWithValue("@idPrograma", this.IdPrograma);
+                BaseDatos.conexionInformacion.Open();
+                SqlDataReader dataReader = comando.ExecuteReader();
+                if (dataReader.HasRows)
+                {
+                    resultado = true;
+                }
+                else
+                {
+                    resultado = false;
+                }
+                BaseDatos.conexionInformacion.Close();
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                BaseDatos.conexionInformacion.Close();
+            }
+
+        }
+
     }
 }
