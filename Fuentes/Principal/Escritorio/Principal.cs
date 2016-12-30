@@ -157,18 +157,19 @@ namespace Escritorio
         private void btnSalir_Click(object sender, EventArgs e)
         {
 
-            if (esInicioSesion)
+            if (this.esInicioSesion)
             {
                 Application.Exit();
             }
             else
             { 
-                pnlContenido.BackgroundImage = global::Principal.Properties.Resources.hiedra;                  
+                pnlContenido.BackgroundImage = global::Principal.Properties.Resources.hiedra;    
                 pnlMenu.Visible = false;
                 pnlIniciarSesion.Visible = true;
                 txtContraseña.Text = string.Empty;       
                 txtUsuario.Text = string.Empty;
-                txtUsuario.Focus();         
+                txtUsuario.Focus();
+                this.esInicioSesion = true;
             }
 
         }
@@ -406,6 +407,7 @@ namespace Escritorio
             try
             {
                 Process.Start(ejecutarProgramaPrincipal);
+                Application.Exit();
             }
             catch (Exception ex)
             {
