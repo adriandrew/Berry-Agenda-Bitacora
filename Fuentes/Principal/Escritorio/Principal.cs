@@ -286,8 +286,8 @@ namespace Escritorio
             }
             else
             {
-                string ruta = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
-                ruta = ruta.Replace("file:\\", null);
+                //string ruta = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+                //ruta = ruta.Replace("file:\\", null);
                 //baseDatos.CadenaConexionInformacion = string.Format("{0}\\Informacion.mdf", ruta);
                 baseDatos.CadenaConexionInformacion = "Informacion";
             }

@@ -22,15 +22,26 @@ Partial Class Principal
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim EnhancedScrollBarRenderer3 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
+        Dim EnhancedScrollBarRenderer4 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Principal))
         Me.pnlContenido = New System.Windows.Forms.Panel()
         Me.pnlCuerpo = New System.Windows.Forms.Panel()
+        Me.spCatalogos = New FarPoint.Win.Spread.FpSpread()
+        Me.spCatalogos_Sheet1 = New FarPoint.Win.Spread.SheetView()
+        Me.msMenu = New System.Windows.Forms.MenuStrip()
+        Me.miArea = New System.Windows.Forms.ToolStripMenuItem()
+        Me.miOpcion2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.pnlPie = New System.Windows.Forms.Panel()
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.pnlEncabezado = New System.Windows.Forms.Panel()
         Me.lblEncabezadoEmpresa = New System.Windows.Forms.Label()
         Me.lblEncabezadoPrograma = New System.Windows.Forms.Label()
         Me.pnlContenido.SuspendLayout()
+        Me.pnlCuerpo.SuspendLayout()
+        CType(Me.spCatalogos, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.spCatalogos_Sheet1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.msMenu.SuspendLayout()
         Me.pnlPie.SuspendLayout()
         Me.pnlEncabezado.SuspendLayout()
         Me.SuspendLayout()
@@ -58,11 +69,103 @@ Partial Class Principal
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCuerpo.AutoScroll = True
         Me.pnlCuerpo.BackColor = System.Drawing.Color.Transparent
+        Me.pnlCuerpo.Controls.Add(Me.spCatalogos)
+        Me.pnlCuerpo.Controls.Add(Me.msMenu)
         Me.pnlCuerpo.Location = New System.Drawing.Point(3, 135)
         Me.pnlCuerpo.Name = "pnlCuerpo"
         Me.pnlCuerpo.Size = New System.Drawing.Size(1029, 429)
         Me.pnlCuerpo.TabIndex = 9
-        Me.pnlCuerpo.Visible = False
+        '
+        'spCatalogos
+        '
+        Me.spCatalogos.AccessibleDescription = ""
+        Me.spCatalogos.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.spCatalogos.BackColor = System.Drawing.Color.White
+        Me.spCatalogos.HorizontalScrollBar.Buttons = New FarPoint.Win.Spread.FpScrollBarButtonCollection("BackwardLineButton,ThumbTrack,ForwardLineButton")
+        Me.spCatalogos.HorizontalScrollBar.Name = ""
+        EnhancedScrollBarRenderer3.ArrowColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer3.ArrowHoveredColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer3.ArrowSelectedColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer3.ButtonBackgroundColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer3.ButtonBorderColor = System.Drawing.Color.SlateGray
+        EnhancedScrollBarRenderer3.ButtonHoveredBackgroundColor = System.Drawing.Color.SlateGray
+        EnhancedScrollBarRenderer3.ButtonHoveredBorderColor = System.Drawing.Color.DarkGray
+        EnhancedScrollBarRenderer3.ButtonSelectedBackgroundColor = System.Drawing.Color.DarkGray
+        EnhancedScrollBarRenderer3.ButtonSelectedBorderColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer3.TrackBarBackgroundColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer3.TrackBarSelectedBackgroundColor = System.Drawing.Color.SlateGray
+        Me.spCatalogos.HorizontalScrollBar.Renderer = EnhancedScrollBarRenderer3
+        Me.spCatalogos.HorizontalScrollBar.TabIndex = 10
+        Me.spCatalogos.Location = New System.Drawing.Point(7, 42)
+        Me.spCatalogos.Name = "spCatalogos"
+        Me.spCatalogos.Sheets.AddRange(New FarPoint.Win.Spread.SheetView() {Me.spCatalogos_Sheet1})
+        Me.spCatalogos.Size = New System.Drawing.Size(1015, 375)
+        Me.spCatalogos.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell
+        Me.spCatalogos.TabIndex = 0
+        Me.spCatalogos.VerticalScrollBar.Buttons = New FarPoint.Win.Spread.FpScrollBarButtonCollection("BackwardLineButton,ThumbTrack,ForwardLineButton")
+        Me.spCatalogos.VerticalScrollBar.Name = ""
+        EnhancedScrollBarRenderer4.ArrowColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer4.ArrowHoveredColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer4.ArrowSelectedColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer4.ButtonBackgroundColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer4.ButtonBorderColor = System.Drawing.Color.SlateGray
+        EnhancedScrollBarRenderer4.ButtonHoveredBackgroundColor = System.Drawing.Color.SlateGray
+        EnhancedScrollBarRenderer4.ButtonHoveredBorderColor = System.Drawing.Color.DarkGray
+        EnhancedScrollBarRenderer4.ButtonSelectedBackgroundColor = System.Drawing.Color.DarkGray
+        EnhancedScrollBarRenderer4.ButtonSelectedBorderColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer4.TrackBarBackgroundColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer4.TrackBarSelectedBackgroundColor = System.Drawing.Color.SlateGray
+        Me.spCatalogos.VerticalScrollBar.Renderer = EnhancedScrollBarRenderer4
+        Me.spCatalogos.VerticalScrollBar.TabIndex = 11
+        '
+        'spCatalogos_Sheet1
+        '
+        Me.spCatalogos_Sheet1.Reset()
+        spCatalogos_Sheet1.SheetName = "Sheet1"
+        'Formulas and custom names must be loaded with R1C1 reference style
+        Me.spCatalogos_Sheet1.ReferenceStyle = FarPoint.Win.Spread.Model.ReferenceStyle.R1C1
+        Me.spCatalogos_Sheet1.ColumnFooter.DefaultStyle.NoteIndicatorColor = System.Drawing.Color.Red
+        Me.spCatalogos_Sheet1.ColumnFooter.DefaultStyle.Parent = "ColumnHeaderSeashell"
+        Me.spCatalogos_Sheet1.ColumnFooterSheetCornerStyle.NoteIndicatorColor = System.Drawing.Color.Red
+        Me.spCatalogos_Sheet1.ColumnFooterSheetCornerStyle.Parent = "CornerSeashell"
+        Me.spCatalogos_Sheet1.ColumnHeader.DefaultStyle.NoteIndicatorColor = System.Drawing.Color.Red
+        Me.spCatalogos_Sheet1.ColumnHeader.DefaultStyle.Parent = "ColumnHeaderSeashell"
+        Me.spCatalogos_Sheet1.RowHeader.DefaultStyle.NoteIndicatorColor = System.Drawing.Color.Red
+        Me.spCatalogos_Sheet1.RowHeader.DefaultStyle.Parent = "RowHeaderSeashell"
+        Me.spCatalogos_Sheet1.SheetCornerStyle.NoteIndicatorColor = System.Drawing.Color.Red
+        Me.spCatalogos_Sheet1.SheetCornerStyle.Parent = "CornerSeashell"
+        Me.spCatalogos_Sheet1.ReferenceStyle = FarPoint.Win.Spread.Model.ReferenceStyle.A1
+        '
+        'msMenu
+        '
+        Me.msMenu.BackColor = System.Drawing.Color.White
+        Me.msMenu.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.msMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.miArea, Me.miOpcion2})
+        Me.msMenu.Location = New System.Drawing.Point(0, 0)
+        Me.msMenu.Name = "msMenu"
+        Me.msMenu.Size = New System.Drawing.Size(1029, 39)
+        Me.msMenu.TabIndex = 1
+        Me.msMenu.Text = "Menú"
+        '
+        'miArea
+        '
+        Me.miArea.AutoToolTip = True
+        Me.miArea.CheckOnClick = True
+        Me.miArea.ForeColor = System.Drawing.Color.Black
+        Me.miArea.Name = "miArea"
+        Me.miArea.Size = New System.Drawing.Size(102, 35)
+        Me.miArea.Text = "Areas"
+        '
+        'miOpcion2
+        '
+        Me.miOpcion2.AutoToolTip = True
+        Me.miOpcion2.CheckOnClick = True
+        Me.miOpcion2.ForeColor = System.Drawing.Color.Black
+        Me.miOpcion2.Name = "miOpcion2"
+        Me.miOpcion2.Size = New System.Drawing.Size(142, 35)
+        Me.miOpcion2.Text = "Opcion 2"
         '
         'pnlPie
         '
@@ -128,9 +231,16 @@ Partial Class Principal
         Me.ClientSize = New System.Drawing.Size(1039, 635)
         Me.Controls.Add(Me.pnlContenido)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MainMenuStrip = Me.msMenu
         Me.Name = "Principal"
         Me.Text = "Catálogos"
         Me.pnlContenido.ResumeLayout(False)
+        Me.pnlCuerpo.ResumeLayout(False)
+        Me.pnlCuerpo.PerformLayout()
+        CType(Me.spCatalogos, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.spCatalogos_Sheet1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.msMenu.ResumeLayout(False)
+        Me.msMenu.PerformLayout()
         Me.pnlPie.ResumeLayout(False)
         Me.pnlEncabezado.ResumeLayout(False)
         Me.pnlEncabezado.PerformLayout()
@@ -144,4 +254,9 @@ Partial Class Principal
     Private WithEvents pnlEncabezado As System.Windows.Forms.Panel
     Private WithEvents lblEncabezadoEmpresa As System.Windows.Forms.Label
     Private WithEvents lblEncabezadoPrograma As System.Windows.Forms.Label
+    Friend WithEvents spCatalogos As FarPoint.Win.Spread.FpSpread
+    Friend WithEvents spCatalogos_Sheet1 As FarPoint.Win.Spread.SheetView
+    Friend WithEvents msMenu As System.Windows.Forms.MenuStrip
+    Friend WithEvents miArea As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents miOpcion2 As System.Windows.Forms.ToolStripMenuItem
 End Class
