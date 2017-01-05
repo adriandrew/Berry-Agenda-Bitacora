@@ -34,7 +34,7 @@ Public Module BaseDatos
 
     Public Sub AbrirConexionCatalogo()
 
-        BaseDatos.ECadenaConexionCatalogo = String.Format("Data Source=LOCALHOST\SQLEXPRESS;Initial Catalog={0};Integrated Security=True;Connect Timeout=30", BaseDatos.ECadenaConexionCatalogo)
+        BaseDatos.ECadenaConexionCatalogo = String.Format("Data Source=SYS21ALIEN03-PC\SQLEXPRESS;Initial Catalog={0};User Id=AdminBerry;Password=@berry", BaseDatos.ECadenaConexionCatalogo)
         'BaseDatos.ECadenaConexionCatalogo = "Data Source=LOCALHOST\SQLEXPRESS;Initial Catalog=CATALOGOS;Integrated Security=True"
         conexionCatalogo.ConnectionString = BaseDatos.ECadenaConexionCatalogo
 

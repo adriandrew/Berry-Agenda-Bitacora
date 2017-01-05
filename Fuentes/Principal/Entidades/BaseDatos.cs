@@ -22,9 +22,9 @@ namespace Entidades
         public void AbrirConexionInformacion()
         {
 
-            this.CadenaConexionInformacion = string.Format("Data Source=.\\SQLEXPRESS;Initial Catalog={0};Integrated Security=True;Connect Timeout=30", this.CadenaConexionInformacion);
+            this.CadenaConexionInformacion = string.Format("Data Source=SYS21ALIEN03-PC\\SQLEXPRESS;Initial Catalog={0};User Id=AdminBerry;Password=@berry", this.CadenaConexionInformacion);
             conexionInformacion.ConnectionString = this.CadenaConexionInformacion;
-
+            //Data Source=SYS21ALIEN03-PC\SQLEXPRESS;Initial Catalog=INFORMACION;User ID=adminberry
         }
         
     }
