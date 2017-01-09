@@ -102,6 +102,28 @@ namespace Escritorio
              
         }
 
+        private void cuadro_MouseHover(object sender, EventArgs e)
+        {
+
+            this.Cursor = Cursors.Hand;
+            string nombre = ((Panel)sender).Name;
+            Panel objetoPanel = new Panel();
+            objetoPanel = (Panel)(pnlMenu.Controls[nombre]);
+            objetoPanel.BorderStyle = BorderStyle.Fixed3D;
+            
+        }
+
+        private void cuadro_MouseLeave(object sender, EventArgs e)
+        {
+
+            this.Cursor = Cursors.Default;
+            string nombre = ((Panel)sender).Name;
+            Panel objetoPanel = new Panel();
+            objetoPanel = (Panel)(pnlMenu.Controls[nombre]);
+            objetoPanel.BorderStyle = BorderStyle.None;
+
+        }
+
         private void btnCambiarEmpresa_Click(object sender, EventArgs e)
         {
 
@@ -137,7 +159,7 @@ namespace Escritorio
             {
                 if (!string.IsNullOrEmpty(this.txtContraseña.Text))
                 {
-                    this.btnIniciarSesion.Focus();
+                    this.btnEntrar.Focus();
                 }
             }
             else if (e.KeyCode == Keys.Escape)
@@ -162,8 +184,12 @@ namespace Escritorio
                 Application.Exit();
             }
             else
-            { 
-                pnlContenido.BackgroundImage = global::Principal.Properties.Resources.hiedra;    
+            {
+                pnlContenido.BackgroundImage = global::Principal.Properties.Resources.Logo3;
+                pnlContenido.BackgroundImageLayout = ImageLayout.Zoom;
+                pnlContenido.BackColor = Color.DarkSlateGray;
+                //pnlContenido.BackgroundImage = global::Principal.Properties.Resources.hiedra;
+                //pnlContenido.BackgroundImageLayout = ImageLayout.Stretch;
                 pnlMenu.Visible = false;
                 pnlIniciarSesion.Visible = true;
                 txtContraseña.Text = string.Empty;       
@@ -262,7 +288,7 @@ namespace Escritorio
             tp.ReshowDelay = 100;
             tp.ShowAlways = true;
             tp.SetToolTip(this.btnCambiarEmpresa, "Cambiar de Empresa.");
-            tp.SetToolTip(this.btnIniciarSesion, "Iniciar Sesión.");
+            tp.SetToolTip(this.btnEntrar, "Entrar.");
             tp.SetToolTip(this.btnMostrarOpciones, "Mostrar Opciones.");
             tp.SetToolTip(this.btnSalir, "Salir.");
 
@@ -271,7 +297,7 @@ namespace Escritorio
         private void AsignarFocos()
         {
 
-            this.btnIniciarSesion.Focus();            
+            this.btnEntrar.Focus();            
 
         }
 
@@ -321,8 +347,8 @@ namespace Escritorio
             programas.IdEmpresa = empresas.Id;
             lista = programas.ObtenerListadoDeProgramas();
             // Se quita la imagen de fondo del programa.
-            pnlContenido.BackgroundImage = null; Application.DoEvents();
-            pnlContenido.BackColor = Color.FromArgb(240, 240, 240); Application.DoEvents();
+            //pnlContenido.BackgroundImage = null; Application.DoEvents();
+            //pnlContenido.BackColor = Color.White; //Color.FromArgb(240, 240, 240); Application.DoEvents();
             // Se calculan los controles necesarios.
             int alto = 190; int ancho = 380; // Los tamaños de los controles.
             int posicionY = 0; int posicionX = 0; // Las posiciones donde inician los controles.
@@ -338,19 +364,25 @@ namespace Escritorio
                 cuadro.Size = new Size(ancho, alto);
                 cuadro.Top = posicionY;
                 cuadro.Left = posicionX;
+                cuadro.BorderStyle = BorderStyle.FixedSingle;
                 cuadro.BackColor = ObtenerColorAleatorio(); 
-                System.Threading.Thread.Sleep(15);
-                cuadro.BackColor = ControlPaint.Dark(cuadro.BackColor); 
+                System.Threading.Thread.Sleep(60);
+                //cuadro.BackColor = ControlPaint.Dark(cuadro.BackColor); 
                 cuadro.Name = "pnlPrograma_1_" + lista[indice-1].Id; // El 1 está fijo, pero corresponde al modulo.
                 cuadro.Click += new System.EventHandler(cuadro_Click); // Se genera el evento desde codigo.
+                cuadro.MouseHover += new System.EventHandler(cuadro_MouseHover); // Se genera el evento desde codigo.
+                cuadro.MouseLeave += new System.EventHandler(cuadro_MouseLeave); // Se genera el evento desde codigo.
                 pnlMenu.Controls.Add(cuadro); Application.DoEvents();
                 // Se crean las etiquetas de los paneles.
                 Label etiqueta = new Label();
                 etiqueta.Width = ancho;
-                etiqueta.Top = cuadro.Height - etiqueta.Height;
+                etiqueta.Top = cuadro.Height - etiqueta.Height - 15;
+                //etiqueta.BackColor = Color.Black;
+                etiqueta.Height = 40;
                 etiqueta.Left = 0;
                 etiqueta.Text = lista[indice-1].Nombre.ToString(); //"numero " + indice; 
                 etiqueta.ForeColor = Color.White;
+                etiqueta.Font = new Font( "Microsoft Sans Serif", 20, FontStyle.Regular);
                 cuadro.Controls.Add(etiqueta); Application.DoEvents();
                 // Se calculan y se distribuyen de acuerdo al tamaño del panel del menu.
                 indiceVariable += 1;
@@ -417,6 +449,8 @@ namespace Escritorio
         }
 
         #endregion
-                  
+
+      
+                           
     }
 }

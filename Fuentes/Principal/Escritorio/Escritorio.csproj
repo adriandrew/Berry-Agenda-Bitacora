@@ -67,7 +67,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Logo2.ico</ApplicationIcon>
+    <ApplicationIcon>Logo3.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FarPoint.CalcEngine, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457" />
@@ -12619,6 +12619,8 @@
     <Content Include="Iconos Nuevos\SVG_EPS_PDF\How to get SVG EPS and PDF.txt" />
     <Content Include="Logo.ico" />
     <Content Include="Logo2.ico" />
+    <Content Include="Logo3.ico" />
+    <None Include="Logos\Logo3.png" />
     <None Include="Logos\hiedra.jpg" />
     <None Include="Logos\smooth-ivy.jpg" />
   </ItemGroup>

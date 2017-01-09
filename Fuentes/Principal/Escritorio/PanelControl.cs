@@ -98,7 +98,7 @@ namespace Escritorio
                 if (spAdministrar.ActiveSheet.ActiveColumnIndex == spAdministrar.ActiveSheet.Columns.Count - 1)
                 {
                     spAdministrar.ActiveSheet.AddRows(spAdministrar.ActiveSheet.Rows.Count, 1);
-                    int fila = spAdministrar.ActiveSheet.ActiveRowIndex;
+                    //int fila = spAdministrar.ActiveSheet.ActiveRowIndex;
                     if (rbtnUsuarios.Checked)
                     {
                         GuardarEditarUsuarios();
@@ -261,6 +261,73 @@ namespace Escritorio
             CargarUsuarios();
             FormatearSpread();
             FormatearSpreadUsuarios();
+
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+
+            this.Dispose();
+            new Principal().Show();            
+
+        }
+
+        private void spAdministrar_CellDoubleClick(object sender, FarPoint.Win.Spread.CellClickEventArgs e)
+        {
+
+            if (rbtnUsuarios.Checked)
+            {
+                //if (spAdministrar.ActiveSheet.ActiveColumnIndex == spAdministrar.ActiveSheet.Columns["nivel"].Index)
+                //{
+                    int fila = e.Row;
+                    spAdministrar.ActiveSheet.ActiveRowIndex = fila;
+                    int valorCelda = Convert.ToInt32(spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["nivel"].Index].Value);
+                    FormatearSpread();
+                    if (valorCelda == 1) // Nivel de bloqueo de los modulos. // TODO. Pendiente.
+                    {
+
+                    }
+                    else if (valorCelda == 2) // Nivel de bloqueo de los programas.
+                    {
+                        spProgramas.Visible = true;
+                        spSubProgramas.Visible = false;
+                        spAdministrar.Height = ((pnlContenido.Height - pnlPie.Height) / 2) - 10;
+                        spProgramas.Top = spAdministrar.Height + 20;
+                        spProgramas.Height = spAdministrar.Height;
+                        spProgramas.Width = spAdministrar.Width;
+                        CargarProgramas();
+                        FormatearSpreadProgramas();
+                    }
+                    else if (valorCelda == 3) // Nivel de bloqueo de los subprogramas. TODO. Pendiente.
+                    {
+                        //spProgramas.Visible = true;
+                        //spSubProgramas.Visible = true;
+                    }
+                //}
+            }
+
+        }
+         
+        private void spProgramas_CellClick(object sender, FarPoint.Win.Spread.CellClickEventArgs e)
+        {
+            
+            if (rbtnUsuarios.Checked)
+            {
+                int fila = e.Row;
+                spProgramas.ActiveSheet.ActiveRowIndex = fila; Application.DoEvents();
+                bool valorCelda = Convert.ToBoolean(spProgramas.ActiveSheet.Cells[fila, spProgramas.ActiveSheet.Columns["estatus"].Index].Value);
+                valorCelda = ((valorCelda == true) ? false : true);
+                if (valorCelda) // Agrega.
+                {
+                    GuardarBloqueoUsuarios();
+                }
+                else if (!valorCelda) // Elimina.
+                {
+                    EliminarBloqueoUsuarios();
+                }
+                CargarProgramas();
+                FormatearSpreadProgramas();
+            }
 
         }
 
@@ -505,92 +572,6 @@ namespace Escritorio
         }
 
         #endregion
-
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-
-            this.Dispose();
-            new Principal().Show();            
-
-        }
-
-        private void spAdministrar_CellDoubleClick(object sender, FarPoint.Win.Spread.CellClickEventArgs e)
-        {
-
-            if (rbtnUsuarios.Checked)
-            {
-                //if (spAdministrar.ActiveSheet.ActiveColumnIndex == spAdministrar.ActiveSheet.Columns["nivel"].Index)
-                //{
-                    int fila = e.Row;
-                    spAdministrar.ActiveSheet.ActiveRowIndex = fila;
-                    int valorCelda = Convert.ToInt32(spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["nivel"].Index].Value);
-                    FormatearSpread();
-                    if (valorCelda == 1) // Nivel de bloqueo de los modulos. // TODO. Pendiente.
-                    {
-
-                    }
-                    else if (valorCelda == 2) // Nivel de bloqueo de los programas.
-                    {
-                        spProgramas.Visible = true;
-                        spSubProgramas.Visible = false;
-                        spAdministrar.Height = ((pnlContenido.Height - pnlPie.Height) / 2) - 10;
-                        spProgramas.Top = spAdministrar.Height + 20;
-                        spProgramas.Height = spAdministrar.Height;
-                        spProgramas.Width = spAdministrar.Width;
-                        CargarProgramas();
-                        FormatearSpreadProgramas();
-                    }
-                    else if (valorCelda == 3) // Nivel de bloqueo de los subprogramas. TODO. Pendiente.
-                    {
-                        //spProgramas.Visible = true;
-                        //spSubProgramas.Visible = true;
-                    }
-                //}
-            }
-
-        }
-         
-        private void spProgramas_CellClick(object sender, FarPoint.Win.Spread.CellClickEventArgs e)
-        {
-            
-            if (rbtnUsuarios.Checked)
-            {
-                int fila = e.Row;
-                spProgramas.ActiveSheet.ActiveRowIndex = fila; Application.DoEvents();
-                bool valorCelda = Convert.ToBoolean(spProgramas.ActiveSheet.Cells[fila, spProgramas.ActiveSheet.Columns["estatus"].Index].Value);
-                valorCelda = ((valorCelda == true) ? false : true);
-                if (valorCelda) // Agrega.
-                {
-                    GuardarBloqueoUsuarios();
-                }
-                else if (!valorCelda) // Elimina.
-                {
-                    EliminarBloqueoUsuarios();
-                }
-                CargarProgramas();
-                FormatearSpreadProgramas();
-            }
-
-        }
-
-        private void btnGuardarBloqueos_Click(object sender, EventArgs e)
-        {
-
-            //if (rbtnUsuarios.Checked)
-            //{
-            //    int fila = spProgramas.ActiveSheet.ActiveRowIndex;
-            //    bool valorCelda = Convert.ToBoolean(spProgramas.ActiveSheet.Cells[fila, spProgramas.ActiveSheet.Columns["estatus"].Index].Value);
-            //    if (valorCelda) // Agrega.
-            //    {
-            //        GuardarBloqueoUsuarios();
-            //    }
-            //    else if (!valorCelda) // Elimina.
-            //    {
-
-            //    }
-            //}
-
-        }
 
     }
 }

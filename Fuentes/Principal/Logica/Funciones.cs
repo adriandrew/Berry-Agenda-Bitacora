@@ -20,8 +20,7 @@ namespace Logica
             {
                 return 0;
             }
-            
-        
+                    
         }
         
     }
