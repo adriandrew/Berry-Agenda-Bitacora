@@ -34,3 +34,7 @@ C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUE
 C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Actividades\Escritorio\obj\x86\Release\CatalogosBerry.exe
 C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Actividades\Escritorio\obj\x86\Release\CatalogosBerry.xml
 C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Actividades\Escritorio\obj\x86\Release\CatalogosBerry.pdb
+C:\Users\Andrew\Desktop\Actividades\Escritorio\bin\x86\Release\CatalogosBerry.exe.config
+C:\Users\Andrew\Desktop\Actividades\Escritorio\obj\x86\Release\CatalogosBerry.exe
+C:\Users\Andrew\Desktop\Actividades\Escritorio\obj\x86\Release\CatalogosBerry.xml
+C:\Users\Andrew\Desktop\Actividades\Escritorio\obj\x86\Release\CatalogosBerry.pdb

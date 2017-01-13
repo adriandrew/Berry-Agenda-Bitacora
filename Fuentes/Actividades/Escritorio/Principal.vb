@@ -1,6 +1,6 @@
 ﻿Public Class Principal
 
-    Dim areas As New EntidadesActividades.Areas
+    Dim areas As New EntidadesActividades.Actividades
     Public datosEmpresa As New LogicaActividades.DatosEmpresa()
     Public tipoTexto As New FarPoint.Win.Spread.CellType.TextCellType()
     Public tipoEntero As New FarPoint.Win.Spread.CellType.NumberCellType()
@@ -176,7 +176,7 @@
 
     Private Sub CargarAreas()
 
-        Dim lista As New List(Of EntidadesActividades.Areas)
+        Dim lista As New List(Of EntidadesActividades.Actividades)
         lista = areas.ObtenerListado()
         spCatalogos.ActiveSheet.DataSource = lista
         spCatalogos.ActiveSheet.Rows.Count += 1

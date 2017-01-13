@@ -1,10 +1,14 @@
 ﻿Imports System.Data.SqlClient
 
-Public Class Areas
+Public Class Actividades
 
     Private id As Integer
+    Private idUsuario As Integer
     Private nombre As String
-    Private clave As String
+    Private descripcion As String
+    Private fechaCreacion As Date
+    Private fechaVencimiento As Date
+    Private esUrente As Boolean
 
     Public Property EId() As Integer
         Get
@@ -12,6 +16,14 @@ Public Class Areas
         End Get
         Set(value As Integer)
             Me.id = value
+        End Set
+    End Property
+    Public Property EIdUsuario() As Integer
+        Get
+            Return Me.idUsuario
+        End Get
+        Set(value As Integer)
+            Me.idUsuario = value 
         End Set
     End Property
     Public Property ENombre() As String
@@ -22,32 +34,59 @@ Public Class Areas
             Me.nombre = value
         End Set
     End Property
-    Public Property EClave() As String
+    Public Property EDescripcion() As String
         Get
-            Return Me.clave
+            Return Me.descripcion
         End Get
         Set(value As String)
-            Me.clave = value
+            Me.descripcion = value
+        End Set
+    End Property
+    Public Property EFechaCreacion() As String
+        Get
+            Return Me.fechaCreacion
+        End Get
+        Set(value As String)
+            Me.fechaCreacion = value
+        End Set
+    End Property
+    Public Property EFechaVencimiento() As String
+        Get
+            Return Me.fechaVencimiento
+        End Get
+        Set(value As String)
+            Me.fechaVencimiento = value
+        End Set
+    End Property
+    Public Property EEsUrente() As String
+        Get
+            Return Me.esUrente
+        End Get
+        Set(value As String)
+            Me.esUrente = value
         End Set
     End Property
 
-    Public Function ObtenerListado() As List(Of Areas)
+    Public Function ObtenerListado() As List(Of Actividades)
 
-        Dim lista As New List(Of Areas)
-        Try 
+        Dim lista As New List(Of Actividades)
+        Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionCatalogo
-            comando.CommandText = "SELECT * FROM Areas" 
+            comando.CommandText = "SELECT * FROM Areas"
             BaseDatos.conexionCatalogo.Open()
             Dim dataReader As SqlDataReader
             dataReader = comando.ExecuteReader()
-            Dim areas As New Areas
-            While (dataReader.Read()) 
-                areas = New Areas()
-                areas.id = Convert.ToInt32(dataReader("Id"))
-                areas.nombre = dataReader("Nombre").ToString()
-                areas.clave = dataReader("Clave").ToString()
-                lista.Add(areas) 
+            Dim actividades As New Actividades
+            While (dataReader.Read())
+                actividades = New Actividades()
+                actividades.id = Convert.ToInt32(dataReader("Id"))
+                actividades.nombre = dataReader("Nombre").ToString()
+                actividades.descripcion = dataReader("Descripcion").ToString()
+                actividades.fechaCreacion = dataReader("FechaCreacion").ToString()
+                actividades.fechaVencimiento = dataReader("FechaVencimiento").ToString()
+                actividades.esUrente = dataReader("EsUrente").ToString()
+                lista.Add(actividades)
             End While
             BaseDatos.conexionCatalogo.Close()
             Return lista
@@ -77,7 +116,7 @@ Public Class Areas
 
     End Sub
 
-    Public Sub Editar() 
+    Public Sub Editar()
 
         Try
             Dim comando As New SqlCommand()
@@ -85,13 +124,13 @@ Public Class Areas
             comando.CommandText = "UPDATE Areas SET Nombre=@nombre, Clave=@clave WHERE Id=@id"
             comando.Parameters.AddWithValue("@id", Me.EId)
             comando.Parameters.AddWithValue("@nombre", Me.ENombre)
-            comando.Parameters.AddWithValue("@clave", Me.EClave) 
+            comando.Parameters.AddWithValue("@clave", Me.EClave)
             BaseDatos.conexionCatalogo.Open()
             comando.ExecuteNonQuery()
             BaseDatos.conexionCatalogo.Close()
-        Catch ex As Exception 
+        Catch ex As Exception
             Throw ex
-        Finally 
+        Finally
             BaseDatos.conexionCatalogo.Close()
         End Try
 
@@ -99,7 +138,7 @@ Public Class Areas
 
     Public Sub Eliminar()
 
-        Try 
+        Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionCatalogo
             comando.CommandText = "DELETE FROM Areas WHERE Id=@id"
@@ -109,7 +148,7 @@ Public Class Areas
             BaseDatos.conexionCatalogo.Close()
         Catch ex As Exception
             Throw ex
-        Finally 
+        Finally
             BaseDatos.conexionCatalogo.Close()
         End Try
 
