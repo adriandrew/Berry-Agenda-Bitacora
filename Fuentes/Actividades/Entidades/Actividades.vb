@@ -8,7 +8,7 @@ Public Class Actividades
     Private descripcion As String
     Private fechaCreacion As Date
     Private fechaVencimiento As Date
-    Private esUrente As Boolean
+    Private esUrgente As Boolean
 
     Public Property EId() As Integer
         Get
@@ -23,7 +23,7 @@ Public Class Actividades
             Return Me.idUsuario
         End Get
         Set(value As Integer)
-            Me.idUsuario = value 
+            Me.idUsuario = value
         End Set
     End Property
     Public Property ENombre() As String
@@ -58,12 +58,12 @@ Public Class Actividades
             Me.fechaVencimiento = value
         End Set
     End Property
-    Public Property EEsUrente() As String
+    Public Property EEsUrgente() As String
         Get
-            Return Me.esUrente
+            Return Me.esUrgente
         End Get
         Set(value As String)
-            Me.esUrente = value
+            Me.esUrgente = value
         End Set
     End Property
 
@@ -72,9 +72,9 @@ Public Class Actividades
         Dim lista As New List(Of Actividades)
         Try
             Dim comando As New SqlCommand()
-            comando.Connection = BaseDatos.conexionCatalogo
-            comando.CommandText = "SELECT * FROM Areas"
-            BaseDatos.conexionCatalogo.Open()
+            comando.Connection = BaseDatos.conexionAgenda
+            comando.CommandText = "SELECT * FROM Actividades"
+            BaseDatos.conexionAgenda.Open()
             Dim dataReader As SqlDataReader
             dataReader = comando.ExecuteReader()
             Dim actividades As New Actividades
@@ -85,13 +85,44 @@ Public Class Actividades
                 actividades.descripcion = dataReader("Descripcion").ToString()
                 actividades.fechaCreacion = dataReader("FechaCreacion").ToString()
                 actividades.fechaVencimiento = dataReader("FechaVencimiento").ToString()
-                actividades.esUrente = dataReader("EsUrente").ToString()
+                actividades.esUrgente = dataReader("EsUrgente").ToString()
                 lista.Add(actividades)
             End While
-            BaseDatos.conexionCatalogo.Close()
+            BaseDatos.conexionAgenda.Close()
             Return lista
         Catch ex As Exception
             Throw ex
+        End Try
+
+    End Function
+
+    Public Function ObtenerListadoPorId() As List(Of Actividades)
+
+        Dim lista As New List(Of Actividades)()
+        Try
+            Dim comando As New SqlCommand()
+            comando.Connection = BaseDatos.conexionAgenda
+            comando.CommandText = "SELECT * FROM Actividades WHERE Id=@id"
+            comando.Parameters.AddWithValue("@id", Me.EId)
+            BaseDatos.conexionAgenda.Open()
+            Dim dataReader As SqlDataReader = comando.ExecuteReader()
+            Dim Actividades As Actividades
+            While dataReader.Read()
+                Actividades = New Actividades()
+                Actividades.id = Convert.ToInt32(dataReader("Id"))
+                Actividades.nombre = dataReader("Nombre").ToString()
+                Actividades.descripcion = dataReader("Descripcion").ToString()
+                Actividades.fechaCreacion = dataReader("FechaCreacion").ToString()
+                Actividades.fechaVencimiento = dataReader("FechaVencimiento").ToString()
+                Actividades.esUrgente = dataReader("EsUrgente").ToString()
+                lista.Add(Actividades)
+            End While
+            BaseDatos.conexionAgenda.Close()
+            Return lista
+        Catch ex As Exception
+            Throw ex
+        Finally
+            BaseDatos.conexionAgenda.Close()
         End Try
 
     End Function
@@ -100,18 +131,22 @@ Public Class Actividades
 
         Try
             Dim comando As New SqlCommand()
-            comando.Connection = BaseDatos.conexionCatalogo
-            comando.CommandText = "INSERT INTO Areas VALUES (@id, @nombre, @clave)"
+            comando.Connection = BaseDatos.conexionAgenda
+            comando.CommandText = "INSERT INTO Actividades VALUES (@id, @idUsuario, @nombre, @descripcion, @fechaCreacion, @fechaVencimiento, @esUrgente)"
             comando.Parameters.AddWithValue("@id", Me.EId)
+            comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
             comando.Parameters.AddWithValue("@nombre", Me.ENombre)
-            comando.Parameters.AddWithValue("@clave", Me.EClave)
-            BaseDatos.conexionCatalogo.Open()
+            comando.Parameters.AddWithValue("@descripcion", Me.EDescripcion)
+            comando.Parameters.AddWithValue("@fechaCreacion", Me.EFechaCreacion)
+            comando.Parameters.AddWithValue("@fechaVencimiento", Me.EFechaVencimiento)
+            comando.Parameters.AddWithValue("@esUrgente", Me.EEsUrgente)
+            BaseDatos.conexionAgenda.Open()
             comando.ExecuteNonQuery()
-            BaseDatos.conexionCatalogo.Close()
+            BaseDatos.conexionAgenda.Close()
         Catch ex As Exception
             Throw ex
         Finally
-            BaseDatos.conexionCatalogo.Close()
+            BaseDatos.conexionAgenda.Close()
         End Try
 
     End Sub
@@ -120,18 +155,22 @@ Public Class Actividades
 
         Try
             Dim comando As New SqlCommand()
-            comando.Connection = BaseDatos.conexionCatalogo
-            comando.CommandText = "UPDATE Areas SET Nombre=@nombre, Clave=@clave WHERE Id=@id"
+            comando.Connection = BaseDatos.conexionAgenda
+            comando.CommandText = "UPDATE Actividades SET IdUsuario=@idUsuario, Nombre=@nombre, Descripcion=@descripcion, FechaCreacion=@fechaCreacion, FechaVencimiento=@fechaVencimiento, EsUrgente=@esUrgente WHERE Id=@id"
             comando.Parameters.AddWithValue("@id", Me.EId)
+            comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
             comando.Parameters.AddWithValue("@nombre", Me.ENombre)
-            comando.Parameters.AddWithValue("@clave", Me.EClave)
-            BaseDatos.conexionCatalogo.Open()
+            comando.Parameters.AddWithValue("@descripcion", Me.EDescripcion)
+            comando.Parameters.AddWithValue("@fechaCreacion", Me.EFechaCreacion)
+            comando.Parameters.AddWithValue("@fechaVencimiento", Me.EFechaVencimiento)
+            comando.Parameters.AddWithValue("@esUrgente", Me.EEsUrgente)
+            BaseDatos.conexionAgenda.Open()
             comando.ExecuteNonQuery()
-            BaseDatos.conexionCatalogo.Close()
+            BaseDatos.conexionAgenda.Close()
         Catch ex As Exception
             Throw ex
         Finally
-            BaseDatos.conexionCatalogo.Close()
+            BaseDatos.conexionAgenda.Close()
         End Try
 
     End Sub
@@ -140,16 +179,16 @@ Public Class Actividades
 
         Try
             Dim comando As New SqlCommand()
-            comando.Connection = BaseDatos.conexionCatalogo
-            comando.CommandText = "DELETE FROM Areas WHERE Id=@id"
+            comando.Connection = BaseDatos.conexionAgenda
+            comando.CommandText = "DELETE FROM Actividades WHERE Id=@id"
             comando.Parameters.AddWithValue("@id", Me.id)
-            BaseDatos.conexionCatalogo.Open()
+            BaseDatos.conexionAgenda.Open()
             comando.ExecuteNonQuery()
-            BaseDatos.conexionCatalogo.Close()
+            BaseDatos.conexionAgenda.Close()
         Catch ex As Exception
             Throw ex
         Finally
-            BaseDatos.conexionCatalogo.Close()
+            BaseDatos.conexionAgenda.Close()
         End Try
 
     End Sub
@@ -159,10 +198,10 @@ Public Class Actividades
         Try
             Dim resultado As Boolean = False
             Dim comando As New SqlCommand()
-            comando.Connection = BaseDatos.conexionCatalogo
-            comando.CommandText = "SELECT * FROM Areas WHERE Id=@id"
+            comando.Connection = BaseDatos.conexionAgenda
+            comando.CommandText = "SELECT * FROM Actividades WHERE Id=@id"
             comando.Parameters.AddWithValue("@id", Me.EId)
-            BaseDatos.conexionCatalogo.Open()
+            BaseDatos.conexionAgenda.Open()
             Dim dataReader As SqlDataReader
             dataReader = comando.ExecuteReader()
             If (dataReader.HasRows) Then
@@ -170,7 +209,7 @@ Public Class Actividades
             Else
                 resultado = False
             End If
-            BaseDatos.conexionCatalogo.Close()
+            BaseDatos.conexionAgenda.Close()
             Return resultado
         Catch ex As Exception
             Throw ex
@@ -180,5 +219,32 @@ Public Class Actividades
 
     End Function
 
+    Public Function ObtenerMaximo() As Integer
+
+        Try
+            Dim comando As New SqlCommand()
+            comando.Connection = BaseDatos.conexionAgenda
+            comando.CommandText = "SELECT MAX(Id) AS Id FROM Actividades" 
+            BaseDatos.conexionAgenda.Open()
+            Dim dataReader As SqlDataReader
+            dataReader = comando.ExecuteReader()
+            If (Not dataReader.HasRows) Then
+                Return 1
+            End If
+            While (dataReader.Read())
+                If (String.IsNullOrEmpty(dataReader("Id").ToString())) Then
+                    Me.id = 1
+                Else
+                    Me.id = Convert.ToInt32(dataReader("Id").ToString()) + 1
+                End If
+            End While
+            BaseDatos.conexionAgenda.Close()
+            Return Me.id
+        Catch ex As Exception
+            Throw ex
+        Finally
+            BaseDatos.conexionAgenda.Close()
+        End Try
+    End Function
 
 End Class

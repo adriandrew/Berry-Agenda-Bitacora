@@ -86,7 +86,6 @@
   <ItemGroup>
     <Compile Include="Areas.vb" />
     <Compile Include="BaseDatos.vb" />
-    <Compile Include="List.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

@@ -22,16 +22,30 @@ Partial Class Principal
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Principal))
         Dim EnhancedScrollBarRenderer1 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
         Dim EnhancedScrollBarRenderer2 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Principal))
         Me.pnlContenido = New System.Windows.Forms.Panel()
         Me.pnlCuerpo = New System.Windows.Forms.Panel()
-        Me.spCatalogos = New FarPoint.Win.Spread.FpSpread()
-        Me.spCatalogos_Sheet1 = New FarPoint.Win.Spread.SheetView()
-        Me.msMenu = New System.Windows.Forms.MenuStrip()
-        Me.miArea = New System.Windows.Forms.ToolStripMenuItem()
-        Me.miOpcion2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tbActividades = New System.Windows.Forms.TabControl()
+        Me.tpCapturarActividades = New System.Windows.Forms.TabPage()
+        Me.btnCapturaIdAnterior = New System.Windows.Forms.Button()
+        Me.btnCapturaIdSiguiente = New System.Windows.Forms.Button()
+        Me.dtpCapturaFechaVencimiento = New System.Windows.Forms.DateTimePicker()
+        Me.dtpCapturaFechaCreacion = New System.Windows.Forms.DateTimePicker()
+        Me.btnCapturaGuardar = New System.Windows.Forms.Button()
+        Me.chkCapturaEsUrgente = New System.Windows.Forms.CheckBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtCapturaId = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.txtCapturaDescripcion = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.txtCapturaNombre = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.spResolverActividades = New FarPoint.Win.Spread.FpSpread()
+        Me.spResolverActividades_Sheet1 = New FarPoint.Win.Spread.SheetView()
         Me.pnlPie = New System.Windows.Forms.Panel()
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.pnlEncabezado = New System.Windows.Forms.Panel()
@@ -39,9 +53,11 @@ Partial Class Principal
         Me.lblEncabezadoPrograma = New System.Windows.Forms.Label()
         Me.pnlContenido.SuspendLayout()
         Me.pnlCuerpo.SuspendLayout()
-        CType(Me.spCatalogos, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.spCatalogos_Sheet1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.msMenu.SuspendLayout()
+        Me.tbActividades.SuspendLayout()
+        Me.tpCapturarActividades.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
+        CType(Me.spResolverActividades, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.spResolverActividades_Sheet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlPie.SuspendLayout()
         Me.pnlEncabezado.SuspendLayout()
         Me.SuspendLayout()
@@ -69,22 +85,197 @@ Partial Class Principal
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCuerpo.AutoScroll = True
         Me.pnlCuerpo.BackColor = System.Drawing.Color.Transparent
-        Me.pnlCuerpo.Controls.Add(Me.spCatalogos)
-        Me.pnlCuerpo.Controls.Add(Me.msMenu)
+        Me.pnlCuerpo.Controls.Add(Me.tbActividades)
         Me.pnlCuerpo.Location = New System.Drawing.Point(3, 135)
         Me.pnlCuerpo.Name = "pnlCuerpo"
         Me.pnlCuerpo.Size = New System.Drawing.Size(1029, 429)
         Me.pnlCuerpo.TabIndex = 9
         '
-        'spCatalogos
+        'tbActividades
         '
-        Me.spCatalogos.AccessibleDescription = ""
-        Me.spCatalogos.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.tbActividades.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.spCatalogos.BackColor = System.Drawing.Color.White
-        Me.spCatalogos.HorizontalScrollBar.Buttons = New FarPoint.Win.Spread.FpScrollBarButtonCollection("BackwardLineButton,ThumbTrack,ForwardLineButton")
-        Me.spCatalogos.HorizontalScrollBar.Name = ""
+        Me.tbActividades.Controls.Add(Me.tpCapturarActividades)
+        Me.tbActividades.Controls.Add(Me.TabPage2)
+        Me.tbActividades.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbActividades.Location = New System.Drawing.Point(3, 0)
+        Me.tbActividades.Name = "tbActividades"
+        Me.tbActividades.SelectedIndex = 0
+        Me.tbActividades.Size = New System.Drawing.Size(1023, 429)
+        Me.tbActividades.TabIndex = 1
+        '
+        'tpCapturarActividades
+        '
+        Me.tpCapturarActividades.AutoScroll = True
+        Me.tpCapturarActividades.BackColor = System.Drawing.Color.White
+        Me.tpCapturarActividades.Controls.Add(Me.btnCapturaIdAnterior)
+        Me.tpCapturarActividades.Controls.Add(Me.btnCapturaIdSiguiente)
+        Me.tpCapturarActividades.Controls.Add(Me.dtpCapturaFechaVencimiento)
+        Me.tpCapturarActividades.Controls.Add(Me.dtpCapturaFechaCreacion)
+        Me.tpCapturarActividades.Controls.Add(Me.btnCapturaGuardar)
+        Me.tpCapturarActividades.Controls.Add(Me.chkCapturaEsUrgente)
+        Me.tpCapturarActividades.Controls.Add(Me.Label5)
+        Me.tpCapturarActividades.Controls.Add(Me.Label4)
+        Me.tpCapturarActividades.Controls.Add(Me.txtCapturaId)
+        Me.tpCapturarActividades.Controls.Add(Me.Label3)
+        Me.tpCapturarActividades.Controls.Add(Me.txtCapturaDescripcion)
+        Me.tpCapturarActividades.Controls.Add(Me.Label2)
+        Me.tpCapturarActividades.Controls.Add(Me.txtCapturaNombre)
+        Me.tpCapturarActividades.Controls.Add(Me.Label1)
+        Me.tpCapturarActividades.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tpCapturarActividades.Location = New System.Drawing.Point(4, 33)
+        Me.tpCapturarActividades.Name = "tpCapturarActividades"
+        Me.tpCapturarActividades.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpCapturarActividades.Size = New System.Drawing.Size(1015, 392)
+        Me.tpCapturarActividades.TabIndex = 0
+        Me.tpCapturarActividades.Text = "Capturar Actividades"
+        '
+        'btnCapturaIdAnterior
+        '
+        Me.btnCapturaIdAnterior.BackColor = System.Drawing.Color.White
+        Me.btnCapturaIdAnterior.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCapturaIdAnterior.Location = New System.Drawing.Point(558, 15)
+        Me.btnCapturaIdAnterior.Name = "btnCapturaIdAnterior"
+        Me.btnCapturaIdAnterior.Size = New System.Drawing.Size(42, 29)
+        Me.btnCapturaIdAnterior.TabIndex = 15
+        Me.btnCapturaIdAnterior.Text = "<"
+        Me.btnCapturaIdAnterior.UseVisualStyleBackColor = False
+        '
+        'btnCapturaIdSiguiente
+        '
+        Me.btnCapturaIdSiguiente.BackColor = System.Drawing.Color.White
+        Me.btnCapturaIdSiguiente.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCapturaIdSiguiente.Location = New System.Drawing.Point(600, 15)
+        Me.btnCapturaIdSiguiente.Name = "btnCapturaIdSiguiente"
+        Me.btnCapturaIdSiguiente.Size = New System.Drawing.Size(42, 29)
+        Me.btnCapturaIdSiguiente.TabIndex = 14
+        Me.btnCapturaIdSiguiente.Text = ">"
+        Me.btnCapturaIdSiguiente.UseVisualStyleBackColor = False
+        '
+        'dtpCapturaFechaVencimiento
+        '
+        Me.dtpCapturaFechaVencimiento.Location = New System.Drawing.Point(190, 184)
+        Me.dtpCapturaFechaVencimiento.Name = "dtpCapturaFechaVencimiento"
+        Me.dtpCapturaFechaVencimiento.Size = New System.Drawing.Size(363, 29)
+        Me.dtpCapturaFechaVencimiento.TabIndex = 13
+        '
+        'dtpCapturaFechaCreacion
+        '
+        Me.dtpCapturaFechaCreacion.Location = New System.Drawing.Point(190, 149)
+        Me.dtpCapturaFechaCreacion.Name = "dtpCapturaFechaCreacion"
+        Me.dtpCapturaFechaCreacion.Size = New System.Drawing.Size(363, 29)
+        Me.dtpCapturaFechaCreacion.TabIndex = 12
+        '
+        'btnCapturaGuardar
+        '
+        Me.btnCapturaGuardar.BackColor = System.Drawing.Color.White
+        Me.btnCapturaGuardar.Image = CType(resources.GetObject("btnCapturaGuardar.Image"), System.Drawing.Image)
+        Me.btnCapturaGuardar.Location = New System.Drawing.Point(493, 251)
+        Me.btnCapturaGuardar.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnCapturaGuardar.Name = "btnCapturaGuardar"
+        Me.btnCapturaGuardar.Size = New System.Drawing.Size(60, 60)
+        Me.btnCapturaGuardar.TabIndex = 11
+        Me.btnCapturaGuardar.UseVisualStyleBackColor = False
+        '
+        'chkCapturaEsUrgente
+        '
+        Me.chkCapturaEsUrgente.AutoSize = True
+        Me.chkCapturaEsUrgente.Location = New System.Drawing.Point(338, 219)
+        Me.chkCapturaEsUrgente.Name = "chkCapturaEsUrgente"
+        Me.chkCapturaEsUrgente.Size = New System.Drawing.Size(215, 28)
+        Me.chkCapturaEsUrgente.TabIndex = 10
+        Me.chkCapturaEsUrgente.Text = "Marcar Como Urgente"
+        Me.chkCapturaEsUrgente.UseVisualStyleBackColor = True
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(10, 188)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(180, 24)
+        Me.Label5.TabIndex = 8
+        Me.Label5.Text = "Fecha Vencimiento:"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(10, 153)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(150, 24)
+        Me.Label4.TabIndex = 6
+        Me.Label4.Text = "Fecha Creación:"
+        '
+        'txtCapturaId
+        '
+        Me.txtCapturaId.Location = New System.Drawing.Point(190, 15)
+        Me.txtCapturaId.MaxLength = 6
+        Me.txtCapturaId.Name = "txtCapturaId"
+        Me.txtCapturaId.Size = New System.Drawing.Size(363, 29)
+        Me.txtCapturaId.TabIndex = 5
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(10, 18)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(30, 24)
+        Me.Label3.TabIndex = 4
+        Me.Label3.Text = "Id:"
+        '
+        'txtCapturaDescripcion
+        '
+        Me.txtCapturaDescripcion.Location = New System.Drawing.Point(190, 85)
+        Me.txtCapturaDescripcion.Multiline = True
+        Me.txtCapturaDescripcion.Name = "txtCapturaDescripcion"
+        Me.txtCapturaDescripcion.Size = New System.Drawing.Size(363, 59)
+        Me.txtCapturaDescripcion.TabIndex = 3
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(10, 88)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(115, 24)
+        Me.Label2.TabIndex = 2
+        Me.Label2.Text = "Descripción:"
+        '
+        'txtCapturaNombre
+        '
+        Me.txtCapturaNombre.Location = New System.Drawing.Point(190, 50)
+        Me.txtCapturaNombre.Name = "txtCapturaNombre"
+        Me.txtCapturaNombre.Size = New System.Drawing.Size(363, 29)
+        Me.txtCapturaNombre.TabIndex = 1
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(10, 53)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(84, 24)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Nombre:"
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.spResolverActividades)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 33)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(1015, 392)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "Resolver Actividades"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'spResolverActividades
+        '
+        Me.spResolverActividades.AccessibleDescription = "spCatalogos, Sheet1, Row 0, Column 0, "
+        Me.spResolverActividades.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.spResolverActividades.BackColor = System.Drawing.Color.White
+        Me.spResolverActividades.HorizontalScrollBar.Buttons = New FarPoint.Win.Spread.FpScrollBarButtonCollection("BackwardLineButton,ThumbTrack,ForwardLineButton")
+        Me.spResolverActividades.HorizontalScrollBar.Name = ""
         EnhancedScrollBarRenderer1.ArrowColor = System.Drawing.Color.DarkSlateGray
         EnhancedScrollBarRenderer1.ArrowHoveredColor = System.Drawing.Color.DarkSlateGray
         EnhancedScrollBarRenderer1.ArrowSelectedColor = System.Drawing.Color.DarkSlateGray
@@ -96,16 +287,16 @@ Partial Class Principal
         EnhancedScrollBarRenderer1.ButtonSelectedBorderColor = System.Drawing.Color.CadetBlue
         EnhancedScrollBarRenderer1.TrackBarBackgroundColor = System.Drawing.Color.CadetBlue
         EnhancedScrollBarRenderer1.TrackBarSelectedBackgroundColor = System.Drawing.Color.SlateGray
-        Me.spCatalogos.HorizontalScrollBar.Renderer = EnhancedScrollBarRenderer1
-        Me.spCatalogos.HorizontalScrollBar.TabIndex = 10
-        Me.spCatalogos.Location = New System.Drawing.Point(7, 42)
-        Me.spCatalogos.Name = "spCatalogos"
-        Me.spCatalogos.Sheets.AddRange(New FarPoint.Win.Spread.SheetView() {Me.spCatalogos_Sheet1})
-        Me.spCatalogos.Size = New System.Drawing.Size(1015, 375)
-        Me.spCatalogos.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell
-        Me.spCatalogos.TabIndex = 0
-        Me.spCatalogos.VerticalScrollBar.Buttons = New FarPoint.Win.Spread.FpScrollBarButtonCollection("BackwardLineButton,ThumbTrack,ForwardLineButton")
-        Me.spCatalogos.VerticalScrollBar.Name = ""
+        Me.spResolverActividades.HorizontalScrollBar.Renderer = EnhancedScrollBarRenderer1
+        Me.spResolverActividades.HorizontalScrollBar.TabIndex = 0
+        Me.spResolverActividades.Location = New System.Drawing.Point(6, 134)
+        Me.spResolverActividades.Name = "spResolverActividades"
+        Me.spResolverActividades.Sheets.AddRange(New FarPoint.Win.Spread.SheetView() {Me.spResolverActividades_Sheet1})
+        Me.spResolverActividades.Size = New System.Drawing.Size(995, 122)
+        Me.spResolverActividades.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell
+        Me.spResolverActividades.TabIndex = 2
+        Me.spResolverActividades.VerticalScrollBar.Buttons = New FarPoint.Win.Spread.FpScrollBarButtonCollection("BackwardLineButton,ThumbTrack,ForwardLineButton")
+        Me.spResolverActividades.VerticalScrollBar.Name = ""
         EnhancedScrollBarRenderer2.ArrowColor = System.Drawing.Color.DarkSlateGray
         EnhancedScrollBarRenderer2.ArrowHoveredColor = System.Drawing.Color.DarkSlateGray
         EnhancedScrollBarRenderer2.ArrowSelectedColor = System.Drawing.Color.DarkSlateGray
@@ -117,55 +308,26 @@ Partial Class Principal
         EnhancedScrollBarRenderer2.ButtonSelectedBorderColor = System.Drawing.Color.CadetBlue
         EnhancedScrollBarRenderer2.TrackBarBackgroundColor = System.Drawing.Color.CadetBlue
         EnhancedScrollBarRenderer2.TrackBarSelectedBackgroundColor = System.Drawing.Color.SlateGray
-        Me.spCatalogos.VerticalScrollBar.Renderer = EnhancedScrollBarRenderer2
-        Me.spCatalogos.VerticalScrollBar.TabIndex = 11
+        Me.spResolverActividades.VerticalScrollBar.Renderer = EnhancedScrollBarRenderer2
+        Me.spResolverActividades.VerticalScrollBar.TabIndex = 1
         '
-        'spCatalogos_Sheet1
+        'spResolverActividades_Sheet1
         '
-        Me.spCatalogos_Sheet1.Reset()
-        spCatalogos_Sheet1.SheetName = "Sheet1"
+        Me.spResolverActividades_Sheet1.Reset()
+        spResolverActividades_Sheet1.SheetName = "Sheet1"
         'Formulas and custom names must be loaded with R1C1 reference style
-        Me.spCatalogos_Sheet1.ReferenceStyle = FarPoint.Win.Spread.Model.ReferenceStyle.R1C1
-        Me.spCatalogos_Sheet1.ColumnFooter.DefaultStyle.NoteIndicatorColor = System.Drawing.Color.Red
-        Me.spCatalogos_Sheet1.ColumnFooter.DefaultStyle.Parent = "ColumnHeaderSeashell"
-        Me.spCatalogos_Sheet1.ColumnFooterSheetCornerStyle.NoteIndicatorColor = System.Drawing.Color.Red
-        Me.spCatalogos_Sheet1.ColumnFooterSheetCornerStyle.Parent = "CornerSeashell"
-        Me.spCatalogos_Sheet1.ColumnHeader.DefaultStyle.NoteIndicatorColor = System.Drawing.Color.Red
-        Me.spCatalogos_Sheet1.ColumnHeader.DefaultStyle.Parent = "ColumnHeaderSeashell"
-        Me.spCatalogos_Sheet1.RowHeader.DefaultStyle.NoteIndicatorColor = System.Drawing.Color.Red
-        Me.spCatalogos_Sheet1.RowHeader.DefaultStyle.Parent = "RowHeaderSeashell"
-        Me.spCatalogos_Sheet1.SheetCornerStyle.NoteIndicatorColor = System.Drawing.Color.Red
-        Me.spCatalogos_Sheet1.SheetCornerStyle.Parent = "CornerSeashell"
-        Me.spCatalogos_Sheet1.ReferenceStyle = FarPoint.Win.Spread.Model.ReferenceStyle.A1
-        '
-        'msMenu
-        '
-        Me.msMenu.BackColor = System.Drawing.Color.White
-        Me.msMenu.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.msMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.miArea, Me.miOpcion2})
-        Me.msMenu.Location = New System.Drawing.Point(0, 0)
-        Me.msMenu.Name = "msMenu"
-        Me.msMenu.Size = New System.Drawing.Size(1029, 39)
-        Me.msMenu.TabIndex = 1
-        Me.msMenu.Text = "Menú"
-        '
-        'miArea
-        '
-        Me.miArea.AutoToolTip = True
-        Me.miArea.CheckOnClick = True
-        Me.miArea.ForeColor = System.Drawing.Color.Black
-        Me.miArea.Name = "miArea"
-        Me.miArea.Size = New System.Drawing.Size(102, 35)
-        Me.miArea.Text = "Areas"
-        '
-        'miOpcion2
-        '
-        Me.miOpcion2.AutoToolTip = True
-        Me.miOpcion2.CheckOnClick = True
-        Me.miOpcion2.ForeColor = System.Drawing.Color.Black
-        Me.miOpcion2.Name = "miOpcion2"
-        Me.miOpcion2.Size = New System.Drawing.Size(142, 35)
-        Me.miOpcion2.Text = "Opcion 2"
+        Me.spResolverActividades_Sheet1.ReferenceStyle = FarPoint.Win.Spread.Model.ReferenceStyle.R1C1
+        Me.spResolverActividades_Sheet1.ColumnFooter.DefaultStyle.NoteIndicatorColor = System.Drawing.Color.Red
+        Me.spResolverActividades_Sheet1.ColumnFooter.DefaultStyle.Parent = "ColumnHeaderSeashell"
+        Me.spResolverActividades_Sheet1.ColumnFooterSheetCornerStyle.NoteIndicatorColor = System.Drawing.Color.Red
+        Me.spResolverActividades_Sheet1.ColumnFooterSheetCornerStyle.Parent = "CornerSeashell"
+        Me.spResolverActividades_Sheet1.ColumnHeader.DefaultStyle.NoteIndicatorColor = System.Drawing.Color.Red
+        Me.spResolverActividades_Sheet1.ColumnHeader.DefaultStyle.Parent = "ColumnHeaderSeashell"
+        Me.spResolverActividades_Sheet1.RowHeader.DefaultStyle.NoteIndicatorColor = System.Drawing.Color.Red
+        Me.spResolverActividades_Sheet1.RowHeader.DefaultStyle.Parent = "RowHeaderSeashell"
+        Me.spResolverActividades_Sheet1.SheetCornerStyle.NoteIndicatorColor = System.Drawing.Color.Red
+        Me.spResolverActividades_Sheet1.SheetCornerStyle.Parent = "CornerSeashell"
+        Me.spResolverActividades_Sheet1.ReferenceStyle = FarPoint.Win.Spread.Model.ReferenceStyle.A1
         '
         'pnlPie
         '
@@ -231,16 +393,16 @@ Partial Class Principal
         Me.ClientSize = New System.Drawing.Size(1039, 635)
         Me.Controls.Add(Me.pnlContenido)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.MainMenuStrip = Me.msMenu
         Me.Name = "Principal"
-        Me.Text = "Catálogos"
+        Me.Text = "Actividades"
         Me.pnlContenido.ResumeLayout(False)
         Me.pnlCuerpo.ResumeLayout(False)
-        Me.pnlCuerpo.PerformLayout()
-        CType(Me.spCatalogos, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.spCatalogos_Sheet1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.msMenu.ResumeLayout(False)
-        Me.msMenu.PerformLayout()
+        Me.tbActividades.ResumeLayout(False)
+        Me.tpCapturarActividades.ResumeLayout(False)
+        Me.tpCapturarActividades.PerformLayout()
+        Me.TabPage2.ResumeLayout(False)
+        CType(Me.spResolverActividades, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.spResolverActividades_Sheet1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlPie.ResumeLayout(False)
         Me.pnlEncabezado.ResumeLayout(False)
         Me.pnlEncabezado.PerformLayout()
@@ -254,9 +416,23 @@ Partial Class Principal
     Private WithEvents pnlEncabezado As System.Windows.Forms.Panel
     Private WithEvents lblEncabezadoEmpresa As System.Windows.Forms.Label
     Private WithEvents lblEncabezadoPrograma As System.Windows.Forms.Label
-    Friend WithEvents spCatalogos As FarPoint.Win.Spread.FpSpread
-    Friend WithEvents spCatalogos_Sheet1 As FarPoint.Win.Spread.SheetView
-    Friend WithEvents msMenu As System.Windows.Forms.MenuStrip
-    Friend WithEvents miArea As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents miOpcion2 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tbActividades As System.Windows.Forms.TabControl
+    Friend WithEvents tpCapturarActividades As System.Windows.Forms.TabPage
+    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
+    Friend WithEvents spResolverActividades As FarPoint.Win.Spread.FpSpread
+    Friend WithEvents spResolverActividades_Sheet1 As FarPoint.Win.Spread.SheetView
+    Friend WithEvents txtCapturaNombre As System.Windows.Forms.TextBox
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents txtCapturaDescripcion As System.Windows.Forms.TextBox
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents txtCapturaId As System.Windows.Forms.TextBox
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents chkCapturaEsUrgente As System.Windows.Forms.CheckBox
+    Private WithEvents btnCapturaGuardar As System.Windows.Forms.Button
+    Friend WithEvents dtpCapturaFechaCreacion As System.Windows.Forms.DateTimePicker
+    Friend WithEvents dtpCapturaFechaVencimiento As System.Windows.Forms.DateTimePicker
+    Friend WithEvents btnCapturaIdSiguiente As System.Windows.Forms.Button
+    Friend WithEvents btnCapturaIdAnterior As System.Windows.Forms.Button
 End Class

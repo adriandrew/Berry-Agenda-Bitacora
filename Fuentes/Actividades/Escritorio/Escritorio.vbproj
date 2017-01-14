@@ -164,6 +164,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Iconos Usados\angle_right-48.png" />
+    <Content Include="Iconos Usados\arrows_long_right-32.png" />
+    <Content Include="Iconos Usados\exit_sign-48.png" />
+    <Content Include="Iconos Usados\save-48.png" />
+    <Content Include="Iconos Usados\user-48.png" />
     <Content Include="Logo2.ico" />
     <Content Include="Logo3.ico" />
   </ItemGroup>

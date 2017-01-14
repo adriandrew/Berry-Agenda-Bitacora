@@ -1,6 +1,6 @@
 ﻿Public Class DatosEmpresa
 
-    Private numero As Integer
+    Private id As Integer
     Private nombre As String
     Private descripcion As String
     Private domicilio As String
@@ -13,10 +13,10 @@
 
     Public Property ENumero() As Integer
         Get
-            Return Me.numero
+            Return Me.id
         End Get
         Set(value As Integer)
-            Me.numero = value
+            Me.id = value
         End Set
     End Property
     Public Property ENombre() As String
@@ -95,8 +95,8 @@
     Public Sub ObtenerParametrosInformacionEmpresa()
 
         Dim parametros() = Environment.GetCommandLineArgs().ToArray()
-        If (parametros.Length > 0) Then 
-            Me.numero = Convert.ToInt32(parametros(1).Replace("|", " "))
+        If (parametros.Length > 0) Then
+            Me.id = Convert.ToInt32(parametros(1).Replace("|", " "))
             Me.nombre = parametros(2).Replace("|", " ")
             Me.descripcion = parametros(3).Replace("|", " ")
             Me.domicilio = parametros(4).Replace("|", " ")
