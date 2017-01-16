@@ -3,6 +3,7 @@
     Dim actividades As New EntidadesActividades.Actividades
     Dim actividadesResueltas As New EntidadesActividades.ActividadesResueltas
     Public datosEmpresa As New LogicaActividades.DatosEmpresa()
+    Public datosUsuario As New LogicaActividades.DatosUsuario()
     Public tipoTexto As New FarPoint.Win.Spread.CellType.TextCellType()
     Public tipoEntero As New FarPoint.Win.Spread.CellType.NumberCellType()
     Public tipoDoble As New FarPoint.Win.Spread.CellType.NumberCellType()
@@ -142,7 +143,7 @@
 
     Private Sub btnCapturaEliminar_Click(sender As Object, e As EventArgs) Handles btnCapturaEliminar.Click
 
-        If (MessageBox.Show("Confirmas que deseas eliminar el registro seleccionado?", "Confirmacion.", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes) Then
+        If (MessageBox.Show("Confirmas que deseas eliminar la actividad seleccionada?", "Confirmacion.", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes) Then
             If (Me.opcionSeleccionada = OpcionActividades.Capturar) Then
                 EliminarActividades()
             End If
@@ -213,6 +214,78 @@
 
     End Sub
 
+    Private Sub btnCapturaGuardar_MouseHover(sender As Object, e As EventArgs) Handles btnCapturaGuardar.MouseHover
+
+        AsignarTooltips("Guardar o Editar.")
+
+    End Sub
+
+    Private Sub btnCapturaEliminar_MouseHover(sender As Object, e As EventArgs) Handles btnCapturaEliminar.MouseHover
+
+        AsignarTooltips("Eliminar.")
+
+    End Sub
+
+    Private Sub tpCapturarActividades_MouseHover(sender As Object, e As EventArgs) Handles tpCapturarActividades.MouseHover
+
+        AsignarTooltips(String.Empty)
+
+    End Sub
+
+    Private Sub btnSalir_MouseHover(sender As Object, e As EventArgs) Handles btnSalir.MouseHover
+
+        AsignarTooltips("Salir.")
+
+    End Sub
+
+    Private Sub btnResolucionGuardar_MouseHover(sender As Object, e As EventArgs) Handles btnResolucionGuardar.MouseHover
+
+        AsignarTooltips("Guardar o Editar.")
+
+    End Sub
+
+    Private Sub tpResolverActividades_MouseHover(sender As Object, e As EventArgs) Handles tpResolverActividades.MouseHover
+
+        AsignarTooltips(String.Empty)
+
+    End Sub
+
+    Private Sub btnCapturaFechaCreacionAnterior_Click(sender As Object, e As EventArgs) Handles btnCapturaFechaCreacionAnterior.Click
+
+        dtpCapturaFechaCreacion.Value = dtpCapturaFechaCreacion.Value.AddDays(-1)
+
+    End Sub
+
+    Private Sub btnCapturaFechaCreacionSiguiente_Click(sender As Object, e As EventArgs) Handles btnCapturaFechaCreacionSiguiente.Click
+
+        dtpCapturaFechaCreacion.Value = dtpCapturaFechaCreacion.Value.AddDays(1)
+
+    End Sub
+
+    Private Sub btnCapturaFechaVencimientoAnterior_Click(sender As Object, e As EventArgs) Handles btnCapturaFechaVencimientoAnterior.Click
+
+        dtpCapturaFechaVencimiento.Value = dtpCapturaFechaVencimiento.Value.AddDays(-1)
+
+    End Sub
+
+    Private Sub btnCapturaFechaVencimientoSiguiente_Click(sender As Object, e As EventArgs) Handles btnCapturaFechaVencimientoSiguiente.Click
+
+        dtpCapturaFechaVencimiento.Value = dtpCapturaFechaVencimiento.Value.AddDays(1)
+
+    End Sub
+
+    Private Sub btnResolucionFechaAnterior_Click(sender As Object, e As EventArgs) Handles btnResolucionFechaAnterior.Click
+
+        dtpResolucionFecha.Value = dtpResolucionFecha.Value.AddDays(-1)
+
+    End Sub
+
+    Private Sub btnResolucionFechaSiguiente_Click(sender As Object, e As EventArgs) Handles btnResolucionFechaSiguiente.Click
+
+        dtpResolucionFecha.Value = dtpResolucionFecha.Value.AddDays(1)
+
+    End Sub
+
 #End Region
 
 #Region "Métodos"
@@ -240,6 +313,10 @@
         tp.SetToolTip(Me.btnCapturaEliminar, "Eliminar.")
         tp.SetToolTip(Me.btnCapturaIdAnterior, "Id Anterior.")
         tp.SetToolTip(Me.btnCapturaIdSiguiente, "Id Siguiente.")
+        tp.SetToolTip(Me.btnCapturaFechaCreacionAnterior, "Fecha Anterior.")
+        tp.SetToolTip(Me.btnCapturaFechaCreacionSiguiente, "Fecha Siguiente.")
+        tp.SetToolTip(Me.btnCapturaFechaVencimientoAnterior, "Fecha Anterior.")
+        tp.SetToolTip(Me.btnCapturaFechaVencimientoSiguiente, "Fecha Siguiente.")
         tp.SetToolTip(Me.btnResolucionGuardar, "Guardar o Editar.")
         tp.SetToolTip(Me.spResolverActividades, "Click para Seleccionar una Actividad A Resolver.")
 
@@ -280,12 +357,13 @@
 
     Private Sub ConfigurarConexiones()
 
-        Dim esPrueba As Boolean = True
+        Dim esPrueba As Boolean = False
         If (esPrueba) Then
             'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf"
             EntidadesActividades.BaseDatos.ECadenaConexionAgenda = "Agenda"
         Else
             Me.datosEmpresa.ObtenerParametrosInformacionEmpresa()
+            Me.datosUsuario.ObtenerParametrosInformacionUsuario()
             EntidadesActividades.BaseDatos.ECadenaConexionAgenda = "Agenda" 'datosEmpresa.EDirectorio & "\\Agenda.mdf" 
         End If
         EntidadesActividades.BaseDatos.AbrirConexionAgenda()
@@ -296,6 +374,7 @@
 
         lblEncabezadoPrograma.Text = "Programa: " + Me.Text
         lblEncabezadoEmpresa.Text = "Empresa: " + datosEmpresa.ENombre
+        lblEncabezadoUsuario.Text = "Usuario: " + datosUsuario.ENombre
 
     End Sub
 
@@ -462,6 +541,7 @@
 
     Private Sub FormatearSpreadActividadesResueltas(ByVal cantidadColumnas As Integer)
 
+        spResolverActividades.ActiveSheet.ColumnHeader.Rows(0).Font = New Font("Microsoft Sans Serif", 14, FontStyle.Bold) : Application.DoEvents()
         Dim numeracion As Integer = 0
         spResolverActividades.ActiveSheet.Columns.Count = cantidadColumnas + 1
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "id" : numeracion += 1
@@ -475,8 +555,8 @@
         spResolverActividades.ActiveSheet.Columns("id").Width = 100 : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("nombre").Width = 300 : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("descripcion").Width = 500 : Application.DoEvents()
-        spResolverActividades.ActiveSheet.Columns("fechaCreacion").Width = 140 : Application.DoEvents()
-        spResolverActividades.ActiveSheet.Columns("fechaVencimiento").Width = 140 : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("fechaCreacion").Width = 150 : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("fechaVencimiento").Width = 150 : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("esUrgente").Width = 130 : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("resolver").Width = 130 : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("esUrgente").CellType = tipoBooleano : Application.DoEvents()
@@ -550,23 +630,5 @@
     End Enum
 
 #End Region
-
-    Private Sub btnCapturaGuardar_MouseHover(sender As Object, e As EventArgs) Handles btnCapturaGuardar.MouseHover
-
-        AsignarTooltips("Guardar o Editar.")
-
-    End Sub
-
-    Private Sub btnCapturaEliminar_MouseHover(sender As Object, e As EventArgs) Handles btnCapturaEliminar.MouseHover
-
-        AsignarTooltips("Eliminar.")
-
-    End Sub
-
-    Private Sub tpCapturarActividades_MouseHover(sender As Object, e As EventArgs) Handles tpCapturarActividades.MouseHover
-
-        AsignarTooltips(String.Empty)
-
-    End Sub
 
 End Class

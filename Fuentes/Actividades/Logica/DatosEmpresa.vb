@@ -11,7 +11,7 @@
     Private activa As Boolean
     Private equipo As String
 
-    Public Property ENumero() As Integer
+    Public Property EId() As Integer
         Get
             Return Me.id
         End Get
@@ -96,16 +96,16 @@
 
         Dim parametros() = Environment.GetCommandLineArgs().ToArray()
         If (parametros.Length > 0) Then
-            Me.id = Convert.ToInt32(parametros(1).Replace("|", " "))
-            Me.nombre = parametros(2).Replace("|", " ")
-            Me.descripcion = parametros(3).Replace("|", " ")
-            Me.domicilio = parametros(4).Replace("|", " ")
-            Me.localidad = parametros(5).Replace("|", " ")
-            Me.rfc = parametros(6).Replace("|", " ")
-            Me.directorio = parametros(7).Replace("|", " ")
-            Me.logo = parametros(8).Replace("|", " ")
-            Me.activa = True 'Convert.ToBoolean(parametros(9).Replace("|", " "))
-            Me.equipo = parametros(10).Replace("|", " ")
+            Me.EId = Convert.ToInt32(parametros(1).Replace("|", " "))
+            Me.ENombre = parametros(2).Replace("|", " ")
+            Me.EDescripcion = parametros(3).Replace("|", " ")
+            Me.EDomicilio = parametros(4).Replace("|", " ")
+            Me.ELocalidad = parametros(5).Replace("|", " ")
+            Me.ERfc = parametros(6).Replace("|", " ")
+            Me.EDirectorio = parametros(7).Replace("|", " ")
+            Me.ELogo = parametros(8).Replace("|", " ")
+            Me.EActiva = True 'Convert.ToBoolean(parametros(9).Replace("|", " "))
+            Me.EEquipo = parametros(10).Replace("|", " ") 
         End If
 
     End Sub

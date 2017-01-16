@@ -139,6 +139,46 @@ namespace Entidades
 
         }
 
+        public string ObtenerPorId()
+        {
+
+            try
+            {
+                SqlCommand comando = new SqlCommand();
+                comando.Connection = BaseDatos.conexionInformacion;
+                comando.CommandText = "SELECT * FROM Usuarios WHERE IdEmpresa=@idEmpresa AND Id=@id";
+                comando.Parameters.AddWithValue("@idEmpresa", this.IdEmpresa);
+                comando.Parameters.AddWithValue("@id", this.Id);
+                BaseDatos.conexionInformacion.Open();
+                SqlDataReader dataReader = comando.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    this.IdEmpresa = Convert.ToInt32(dataReader["idEmpresa"].ToString());
+                    this.Id = Convert.ToInt32(dataReader["id"].ToString());
+                    this.Nombre = dataReader["nombre"].ToString();
+                    this.Contrasena = dataReader["contrasena"].ToString();
+                    this.Nivel = Convert.ToInt32(dataReader["nivel"].ToString());
+                    this.AccesoTotal = Convert.ToBoolean(dataReader["accesoTotal"].ToString());
+                    this.IdArea = Convert.ToInt32(dataReader["idArea"].ToString());
+                }
+                if (!dataReader.HasRows)
+                {
+                    return string.Empty + "|" + string.Empty + "|" + string.Empty + "|" + string.Empty + "|" + string.Empty + "|" + string.Empty + "|" + string.Empty + "|" + string.Empty;
+                }
+                BaseDatos.conexionInformacion.Close();
+                return this.IdEmpresa + "|" + this.Id + "|" + this.Nombre + "|" + this.Contrasena + "|" + this.Nivel + "|" + this.AccesoTotal + "|" + this.IdArea;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                BaseDatos.conexionInformacion.Close();
+            }
+
+        }
+
         public string ObtenerPorNombre()
         {
 

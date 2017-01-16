@@ -29,6 +29,10 @@ Partial Class Principal
         Me.pnlCuerpo = New System.Windows.Forms.Panel()
         Me.tbActividades = New System.Windows.Forms.TabControl()
         Me.tpCapturarActividades = New System.Windows.Forms.TabPage()
+        Me.btnCapturaFechaVencimientoAnterior = New System.Windows.Forms.Button()
+        Me.btnCapturaFechaVencimientoSiguiente = New System.Windows.Forms.Button()
+        Me.btnCapturaFechaCreacionAnterior = New System.Windows.Forms.Button()
+        Me.btnCapturaFechaCreacionSiguiente = New System.Windows.Forms.Button()
         Me.btnCapturaEliminar = New System.Windows.Forms.Button()
         Me.btnCapturaIdAnterior = New System.Windows.Forms.Button()
         Me.btnCapturaIdSiguiente = New System.Windows.Forms.Button()
@@ -45,13 +49,9 @@ Partial Class Principal
         Me.txtCapturaNombre = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tpResolverActividades = New System.Windows.Forms.TabPage()
-        Me.spResolverActividades = New FarPoint.Win.Spread.FpSpread()
-        Me.spResolverActividades_Sheet1 = New FarPoint.Win.Spread.SheetView()
-        Me.pnlPie = New System.Windows.Forms.Panel()
-        Me.btnSalir = New System.Windows.Forms.Button()
-        Me.pnlEncabezado = New System.Windows.Forms.Panel()
-        Me.lblEncabezadoEmpresa = New System.Windows.Forms.Label()
-        Me.lblEncabezadoPrograma = New System.Windows.Forms.Label()
+        Me.btnResolucionFechaAnterior = New System.Windows.Forms.Button()
+        Me.btnResolucionFechaSiguiente = New System.Windows.Forms.Button()
+        Me.btnResolucionGuardar = New System.Windows.Forms.Button()
         Me.dtpResolucionFecha = New System.Windows.Forms.DateTimePicker()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtResolucionId = New System.Windows.Forms.TextBox()
@@ -60,8 +60,15 @@ Partial Class Principal
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtResolucionMotivoRetraso = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.btnResolucionGuardar = New System.Windows.Forms.Button()
+        Me.spResolverActividades = New FarPoint.Win.Spread.FpSpread()
+        Me.spResolverActividades_Sheet1 = New FarPoint.Win.Spread.SheetView()
+        Me.pnlPie = New System.Windows.Forms.Panel()
         Me.lblDescripcionTooltip = New System.Windows.Forms.Label()
+        Me.btnSalir = New System.Windows.Forms.Button()
+        Me.pnlEncabezado = New System.Windows.Forms.Panel()
+        Me.lblEncabezadoUsuario = New System.Windows.Forms.Label()
+        Me.lblEncabezadoEmpresa = New System.Windows.Forms.Label()
+        Me.lblEncabezadoPrograma = New System.Windows.Forms.Label()
         Me.pnlContenido.SuspendLayout()
         Me.pnlCuerpo.SuspendLayout()
         Me.tbActividades.SuspendLayout()
@@ -120,6 +127,10 @@ Partial Class Principal
         '
         Me.tpCapturarActividades.AutoScroll = True
         Me.tpCapturarActividades.BackColor = System.Drawing.Color.White
+        Me.tpCapturarActividades.Controls.Add(Me.btnCapturaFechaVencimientoAnterior)
+        Me.tpCapturarActividades.Controls.Add(Me.btnCapturaFechaVencimientoSiguiente)
+        Me.tpCapturarActividades.Controls.Add(Me.btnCapturaFechaCreacionAnterior)
+        Me.tpCapturarActividades.Controls.Add(Me.btnCapturaFechaCreacionSiguiente)
         Me.tpCapturarActividades.Controls.Add(Me.btnCapturaEliminar)
         Me.tpCapturarActividades.Controls.Add(Me.btnCapturaIdAnterior)
         Me.tpCapturarActividades.Controls.Add(Me.btnCapturaIdSiguiente)
@@ -142,6 +153,50 @@ Partial Class Principal
         Me.tpCapturarActividades.Size = New System.Drawing.Size(1015, 392)
         Me.tpCapturarActividades.TabIndex = 0
         Me.tpCapturarActividades.Text = "Capturar Actividades"
+        '
+        'btnCapturaFechaVencimientoAnterior
+        '
+        Me.btnCapturaFechaVencimientoAnterior.BackColor = System.Drawing.Color.White
+        Me.btnCapturaFechaVencimientoAnterior.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCapturaFechaVencimientoAnterior.Location = New System.Drawing.Point(615, 184)
+        Me.btnCapturaFechaVencimientoAnterior.Name = "btnCapturaFechaVencimientoAnterior"
+        Me.btnCapturaFechaVencimientoAnterior.Size = New System.Drawing.Size(42, 29)
+        Me.btnCapturaFechaVencimientoAnterior.TabIndex = 20
+        Me.btnCapturaFechaVencimientoAnterior.Text = "<"
+        Me.btnCapturaFechaVencimientoAnterior.UseVisualStyleBackColor = False
+        '
+        'btnCapturaFechaVencimientoSiguiente
+        '
+        Me.btnCapturaFechaVencimientoSiguiente.BackColor = System.Drawing.Color.White
+        Me.btnCapturaFechaVencimientoSiguiente.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCapturaFechaVencimientoSiguiente.Location = New System.Drawing.Point(657, 184)
+        Me.btnCapturaFechaVencimientoSiguiente.Name = "btnCapturaFechaVencimientoSiguiente"
+        Me.btnCapturaFechaVencimientoSiguiente.Size = New System.Drawing.Size(42, 29)
+        Me.btnCapturaFechaVencimientoSiguiente.TabIndex = 19
+        Me.btnCapturaFechaVencimientoSiguiente.Text = ">"
+        Me.btnCapturaFechaVencimientoSiguiente.UseVisualStyleBackColor = False
+        '
+        'btnCapturaFechaCreacionAnterior
+        '
+        Me.btnCapturaFechaCreacionAnterior.BackColor = System.Drawing.Color.White
+        Me.btnCapturaFechaCreacionAnterior.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCapturaFechaCreacionAnterior.Location = New System.Drawing.Point(615, 149)
+        Me.btnCapturaFechaCreacionAnterior.Name = "btnCapturaFechaCreacionAnterior"
+        Me.btnCapturaFechaCreacionAnterior.Size = New System.Drawing.Size(42, 29)
+        Me.btnCapturaFechaCreacionAnterior.TabIndex = 18
+        Me.btnCapturaFechaCreacionAnterior.Text = "<"
+        Me.btnCapturaFechaCreacionAnterior.UseVisualStyleBackColor = False
+        '
+        'btnCapturaFechaCreacionSiguiente
+        '
+        Me.btnCapturaFechaCreacionSiguiente.BackColor = System.Drawing.Color.White
+        Me.btnCapturaFechaCreacionSiguiente.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCapturaFechaCreacionSiguiente.Location = New System.Drawing.Point(657, 149)
+        Me.btnCapturaFechaCreacionSiguiente.Name = "btnCapturaFechaCreacionSiguiente"
+        Me.btnCapturaFechaCreacionSiguiente.Size = New System.Drawing.Size(42, 29)
+        Me.btnCapturaFechaCreacionSiguiente.TabIndex = 17
+        Me.btnCapturaFechaCreacionSiguiente.Text = ">"
+        Me.btnCapturaFechaCreacionSiguiente.UseVisualStyleBackColor = False
         '
         'btnCapturaEliminar
         '
@@ -290,6 +345,8 @@ Partial Class Principal
         'tpResolverActividades
         '
         Me.tpResolverActividades.BackColor = System.Drawing.Color.White
+        Me.tpResolverActividades.Controls.Add(Me.btnResolucionFechaAnterior)
+        Me.tpResolverActividades.Controls.Add(Me.btnResolucionFechaSiguiente)
         Me.tpResolverActividades.Controls.Add(Me.btnResolucionGuardar)
         Me.tpResolverActividades.Controls.Add(Me.dtpResolucionFecha)
         Me.tpResolverActividades.Controls.Add(Me.Label6)
@@ -306,6 +363,113 @@ Partial Class Principal
         Me.tpResolverActividades.Size = New System.Drawing.Size(1015, 392)
         Me.tpResolverActividades.TabIndex = 1
         Me.tpResolverActividades.Text = "Resolver Actividades"
+        '
+        'btnResolucionFechaAnterior
+        '
+        Me.btnResolucionFechaAnterior.BackColor = System.Drawing.Color.White
+        Me.btnResolucionFechaAnterior.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnResolucionFechaAnterior.Location = New System.Drawing.Point(651, 152)
+        Me.btnResolucionFechaAnterior.Name = "btnResolucionFechaAnterior"
+        Me.btnResolucionFechaAnterior.Size = New System.Drawing.Size(42, 29)
+        Me.btnResolucionFechaAnterior.TabIndex = 23
+        Me.btnResolucionFechaAnterior.Text = "<"
+        Me.btnResolucionFechaAnterior.UseVisualStyleBackColor = False
+        '
+        'btnResolucionFechaSiguiente
+        '
+        Me.btnResolucionFechaSiguiente.BackColor = System.Drawing.Color.White
+        Me.btnResolucionFechaSiguiente.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnResolucionFechaSiguiente.Location = New System.Drawing.Point(693, 152)
+        Me.btnResolucionFechaSiguiente.Name = "btnResolucionFechaSiguiente"
+        Me.btnResolucionFechaSiguiente.Size = New System.Drawing.Size(42, 29)
+        Me.btnResolucionFechaSiguiente.TabIndex = 22
+        Me.btnResolucionFechaSiguiente.Text = ">"
+        Me.btnResolucionFechaSiguiente.UseVisualStyleBackColor = False
+        '
+        'btnResolucionGuardar
+        '
+        Me.btnResolucionGuardar.BackColor = System.Drawing.Color.White
+        Me.btnResolucionGuardar.Image = CType(resources.GetObject("btnResolucionGuardar.Image"), System.Drawing.Image)
+        Me.btnResolucionGuardar.Location = New System.Drawing.Point(586, 184)
+        Me.btnResolucionGuardar.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnResolucionGuardar.Name = "btnResolucionGuardar"
+        Me.btnResolucionGuardar.Size = New System.Drawing.Size(60, 60)
+        Me.btnResolucionGuardar.TabIndex = 21
+        Me.btnResolucionGuardar.UseVisualStyleBackColor = False
+        '
+        'dtpResolucionFecha
+        '
+        Me.dtpResolucionFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpResolucionFecha.Location = New System.Drawing.Point(283, 152)
+        Me.dtpResolucionFecha.Name = "dtpResolucionFecha"
+        Me.dtpResolucionFecha.Size = New System.Drawing.Size(363, 29)
+        Me.dtpResolucionFecha.TabIndex = 20
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(12, 153)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(216, 24)
+        Me.Label6.TabIndex = 19
+        Me.Label6.Text = "Fecha de Resolución:"
+        '
+        'txtResolucionId
+        '
+        Me.txtResolucionId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtResolucionId.Enabled = False
+        Me.txtResolucionId.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtResolucionId.Location = New System.Drawing.Point(283, 18)
+        Me.txtResolucionId.MaxLength = 6
+        Me.txtResolucionId.Name = "txtResolucionId"
+        Me.txtResolucionId.Size = New System.Drawing.Size(363, 29)
+        Me.txtResolucionId.TabIndex = 18
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(12, 18)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(33, 24)
+        Me.Label7.TabIndex = 17
+        Me.Label7.Text = "Id:"
+        '
+        'txtResolucionDescripcion
+        '
+        Me.txtResolucionDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtResolucionDescripcion.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtResolucionDescripcion.Location = New System.Drawing.Point(283, 52)
+        Me.txtResolucionDescripcion.Multiline = True
+        Me.txtResolucionDescripcion.Name = "txtResolucionDescripcion"
+        Me.txtResolucionDescripcion.Size = New System.Drawing.Size(363, 59)
+        Me.txtResolucionDescripcion.TabIndex = 16
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(12, 52)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(268, 24)
+        Me.Label8.TabIndex = 15
+        Me.Label8.Text = "Descripción de Resolución:"
+        '
+        'txtResolucionMotivoRetraso
+        '
+        Me.txtResolucionMotivoRetraso.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtResolucionMotivoRetraso.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtResolucionMotivoRetraso.Location = New System.Drawing.Point(283, 117)
+        Me.txtResolucionMotivoRetraso.Name = "txtResolucionMotivoRetraso"
+        Me.txtResolucionMotivoRetraso.Size = New System.Drawing.Size(363, 29)
+        Me.txtResolucionMotivoRetraso.TabIndex = 14
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(12, 117)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(184, 24)
+        Me.Label9.TabIndex = 13
+        Me.Label9.Text = "Motivo de Retraso:"
         '
         'spResolverActividades
         '
@@ -382,6 +546,16 @@ Partial Class Principal
         Me.pnlPie.Size = New System.Drawing.Size(1035, 60)
         Me.pnlPie.TabIndex = 8
         '
+        'lblDescripcionTooltip
+        '
+        Me.lblDescripcionTooltip.AutoSize = True
+        Me.lblDescripcionTooltip.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDescripcionTooltip.ForeColor = System.Drawing.Color.White
+        Me.lblDescripcionTooltip.Location = New System.Drawing.Point(101, 17)
+        Me.lblDescripcionTooltip.Name = "lblDescripcionTooltip"
+        Me.lblDescripcionTooltip.Size = New System.Drawing.Size(0, 31)
+        Me.lblDescripcionTooltip.TabIndex = 3
+        '
         'btnSalir
         '
         Me.btnSalir.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -400,12 +574,25 @@ Partial Class Principal
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlEncabezado.BackColor = System.Drawing.SystemColors.InactiveCaptionText
         Me.pnlEncabezado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlEncabezado.Controls.Add(Me.lblEncabezadoUsuario)
         Me.pnlEncabezado.Controls.Add(Me.lblEncabezadoEmpresa)
         Me.pnlEncabezado.Controls.Add(Me.lblEncabezadoPrograma)
         Me.pnlEncabezado.Location = New System.Drawing.Point(0, 0)
         Me.pnlEncabezado.Name = "pnlEncabezado"
         Me.pnlEncabezado.Size = New System.Drawing.Size(1035, 129)
         Me.pnlEncabezado.TabIndex = 7
+        '
+        'lblEncabezadoUsuario
+        '
+        Me.lblEncabezadoUsuario.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblEncabezadoUsuario.AutoSize = True
+        Me.lblEncabezadoUsuario.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblEncabezadoUsuario.ForeColor = System.Drawing.Color.White
+        Me.lblEncabezadoUsuario.Location = New System.Drawing.Point(700, 50)
+        Me.lblEncabezadoUsuario.Name = "lblEncabezadoUsuario"
+        Me.lblEncabezadoUsuario.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.lblEncabezadoUsuario.Size = New System.Drawing.Size(0, 33)
+        Me.lblEncabezadoUsuario.TabIndex = 2
         '
         'lblEncabezadoEmpresa
         '
@@ -426,101 +613,6 @@ Partial Class Principal
         Me.lblEncabezadoPrograma.Name = "lblEncabezadoPrograma"
         Me.lblEncabezadoPrograma.Size = New System.Drawing.Size(0, 33)
         Me.lblEncabezadoPrograma.TabIndex = 0
-        '
-        'dtpResolucionFecha
-        '
-        Me.dtpResolucionFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpResolucionFecha.Location = New System.Drawing.Point(283, 152)
-        Me.dtpResolucionFecha.Name = "dtpResolucionFecha"
-        Me.dtpResolucionFecha.Size = New System.Drawing.Size(363, 29)
-        Me.dtpResolucionFecha.TabIndex = 20
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(12, 153)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(216, 24)
-        Me.Label6.TabIndex = 19
-        Me.Label6.Text = "Fecha de Resolución:"
-        '
-        'txtResolucionId
-        '
-        Me.txtResolucionId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtResolucionId.Enabled = False
-        Me.txtResolucionId.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtResolucionId.Location = New System.Drawing.Point(283, 18)
-        Me.txtResolucionId.MaxLength = 6
-        Me.txtResolucionId.Name = "txtResolucionId"
-        Me.txtResolucionId.Size = New System.Drawing.Size(363, 29)
-        Me.txtResolucionId.TabIndex = 18
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(12, 18)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(33, 24)
-        Me.Label7.TabIndex = 17
-        Me.Label7.Text = "Id:"
-        '
-        'txtResolucionDescripcion
-        '
-        Me.txtResolucionDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtResolucionDescripcion.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtResolucionDescripcion.Location = New System.Drawing.Point(283, 52)
-        Me.txtResolucionDescripcion.Multiline = True
-        Me.txtResolucionDescripcion.Name = "txtResolucionDescripcion"
-        Me.txtResolucionDescripcion.Size = New System.Drawing.Size(363, 59)
-        Me.txtResolucionDescripcion.TabIndex = 16
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(12, 52)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(268, 24)
-        Me.Label8.TabIndex = 15
-        Me.Label8.Text = "Descripción de Resolución:"
-        '
-        'txtResolucionMotivoRetraso
-        '
-        Me.txtResolucionMotivoRetraso.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtResolucionMotivoRetraso.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtResolucionMotivoRetraso.Location = New System.Drawing.Point(283, 117)
-        Me.txtResolucionMotivoRetraso.Name = "txtResolucionMotivoRetraso"
-        Me.txtResolucionMotivoRetraso.Size = New System.Drawing.Size(363, 29)
-        Me.txtResolucionMotivoRetraso.TabIndex = 14
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(12, 117)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(184, 24)
-        Me.Label9.TabIndex = 13
-        Me.Label9.Text = "Motivo de Retraso:"
-        '
-        'btnResolucionGuardar
-        '
-        Me.btnResolucionGuardar.BackColor = System.Drawing.Color.White
-        Me.btnResolucionGuardar.Image = CType(resources.GetObject("btnResolucionGuardar.Image"), System.Drawing.Image)
-        Me.btnResolucionGuardar.Location = New System.Drawing.Point(586, 184)
-        Me.btnResolucionGuardar.Margin = New System.Windows.Forms.Padding(0)
-        Me.btnResolucionGuardar.Name = "btnResolucionGuardar"
-        Me.btnResolucionGuardar.Size = New System.Drawing.Size(60, 60)
-        Me.btnResolucionGuardar.TabIndex = 21
-        Me.btnResolucionGuardar.UseVisualStyleBackColor = False
-        '
-        'lblDescripcionTooltip
-        '
-        Me.lblDescripcionTooltip.AutoSize = True
-        Me.lblDescripcionTooltip.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDescripcionTooltip.ForeColor = System.Drawing.Color.White
-        Me.lblDescripcionTooltip.Location = New System.Drawing.Point(101, 17)
-        Me.lblDescripcionTooltip.Name = "lblDescripcionTooltip"
-        Me.lblDescripcionTooltip.Size = New System.Drawing.Size(0, 31)
-        Me.lblDescripcionTooltip.TabIndex = 3
         '
         'Principal
         '
@@ -584,4 +676,11 @@ Partial Class Principal
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Private WithEvents btnResolucionGuardar As System.Windows.Forms.Button
     Friend WithEvents lblDescripcionTooltip As System.Windows.Forms.Label
+    Friend WithEvents btnCapturaFechaVencimientoAnterior As System.Windows.Forms.Button
+    Friend WithEvents btnCapturaFechaVencimientoSiguiente As System.Windows.Forms.Button
+    Friend WithEvents btnCapturaFechaCreacionAnterior As System.Windows.Forms.Button
+    Friend WithEvents btnCapturaFechaCreacionSiguiente As System.Windows.Forms.Button
+    Friend WithEvents btnResolucionFechaAnterior As System.Windows.Forms.Button
+    Friend WithEvents btnResolucionFechaSiguiente As System.Windows.Forms.Button
+    Private WithEvents lblEncabezadoUsuario As System.Windows.Forms.Label
 End Class
