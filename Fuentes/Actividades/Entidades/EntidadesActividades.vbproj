@@ -84,6 +84,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActividadesResueltas.vb" />
     <Compile Include="Actividades.vb" />
     <Compile Include="BaseDatos.vb" />
     <Compile Include="List.vb" />

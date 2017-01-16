@@ -1,6 +1,7 @@
 ﻿Public Class Principal
 
     Dim actividades As New EntidadesActividades.Actividades
+    Dim actividadesResueltas As New EntidadesActividades.ActividadesResueltas
     Public datosEmpresa As New LogicaActividades.DatosEmpresa()
     Public tipoTexto As New FarPoint.Win.Spread.CellType.TextCellType()
     Public tipoEntero As New FarPoint.Win.Spread.CellType.NumberCellType()
@@ -8,6 +9,8 @@
     Public tipoPorcentaje As New FarPoint.Win.Spread.CellType.PercentCellType()
     Public tipoHora As New FarPoint.Win.Spread.CellType.DateTimeCellType()
     Public tipoFecha As New FarPoint.Win.Spread.CellType.DateTimeCellType()
+    Public tipoBooleano As New FarPoint.Win.Spread.CellType.CheckBoxCellType()
+
     Public opcionSeleccionada As Integer = 0
 
 #Region "Eventos"
@@ -19,8 +22,9 @@
         ConfigurarConexiones()
         CargarEncabezados()
         CargarConsecutivoActividades()
-        'ComenzarCargarActividades()
-        'CargarTiposDeDatos() 
+        ComenzarCargarActividadesResueltas()
+        CargarTiposDeDatos()
+        CargarIndiceActividades()
 
     End Sub
 
@@ -50,26 +54,18 @@
         End If
 
     End Sub
-
-    Private Sub tbActividades_TabIndexChanged(sender As Object, e As EventArgs) Handles tbActividades.TabIndexChanged
-
-        If tbActividades.TabIndex = 0 Then
-            Me.opcionSeleccionada = OpcionActividades.Capturar
-        Else
-            Me.opcionSeleccionada = OpcionActividades.Resolver
-        End If
-
-    End Sub
-
+     
     Private Sub Principal_Shown(sender As Object, e As EventArgs) Handles Me.Shown
 
-        PonerFoco()
+        PonerFocoEnControl(txtCapturaId)
 
     End Sub
 
     Private Sub btnCapturaGuardar_Click(sender As Object, e As EventArgs) Handles btnCapturaGuardar.Click
 
-        GuardarEditarActividades()
+        If (Me.opcionSeleccionada = OpcionActividades.Capturar) Then
+            GuardarEditarActividades()
+        End If
 
     End Sub
 
@@ -89,7 +85,7 @@
             If CInt(txtCapturaId.Text) > 1 Then
                 txtCapturaId.Text -= 1
                 CargarActividades()
-                PonerFoco()
+                PonerFocoEnControl(txtCapturaId)
             End If
         Else
             txtCapturaId.Clear()
@@ -103,10 +99,116 @@
             If CInt(txtCapturaId.Text) > 0 Then
                 txtCapturaId.Text += 1
                 CargarActividades()
-                PonerFoco()
+                PonerFocoEnControl(txtCapturaId)
             End If
         Else
             txtCapturaId.Clear()
+        End If
+
+    End Sub
+
+    Private Sub txtCapturaId_KeyDown(sender As Object, e As KeyEventArgs) Handles txtCapturaNombre.KeyDown, txtCapturaId.KeyDown, txtCapturaDescripcion.KeyDown, dtpCapturaFechaVencimiento.KeyDown, dtpCapturaFechaCreacion.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            e.SuppressKeyPress = True
+            If sender.Equals(txtCapturaId) Then 
+                If IsNumeric(txtCapturaId.Text) Then
+                    If CInt(txtCapturaId.Text) > 0 Then
+                        CargarActividades()
+                        txtCapturaNombre.Focus()
+                    End If
+                End If
+            ElseIf sender.Equals(txtCapturaNombre) Then 
+                If Not String.IsNullOrEmpty(txtCapturaNombre.Text) Then
+                    txtCapturaDescripcion.Focus()
+                End If
+            ElseIf sender.Equals(txtCapturaDescripcion) Then
+                dtpCapturaFechaCreacion.Focus()
+            ElseIf sender.Equals(dtpCapturaFechaCreacion) Then
+                If IsDate(dtpCapturaFechaCreacion.Value) Then
+                    dtpCapturaFechaVencimiento.Focus()
+                End If
+            ElseIf sender.Equals(dtpCapturaFechaVencimiento) Then
+                If IsDate(dtpCapturaFechaVencimiento.Value) Then
+                    btnCapturaGuardar.Focus()
+                End If
+            End If
+            'ElseIf e.KeyData = Keys.Escape Then
+            '    e.SuppressKeyPress = True
+            '    SendKeys.Send("+({TAB})")
+        End If
+
+    End Sub
+
+    Private Sub btnCapturaEliminar_Click(sender As Object, e As EventArgs) Handles btnCapturaEliminar.Click
+
+        If (MessageBox.Show("Confirmas que deseas eliminar el registro seleccionado?", "Confirmacion.", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes) Then
+            If (Me.opcionSeleccionada = OpcionActividades.Capturar) Then
+                EliminarActividades()
+            End If
+        End If
+
+    End Sub
+
+    Private Sub tbActividades_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tbActividades.SelectedIndexChanged
+
+        If tbActividades.SelectedIndex = 0 Then
+            Me.opcionSeleccionada = OpcionActividades.Capturar
+            PonerFocoEnControl(txtCapturaId)
+        Else
+            Me.opcionSeleccionada = OpcionActividades.Resolver
+            ComenzarCargarActividadesResueltas()
+        End If
+
+    End Sub
+
+    Private Sub spResolverActividades_CellDoubleClick(sender As Object, e As FarPoint.Win.Spread.CellClickEventArgs) Handles spResolverActividades.CellDoubleClick
+
+        ''If spResolverActividades.ActiveSheet.Cells(spResolverActividades.ActiveSheet.ActiveRowIndex, spResolverActividades.ActiveSheet.Columns("resolver").Index).Value Then
+        ''    spResolverActividades.ActiveSheet.Cells(spResolverActividades.ActiveSheet.ActiveRowIndex, spResolverActividades.ActiveSheet.Columns("resolver").Index).Value = False
+        ''    spResolverActividades.ActiveSheet.Rows(-1).BackColor = Color.White
+        ''    spResolverActividades.ActiveSheet.Rows(spResolverActividades.ActiveSheet.ActiveRowIndex).BackColor = Color.White
+        ''Else
+        'spResolverActividades.ActiveSheet.Cells(spResolverActividades.ActiveSheet.ActiveRowIndex, spResolverActividades.ActiveSheet.Columns("resolver").Index).Value = True
+        'spResolverActividades.ActiveSheet.Rows(0, spResolverActividades.ActiveSheet.Rows.Count - 1).BackColor = Color.White
+        'spResolverActividades.ActiveSheet.Rows(spResolverActividades.ActiveSheet.ActiveRowIndex).BackColor = Color.GreenYellow
+        ''End If
+        'CargarActividadesResueltas()
+        'PonerFocoEnControl(txtResolucionDescripcion)
+
+    End Sub
+
+    Private Sub spResolverActividades_CellClick(sender As Object, e As FarPoint.Win.Spread.CellClickEventArgs) Handles spResolverActividades.CellClick
+
+        spResolverActividades.ActiveSheet.Rows(0, spResolverActividades.ActiveSheet.Rows.Count - 1).BackColor = Color.White
+        spResolverActividades.ActiveSheet.Rows(e.Row).BackColor = Color.GreenYellow
+        spResolverActividades.ActiveSheet.ActiveRowIndex = e.Row
+        CargarActividadesResueltas()
+        PonerFocoEnControl(txtResolucionMotivoRetraso)
+
+    End Sub
+
+    Private Sub btnResolucionGuardar_Click(sender As Object, e As EventArgs) Handles btnResolucionGuardar.Click
+
+        GuardarEditarActividadesResueltas()
+
+    End Sub
+
+    Private Sub txtResolucionId_KeyDown(sender As Object, e As KeyEventArgs) Handles txtResolucionMotivoRetraso.KeyDown, txtResolucionId.KeyDown, txtResolucionDescripcion.KeyDown, dtpResolucionFecha.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            e.SuppressKeyPress = True
+            If sender.Equals(txtResolucionDescripcion) Then
+                If Not String.IsNullOrEmpty(txtResolucionDescripcion.Text) Then
+                    txtResolucionMotivoRetraso.Focus()
+                End If
+            ElseIf sender.Equals(txtResolucionMotivoRetraso) Then
+                dtpResolucionFecha.Focus()
+            ElseIf sender.Equals(dtpResolucionFecha) Then
+                If IsDate(dtpResolucionFecha.Value) Then
+                    btnResolucionGuardar.Focus()
+                End If
+            End If
         End If
 
     End Sub
@@ -134,9 +236,18 @@
         tp.ReshowDelay = 100
         tp.ShowAlways = True
         tp.SetToolTip(Me.btnSalir, "Salir.")
-        tp.SetToolTip(Me.btnCapturaGuardar, "Guardar.")
+        tp.SetToolTip(Me.btnCapturaGuardar, "Guardar o Editar.")
+        tp.SetToolTip(Me.btnCapturaEliminar, "Eliminar.")
         tp.SetToolTip(Me.btnCapturaIdAnterior, "Id Anterior.")
         tp.SetToolTip(Me.btnCapturaIdSiguiente, "Id Siguiente.")
+        tp.SetToolTip(Me.btnResolucionGuardar, "Guardar o Editar.")
+        tp.SetToolTip(Me.spResolverActividades, "Click para Seleccionar una Actividad A Resolver.")
+
+    End Sub
+
+    Private Sub AsignarTooltips(ByVal texto As String)
+
+        lblDescripcionTooltip.Text = texto
 
     End Sub
 
@@ -188,15 +299,21 @@
 
     End Sub
 
-    Private Sub PonerFoco()
+    Private Sub PonerFocoEnControl(ByVal c As Control)
 
-        txtCapturaNombre.Focus()
+        c.Focus() 
 
     End Sub
 
 #End Region
 
 #Region "Captura de Actividades"
+
+    Private Sub CargarIndiceActividades()
+
+        Me.opcionSeleccionada = OpcionActividades.Capturar
+
+    End Sub
 
     Private Sub CargarConsecutivoActividades()
 
@@ -246,7 +363,7 @@
             End If
             MsgBox("Guardado o editado finalizado.", MsgBoxStyle.ApplicationModal, "Finalizado.")
             CargarConsecutivoActividades()
-            LimpiarPantallaActividades() 
+            LimpiarPantallaActividades()
         End If
 
     End Sub
@@ -257,7 +374,20 @@
         txtCapturaDescripcion.Clear()
         dtpCapturaFechaCreacion.Value = Today
         dtpCapturaFechaVencimiento.Value = Today
-        PonerFoco()
+        chkCapturaEsUrgente.Checked = False
+        PonerFocoEnControl(txtCapturaId)
+        Application.DoEvents()
+
+    End Sub
+
+    Private Sub EliminarActividades()
+
+        Dim id As Integer = LogicaActividades.Funciones.ValidarNumero(txtCapturaId.Text)
+        If (id > 0) Then
+            actividades.EId = id
+            actividades.Eliminar()
+            CargarActividades()
+        End If
 
     End Sub
 
@@ -268,44 +398,49 @@
     Private Sub ComenzarCargarActividadesResueltas()
 
         FormatearSpreadGeneralActividadesResueltas()
-        CargarActividades()
-        FormatearSpreadActividadesResueltas()
+        CargarActividadesResueltasSpread()
 
     End Sub
 
     Private Sub CargarActividadesResueltas()
 
+        Dim fila As Integer = spResolverActividades.ActiveSheet.ActiveRowIndex
+        If fila > 0 Then
+            txtResolucionId.Text = spResolverActividades.ActiveSheet.Cells(fila, spResolverActividades.ActiveSheet.Columns("id").Index).Value
+        End If
+
+    End Sub
+
+    Private Sub CargarActividadesResueltasSpread()
+
         Dim lista As New List(Of EntidadesActividades.Actividades)
-        lista = actividades.ObtenerListado()
-        spResolverActividades.ActiveSheet.DataSource = lista
-        spResolverActividades.ActiveSheet.Rows.Count += 1
+        lista = actividades.ObtenerListadoSinResolucion()
+        spResolverActividades.ActiveSheet.DataSource = lista 
+        FormatearSpreadActividadesResueltas(spResolverActividades.ActiveSheet.Columns.Count)
 
     End Sub
 
     Private Sub GuardarEditarActividadesResueltas()
 
         Dim fila As Integer = spResolverActividades.ActiveSheet.ActiveRowIndex
-        Dim id As Integer = spResolverActividades.ActiveSheet.Cells(fila, spResolverActividades.ActiveSheet.Columns("id").Index).Value
-        Dim idUsuario As Integer = spResolverActividades.ActiveSheet.Cells(fila, spResolverActividades.ActiveSheet.Columns("idUsuario").Index).Value
-        Dim nombre As String = spResolverActividades.ActiveSheet.Cells(fila, spResolverActividades.ActiveSheet.Columns("nombre").Index).Value
-        Dim descripcion As String = spResolverActividades.ActiveSheet.Cells(fila, spResolverActividades.ActiveSheet.Columns("descripcion").Index).Value
-        Dim fechaCreacion As Date = spResolverActividades.ActiveSheet.Cells(fila, spResolverActividades.ActiveSheet.Columns("fechaCreacion").Index).Value
-        Dim fechaVencimiento As Date = spResolverActividades.ActiveSheet.Cells(fila, spResolverActividades.ActiveSheet.Columns("fechaVencimiento").Index).Value
-        Dim esUrgente As Boolean = spResolverActividades.ActiveSheet.Cells(fila, spResolverActividades.ActiveSheet.Columns("esUrgente").Index).Value
-        If (id > 0) And (Not String.IsNullOrEmpty(nombre)) And (IsDate(fechaCreacion)) And IsDate(fechaVencimiento) Then
-            actividades.EId = id
-            actividades.EIdUsuario = idUsuario
-            actividades.ENombre = nombre
-            actividades.EDescripcion = descripcion
-            actividades.EFechaCreacion = fechaCreacion
-            actividades.EFechaVencimiento = fechaVencimiento
-            actividades.EEsUrgente = esUrgente
-            Dim tieneActividades As Boolean = actividades.ValidarPorNumero()
+        Dim id As Integer = LogicaActividades.Funciones.ValidarNumero(spResolverActividades.ActiveSheet.Cells(fila, spResolverActividades.ActiveSheet.Columns("id").Index).Value)
+        Dim descripcion As String = txtResolucionDescripcion.Text
+        Dim motivoRetraso As String = txtResolucionMotivoRetraso.Text
+        Dim fechaResolucion As Date = dtpResolucionFecha.Text
+        If (id > 0) And (Not String.IsNullOrEmpty(descripcion)) And IsDate(fechaResolucion) Then
+            actividadesResueltas.EId = id
+            actividadesResueltas.EDescripcionResolucion = descripcion
+            actividadesResueltas.EMotivoRetraso = motivoRetraso
+            actividadesResueltas.EFechaResolucion = fechaResolucion
+            Dim tieneActividades As Boolean = actividadesResueltas.ValidarPorNumero()
             If tieneActividades Then
-                actividades.Editar()
+                actividadesResueltas.Editar()
             Else
-                actividades.Guardar()
+                actividadesResueltas.Guardar()
             End If
+            MsgBox("Guardado o editado finalizado.", MsgBoxStyle.ApplicationModal, "Finalizado.")
+            CargarActividadesResueltasSpread()
+            LimpiarPantallaActividadesResueltas()
         End If
 
     End Sub
@@ -313,28 +448,52 @@
     Private Sub FormatearSpreadGeneralActividadesResueltas()
 
         spResolverActividades.Reset() : Application.DoEvents()
+        spResolverActividades.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell
         ControlarSpread(spResolverActividades)
         spResolverActividades.Visible = True : Application.DoEvents()
         spResolverActividades.ActiveSheet.GrayAreaBackColor = Color.White : Application.DoEvents()
-        spResolverActividades.Font = New Font("Microsoft Sans Serif", 12, FontStyle.Bold) : Application.DoEvents()
-        spResolverActividades.ActiveSheet.Rows(-1).Height = 25 : Application.DoEvents()
+        spResolverActividades.Font = New Font("Microsoft Sans Serif", 14, FontStyle.Regular) : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Rows(-1).Height = 50 : Application.DoEvents()
         spResolverActividades.ActiveSheetIndex = 0 : Application.DoEvents()
+        spResolverActividades.HorizontalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded
+        spResolverActividades.VerticalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded
 
     End Sub
 
-    Private Sub FormatearSpreadActividadesResueltas()
+    Private Sub FormatearSpreadActividadesResueltas(ByVal cantidadColumnas As Integer)
 
         Dim numeracion As Integer = 0
+        spResolverActividades.ActiveSheet.Columns.Count = cantidadColumnas + 1
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "id" : numeracion += 1
+        spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "idUsuario" : numeracion += 1
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "nombre" : numeracion += 1
-        spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "clave" : numeracion += 1
+        spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "descripcion" : numeracion += 1
+        spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "fechaCreacion" : numeracion += 1
+        spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "fechaVencimiento" : numeracion += 1
+        spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "esUrgente" : numeracion += 1
+        spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "resolver" : numeracion += 1
         spResolverActividades.ActiveSheet.Columns("id").Width = 100 : Application.DoEvents()
-        spResolverActividades.ActiveSheet.Columns("nombre").Width = 200 : Application.DoEvents()
-        spResolverActividades.ActiveSheet.Columns("clave").Width = 150 : Application.DoEvents()
-        'spCapturarActividades.ActiveSheet.Columns("clave").CellType =
+        spResolverActividades.ActiveSheet.Columns("nombre").Width = 300 : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("descripcion").Width = 500 : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("fechaCreacion").Width = 140 : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("fechaVencimiento").Width = 140 : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("esUrgente").Width = 130 : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("resolver").Width = 130 : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("esUrgente").CellType = tipoBooleano : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("resolver").CellType = tipoBooleano : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("nombre").HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("descripcion").HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify : Application.DoEvents()
         spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("id").Index).Value = "Id".ToUpper : Application.DoEvents()
         spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("nombre").Index).Value = "Nombre".ToUpper : Application.DoEvents()
-        spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("clave").Index).Value = "Clave".ToUpper : Application.DoEvents()
+        spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("descripcion").Index).Value = "Descripción".ToUpper : Application.DoEvents()
+        spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("fechaCreacion").Index).Value = "Fecha de Creación".ToUpper : Application.DoEvents()
+        spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("fechaVencimiento").Index).Value = "Fecha de Vencimiento".ToUpper : Application.DoEvents()
+        spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("esUrgente").Index).Value = "Es Urgente?".ToUpper : Application.DoEvents()
+        spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("resolver").Index).Value = "Resolver?".ToUpper : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("idUsuario").Visible = False : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("resolver").Visible = False : Application.DoEvents()
+        spResolverActividades.ActiveSheet.ColumnHeader.Rows(0).Height = 45 : Application.DoEvents()
+        spResolverActividades.ActiveSheet.OperationMode = FarPoint.Win.Spread.OperationMode.SingleSelect
 
     End Sub
 
@@ -366,6 +525,17 @@
 
     End Sub
 
+    Private Sub LimpiarPantallaActividadesResueltas()
+
+        txtResolucionId.Clear()
+        txtResolucionDescripcion.Clear()
+        txtResolucionMotivoRetraso.Clear() 
+        dtpResolucionFecha.Value = Today
+        spResolverActividades.ActiveSheet.Rows(0, spResolverActividades.ActiveSheet.Rows.Count - 1).BackColor = Color.White
+        Application.DoEvents()
+
+    End Sub
+
 #End Region
 
 #End Region
@@ -381,38 +551,21 @@
 
 #End Region
 
-    Private Sub txtCapturaId_KeyDown(sender As Object, e As KeyEventArgs) Handles txtCapturaNombre.KeyDown, txtCapturaId.KeyDown, txtCapturaDescripcion.KeyDown, dtpCapturaFechaVencimiento.KeyDown, dtpCapturaFechaCreacion.KeyDown
+    Private Sub btnCapturaGuardar_MouseHover(sender As Object, e As EventArgs) Handles btnCapturaGuardar.MouseHover
 
-        If e.KeyData = Keys.Enter Then
-            e.SuppressKeyPress = True
-            If sender.Equals(txtCapturaId) Then
-                'e.SuppressKeyPress = True
-                If IsNumeric(txtCapturaId.Text) Then
-                    If CInt(txtCapturaId.Text) > 0 Then
-                        CargarActividades()
-                        txtCapturaNombre.Focus()
-                    End If
-                End If
-            ElseIf sender.Equals(txtCapturaNombre) Then
-                'e.SuppressKeyPress = True
-                If Not String.IsNullOrEmpty(txtCapturaNombre.Text) Then
-                    txtCapturaDescripcion.Focus()
-                End If
-            ElseIf sender.Equals(txtCapturaDescripcion) Then
-                dtpCapturaFechaCreacion.Focus()
-            ElseIf sender.Equals(dtpCapturaFechaCreacion) Then
-                If IsDate(dtpCapturaFechaCreacion.Value) Then
-                    dtpCapturaFechaVencimiento.Focus()
-                End If
-            ElseIf sender.Equals(dtpCapturaFechaVencimiento) Then
-                If IsDate(dtpCapturaFechaVencimiento.Value) Then
-                    btnCapturaGuardar.Focus()
-                End If 
-            End If
-            'ElseIf e.KeyData = Keys.Escape Then
-            '    e.SuppressKeyPress = True
-            '    SendKeys.Send("+({TAB})")
-        End If
+        AsignarTooltips("Guardar o Editar.")
+
+    End Sub
+
+    Private Sub btnCapturaEliminar_MouseHover(sender As Object, e As EventArgs) Handles btnCapturaEliminar.MouseHover
+
+        AsignarTooltips("Eliminar.")
+
+    End Sub
+
+    Private Sub tpCapturarActividades_MouseHover(sender As Object, e As EventArgs) Handles tpCapturarActividades.MouseHover
+
+        AsignarTooltips(String.Empty)
 
     End Sub
 

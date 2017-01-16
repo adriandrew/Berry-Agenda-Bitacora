@@ -96,6 +96,36 @@ Public Class Actividades
 
     End Function
 
+    Public Function ObtenerListadoSinResolucion() As List(Of Actividades)
+
+        Dim lista As New List(Of Actividades)
+        Try
+            Dim comando As New SqlCommand()
+            comando.Connection = BaseDatos.conexionAgenda
+            comando.CommandText = "SELECT A.* FROM Actividades AS A LEFT JOIN ActividadesResueltas AS AR ON A.Id = AR.IdActividad WHERE AR.IdActividad IS NULL"
+            BaseDatos.conexionAgenda.Open()
+            Dim dataReader As SqlDataReader
+            dataReader = comando.ExecuteReader()
+            Dim actividades As New Actividades
+            While (dataReader.Read())
+                actividades = New Actividades()
+                actividades.id = Convert.ToInt32(dataReader("Id"))
+                actividades.idUsuario = Convert.ToInt32(dataReader("IdUsuario"))
+                actividades.nombre = dataReader("Nombre").ToString()
+                actividades.descripcion = dataReader("Descripcion").ToString()
+                actividades.fechaCreacion = dataReader("FechaCreacion").ToString()
+                actividades.fechaVencimiento = dataReader("FechaVencimiento").ToString()
+                actividades.esUrgente = dataReader("EsUrgente").ToString()
+                lista.Add(actividades)
+            End While
+            BaseDatos.conexionAgenda.Close()
+            Return lista
+        Catch ex As Exception
+            Throw ex
+        End Try
+
+    End Function
+
     Public Function ObtenerListadoPorId() As List(Of Actividades)
 
         Dim lista As New List(Of Actividades)()
@@ -181,7 +211,7 @@ Public Class Actividades
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
             comando.CommandText = "DELETE FROM Actividades WHERE Id=@id"
-            comando.Parameters.AddWithValue("@id", Me.id)
+            comando.Parameters.AddWithValue("@id", Me.EId)
             BaseDatos.conexionAgenda.Open()
             comando.ExecuteNonQuery()
             BaseDatos.conexionAgenda.Close()
