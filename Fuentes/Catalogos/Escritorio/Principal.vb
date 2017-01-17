@@ -2,6 +2,8 @@
 
     Dim areas As New EntidadesCatalogos.Areas
     Public datosEmpresa As New LogicaCatalogos.DatosEmpresa()
+    Public datosUsuario As New LogicaCatalogos.datosUsuario()
+    Public datosArea As New LogicaCatalogos.DatosArea()
     Public tipoTexto As New FarPoint.Win.Spread.CellType.TextCellType() 
     Public tipoEntero As New FarPoint.Win.Spread.CellType.NumberCellType()
     Public tipoDoble As New FarPoint.Win.Spread.CellType.NumberCellType()
@@ -105,6 +107,8 @@
             EntidadesCatalogos.BaseDatos.ECadenaConexionCatalogo = "Catalogos"
         Else
             Me.datosEmpresa.ObtenerParametrosInformacionEmpresa()
+            Me.datosUsuario.ObtenerParametrosInformacionUsuario()
+            Me.datosArea.ObtenerParametrosInformacionArea()
             EntidadesCatalogos.BaseDatos.ECadenaConexionCatalogo = "Catalogos" 'datosEmpresa.EDirectorio & "\\Catalogos.mdf" 
         End If
         EntidadesCatalogos.BaseDatos.AbrirConexionCatalogo()
@@ -115,6 +119,8 @@
 
         lblEncabezadoPrograma.Text = "Programa: " + Me.Text
         lblEncabezadoEmpresa.Text = "Empresa: " + datosEmpresa.ENombre
+        lblEncabezadoUsuario.Text = "Usuario: " + datosUsuario.ENombre
+        lblEncabezadoArea.Text = "Area: " + datosArea.ENombre        
 
     End Sub
 

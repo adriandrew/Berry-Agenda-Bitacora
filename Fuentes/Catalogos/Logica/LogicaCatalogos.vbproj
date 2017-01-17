@@ -84,7 +84,9 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatosArea.vb" />
     <Compile Include="DatosEmpresa.vb" />
+    <Compile Include="DatosUsuario.vb" />
     <Compile Include="Funciones.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

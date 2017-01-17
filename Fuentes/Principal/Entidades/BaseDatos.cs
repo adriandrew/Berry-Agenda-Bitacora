@@ -10,12 +10,20 @@ namespace Entidades
    public class BaseDatos
     {
 
-        private string cadenaConexionInformacion; 
-        public static SqlConnection conexionInformacion = new SqlConnection(); 
+        private string cadenaConexionInformacion;
+        private string cadenaConexionCatalogo;
+        public static SqlConnection conexionInformacion = new SqlConnection();
+        public static SqlConnection conexionCatalogo = new SqlConnection(); 
+
         public string CadenaConexionInformacion
         {
             get { return cadenaConexionInformacion; }
             set { cadenaConexionInformacion = value; }
+        }
+        public string CadenaConexionCatalogo
+        {
+            get { return cadenaConexionCatalogo; }
+            set { cadenaConexionCatalogo = value; }
         } 
           //public static SqlConnection conexionPrincipal = new SqlConnection(ConfigurationManager.ConnectionStrings["conexionPrincipal"].ConnectionString);
             
@@ -25,8 +33,17 @@ namespace Entidades
             this.CadenaConexionInformacion = string.Format("Data Source=SYS21ALIEN03-PC\\SQLEXPRESS;Initial Catalog={0};User Id=AdminBerry;Password=@berry", this.CadenaConexionInformacion);
             conexionInformacion.ConnectionString = this.CadenaConexionInformacion;
             //Data Source=SYS21ALIEN03-PC\SQLEXPRESS;Initial Catalog=INFORMACION;User ID=adminberry
+
         }
-        
+
+        public void AbrirConexionCatalogo()
+        {
+
+            this.cadenaConexionCatalogo = string.Format("Data Source=SYS21ALIEN03-PC\\SQLEXPRESS;Initial Catalog={0};User Id=AdminBerry;Password=@berry", this.cadenaConexionCatalogo);
+            conexionCatalogo.ConnectionString = this.cadenaConexionCatalogo; 
+
+        }
+ 
     }
     
 }

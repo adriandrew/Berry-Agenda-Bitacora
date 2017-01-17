@@ -75,7 +75,7 @@
             Me.ENombre = parametros(13).Replace("|", " ")
             Me.EContrasena = parametros(14).Replace("|", " ")
             Me.ENivel = Convert.ToInt32(parametros(15).Replace("|", " "))
-            Me.EAccesoTotal = False 'Convert.ToBoolean(parametros(16).Replace("|", " "))
+            Me.EAccesoTotal = Convert.ToBoolean(parametros(16).Replace("|", " ")) 
             Me.EIdArea = Convert.ToInt32(parametros(17).Replace("|", " "))
         End If
 

@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas.cs" />
     <Compile Include="BaseDatos.cs" />
     <Compile Include="BloqueoUsuarios.cs" />
     <Compile Include="Empresas.cs" />

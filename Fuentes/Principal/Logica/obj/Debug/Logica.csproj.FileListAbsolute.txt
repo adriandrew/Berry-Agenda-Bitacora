@@ -11,3 +11,7 @@ C:\Users\Andrew\Desktop\Fuentes\Principal\Logica\bin\Debug\Logica.dll
 C:\Users\Andrew\Desktop\Fuentes\Principal\Logica\bin\Debug\Logica.pdb
 C:\Users\Andrew\Desktop\Fuentes\Principal\Logica\obj\Debug\Logica.dll
 C:\Users\Andrew\Desktop\Fuentes\Principal\Logica\obj\Debug\Logica.pdb
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Principal\Logica\bin\Debug\Logica.dll
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Principal\Logica\bin\Debug\Logica.pdb
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Principal\Logica\obj\Debug\Logica.dll
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Principal\Logica\obj\Debug\Logica.pdb

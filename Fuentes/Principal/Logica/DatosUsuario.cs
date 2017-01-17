@@ -51,8 +51,6 @@ namespace Logica
             get { return idArea; }
             set { idArea = value; }
         }
-
-
-
+         
     }
 }

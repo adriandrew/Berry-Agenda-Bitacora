@@ -37,6 +37,8 @@ Partial Class Principal
         Me.pnlEncabezado = New System.Windows.Forms.Panel()
         Me.lblEncabezadoEmpresa = New System.Windows.Forms.Label()
         Me.lblEncabezadoPrograma = New System.Windows.Forms.Label()
+        Me.lblEncabezadoArea = New System.Windows.Forms.Label()
+        Me.lblEncabezadoUsuario = New System.Windows.Forms.Label()
         Me.pnlContenido.SuspendLayout()
         Me.pnlCuerpo.SuspendLayout()
         CType(Me.spCatalogos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -197,6 +199,8 @@ Partial Class Principal
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlEncabezado.BackColor = System.Drawing.SystemColors.InactiveCaptionText
         Me.pnlEncabezado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlEncabezado.Controls.Add(Me.lblEncabezadoArea)
+        Me.pnlEncabezado.Controls.Add(Me.lblEncabezadoUsuario)
         Me.pnlEncabezado.Controls.Add(Me.lblEncabezadoEmpresa)
         Me.pnlEncabezado.Controls.Add(Me.lblEncabezadoPrograma)
         Me.pnlEncabezado.Location = New System.Drawing.Point(0, 0)
@@ -223,6 +227,28 @@ Partial Class Principal
         Me.lblEncabezadoPrograma.Name = "lblEncabezadoPrograma"
         Me.lblEncabezadoPrograma.Size = New System.Drawing.Size(0, 33)
         Me.lblEncabezadoPrograma.TabIndex = 0
+        '
+        'lblEncabezadoArea
+        '
+        Me.lblEncabezadoArea.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblEncabezadoArea.AutoSize = True
+        Me.lblEncabezadoArea.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblEncabezadoArea.ForeColor = System.Drawing.Color.White
+        Me.lblEncabezadoArea.Location = New System.Drawing.Point(600, 9)
+        Me.lblEncabezadoArea.Name = "lblEncabezadoArea"
+        Me.lblEncabezadoArea.Size = New System.Drawing.Size(0, 33)
+        Me.lblEncabezadoArea.TabIndex = 5
+        '
+        'lblEncabezadoUsuario
+        '
+        Me.lblEncabezadoUsuario.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblEncabezadoUsuario.AutoSize = True
+        Me.lblEncabezadoUsuario.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblEncabezadoUsuario.ForeColor = System.Drawing.Color.White
+        Me.lblEncabezadoUsuario.Location = New System.Drawing.Point(600, 50)
+        Me.lblEncabezadoUsuario.Name = "lblEncabezadoUsuario"
+        Me.lblEncabezadoUsuario.Size = New System.Drawing.Size(0, 33)
+        Me.lblEncabezadoUsuario.TabIndex = 4
         '
         'Principal
         '
@@ -259,4 +285,6 @@ Partial Class Principal
     Friend WithEvents msMenu As System.Windows.Forms.MenuStrip
     Friend WithEvents miArea As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents miOpcion2 As System.Windows.Forms.ToolStripMenuItem
+    Private WithEvents lblEncabezadoArea As System.Windows.Forms.Label
+    Private WithEvents lblEncabezadoUsuario As System.Windows.Forms.Label
 End Class

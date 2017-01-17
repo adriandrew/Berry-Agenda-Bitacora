@@ -4,6 +4,7 @@
     Dim actividadesResueltas As New EntidadesActividades.ActividadesResueltas
     Public datosEmpresa As New LogicaActividades.DatosEmpresa()
     Public datosUsuario As New LogicaActividades.DatosUsuario()
+    Public datosArea As New LogicaActividades.DatosArea()
     Public tipoTexto As New FarPoint.Win.Spread.CellType.TextCellType()
     Public tipoEntero As New FarPoint.Win.Spread.CellType.NumberCellType()
     Public tipoDoble As New FarPoint.Win.Spread.CellType.NumberCellType()
@@ -364,6 +365,7 @@
         Else
             Me.datosEmpresa.ObtenerParametrosInformacionEmpresa()
             Me.datosUsuario.ObtenerParametrosInformacionUsuario()
+            Me.datosArea.ObtenerParametrosInformacionArea()
             EntidadesActividades.BaseDatos.ECadenaConexionAgenda = "Agenda" 'datosEmpresa.EDirectorio & "\\Agenda.mdf" 
         End If
         EntidadesActividades.BaseDatos.AbrirConexionAgenda()
@@ -375,6 +377,7 @@
         lblEncabezadoPrograma.Text = "Programa: " + Me.Text
         lblEncabezadoEmpresa.Text = "Empresa: " + datosEmpresa.ENombre
         lblEncabezadoUsuario.Text = "Usuario: " + datosUsuario.ENombre
+        lblEncabezadoArea.Text = "Area: " + datosArea.ENombre
 
     End Sub
 
