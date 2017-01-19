@@ -52,3 +52,4 @@ C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUE
 C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones\Escritorio\obj\x86\Debug\Notificaciones.exe
 C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones\Escritorio\obj\x86\Debug\Notificaciones.xml
 C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones\Escritorio\obj\x86\Debug\Notificaciones.pdb
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones\Escritorio\obj\x86\Debug\Notificaciones.Listado.resources

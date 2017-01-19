@@ -167,6 +167,7 @@ Partial Class Principal
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Principal"
         Me.Text = "Actividades"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Minimized
         Me.pnlContenido.ResumeLayout(False)
         Me.pnlPie.ResumeLayout(False)
         Me.pnlPie.PerformLayout()

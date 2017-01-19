@@ -14,10 +14,9 @@ Public Class Principal
 
         Centrar()
         ConfigurarConexiones()
-        CargarEncabezados()
+        'CargarEncabezados()
         ConsultarInformacionEmpresa()
-        CargarActividadesSinResolver()
-        'ComenzarCargarActividades() 
+        IniciarProceso()
 
     End Sub
 
@@ -90,26 +89,57 @@ Public Class Principal
 
     End Sub
 
-    Private Sub CargarActividadesSinResolver()
+    Private Sub CargarActividadesVencidas()
 
         Dim lista As New List(Of EntidadesNotificaciones.Actividades)
         lista = actividades.ObtenerListadoSinResolucion()
+        If Me.Visible Then
+            Me.Hide()
+        End If
+        If Not Listado.Visible Then
+            Listado.Show()
+            'Dim hilo As New Thread(AddressOf AbrirListado)
+            'CheckForIllegalCrossThreadCalls = False
+            'Try
+            '    hilo.Start()
+            'Catch ex As Exception
+            '    Throw ex
+            'Finally
+            '    'Me.Visible = True
+            '    'Me.ShowInTaskbar = True
+            'End Try
+        Else
+            Listado.Dispose()
+            System.Threading.Thread.Sleep(5000)
+            Listado.Show()
+        End If
+        If lista.Count > 2 Then
+            Listado.lbl1.Text = lista(0).ENombre & " - " & lista(0).EDescripcion
+            Listado.lbl2.Text = lista(1).ENombre & " - " & lista(1).EDescripcion
+            Listado.lbl1.Width = Listado.pnlPrueba1.Width - 20
+            Listado.lbl1.Height = Listado.pnlPrueba1.Height - 20
+        End If
+         
+    End Sub
+     
+    Private Sub AbrirListado()
+         
+        Dim constructor = New Listado()
+        Application.Run(constructor)
 
     End Sub
 
-    Private Sub IniciarProceso(ByVal segundos As Integer)
+    Private Sub IniciarProceso()
 
         Me.Hide()
         Dim hilo As New Thread(AddressOf CiclarInfinitamente)
         CheckForIllegalCrossThreadCalls = False
         Try
             hilo.Start()
-            System.Threading.Thread.Sleep(segundos)
+            System.Threading.Thread.Sleep(30)
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error al iniciar programa de notificaciones.")
-        Finally
-            Me.Visible = True
-            Me.ShowInTaskbar = True
+        Finally  
         End Try
 
     End Sub
@@ -118,16 +148,27 @@ Public Class Principal
 
         Dim hora As Integer = 0
         Dim minutos As Integer = 0
+        Dim esRangoValido As Boolean = False
+        Dim esPrimeraVez As Boolean = True
         While True
             hora = Date.Now.Hour
             minutos = Date.Now.Minute
-            If (minutos >= 1 And minutos <= 15) Then 'Oficina
-                Me.Show()
-                Me.Visible = True 
-                'ProcesaInformacion("EMPAQUE")                 
-                System.Threading.Thread.Sleep(900000) ' 15 minutos.
+            'If (minutos >= 1 And minutos <= 30) Then
+            If (minutos Mod 2) = 0 Then
+                esRangoValido = True
             Else
-                System.Threading.Thread.Sleep(300000) ' 5 minutos.
+                esRangoValido = False
+            End If
+            If (esRangoValido) And (esPrimeraVez) Then
+                CargarActividadesVencidas()
+                esPrimeraVez = False
+                Application.DoEvents()
+            ElseIf (esRangoValido) And (Not esPrimeraVez) Then
+                esPrimeraVez = False
+                Application.DoEvents()
+            Else
+                esPrimeraVez = True
+                Application.DoEvents()
             End If
         End While
 
@@ -136,5 +177,11 @@ Public Class Principal
 #End Region
 
 #End Region
+
+    Private Sub Principal_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+
+        Me.Hide()
+
+    End Sub
 
 End Class
