@@ -26,6 +26,12 @@ Public Class Principal
 
     End Sub
 
+    Private Sub Principal_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+
+        Me.Hide()
+
+    End Sub
+
 #End Region
 
 #Region "Métodos"
@@ -97,38 +103,16 @@ Public Class Principal
             Me.Hide()
         End If
         If Not Listado.Visible Then
-            Listado.Show()
-            'Dim hilo As New Thread(AddressOf AbrirListado)
-            'CheckForIllegalCrossThreadCalls = False
-            'Try
-            '    hilo.Start()
-            'Catch ex As Exception
-            '    Throw ex
-            'Finally
-            '    'Me.Visible = True
-            '    'Me.ShowInTaskbar = True
-            'End Try
+            Listado.Show() 
         Else
             Listado.Dispose()
             System.Threading.Thread.Sleep(5000)
             Listado.Show()
         End If
-        If lista.Count > 2 Then
-            Listado.lbl1.Text = lista(0).ENombre & " - " & lista(0).EDescripcion
-            Listado.lbl2.Text = lista(1).ENombre & " - " & lista(1).EDescripcion
-            Listado.lbl1.Width = Listado.pnlPrueba1.Width - 20
-            Listado.lbl1.Height = Listado.pnlPrueba1.Height - 20
-        End If
+        Listado.GenerarListado(lista) 
          
     End Sub
-     
-    Private Sub AbrirListado()
-         
-        Dim constructor = New Listado()
-        Application.Run(constructor)
-
-    End Sub
-
+ 
     Private Sub IniciarProceso()
 
         Me.Hide()
@@ -153,11 +137,11 @@ Public Class Principal
         While True
             hora = Date.Now.Hour
             minutos = Date.Now.Minute
-            'If (minutos >= 1 And minutos <= 30) Then
-            If (minutos Mod 2) = 0 Then
+            If (minutos >= 1 And minutos <= 30) Then
+                'If (minutos Mod 2) = 0 Then
                 esRangoValido = True
             Else
-                esRangoValido = False
+                esRangoValido = False ' TODO. Cambiar a false.
             End If
             If (esRangoValido) And (esPrimeraVez) Then
                 CargarActividadesVencidas()
@@ -178,10 +162,5 @@ Public Class Principal
 
 #End Region
 
-    Private Sub Principal_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-
-        Me.Hide()
-
-    End Sub
 
 End Class
