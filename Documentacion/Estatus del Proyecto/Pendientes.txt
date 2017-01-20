@@ -1,0 +1,2 @@
+- no te debe dejar guardar una fecha de resolución anterior a la fecha de creación.
+- 
