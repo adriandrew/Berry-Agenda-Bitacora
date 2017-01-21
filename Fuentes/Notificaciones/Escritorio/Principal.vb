@@ -11,7 +11,7 @@ Public Class Principal
 #Region "Eventos"
 
     Private Sub Principal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+         
         Centrar()
         ConfigurarConexiones()
         'CargarEncabezados()
@@ -27,7 +27,7 @@ Public Class Principal
     End Sub
 
     Private Sub Principal_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-
+         
         Me.Hide()
 
     End Sub
@@ -48,7 +48,7 @@ Public Class Principal
 
     Private Sub ConfigurarConexiones()
 
-        Dim esPrueba As Boolean = True
+        Dim esPrueba As Boolean = False
         If (esPrueba) Then
             'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf"
             EntidadesNotificaciones.BaseDatos.ECadenaConexionInformacion = "Informacion"
@@ -57,9 +57,14 @@ Public Class Principal
             EntidadesNotificaciones.BaseDatos.ECadenaConexionInformacion = "Informacion"
             EntidadesNotificaciones.BaseDatos.ECadenaConexionAgenda = "Agenda"
             'datosEmpresa.EDirectorio & "\\Agenda.mdf" 
-            'Me.datosEmpresa.ObtenerParametrosInformacionEmpresa()
-            'Me.datosUsuario.ObtenerParametrosInformacionUsuario()
-            'Me.datosArea.ObtenerParametrosInformacionArea()
+            Try
+                Me.datosEmpresa.ObtenerParametrosInformacionEmpresa()
+                Me.datosUsuario.ObtenerParametrosInformacionUsuario()
+                Me.datosArea.ObtenerParametrosInformacionArea()
+                'MsgBox("    Usuario: " & Me.datosUsuario.ENombre & "   Area: " & Me.datosArea.ENombre)
+            Catch ex As Exception
+                'MsgBox("Error al obtener parametros de información. " & vbNewLine & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Error.")
+            End Try
         End If
         EntidadesNotificaciones.BaseDatos.AbrirConexionInformacion()
         EntidadesNotificaciones.BaseDatos.AbrirConexionAgenda()
@@ -103,13 +108,14 @@ Public Class Principal
             Me.Hide()
         End If
         If Not Listado.Visible Then
-            Listado.Show() 
+            Listado.Show()
         Else
             Listado.Dispose()
             System.Threading.Thread.Sleep(5000)
             Listado.Show()
         End If
-        Listado.GenerarListado(lista) 
+        Listado.GenerarListado(lista)
+        Listado.Text &= "    Usuario: " & Me.datosUsuario.ENombre & "   Area: " & Me.datosArea.ENombre
          
     End Sub
  
@@ -134,7 +140,7 @@ Public Class Principal
         Dim minutos As Integer = 0
         Dim esRangoValido As Boolean = False
         Dim esPrimeraVez As Boolean = True
-        While True
+        While True 
             hora = Date.Now.Hour
             minutos = Date.Now.Minute
             If (minutos >= 1 And minutos <= 30) Then
@@ -161,6 +167,5 @@ Public Class Principal
 #End Region
 
 #End Region
-
 
 End Class

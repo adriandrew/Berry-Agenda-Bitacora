@@ -100,7 +100,7 @@ namespace Escritorio
                 lista = modulos.ObtenerListadoPorId();
                 string nombreModulo = lista[0].Prefijo; 
                 string nombrePrograma = nombreModulo + idPrograma.ToString().PadLeft(2, '0');  
-                AbrirPrograma(nombrePrograma);
+                AbrirPrograma(nombrePrograma, true);
             }
              
         }
@@ -248,6 +248,9 @@ namespace Escritorio
                         GenerarMenu();
                         ConsultarInformacionUsuario();
                         ConsultarInformacionArea();
+                        CerrarPrograma("Notificaciones");
+                        System.Threading.Thread.Sleep(1000);
+                        AbrirPrograma("Notificaciones", false);
                     }
                     else
                     {
@@ -463,7 +466,19 @@ namespace Escritorio
 
         }
 
-        private void AbrirPrograma(string nombre)
+        private void CerrarPrograma(string nombre)
+        {
+
+            Process[] myProcesses;
+            myProcesses = Process.GetProcessesByName(nombre);
+            foreach (Process myProcess in myProcesses)
+            { 
+                myProcess.Kill();
+            }
+
+        }
+
+        private void AbrirPrograma(string nombre, bool salir)
         {
 
             ejecutarProgramaPrincipal.UseShellExecute = true;
@@ -473,12 +488,15 @@ namespace Escritorio
             try
             {
                 Process.Start(ejecutarProgramaPrincipal);
-                Application.Exit();
+                if (salir)
+                {
+                    Application.Exit();
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("No se puede abrir el programa principal en la ruta : " + ejecutarProgramaPrincipal.WorkingDirectory + "\\" + nombre + Environment.NewLine + Environment.NewLine + ex.Message, "Error.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }    
+            }
 
         }
 

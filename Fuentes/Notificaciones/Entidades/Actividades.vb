@@ -102,7 +102,7 @@ Public Class Actividades
         Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
-            comando.CommandText = "SELECT A.* FROM Actividades AS A LEFT JOIN ActividadesResueltas AS AR ON A.Id = AR.IdActividad WHERE AR.IdActividad IS NULL AND CONVERT(CHAR(10), FechaVencimiento, 121) < CONVERT(CHAR(10), GETDATE(), 121)"
+            comando.CommandText = "SELECT A.* FROM Actividades AS A LEFT JOIN ActividadesResueltas AS AR ON A.Id = AR.IdActividad WHERE AR.IdActividad IS NULL AND CONVERT(CHAR(10), FechaVencimiento, 121) < CONVERT(CHAR(10), GETDATE(), 121) ORDER BY FechaVencimiento ASC"
             BaseDatos.conexionAgenda.Open()
             Dim dataReader As SqlDataReader
             dataReader = comando.ExecuteReader()

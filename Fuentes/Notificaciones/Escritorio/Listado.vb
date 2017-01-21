@@ -14,7 +14,7 @@
 
         Me.CenterToScreen()
         Me.Location = Screen.PrimaryScreen.WorkingArea.Location
-        Me.Size = Screen.PrimaryScreen.WorkingArea.Size 
+        Me.Size = Screen.PrimaryScreen.WorkingArea.Size        
         Me.BringToFront()
         Me.Focus()
 
@@ -55,7 +55,7 @@
         ' Margen de espacio hacia abajo.
         Dim margen As Integer = 5
         ' Es la cantidad de controles que caben verticalmente.    
-        Dim cantidad As Integer = lista.Count 
+        Dim cantidad As Integer = lista.Count
         ' Se utiliza para controlar la cantidad de opciones verticales.
         For indice As Integer = 1 To cantidad
             ' Crea controles.
@@ -65,13 +65,20 @@
             etiqueta.BackColor = Color.Transparent
             etiqueta.BorderStyle = BorderStyle.FixedSingle
             etiqueta.Font = New Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            etiqueta.ForeColor = Color.White 
+            Dim diferenciaDias As Integer = DateDiff(DateInterval.Day, CDate(lista(indice - 1).EFechaVencimiento), Now, FirstDayOfWeek.System, FirstWeekOfYear.Jan1)
+            If diferenciaDias > 10 Then
+                etiqueta.ForeColor = Color.Red
+            ElseIf diferenciaDias > 5 And diferenciaDias < 10 Then
+                etiqueta.ForeColor = Color.Orange
+            Else
+                etiqueta.ForeColor = Color.Yellow
+            End If
             etiqueta.Top = posicionY
             etiqueta.Left = posicionX
             etiqueta.Name = "lbl_" & indice
             etiqueta.Size = New Size(ancho, alto)
             etiqueta.TabIndex = indice - 1
-            etiqueta.Text = "    " & lista(indice - 1).ENombre.ToString() & vbNewLine & lista(indice - 1).EDescripcion.ToString()
+            etiqueta.Text = "    " & lista(indice - 1).EFechaVencimiento & "    " & lista(indice - 1).ENombre.ToString() & vbNewLine & lista(indice - 1).EDescripcion.ToString()
             etiqueta.AutoSize = False
             etiqueta.Image = Global.Notificaciones.My.Resources.Resources.Logo3
             etiqueta.ImageAlign = ContentAlignment.TopLeft
@@ -83,13 +90,13 @@
             'etiqueta.MouseLeave += New System.EventHandler(etiqueta_MouseLeave)
             Me.Controls.Add(etiqueta)
             Application.DoEvents()
-            System.Threading.Thread.Sleep(60)
+            System.Threading.Thread.Sleep(50)
             ' Se distribuyen hacia abajo. 
             posicionY += alto + margen
-        Next 
+        Next
 
     End Sub
 
 #End Region
-
+     
 End Class
