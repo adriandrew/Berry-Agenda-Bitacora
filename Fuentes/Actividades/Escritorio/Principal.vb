@@ -38,22 +38,22 @@
 
     Private Sub spCapturarActividades_KeyDown(sender As Object, e As KeyEventArgs)
 
-        If e.KeyData = Keys.F9 Then
-            Dim columnaActiva As Integer = spResolverActividades.ActiveSheet.ActiveColumnIndex
-            '    if (columnaActiva = spCapturarActividades.ActiveSheet.Columns["idProductor"].Index) then
-            '         Catalogos.opcionSeleccionada = (int)LogicaTarima.NumeracionCatalogos.Numeracion.productor;
-            '        new Escritorio.Catalogos().Show();
-            'End If
-        ElseIf e.KeyData = Keys.F11 Then
-            If (MessageBox.Show("Confirmas que deseas eliminar el registro seleccionado?", "Confirmacion.", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes) Then
-                If (Me.opcionSeleccionada = OpcionActividades.Capturar) Then
-                    EliminarActividadesResueltas()
-                ElseIf (Me.opcionSeleccionada = OpcionActividades.Resolver) Then
-                End If
-            End If
-        ElseIf (e.KeyData = Keys.Enter) Then
-            ControlarSpreadActividadesResueltasEnter()
-        End If
+        'If e.KeyData = Keys.F9 Then
+        'Dim columnaActiva As Integer = spResolverActividades.ActiveSheet.ActiveColumnIndex
+        '    if (columnaActiva = spCapturarActividades.ActiveSheet.Columns["idProductor"].Index) then
+        '         Catalogos.opcionSeleccionada = (int)LogicaTarima.NumeracionCatalogos.Numeracion.productor;
+        '        new Escritorio.Catalogos().Show();
+        'End If
+        'ElseIf e.KeyData = Keys.F11 Then
+        '    If (MessageBox.Show("Confirmas que deseas eliminar el registro seleccionado?", "Confirmacion.", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes) Then
+        '        If (Me.opcionSeleccionada = OpcionActividades.Capturar) Then
+        '            EliminarActividadesResueltas()
+        '        ElseIf (Me.opcionSeleccionada = OpcionActividades.Resolver) Then
+        '        End If
+        '    End If
+        'ElseIf (e.KeyData = Keys.Enter) Then
+        '    ControlarSpreadActividadesResueltasEnter()
+        'End If
 
     End Sub
      
@@ -182,11 +182,14 @@
 
     Private Sub spResolverActividades_CellClick(sender As Object, e As FarPoint.Win.Spread.CellClickEventArgs) Handles spResolverActividades.CellClick
 
-        spResolverActividades.ActiveSheet.Rows(0, spResolverActividades.ActiveSheet.Rows.Count - 1).BackColor = Color.White
-        spResolverActividades.ActiveSheet.Rows(e.Row).BackColor = Color.GreenYellow
-        spResolverActividades.ActiveSheet.ActiveRowIndex = e.Row
-        CargarActividadesResueltas()
-        PonerFocoEnControl(txtResolucionMotivoRetraso)
+        Dim filas As Integer = spResolverActividades.ActiveSheet.Rows.Count
+        If filas > 0 Then
+            spResolverActividades.ActiveSheet.Rows(0, filas - 1).BackColor = Color.White
+            spResolverActividades.ActiveSheet.Rows(e.Row).BackColor = Color.GreenYellow
+            spResolverActividades.ActiveSheet.ActiveRowIndex = e.Row
+            CargarActividadesResueltas()
+            PonerFocoEnControl(txtResolucionDescripcion)
+        End If
 
     End Sub
 
@@ -362,6 +365,8 @@
         If (esPrueba) Then
             'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf"
             EntidadesActividades.BaseDatos.ECadenaConexionAgenda = "Agenda"
+            Me.datosUsuario.EId = 1
+            Me.datosUsuario.EIdArea = 2
         Else
             Me.datosEmpresa.ObtenerParametrosInformacionEmpresa()
             Me.datosUsuario.ObtenerParametrosInformacionUsuario()
@@ -399,6 +404,7 @@
 
     Private Sub CargarConsecutivoActividades()
 
+        actividades.EIdArea = Me.datosUsuario.EIdArea
         txtCapturaId.Text = actividades.ObtenerMaximo()
 
     End Sub
@@ -407,6 +413,7 @@
 
         Dim lista As New List(Of EntidadesActividades.Actividades)
         actividades.EId = LogicaActividades.Funciones.ValidarNumero(txtCapturaId.Text)
+        actividades.EIdArea = Me.datosUsuario.EIdArea
         lista = actividades.ObtenerListadoPorId()
         If lista.Count = 1 Then
             txtCapturaNombre.Text = lista(0).ENombre
@@ -423,7 +430,8 @@
     Private Sub GuardarEditarActividades()
 
         Dim id As Integer = LogicaActividades.Funciones.ValidarNumero(txtCapturaId.Text)
-        Dim idUsuario As Integer = 1 'Me.IdUsuario ' TODO. Pendiente obtener de los parametros.
+        Dim idUsuario As Integer = Me.datosUsuario.EId
+        Dim idArea As Integer = Me.datosUsuario.EIdArea
         Dim nombre As String = txtCapturaNombre.Text
         Dim descripcion As String = txtCapturaDescripcion.Text
         Dim fechaCreacion As Date = dtpCapturaFechaCreacion.Text
@@ -432,6 +440,7 @@
         If (id > 0) And (Not String.IsNullOrEmpty(nombre)) And (IsDate(fechaCreacion)) And IsDate(fechaVencimiento) Then
             actividades.EId = id
             actividades.EIdUsuario = idUsuario
+            actividades.EIdArea = idArea
             actividades.ENombre = nombre
             actividades.EDescripcion = descripcion
             actividades.EFechaCreacion = fechaCreacion
@@ -467,6 +476,7 @@
         Dim id As Integer = LogicaActividades.Funciones.ValidarNumero(txtCapturaId.Text)
         If (id > 0) Then
             actividades.EId = id
+            actividades.EIdArea = Me.datosUsuario.EIdArea
             actividades.Eliminar()
             CargarActividades()
         End If
@@ -486,16 +496,15 @@
 
     Private Sub CargarActividadesResueltas()
 
-        Dim fila As Integer = spResolverActividades.ActiveSheet.ActiveRowIndex
-        If fila > 0 Then
-            txtResolucionId.Text = spResolverActividades.ActiveSheet.Cells(fila, spResolverActividades.ActiveSheet.Columns("id").Index).Value
-        End If
+        Dim fila As Integer = spResolverActividades.ActiveSheet.ActiveRowIndex 
+        txtResolucionId.Text = spResolverActividades.ActiveSheet.Cells(fila, spResolverActividades.ActiveSheet.Columns("id").Index).Value
 
     End Sub
 
     Private Sub CargarActividadesResueltasSpread()
 
         Dim lista As New List(Of EntidadesActividades.Actividades)
+        actividades.EIdArea = Me.datosUsuario.EIdArea
         lista = actividades.ObtenerListadoSinResolucion()
         spResolverActividades.ActiveSheet.DataSource = lista 
         FormatearSpreadActividadesResueltas(spResolverActividades.ActiveSheet.Columns.Count)
@@ -506,11 +515,13 @@
 
         Dim fila As Integer = spResolverActividades.ActiveSheet.ActiveRowIndex
         Dim id As Integer = LogicaActividades.Funciones.ValidarNumero(spResolverActividades.ActiveSheet.Cells(fila, spResolverActividades.ActiveSheet.Columns("id").Index).Value)
+        Dim idArea As Integer = Me.datosUsuario.EIdArea
         Dim descripcion As String = txtResolucionDescripcion.Text
         Dim motivoRetraso As String = txtResolucionMotivoRetraso.Text
         Dim fechaResolucion As Date = dtpResolucionFecha.Text
         If (id > 0) And (Not String.IsNullOrEmpty(descripcion)) And IsDate(fechaResolucion) Then
             actividadesResueltas.EId = id
+            actividadesResueltas.EIdArea = idArea
             actividadesResueltas.EDescripcionResolucion = descripcion
             actividadesResueltas.EMotivoRetraso = motivoRetraso
             actividadesResueltas.EFechaResolucion = fechaResolucion
@@ -549,6 +560,7 @@
         spResolverActividades.ActiveSheet.Columns.Count = cantidadColumnas + 1
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "id" : numeracion += 1
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "idUsuario" : numeracion += 1
+        spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "idArea" : numeracion += 1
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "nombre" : numeracion += 1
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "descripcion" : numeracion += 1
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "fechaCreacion" : numeracion += 1
@@ -574,6 +586,7 @@
         spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("esUrgente").Index).Value = "Es Urgente?".ToUpper : Application.DoEvents()
         spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("resolver").Index).Value = "Resolver?".ToUpper : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("idUsuario").Visible = False : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("idArea").Visible = False : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("resolver").Visible = False : Application.DoEvents()
         spResolverActividades.ActiveSheet.ColumnHeader.Rows(0).Height = 45 : Application.DoEvents()
         spResolverActividades.ActiveSheet.OperationMode = FarPoint.Win.Spread.OperationMode.SingleSelect
@@ -602,7 +615,8 @@
         Dim id As String = spResolverActividades.ActiveSheet.Cells(fila, spResolverActividades.ActiveSheet.Columns("id").Index).Value
         If (Not String.IsNullOrEmpty(id)) Then
             actividades.EId = LogicaActividades.Funciones.ValidarNumero(id)
-            actividades.Eliminar()
+            actividades.EIdArea = Me.datosUsuario.EIdArea
+            'actividades.Eliminar()
             'CargarActividades()
         End If
 
@@ -614,7 +628,10 @@
         txtResolucionDescripcion.Clear()
         txtResolucionMotivoRetraso.Clear() 
         dtpResolucionFecha.Value = Today
-        spResolverActividades.ActiveSheet.Rows(0, spResolverActividades.ActiveSheet.Rows.Count - 1).BackColor = Color.White
+        Dim filas As Integer = spResolverActividades.ActiveSheet.Rows.Count
+        If filas > 0 Then
+            spResolverActividades.ActiveSheet.Rows(0, filas - 1).BackColor = Color.White
+        End If
         Application.DoEvents()
 
     End Sub

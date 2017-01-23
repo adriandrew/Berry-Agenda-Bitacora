@@ -155,7 +155,7 @@
         Dim fila As Integer = spCatalogos.ActiveSheet.ActiveRowIndex
         Dim id As Integer = spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("id").Index).Value
         Dim nombre As String = spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("nombre").Index).Value
-        Dim clave As String = spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("clave").Index).Value
+        Dim clave As String = LogicaCatalogos.ValidarLetra(spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("clave").Index).Value)
         If (Not String.IsNullOrEmpty(id)) And (Not String.IsNullOrEmpty(nombre)) Then
             areas.EId = id
             areas.ENombre = nombre
@@ -216,10 +216,18 @@
 
 #End Region
 
+    Private Sub spCatalogos_DialogKey(sender As Object, e As FarPoint.Win.Spread.DialogKeyEventArgs) Handles spCatalogos.DialogKey
+
+        If (e.KeyData = Keys.Enter) Then
+            ControlarSpreadEnter()
+        End If
+
+    End Sub
+
     Private Sub spCatalogos_KeyDown(sender As Object, e As KeyEventArgs) Handles spCatalogos.KeyDown
 
         If e.KeyData = Keys.F9 Then
-            Dim columnaActiva As Integer = spCatalogos.ActiveSheet.ActiveColumnIndex
+            'Dim columnaActiva As Integer = spCatalogos.ActiveSheet.ActiveColumnIndex
             '    if (columnaActiva = spCatalogos.ActiveSheet.Columns["idProductor"].Index) then
             '         Catalogos.opcionSeleccionada = (int)LogicaTarima.NumeracionCatalogos.Numeracion.productor;
             '        new Escritorio.Catalogos().Show();

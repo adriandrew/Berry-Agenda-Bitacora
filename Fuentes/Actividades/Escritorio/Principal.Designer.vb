@@ -159,7 +159,7 @@ Partial Class Principal
         '
         Me.btnCapturaFechaVencimientoAnterior.BackColor = System.Drawing.Color.White
         Me.btnCapturaFechaVencimientoAnterior.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCapturaFechaVencimientoAnterior.Location = New System.Drawing.Point(615, 184)
+        Me.btnCapturaFechaVencimientoAnterior.Location = New System.Drawing.Point(615, 257)
         Me.btnCapturaFechaVencimientoAnterior.Name = "btnCapturaFechaVencimientoAnterior"
         Me.btnCapturaFechaVencimientoAnterior.Size = New System.Drawing.Size(42, 29)
         Me.btnCapturaFechaVencimientoAnterior.TabIndex = 20
@@ -170,7 +170,7 @@ Partial Class Principal
         '
         Me.btnCapturaFechaVencimientoSiguiente.BackColor = System.Drawing.Color.White
         Me.btnCapturaFechaVencimientoSiguiente.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCapturaFechaVencimientoSiguiente.Location = New System.Drawing.Point(657, 184)
+        Me.btnCapturaFechaVencimientoSiguiente.Location = New System.Drawing.Point(657, 257)
         Me.btnCapturaFechaVencimientoSiguiente.Name = "btnCapturaFechaVencimientoSiguiente"
         Me.btnCapturaFechaVencimientoSiguiente.Size = New System.Drawing.Size(42, 29)
         Me.btnCapturaFechaVencimientoSiguiente.TabIndex = 19
@@ -181,7 +181,7 @@ Partial Class Principal
         '
         Me.btnCapturaFechaCreacionAnterior.BackColor = System.Drawing.Color.White
         Me.btnCapturaFechaCreacionAnterior.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCapturaFechaCreacionAnterior.Location = New System.Drawing.Point(615, 149)
+        Me.btnCapturaFechaCreacionAnterior.Location = New System.Drawing.Point(615, 222)
         Me.btnCapturaFechaCreacionAnterior.Name = "btnCapturaFechaCreacionAnterior"
         Me.btnCapturaFechaCreacionAnterior.Size = New System.Drawing.Size(42, 29)
         Me.btnCapturaFechaCreacionAnterior.TabIndex = 18
@@ -192,7 +192,7 @@ Partial Class Principal
         '
         Me.btnCapturaFechaCreacionSiguiente.BackColor = System.Drawing.Color.White
         Me.btnCapturaFechaCreacionSiguiente.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCapturaFechaCreacionSiguiente.Location = New System.Drawing.Point(657, 149)
+        Me.btnCapturaFechaCreacionSiguiente.Location = New System.Drawing.Point(657, 222)
         Me.btnCapturaFechaCreacionSiguiente.Name = "btnCapturaFechaCreacionSiguiente"
         Me.btnCapturaFechaCreacionSiguiente.Size = New System.Drawing.Size(42, 29)
         Me.btnCapturaFechaCreacionSiguiente.TabIndex = 17
@@ -203,7 +203,7 @@ Partial Class Principal
         '
         Me.btnCapturaEliminar.BackColor = System.Drawing.Color.White
         Me.btnCapturaEliminar.Image = CType(resources.GetObject("btnCapturaEliminar.Image"), System.Drawing.Image)
-        Me.btnCapturaEliminar.Location = New System.Drawing.Point(490, 251)
+        Me.btnCapturaEliminar.Location = New System.Drawing.Point(579, 324)
         Me.btnCapturaEliminar.Margin = New System.Windows.Forms.Padding(0)
         Me.btnCapturaEliminar.Name = "btnCapturaEliminar"
         Me.btnCapturaEliminar.Size = New System.Drawing.Size(60, 60)
@@ -234,14 +234,14 @@ Partial Class Principal
         '
         'dtpCapturaFechaVencimiento
         '
-        Me.dtpCapturaFechaVencimiento.Location = New System.Drawing.Point(247, 184)
+        Me.dtpCapturaFechaVencimiento.Location = New System.Drawing.Point(247, 257)
         Me.dtpCapturaFechaVencimiento.Name = "dtpCapturaFechaVencimiento"
         Me.dtpCapturaFechaVencimiento.Size = New System.Drawing.Size(363, 29)
         Me.dtpCapturaFechaVencimiento.TabIndex = 13
         '
         'dtpCapturaFechaCreacion
         '
-        Me.dtpCapturaFechaCreacion.Location = New System.Drawing.Point(247, 149)
+        Me.dtpCapturaFechaCreacion.Location = New System.Drawing.Point(247, 222)
         Me.dtpCapturaFechaCreacion.Name = "dtpCapturaFechaCreacion"
         Me.dtpCapturaFechaCreacion.Size = New System.Drawing.Size(363, 29)
         Me.dtpCapturaFechaCreacion.TabIndex = 12
@@ -250,7 +250,7 @@ Partial Class Principal
         '
         Me.btnCapturaGuardar.BackColor = System.Drawing.Color.White
         Me.btnCapturaGuardar.Image = CType(resources.GetObject("btnCapturaGuardar.Image"), System.Drawing.Image)
-        Me.btnCapturaGuardar.Location = New System.Drawing.Point(550, 251)
+        Me.btnCapturaGuardar.Location = New System.Drawing.Point(639, 324)
         Me.btnCapturaGuardar.Margin = New System.Windows.Forms.Padding(0)
         Me.btnCapturaGuardar.Name = "btnCapturaGuardar"
         Me.btnCapturaGuardar.Size = New System.Drawing.Size(60, 60)
@@ -260,7 +260,7 @@ Partial Class Principal
         'chkCapturaEsUrgente
         '
         Me.chkCapturaEsUrgente.AutoSize = True
-        Me.chkCapturaEsUrgente.Location = New System.Drawing.Point(395, 219)
+        Me.chkCapturaEsUrgente.Location = New System.Drawing.Point(484, 292)
         Me.chkCapturaEsUrgente.Name = "chkCapturaEsUrgente"
         Me.chkCapturaEsUrgente.Size = New System.Drawing.Size(215, 28)
         Me.chkCapturaEsUrgente.TabIndex = 10
@@ -271,7 +271,7 @@ Partial Class Principal
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(10, 188)
+        Me.Label5.Location = New System.Drawing.Point(10, 261)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(228, 24)
         Me.Label5.TabIndex = 8
@@ -281,7 +281,7 @@ Partial Class Principal
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(10, 153)
+        Me.Label4.Location = New System.Drawing.Point(10, 226)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(195, 24)
         Me.Label4.TabIndex = 6
@@ -312,7 +312,8 @@ Partial Class Principal
         Me.txtCapturaDescripcion.Location = New System.Drawing.Point(247, 85)
         Me.txtCapturaDescripcion.Multiline = True
         Me.txtCapturaDescripcion.Name = "txtCapturaDescripcion"
-        Me.txtCapturaDescripcion.Size = New System.Drawing.Size(363, 59)
+        Me.txtCapturaDescripcion.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtCapturaDescripcion.Size = New System.Drawing.Size(452, 131)
         Me.txtCapturaDescripcion.TabIndex = 3
         '
         'Label2
@@ -330,7 +331,7 @@ Partial Class Principal
         Me.txtCapturaNombre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtCapturaNombre.Location = New System.Drawing.Point(247, 50)
         Me.txtCapturaNombre.Name = "txtCapturaNombre"
-        Me.txtCapturaNombre.Size = New System.Drawing.Size(363, 29)
+        Me.txtCapturaNombre.Size = New System.Drawing.Size(452, 29)
         Me.txtCapturaNombre.TabIndex = 1
         '
         'Label1
@@ -391,7 +392,7 @@ Partial Class Principal
         '
         Me.btnResolucionGuardar.BackColor = System.Drawing.Color.White
         Me.btnResolucionGuardar.Image = CType(resources.GetObject("btnResolucionGuardar.Image"), System.Drawing.Image)
-        Me.btnResolucionGuardar.Location = New System.Drawing.Point(586, 184)
+        Me.btnResolucionGuardar.Location = New System.Drawing.Point(750, 121)
         Me.btnResolucionGuardar.Margin = New System.Windows.Forms.Padding(0)
         Me.btnResolucionGuardar.Name = "btnResolucionGuardar"
         Me.btnResolucionGuardar.Size = New System.Drawing.Size(60, 60)
@@ -423,7 +424,7 @@ Partial Class Principal
         Me.txtResolucionId.Location = New System.Drawing.Point(283, 18)
         Me.txtResolucionId.MaxLength = 6
         Me.txtResolucionId.Name = "txtResolucionId"
-        Me.txtResolucionId.Size = New System.Drawing.Size(363, 29)
+        Me.txtResolucionId.Size = New System.Drawing.Size(452, 29)
         Me.txtResolucionId.TabIndex = 18
         '
         'Label7
@@ -442,7 +443,8 @@ Partial Class Principal
         Me.txtResolucionDescripcion.Location = New System.Drawing.Point(283, 52)
         Me.txtResolucionDescripcion.Multiline = True
         Me.txtResolucionDescripcion.Name = "txtResolucionDescripcion"
-        Me.txtResolucionDescripcion.Size = New System.Drawing.Size(363, 59)
+        Me.txtResolucionDescripcion.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtResolucionDescripcion.Size = New System.Drawing.Size(452, 59)
         Me.txtResolucionDescripcion.TabIndex = 16
         '
         'Label8
@@ -460,7 +462,7 @@ Partial Class Principal
         Me.txtResolucionMotivoRetraso.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtResolucionMotivoRetraso.Location = New System.Drawing.Point(283, 117)
         Me.txtResolucionMotivoRetraso.Name = "txtResolucionMotivoRetraso"
-        Me.txtResolucionMotivoRetraso.Size = New System.Drawing.Size(363, 29)
+        Me.txtResolucionMotivoRetraso.Size = New System.Drawing.Size(452, 29)
         Me.txtResolucionMotivoRetraso.TabIndex = 14
         '
         'Label9
@@ -494,10 +496,10 @@ Partial Class Principal
         EnhancedScrollBarRenderer3.TrackBarSelectedBackgroundColor = System.Drawing.Color.SlateGray
         Me.spResolverActividades.HorizontalScrollBar.Renderer = EnhancedScrollBarRenderer3
         Me.spResolverActividades.HorizontalScrollBar.TabIndex = 0
-        Me.spResolverActividades.Location = New System.Drawing.Point(6, 247)
+        Me.spResolverActividades.Location = New System.Drawing.Point(6, 187)
         Me.spResolverActividades.Name = "spResolverActividades"
         Me.spResolverActividades.Sheets.AddRange(New FarPoint.Win.Spread.SheetView() {Me.spResolverActividades_Sheet1})
-        Me.spResolverActividades.Size = New System.Drawing.Size(995, 139)
+        Me.spResolverActividades.Size = New System.Drawing.Size(1003, 199)
         Me.spResolverActividades.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell
         Me.spResolverActividades.TabIndex = 2
         Me.spResolverActividades.VerticalScrollBar.Buttons = New FarPoint.Win.Spread.FpScrollBarButtonCollection("BackwardLineButton,ThumbTrack,ForwardLineButton")

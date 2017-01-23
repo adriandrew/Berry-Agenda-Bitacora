@@ -10,4 +10,14 @@
 
     End Function
 
+    Public Function ValidarLetra(ByVal valor As String) As String
+
+        If valor = Nothing Then
+            Return String.Empty
+        Else
+            Return valor
+        End If
+
+    End Function
+
 End Module

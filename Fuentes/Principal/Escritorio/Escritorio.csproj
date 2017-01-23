@@ -69,6 +69,12 @@
   <PropertyGroup>
     <ApplicationIcon>Logo3.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>PrincipalFirma.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="FarPoint.CalcEngine, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457" />
     <Reference Include="FarPoint.Excel, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457" />
@@ -139,6 +145,7 @@
     <None Include="Iconos Nuevos\PNG\100\How to get 100x100.pdf" />
     <None Include="Iconos Nuevos\Promo App for Mac and Windows.pdf" />
     <None Include="Iconos Nuevos\Promo Free Web App.pdf" />
+    <None Include="PrincipalFirma.snk" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

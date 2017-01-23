@@ -53,6 +53,8 @@ Public Class Principal
             'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf"
             EntidadesNotificaciones.BaseDatos.ECadenaConexionInformacion = "Informacion"
             EntidadesNotificaciones.BaseDatos.ECadenaConexionAgenda = "Agenda"
+            Me.datosUsuario.EId = 1
+            Me.datosUsuario.EIdArea = 2
         Else
             EntidadesNotificaciones.BaseDatos.ECadenaConexionInformacion = "Informacion"
             EntidadesNotificaciones.BaseDatos.ECadenaConexionAgenda = "Agenda"
@@ -103,6 +105,7 @@ Public Class Principal
     Private Sub CargarActividadesVencidas()
 
         Dim lista As New List(Of EntidadesNotificaciones.Actividades)
+        actividades.EIdArea = Me.datosUsuario.EIdArea
         lista = actividades.ObtenerListadoSinResolucion()
         If Me.Visible Then
             Me.Hide()
@@ -147,7 +150,7 @@ Public Class Principal
                 'If (minutos Mod 2) = 0 Then
                 esRangoValido = True
             Else
-                esRangoValido = False ' TODO. Cambiar a false.
+                esRangoValido = True ' TODO. Cambiar a false.
             End If
             If (esRangoValido) And (esPrimeraVez) Then
                 CargarActividadesVencidas()

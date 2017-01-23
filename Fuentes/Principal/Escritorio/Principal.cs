@@ -10,6 +10,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Reflection;
+using System.Data.Sql;
 
 namespace Escritorio
 {
@@ -318,6 +319,10 @@ namespace Escritorio
                 //baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\Informacion.mdf";
                 baseDatos.CadenaConexionInformacion = "Informacion";
                 baseDatos.CadenaConexionCatalogo = "Catalogos";
+                //string[] nombre = InstanciaSql().Split('|');
+                //string servidor = nombre[0];
+                //string instancia = nombre[1];
+                //MessageBox.Show(servidor + " " + instancia);
             }
             else
             {
@@ -329,6 +334,21 @@ namespace Escritorio
             }
             baseDatos.AbrirConexionInformacion();
             baseDatos.AbrirConexionCatalogo();
+
+        }
+
+        public string InstanciaSql()
+        {
+
+            DataTable datos = SqlDataSourceEnumerator.Instance.GetDataSources();
+            string valor = string.Empty; 
+            string valor2 = string.Empty;
+            if (datos.Rows.Count == 1)
+            {
+                valor = datos.Rows[0]["ServerName"].ToString();
+                valor2 = datos.Rows[0]["InstanceName"].ToString();  
+            }
+            return valor +'|'+ valor2;
 
         }
 
@@ -480,7 +500,7 @@ namespace Escritorio
 
         private void AbrirPrograma(string nombre, bool salir)
         {
-
+             
             ejecutarProgramaPrincipal.UseShellExecute = true;
             ejecutarProgramaPrincipal.FileName = nombre + ".exe";
             ejecutarProgramaPrincipal.WorkingDirectory = Directory.GetCurrentDirectory();

@@ -3,6 +3,7 @@
 Public Class Actividades
 
     Private id As Integer
+    Private idArea As Integer
     Private idUsuario As Integer
     Private nombre As String
     Private descripcion As String
@@ -16,6 +17,14 @@ Public Class Actividades
         End Get
         Set(value As Integer)
             Me.id = value
+        End Set
+    End Property
+    Public Property EIdArea() As Integer
+        Get
+            Return Me.idArea
+        End Get
+        Set(value As Integer)
+            Me.idArea = value
         End Set
     End Property
     Public Property EIdUsuario() As Integer
@@ -81,6 +90,8 @@ Public Class Actividades
             While (dataReader.Read())
                 actividades = New Actividades()
                 actividades.id = Convert.ToInt32(dataReader("Id"))
+                actividades.idArea = Convert.ToInt32(dataReader("IdArea"))
+                actividades.idUsuario = Convert.ToInt32(dataReader("IdUsuario"))
                 actividades.nombre = dataReader("Nombre").ToString()
                 actividades.descripcion = dataReader("Descripcion").ToString()
                 actividades.fechaCreacion = dataReader("FechaCreacion").ToString()
@@ -102,7 +113,8 @@ Public Class Actividades
         Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
-            comando.CommandText = "SELECT A.* FROM Actividades AS A LEFT JOIN ActividadesResueltas AS AR ON A.Id = AR.IdActividad WHERE AR.IdActividad IS NULL"
+            comando.CommandText = "SELECT A.* FROM Actividades AS A LEFT JOIN ActividadesResueltas AS AR ON A.Id = AR.IdActividad AND A.IdArea = AR.IdArea WHERE A.IdArea=@idArea AND AR.IdActividad IS NULL AND AR.IdArea IS NULL"
+            comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
             BaseDatos.conexionAgenda.Open()
             Dim dataReader As SqlDataReader
             dataReader = comando.ExecuteReader()
@@ -110,6 +122,7 @@ Public Class Actividades
             While (dataReader.Read())
                 actividades = New Actividades()
                 actividades.id = Convert.ToInt32(dataReader("Id"))
+                actividades.idArea = Convert.ToInt32(dataReader("IdArea"))
                 actividades.idUsuario = Convert.ToInt32(dataReader("IdUsuario"))
                 actividades.nombre = dataReader("Nombre").ToString()
                 actividades.descripcion = dataReader("Descripcion").ToString()
@@ -132,20 +145,23 @@ Public Class Actividades
         Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
-            comando.CommandText = "SELECT * FROM Actividades WHERE Id=@id"
+            comando.CommandText = "SELECT * FROM Actividades WHERE Id=@id AND IdArea=@idArea"
             comando.Parameters.AddWithValue("@id", Me.EId)
+            comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
             BaseDatos.conexionAgenda.Open()
             Dim dataReader As SqlDataReader = comando.ExecuteReader()
-            Dim Actividades As Actividades
+            Dim actividades As Actividades
             While dataReader.Read()
-                Actividades = New Actividades()
-                Actividades.id = Convert.ToInt32(dataReader("Id"))
-                Actividades.nombre = dataReader("Nombre").ToString()
-                Actividades.descripcion = dataReader("Descripcion").ToString()
-                Actividades.fechaCreacion = dataReader("FechaCreacion").ToString()
-                Actividades.fechaVencimiento = dataReader("FechaVencimiento").ToString()
-                Actividades.esUrgente = dataReader("EsUrgente").ToString()
-                lista.Add(Actividades)
+                actividades = New Actividades()
+                actividades.id = Convert.ToInt32(dataReader("Id"))
+                actividades.idArea = Convert.ToInt32(dataReader("IdArea"))
+                actividades.idUsuario = Convert.ToInt32(dataReader("IdUsuario"))
+                actividades.nombre = dataReader("Nombre").ToString()
+                actividades.descripcion = dataReader("Descripcion").ToString()
+                actividades.fechaCreacion = dataReader("FechaCreacion").ToString()
+                actividades.fechaVencimiento = dataReader("FechaVencimiento").ToString()
+                actividades.esUrgente = dataReader("EsUrgente").ToString()
+                lista.Add(actividades)
             End While
             BaseDatos.conexionAgenda.Close()
             Return lista
@@ -162,8 +178,9 @@ Public Class Actividades
         Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
-            comando.CommandText = "INSERT INTO Actividades VALUES (@id, @idUsuario, @nombre, @descripcion, @fechaCreacion, @fechaVencimiento, @esUrgente)"
+            comando.CommandText = "INSERT INTO Actividades VALUES (@id, @idArea, @idUsuario, @nombre, @descripcion, @fechaCreacion, @fechaVencimiento, @esUrgente)"
             comando.Parameters.AddWithValue("@id", Me.EId)
+            comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
             comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
             comando.Parameters.AddWithValue("@nombre", Me.ENombre)
             comando.Parameters.AddWithValue("@descripcion", Me.EDescripcion)
@@ -186,8 +203,9 @@ Public Class Actividades
         Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
-            comando.CommandText = "UPDATE Actividades SET IdUsuario=@idUsuario, Nombre=@nombre, Descripcion=@descripcion, FechaCreacion=@fechaCreacion, FechaVencimiento=@fechaVencimiento, EsUrgente=@esUrgente WHERE Id=@id"
+            comando.CommandText = "UPDATE Actividades SET IdUsuario=@idUsuario, Nombre=@nombre, Descripcion=@descripcion, FechaCreacion=@fechaCreacion, FechaVencimiento=@fechaVencimiento, EsUrgente=@esUrgente WHERE Id=@id AND IdArea=@idArea"
             comando.Parameters.AddWithValue("@id", Me.EId)
+            comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
             comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
             comando.Parameters.AddWithValue("@nombre", Me.ENombre)
             comando.Parameters.AddWithValue("@descripcion", Me.EDescripcion)
@@ -210,8 +228,9 @@ Public Class Actividades
         Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
-            comando.CommandText = "DELETE FROM Actividades WHERE Id=@id"
+            comando.CommandText = "DELETE FROM Actividades WHERE Id=@id AND IdArea=@idArea"
             comando.Parameters.AddWithValue("@id", Me.EId)
+            comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
             BaseDatos.conexionAgenda.Open()
             comando.ExecuteNonQuery()
             BaseDatos.conexionAgenda.Close()
@@ -229,8 +248,9 @@ Public Class Actividades
             Dim resultado As Boolean = False
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
-            comando.CommandText = "SELECT * FROM Actividades WHERE Id=@id"
+            comando.CommandText = "SELECT * FROM Actividades WHERE Id=@id AND IdArea=@idArea"
             comando.Parameters.AddWithValue("@id", Me.EId)
+            comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
             BaseDatos.conexionAgenda.Open()
             Dim dataReader As SqlDataReader
             dataReader = comando.ExecuteReader()
@@ -254,7 +274,8 @@ Public Class Actividades
         Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
-            comando.CommandText = "SELECT MAX(Id) AS Id FROM Actividades" 
+            comando.CommandText = "SELECT MAX(Id) AS Id FROM Actividades WHERE IdArea=@idArea"
+            comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
             BaseDatos.conexionAgenda.Open()
             Dim dataReader As SqlDataReader
             dataReader = comando.ExecuteReader()
@@ -275,6 +296,7 @@ Public Class Actividades
         Finally
             BaseDatos.conexionAgenda.Close()
         End Try
+
     End Function
 
 End Class
