@@ -8,10 +8,10 @@ Imports System.Runtime.InteropServices
 
 ' Revisar los valores de los atributos del ensamblado
 
-<Assembly: AssemblyTitle("Catalogos")> 
-<Assembly: AssemblyDescription("Catalogos como areas, usuarios, etc.")> 
+<Assembly: AssemblyTitle("Notificaciones")> 
+<Assembly: AssemblyDescription("Notificaciones dedicadas por usuario.")> 
 <Assembly: AssemblyCompany("Berry")> 
-<Assembly: AssemblyProduct("Catalogos")> 
+<Assembly: AssemblyProduct("Notificaciones")> 
 <Assembly: AssemblyCopyright("Copyright © Berry 2016")> 
 <Assembly: AssemblyTrademark("")> 
 
