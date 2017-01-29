@@ -24,20 +24,22 @@ namespace Escritorio
         Entidades.Usuarios usuarios = new Entidades.Usuarios();
         Entidades.Programas programas = new Entidades.Programas();
         Entidades.BloqueoUsuarios bloqueoUsuarios = new Entidades.BloqueoUsuarios();
-
-        #region Eventos
-
+        
         public PanelControl()
         {
             InitializeComponent();
         }
+
+        #region Eventos
 
         private void PanelControl_Load(object sender, EventArgs e)
         {
 
             Centrar();
             ReiniciarControles();
-            ControlarSpread(spAdministrar);
+            ControlarSpreadEnter(spAdministrar);
+            CargarEncabezados(); 
+            CargarUsuarios();
 
         }
        
@@ -65,177 +67,30 @@ namespace Escritorio
         {
 
             // Eliminar.
-            if (e.KeyData == Keys.F11)
+            if (e.KeyData == Keys.F5)
             {
                 if (MessageBox.Show("Confirmas que deseas eliminar el registro seleccionado?", "Confirmacion.", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     int fila = spAdministrar.ActiveSheet.ActiveRowIndex;
-                    if (rbtnUsuarios.Checked)
-                    {
-                        string empresa = cbEmpresas.SelectedValue.ToString();
-                        string numero = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["numero"].Index].Text;
-                        if (!string.IsNullOrEmpty(empresa) && !string.IsNullOrEmpty(numero))
-                        {
-                            usuarios.IdEmpresa = Logica.Funciones.ValidarNumero(empresa);
-                            usuarios.Id = Logica.Funciones.ValidarNumero(numero);
-                            usuarios.Eliminar();
-                        }
-                    }
-                    else if (rbtnEmpresas.Checked)
-                    {
-                        string numero = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["numero"].Index].Text;
-                        if (!string.IsNullOrEmpty(numero))
-                        {                            
-                            empresas.Id = Logica.Funciones.ValidarNumero(numero);
-                            empresas.Eliminar();
-                        }
-                    }
+                    spAdministrar.ActiveSheet.Rows.Remove(fila, 1);
+                    //else if (rbtnEmpresas.Checked)
+                    //{
+                    //    string numero = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["numero"].Index].Text;
+                    //    if (!string.IsNullOrEmpty(numero))
+                    //    {                            
+                    //        empresas.Id = Logica.Funciones.ValidarNumero(numero);
+                    //        empresas.Eliminar();
+                    //    }
+                    //}
                 }
-            }
-            // Guardar o editar.
+            } 
             else if (e.KeyData == Keys.Enter)
             {
-                if (spAdministrar.ActiveSheet.ActiveColumnIndex == spAdministrar.ActiveSheet.Columns.Count - 1)
-                {
-                    spAdministrar.ActiveSheet.AddRows(spAdministrar.ActiveSheet.Rows.Count, 1);
-                    //int fila = spAdministrar.ActiveSheet.ActiveRowIndex;
-                    if (rbtnUsuarios.Checked)
-                    {
-                        GuardarEditarUsuarios();
-                    }
-                    else if (rbtnEmpresas.Checked)
-                    {
-                        GuardarEditarEmpresas();
-                    }
-                }
-               
+                ControlarSpreadEnter(); // Metodo descontinuado.
             }
 
         }
-
-        private void GuardarEditarUsuarios() 
-        {
-
-            int fila = spAdministrar.ActiveSheet.ActiveRowIndex;
-            string empresa = cbEmpresas.SelectedValue.ToString();
-            string numero = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["numero"].Index].Text;
-            string nombre = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["nombre"].Index].Text;
-            string contrasena = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["contrasena"].Index].Value.ToString();
-            string nivel = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["nivel"].Index].Text;
-            bool accesoTotal = Convert.ToBoolean(spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["accesoTotal"].Index].Value);
-            string idArea = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["idArea"].Index].Text;
-            if (!string.IsNullOrEmpty(empresa) && !string.IsNullOrEmpty(numero) && !string.IsNullOrEmpty(nombre) && !string.IsNullOrEmpty(contrasena) && !string.IsNullOrEmpty(nivel) && !string.IsNullOrEmpty(idArea))
-            {
-                usuarios.IdEmpresa = Convert.ToInt32(empresa);
-                usuarios.Id = Convert.ToInt32(numero);
-                bool tieneUsuarios = usuarios.ValidarPorNumero();
-                usuarios.Nombre = nombre;
-                usuarios.Contrasena = contrasena;
-                usuarios.Nivel = Convert.ToInt32(nivel);
-                usuarios.AccesoTotal = accesoTotal;
-                usuarios.IdArea = Convert.ToInt32(idArea);
-                if (!tieneUsuarios)
-                {
-                    usuarios.Guardar();
-                }
-                else
-                {
-                    usuarios.Editar();
-                }
-            }
-
-        }
-
-        private void GuardarBloqueoUsuarios() 
-        {
-
-            int fila = spAdministrar.ActiveSheet.ActiveRowIndex;
-            int filaProgramas = spProgramas.ActiveSheet.ActiveRowIndex;
-            int idEmpresa = Convert.ToInt32(cbEmpresas.SelectedValue.ToString());
-            int idUsuario = Convert.ToInt32(spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["numero"].Index].Text);
-            int idModulo = Convert.ToInt32(spProgramas.ActiveSheet.Cells[filaProgramas, spProgramas.ActiveSheet.Columns["idModulo"].Index].Text);
-            int idPrograma = Convert.ToInt32(spProgramas.ActiveSheet.Cells[filaProgramas, spProgramas.ActiveSheet.Columns["id"].Index].Text);
-            int idSubPrograma = 0;
-            if ((idEmpresa>0) && (idUsuario>0))
-            {
-                bloqueoUsuarios.IdEmpresa = idEmpresa;
-                bloqueoUsuarios.IdUsuario = idUsuario;
-                bloqueoUsuarios.IdModulo = idModulo;
-                bloqueoUsuarios.IdPrograma = idPrograma;
-                bloqueoUsuarios.IdSubPrograma = idSubPrograma;
-                //bool tieneUsuarios = usuarios.ValidarPorNumero();  
-                //if (!tieneUsuarios)
-                //{
-                bloqueoUsuarios.Guardar();
-                //}
-                //else
-                //{
-                //    usuarios.Editar();
-                //}
-            }
-
-        }
-
-        private void GuardarEditarEmpresas()
-        {
-
-            int fila = spAdministrar.ActiveSheet.ActiveRowIndex;
-            string id = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["numero"].Index].Text;
-            string nombre = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["nombre"].Index].Text;
-            string descripcion = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["descripcion"].Index].Text;
-            string domicilio = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["domicilio"].Index].Text;
-            string localidad = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["localidad"].Index].Text;
-            string rfc = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["rfc"].Index].Text;
-            string directorio = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["directorio"].Index].Text;
-            string logo = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["logo"].Index].Text;
-            bool activa = Convert.ToBoolean(spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["activa"].Index].Value);
-            string equipo = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["equipo"].Index].Text;
-            if (!string.IsNullOrEmpty(id) && !string.IsNullOrEmpty(nombre) && !string.IsNullOrEmpty(descripcion) && !string.IsNullOrEmpty(domicilio) && !string.IsNullOrEmpty(rfc) && !string.IsNullOrEmpty(directorio) && !string.IsNullOrEmpty(logo))
-            {
-                empresas.Id = Convert.ToInt32(id);
-                bool tieneEmpresas = empresas.ValidarPorNumero();
-                empresas.Nombre = nombre;
-                empresas.Descripcion = descripcion;
-                empresas.Domicilio = domicilio;
-                empresas.Localidad = localidad;
-                empresas.Rfc = rfc;
-                empresas.Directorio = directorio;
-                empresas.Logo = logo;
-                empresas.Activa = activa;
-                empresas.Equipo = equipo;
-                if (!tieneEmpresas)
-                {
-                    empresas.Guardar();
-                }
-                else
-                {
-                    empresas.Editar();
-                }
-            }
-
-        }
-
-        private void EliminarBloqueoUsuarios()
-        {
-
-            int fila = spProgramas.ActiveSheet.ActiveRowIndex;
-            int idEmpresa = Convert.ToInt32(cbEmpresas.SelectedValue.ToString());
-            int idUsuario = Convert.ToInt32(spProgramas.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["numero"].Index].Text);
-            int idModulo = Convert.ToInt32(spProgramas.ActiveSheet.Cells[fila, spProgramas.ActiveSheet.Columns["idModulo"].Index].Text);
-            int idPrograma = Convert.ToInt32(spProgramas.ActiveSheet.Cells[fila, spProgramas.ActiveSheet.Columns["id"].Index].Text);
-            int idSubPrograma = 0;
-            if ((idEmpresa>0) && (idUsuario>0))
-            {
-                bloqueoUsuarios.IdEmpresa = idEmpresa;
-                bloqueoUsuarios.IdUsuario = idUsuario;
-                bloqueoUsuarios.IdModulo = idModulo;
-                bloqueoUsuarios.IdPrograma = idPrograma;
-                bloqueoUsuarios.IdSubPrograma = idSubPrograma;
-                bloqueoUsuarios.Eliminar();
-            }
-
-        }
-
+        
         private void PanelControl_FormClosed(object sender, FormClosedEventArgs e)
         {
 
@@ -283,7 +138,12 @@ namespace Escritorio
                     spAdministrar.ActiveSheet.ActiveRowIndex = fila;
                     int valorCelda = Convert.ToInt32(spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["nivel"].Index].Value);
                     FormatearSpread();
-                    if (valorCelda == 1) // Nivel de bloqueo de los modulos. // TODO. Pendiente.
+                    if (valorCelda == 0) 
+                    {
+                        spProgramas.Visible = false;
+                        spSubProgramas.Visible = false;                        
+                    }
+                    else if (valorCelda == 1) // Nivel de bloqueo de los modulos. // TODO. Pendiente.
                     {
 
                     }
@@ -343,16 +203,42 @@ namespace Escritorio
             this.Size = Screen.PrimaryScreen.WorkingArea.Size;
 
         }
-         
+
+        private void ControlarSpreadEnter()
+        {
+
+            if (spAdministrar.ActiveSheet.ActiveColumnIndex == spAdministrar.ActiveSheet.Columns.Count - 1)
+            {
+                spAdministrar.ActiveSheet.AddRows(spAdministrar.ActiveSheet.Rows.Count, 1);
+                if (rbtnUsuarios.Checked)
+                {
+                    //GuardarEditarUsuarios();
+                }
+                else if (rbtnEmpresas.Checked)
+                {
+                    //GuardarEditarEmpresas();
+                }
+            }
+
+        }
+
         private void ReiniciarControles() 
         {
 
-            spAdministrar.Visible = false;
-            rbtnUsuarios.Checked = false;
+            //spAdministrar.Visible = false            
+            rbtnUsuarios.Checked = true;
             rbtnEmpresas.Checked = false;
             rbtnProgramas.Checked = false;
             spProgramas.Visible = false;
             spSubProgramas.Visible = false;
+
+        }
+
+        private void CargarEncabezados()
+        {
+
+            lblEncabezadoPrograma.Text = "Programa: " + this.Text;
+            lblEncabezadoEmpresa.Text = "Empresa: " + new Principal().datosEmpresa.Nombre;
 
         }
 
@@ -385,7 +271,7 @@ namespace Escritorio
         private void FormatearSpreadUsuarios()
         {
 
-            spAdministrar.Height = pnlContenido.Height - pnlPie.Height - 25;
+            spAdministrar.Height = pnlCuerpo.Height - btnGuardar.Height - 25;
             spAdministrar.ActiveSheet.Columns[0].Tag = "empresa";
             spAdministrar.ActiveSheet.Columns[1].Tag = "numero";
             spAdministrar.ActiveSheet.Columns[2].Tag = "nombre";
@@ -470,8 +356,13 @@ namespace Escritorio
 
             try
             {
-                usuarios.IdEmpresa = Convert.ToInt32(cbEmpresas.SelectedValue.ToString());            
+                //if (cbEmpresas.Items.Count > 0)
+                //{ 
+                usuarios.IdEmpresa = 1; // Convert.ToInt32(cbEmpresas.SelectedValue.ToString());
                 spAdministrar.DataSource = usuarios.ObtenerListadoDeEmpresa();
+                FormatearSpread();
+                FormatearSpreadUsuarios();
+                //}
             }
             catch (Exception)
             {                             
@@ -509,7 +400,7 @@ namespace Escritorio
 
         }
                 
-        private void ControlarSpread(FarPoint.Win.Spread.FpSpread spread)
+        private void ControlarSpreadEnter(FarPoint.Win.Spread.FpSpread spread)
         {
 
             FarPoint.Win.Spread.InputMap valor1;
@@ -571,7 +462,228 @@ namespace Escritorio
 
         }
 
+        private void GuardarEditarUsuariosEnter()
+        {
+
+            int fila = spAdministrar.ActiveSheet.ActiveRowIndex;
+            string empresa = cbEmpresas.SelectedValue.ToString();
+            string numero = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["numero"].Index].Text;
+            string nombre = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["nombre"].Index].Text;
+            string contrasena = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["contrasena"].Index].Value.ToString();
+            string nivel = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["nivel"].Index].Text;
+            bool accesoTotal = Convert.ToBoolean(spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["accesoTotal"].Index].Value);
+            string idArea = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["idArea"].Index].Text;
+            if (!string.IsNullOrEmpty(empresa) && !string.IsNullOrEmpty(numero) && !string.IsNullOrEmpty(nombre) && !string.IsNullOrEmpty(contrasena) && !string.IsNullOrEmpty(nivel) && !string.IsNullOrEmpty(idArea))
+            {
+                usuarios.IdEmpresa = Convert.ToInt32(empresa);
+                usuarios.Id = Convert.ToInt32(numero);
+                bool tieneUsuarios = usuarios.ValidarPorNumero();
+                usuarios.Nombre = nombre;
+                usuarios.Contrasena = contrasena;
+                usuarios.Nivel = Convert.ToInt32(nivel);
+                usuarios.AccesoTotal = accesoTotal;
+                usuarios.IdArea = Convert.ToInt32(idArea);
+                if (!tieneUsuarios)
+                {
+                    usuarios.Guardar();
+                }
+                else
+                {
+                    usuarios.Editar();
+                }
+            }
+
+        }
+
+        private void GuardarEditarUsuarios()
+        {
+
+            string empresa = cbEmpresas.SelectedValue.ToString();
+            usuarios.IdEmpresa = Convert.ToInt32(empresa);
+            usuarios.EliminarTodo();
+            for (int fila = 0; fila < spAdministrar.ActiveSheet.Rows.Count; fila++)
+            {  
+                string numero = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["numero"].Index].Text;
+                string nombre = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["nombre"].Index].Text;
+                string contrasena = Logica.Funciones.ValidarLetra(spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["contrasena"].Index].Value);
+                string nivel = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["nivel"].Index].Text;
+                bool accesoTotal = Convert.ToBoolean(spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["accesoTotal"].Index].Value);
+                string idArea = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["idArea"].Index].Text;
+                if (!string.IsNullOrEmpty(empresa) && !string.IsNullOrEmpty(numero) && !string.IsNullOrEmpty(nombre) && !string.IsNullOrEmpty(contrasena) && !string.IsNullOrEmpty(nivel) && !string.IsNullOrEmpty(idArea))
+                {
+                    usuarios.Id = Convert.ToInt32(numero);
+                    bool tieneUsuarios = usuarios.ValidarPorNumero();
+                    usuarios.Nombre = nombre;
+                    usuarios.Contrasena = contrasena;
+                    usuarios.Nivel = Convert.ToInt32(nivel);
+                    usuarios.AccesoTotal = accesoTotal;
+                    usuarios.IdArea = Convert.ToInt32(idArea);
+                    if (!tieneUsuarios)
+                    {
+                        usuarios.Guardar();
+                    }
+                    else
+                    {
+                        usuarios.Editar();
+                    }
+                }
+            }
+            MessageBox.Show("Guardado correcto.", "Correcto.", MessageBoxButtons.OK);
+            CargarUsuarios();
+
+        }
+
+        private void GuardarBloqueoUsuarios()
+        {
+
+            int fila = spAdministrar.ActiveSheet.ActiveRowIndex;
+            int filaProgramas = spProgramas.ActiveSheet.ActiveRowIndex;
+            int idEmpresa = Convert.ToInt32(cbEmpresas.SelectedValue.ToString());
+            int idUsuario = Convert.ToInt32(spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["numero"].Index].Text);
+            int idModulo = Convert.ToInt32(spProgramas.ActiveSheet.Cells[filaProgramas, spProgramas.ActiveSheet.Columns["idModulo"].Index].Text);
+            int idPrograma = Convert.ToInt32(spProgramas.ActiveSheet.Cells[filaProgramas, spProgramas.ActiveSheet.Columns["id"].Index].Text);
+            int idSubPrograma = 0;
+            if ((idEmpresa > 0) && (idUsuario > 0))
+            {
+                bloqueoUsuarios.IdEmpresa = idEmpresa;
+                bloqueoUsuarios.IdUsuario = idUsuario;
+                bloqueoUsuarios.IdModulo = idModulo;
+                bloqueoUsuarios.IdPrograma = idPrograma;
+                bloqueoUsuarios.IdSubPrograma = idSubPrograma;
+                //bool tieneUsuarios = usuarios.ValidarPorNumero();  
+                //if (!tieneUsuarios)
+                //{
+                bloqueoUsuarios.Guardar();
+                //}
+                //else
+                //{
+                //    usuarios.Editar();
+                //}
+            }
+
+        }
+
+        private void GuardarEditarEmpresas()
+        {
+
+            int fila = spAdministrar.ActiveSheet.ActiveRowIndex;
+            string id = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["numero"].Index].Text;
+            string nombre = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["nombre"].Index].Text;
+            string descripcion = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["descripcion"].Index].Text;
+            string domicilio = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["domicilio"].Index].Text;
+            string localidad = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["localidad"].Index].Text;
+            string rfc = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["rfc"].Index].Text;
+            string directorio = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["directorio"].Index].Text;
+            string logo = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["logo"].Index].Text;
+            bool activa = Convert.ToBoolean(spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["activa"].Index].Value);
+            string equipo = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["equipo"].Index].Text;
+            if (!string.IsNullOrEmpty(id) && !string.IsNullOrEmpty(nombre) && !string.IsNullOrEmpty(descripcion) && !string.IsNullOrEmpty(domicilio) && !string.IsNullOrEmpty(rfc) && !string.IsNullOrEmpty(directorio) && !string.IsNullOrEmpty(logo))
+            {
+                empresas.Id = Convert.ToInt32(id);
+                bool tieneEmpresas = empresas.ValidarPorNumero();
+                empresas.Nombre = nombre;
+                empresas.Descripcion = descripcion;
+                empresas.Domicilio = domicilio;
+                empresas.Localidad = localidad;
+                empresas.Rfc = rfc;
+                empresas.Directorio = directorio;
+                empresas.Logo = logo;
+                empresas.Activa = activa;
+                empresas.Equipo = equipo;
+                if (!tieneEmpresas)
+                {
+                    empresas.Guardar();
+                }
+                else
+                {
+                    empresas.Editar();
+                }
+            }
+
+        }
+
+        private void EliminarUsuariosEnter()
+        {
+
+            int fila = spAdministrar.ActiveSheet.ActiveRowIndex;
+            string empresa = cbEmpresas.SelectedValue.ToString();
+            string numero = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["numero"].Index].Text;
+            if (!string.IsNullOrEmpty(empresa) && !string.IsNullOrEmpty(numero))
+            {
+                usuarios.IdEmpresa = Logica.Funciones.ValidarNumero(empresa);
+                usuarios.Id = Logica.Funciones.ValidarNumero(numero);
+                usuarios.Eliminar();
+            }
+
+        }
+
+        private void EliminarUsuarios() 
+        {
+
+            if ((MessageBox.Show("Confirmas que deseas eliminar todo?", "Confirmación.", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes))
+            {
+                string empresa = cbEmpresas.SelectedValue.ToString(); 
+                if (!string.IsNullOrEmpty(empresa))
+                {
+                    usuarios.IdEmpresa = Logica.Funciones.ValidarNumero(empresa); 
+                    usuarios.EliminarTodo();
+                    CargarUsuarios();
+                }
+            }
+
+        }
+
+        private void EliminarBloqueoUsuarios()
+        {
+
+            int filaProgramas = spProgramas.ActiveSheet.ActiveRowIndex;
+            int filaAdministrar = spAdministrar.ActiveSheet.ActiveRowIndex;
+            int idEmpresa = Convert.ToInt32(cbEmpresas.SelectedValue.ToString());
+            int idUsuario = Convert.ToInt32(spAdministrar.ActiveSheet.Cells[filaAdministrar, spAdministrar.ActiveSheet.Columns["numero"].Index].Text);
+            int idModulo = Convert.ToInt32(spProgramas.ActiveSheet.Cells[filaProgramas, spProgramas.ActiveSheet.Columns["idModulo"].Index].Text);
+            int idPrograma = Convert.ToInt32(spProgramas.ActiveSheet.Cells[filaProgramas, spProgramas.ActiveSheet.Columns["id"].Index].Text);
+            int idSubPrograma = 0;
+            if ((idEmpresa > 0) && (idUsuario > 0))
+            {
+                bloqueoUsuarios.IdEmpresa = idEmpresa;
+                bloqueoUsuarios.IdUsuario = idUsuario;
+                bloqueoUsuarios.IdModulo = idModulo;
+                bloqueoUsuarios.IdPrograma = idPrograma;
+                bloqueoUsuarios.IdSubPrograma = idSubPrograma;
+                bloqueoUsuarios.Eliminar();
+            }
+
+        }
+
         #endregion
+
+        public enum TipoControl
+        { 
+        
+            Usuarios = 1, 
+            Empresas = 2,
+            Programas = 3
+            
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+
+            //if (this.opcionSeleccionada = TipoControl.Usuarios) 
+            //{
+                GuardarEditarUsuarios();
+            //}
+
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+
+            EliminarUsuarios();
+
+        }
+
+
 
     }
 }

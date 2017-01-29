@@ -139,6 +139,30 @@ namespace Entidades
 
         }
 
+        public void EliminarTodo()
+        {
+
+            try
+            {
+                SqlCommand comando = new SqlCommand();
+                comando.Connection = BaseDatos.conexionInformacion;
+                comando.CommandText = "DELETE FROM Usuarios WHERE IdEmpresa=@idEmpresa";
+                comando.Parameters.AddWithValue("@idEmpresa", this.IdEmpresa); 
+                BaseDatos.conexionInformacion.Open();
+                comando.ExecuteNonQuery();
+                BaseDatos.conexionInformacion.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                BaseDatos.conexionInformacion.Close();
+            }
+
+        }
+
         public string ObtenerPorId()
         {
 

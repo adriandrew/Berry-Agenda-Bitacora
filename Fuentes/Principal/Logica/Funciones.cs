@@ -22,6 +22,20 @@ namespace Logica
             }
                     
         }
+
+        public static string ValidarLetra(object valor)
+        { 
+        
+            if (valor == null)
+            {
+                return string.Empty;
+            }
+            else
+            {
+                return valor.ToString();
+            }
+
+        }
         
     }
 }

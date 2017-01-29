@@ -35,10 +35,12 @@ Partial Class Principal
         Me.pnlPie = New System.Windows.Forms.Panel()
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.pnlEncabezado = New System.Windows.Forms.Panel()
-        Me.lblEncabezadoEmpresa = New System.Windows.Forms.Label()
-        Me.lblEncabezadoPrograma = New System.Windows.Forms.Label()
         Me.lblEncabezadoArea = New System.Windows.Forms.Label()
         Me.lblEncabezadoUsuario = New System.Windows.Forms.Label()
+        Me.lblEncabezadoEmpresa = New System.Windows.Forms.Label()
+        Me.lblEncabezadoPrograma = New System.Windows.Forms.Label()
+        Me.btnEliminar = New System.Windows.Forms.Button()
+        Me.btnGuardar = New System.Windows.Forms.Button()
         Me.pnlContenido.SuspendLayout()
         Me.pnlCuerpo.SuspendLayout()
         CType(Me.spCatalogos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -71,11 +73,13 @@ Partial Class Principal
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCuerpo.AutoScroll = True
         Me.pnlCuerpo.BackColor = System.Drawing.Color.Transparent
+        Me.pnlCuerpo.Controls.Add(Me.btnEliminar)
+        Me.pnlCuerpo.Controls.Add(Me.btnGuardar)
         Me.pnlCuerpo.Controls.Add(Me.spCatalogos)
         Me.pnlCuerpo.Controls.Add(Me.msMenu)
         Me.pnlCuerpo.Location = New System.Drawing.Point(3, 135)
         Me.pnlCuerpo.Name = "pnlCuerpo"
-        Me.pnlCuerpo.Size = New System.Drawing.Size(1029, 429)
+        Me.pnlCuerpo.Size = New System.Drawing.Size(1029, 432)
         Me.pnlCuerpo.TabIndex = 9
         '
         'spCatalogos
@@ -103,7 +107,7 @@ Partial Class Principal
         Me.spCatalogos.Location = New System.Drawing.Point(7, 42)
         Me.spCatalogos.Name = "spCatalogos"
         Me.spCatalogos.Sheets.AddRange(New FarPoint.Win.Spread.SheetView() {Me.spCatalogos_Sheet1})
-        Me.spCatalogos.Size = New System.Drawing.Size(1015, 375)
+        Me.spCatalogos.Size = New System.Drawing.Size(1015, 322)
         Me.spCatalogos.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell
         Me.spCatalogos.TabIndex = 0
         Me.spCatalogos.VerticalScrollBar.Buttons = New FarPoint.Win.Spread.FpScrollBarButtonCollection("BackwardLineButton,ThumbTrack,ForwardLineButton")
@@ -208,26 +212,6 @@ Partial Class Principal
         Me.pnlEncabezado.Size = New System.Drawing.Size(1035, 129)
         Me.pnlEncabezado.TabIndex = 7
         '
-        'lblEncabezadoEmpresa
-        '
-        Me.lblEncabezadoEmpresa.AutoSize = True
-        Me.lblEncabezadoEmpresa.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblEncabezadoEmpresa.ForeColor = System.Drawing.Color.White
-        Me.lblEncabezadoEmpresa.Location = New System.Drawing.Point(12, 50)
-        Me.lblEncabezadoEmpresa.Name = "lblEncabezadoEmpresa"
-        Me.lblEncabezadoEmpresa.Size = New System.Drawing.Size(0, 33)
-        Me.lblEncabezadoEmpresa.TabIndex = 1
-        '
-        'lblEncabezadoPrograma
-        '
-        Me.lblEncabezadoPrograma.AutoSize = True
-        Me.lblEncabezadoPrograma.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblEncabezadoPrograma.ForeColor = System.Drawing.Color.White
-        Me.lblEncabezadoPrograma.Location = New System.Drawing.Point(12, 9)
-        Me.lblEncabezadoPrograma.Name = "lblEncabezadoPrograma"
-        Me.lblEncabezadoPrograma.Size = New System.Drawing.Size(0, 33)
-        Me.lblEncabezadoPrograma.TabIndex = 0
-        '
         'lblEncabezadoArea
         '
         Me.lblEncabezadoArea.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -249,6 +233,50 @@ Partial Class Principal
         Me.lblEncabezadoUsuario.Name = "lblEncabezadoUsuario"
         Me.lblEncabezadoUsuario.Size = New System.Drawing.Size(0, 33)
         Me.lblEncabezadoUsuario.TabIndex = 4
+        '
+        'lblEncabezadoEmpresa
+        '
+        Me.lblEncabezadoEmpresa.AutoSize = True
+        Me.lblEncabezadoEmpresa.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblEncabezadoEmpresa.ForeColor = System.Drawing.Color.White
+        Me.lblEncabezadoEmpresa.Location = New System.Drawing.Point(12, 50)
+        Me.lblEncabezadoEmpresa.Name = "lblEncabezadoEmpresa"
+        Me.lblEncabezadoEmpresa.Size = New System.Drawing.Size(0, 33)
+        Me.lblEncabezadoEmpresa.TabIndex = 1
+        '
+        'lblEncabezadoPrograma
+        '
+        Me.lblEncabezadoPrograma.AutoSize = True
+        Me.lblEncabezadoPrograma.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblEncabezadoPrograma.ForeColor = System.Drawing.Color.White
+        Me.lblEncabezadoPrograma.Location = New System.Drawing.Point(12, 9)
+        Me.lblEncabezadoPrograma.Name = "lblEncabezadoPrograma"
+        Me.lblEncabezadoPrograma.Size = New System.Drawing.Size(0, 33)
+        Me.lblEncabezadoPrograma.TabIndex = 0
+        '
+        'btnEliminar
+        '
+        Me.btnEliminar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnEliminar.BackColor = System.Drawing.Color.White
+        Me.btnEliminar.Image = CType(resources.GetObject("btnEliminar.Image"), System.Drawing.Image)
+        Me.btnEliminar.Location = New System.Drawing.Point(905, 372)
+        Me.btnEliminar.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnEliminar.Name = "btnEliminar"
+        Me.btnEliminar.Size = New System.Drawing.Size(60, 60)
+        Me.btnEliminar.TabIndex = 18
+        Me.btnEliminar.UseVisualStyleBackColor = False
+        '
+        'btnGuardar
+        '
+        Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnGuardar.BackColor = System.Drawing.Color.White
+        Me.btnGuardar.Image = CType(resources.GetObject("btnGuardar.Image"), System.Drawing.Image)
+        Me.btnGuardar.Location = New System.Drawing.Point(965, 372)
+        Me.btnGuardar.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnGuardar.Name = "btnGuardar"
+        Me.btnGuardar.Size = New System.Drawing.Size(60, 60)
+        Me.btnGuardar.TabIndex = 17
+        Me.btnGuardar.UseVisualStyleBackColor = False
         '
         'Principal
         '
@@ -287,4 +315,6 @@ Partial Class Principal
     Friend WithEvents miOpcion2 As System.Windows.Forms.ToolStripMenuItem
     Private WithEvents lblEncabezadoArea As System.Windows.Forms.Label
     Private WithEvents lblEncabezadoUsuario As System.Windows.Forms.Label
+    Private WithEvents btnEliminar As System.Windows.Forms.Button
+    Private WithEvents btnGuardar As System.Windows.Forms.Button
 End Class

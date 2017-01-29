@@ -23,7 +23,7 @@ namespace Escritorio
         Entidades.BaseDatos baseDatos = new Entidades.BaseDatos();
         Entidades.Modulos modulos = new Entidades.Modulos();
         Entidades.BloqueoUsuarios bloqueoUsuarios = new Entidades.BloqueoUsuarios();
-        Logica.DatosEmpresa datosEmpresa = new Logica.DatosEmpresa();
+        public Logica.DatosEmpresa datosEmpresa = new Logica.DatosEmpresa();
         Logica.DatosUsuario datosUsuario = new Logica.DatosUsuario();
         Logica.DatosArea datosAreas = new Logica.DatosArea();
         ProcessStartInfo ejecutarProgramaPrincipal = new ProcessStartInfo();

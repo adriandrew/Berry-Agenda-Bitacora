@@ -72,7 +72,7 @@
 
     End Sub
 
-    Public Sub ControlarSpread(ByVal spread As FarPoint.Win.Spread.FpSpread)
+    Public Sub ControlarSpreadEnter(ByVal spread As FarPoint.Win.Spread.FpSpread)
 
         Dim valor1 As FarPoint.Win.Spread.InputMap
         Dim valor2 As FarPoint.Win.Spread.InputMap
@@ -120,7 +120,7 @@
         lblEncabezadoPrograma.Text = "Programa: " + Me.Text
         lblEncabezadoEmpresa.Text = "Empresa: " + datosEmpresa.ENombre
         lblEncabezadoUsuario.Text = "Usuario: " + datosUsuario.ENombre
-        lblEncabezadoArea.Text = "Area: " + datosArea.ENombre        
+        lblEncabezadoArea.Text = "Area: " + datosArea.ENombre
 
     End Sub
 
@@ -152,20 +152,44 @@
 
     Private Sub GuardarEditarAreas()
 
-        Dim fila As Integer = spCatalogos.ActiveSheet.ActiveRowIndex
-        Dim id As Integer = spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("id").Index).Value
-        Dim nombre As String = spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("nombre").Index).Value
-        Dim clave As String = LogicaCatalogos.ValidarLetra(spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("clave").Index).Value)
-        If (Not String.IsNullOrEmpty(id)) And (Not String.IsNullOrEmpty(nombre)) Then
-            areas.EId = id
-            areas.ENombre = nombre
-            areas.EClave = clave
-            Dim tieneAreas As Boolean = areas.ValidarPorNumero()
-            If tieneAreas Then
-                areas.Editar()
-            Else
-                areas.Guardar()
+        areas.EliminarTodo()
+        For filaActiva = 0 To spCatalogos.ActiveSheet.Rows.Count - 1
+            Dim id As Integer = spCatalogos.ActiveSheet.Cells(filaActiva, spCatalogos.ActiveSheet.Columns("id").Index).Value
+            Dim nombre As String = spCatalogos.ActiveSheet.Cells(filaActiva, spCatalogos.ActiveSheet.Columns("nombre").Index).Value
+            Dim clave As String = LogicaCatalogos.ValidarLetra(spCatalogos.ActiveSheet.Cells(filaActiva, spCatalogos.ActiveSheet.Columns("clave").Index).Value)
+            If (Not String.IsNullOrEmpty(id)) And (Not String.IsNullOrEmpty(nombre)) Then
+                areas.EId = id
+                areas.ENombre = nombre
+                areas.EClave = clave
+                Dim tieneAreas As Boolean = areas.ValidarPorNumero()
+                If tieneAreas Then
+                    areas.Editar()
+                Else
+                    areas.Guardar()
+                End If
             End If
+        Next
+        MsgBox("Guardado correcto.", MsgBoxStyle.ApplicationModal, "Correcto.")
+        CargarAreas()
+
+    End Sub
+
+    Private Sub EliminarAreasEnter()
+
+        'Dim id As String = spCatalogos.ActiveSheet.Cells(filaActiva, spCatalogos.ActiveSheet.Columns("id").Index).Value
+        'If (Not String.IsNullOrEmpty(id)) Then
+        '    areas.EId = LogicaCatalogos.Funciones.ValidarNumero(id)
+        '    areas.Eliminar()
+        '    CargarAreas()
+        'End If
+
+    End Sub
+
+    Private Sub EliminarAreas()
+
+        If (MessageBox.Show("Confirmas que deseas eliminar todo?", "Confirmación.", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes) Then
+            areas.EliminarTodo()
+            CargarAreas()
         End If
 
     End Sub
@@ -173,11 +197,12 @@
     Private Sub FormatearSpread()
 
         spCatalogos.Reset() : Application.DoEvents()
-        ControlarSpread(spCatalogos)
+        ControlarSpreadEnter(spCatalogos)
+        spCatalogos.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell
         spCatalogos.Visible = True : Application.DoEvents()
         spCatalogos.ActiveSheet.GrayAreaBackColor = Color.White : Application.DoEvents()
         spCatalogos.Font = New Font("Microsoft Sans Serif", 12, FontStyle.Bold) : Application.DoEvents()
-        spCatalogos.ActiveSheet.Rows(-1).Height = 25 : Application.DoEvents()
+        spCatalogos.ActiveSheet.Rows(-1).Height = 30 : Application.DoEvents()
         spCatalogos.ActiveSheetIndex = 0 : Application.DoEvents()
 
     End Sub
@@ -195,6 +220,7 @@
         spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("id").Index).Value = "Id".ToUpper : Application.DoEvents()
         spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("nombre").Index).Value = "Nombre".ToUpper : Application.DoEvents()
         spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("clave").Index).Value = "Clave".ToUpper : Application.DoEvents()
+        spCatalogos.ActiveSheet.ColumnHeader.Rows(0).Height = 35 : Application.DoEvents()
 
     End Sub
 
@@ -202,14 +228,14 @@
 
         Dim columnaActiva As Integer = spCatalogos.ActiveSheet.ActiveColumnIndex
         ' Guardar o editar. 
-        If (spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns.Count - 1) Then
+        If (columnaActiva = spCatalogos.ActiveSheet.Columns.Count - 1) Then
             spCatalogos.ActiveSheet.AddRows(spCatalogos.ActiveSheet.Rows.Count, 1)
-            Dim filaActiva As Integer = spCatalogos.ActiveSheet.ActiveRowIndex 
-            If (Me.opcionSeleccionada = Reportes.Areas) Then
-                GuardarEditarAreas()
-            ElseIf (Me.opcionSeleccionada = Reportes.Opcion2) Then
-                'GuardarEditarEmpresas()
-            End If
+            'Dim filaActiva As Integer = spCatalogos.ActiveSheet.ActiveRowIndex 
+            'If (Me.opcionSeleccionada = Reportes.Areas) Then
+            '    'GuardarEditarAreas()
+            'ElseIf (Me.opcionSeleccionada = Reportes.Opcion2) Then
+            '    'GuardarEditarEmpresas()
+            'End If
         End If
 
     End Sub
@@ -219,39 +245,30 @@
     Private Sub spCatalogos_DialogKey(sender As Object, e As FarPoint.Win.Spread.DialogKeyEventArgs) Handles spCatalogos.DialogKey
 
         If (e.KeyData = Keys.Enter) Then
-            ControlarSpreadEnter()
+            ControlarSpreadEnter() ' Metodo descontinuado.
         End If
 
     End Sub
 
     Private Sub spCatalogos_KeyDown(sender As Object, e As KeyEventArgs) Handles spCatalogos.KeyDown
 
-        If e.KeyData = Keys.F9 Then
+        If e.KeyData = Keys.F1 Then ' Abrir catalogos.
             'Dim columnaActiva As Integer = spCatalogos.ActiveSheet.ActiveColumnIndex
             '    if (columnaActiva = spCatalogos.ActiveSheet.Columns["idProductor"].Index) then
             '         Catalogos.opcionSeleccionada = (int)LogicaTarima.NumeracionCatalogos.Numeracion.productor;
             '        new Escritorio.Catalogos().Show();
             'End If
-        ElseIf e.KeyData = Keys.F11 Then
-            If (MessageBox.Show("Confirmas que deseas eliminar el registro seleccionado?", "Confirmacion.", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes) Then
+        ElseIf e.KeyData = Keys.F5 Then ' Eliminar un registro.
+            If (MessageBox.Show("Confirmas que deseas eliminar el registro seleccionado?", "Confirmación.", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes) Then
                 Dim fila As Integer = spCatalogos.ActiveSheet.ActiveRowIndex
-                If (Me.opcionSeleccionada = Reportes.Areas) Then 
-                    Dim id As String = spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("id").Index).Value
-                    If (Not String.IsNullOrEmpty(id)) Then
-                        areas.EId = LogicaCatalogos.Funciones.ValidarNumero(id)
-                        areas.Eliminar()
-                        CargarAreas()
-                    End If
+                If (Me.opcionSeleccionada = Reportes.Areas) Then
+                    spCatalogos.ActiveSheet.Rows.Remove(fila, 1)
                 ElseIf (Me.opcionSeleccionada = Reportes.Opcion2) Then
-                    'Dim numero As String = spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("numero").Index).Value
-                    'If (Not String.IsNullOrEmpty(numero)) Then
-                    '        empresas.Id = Logica.Funciones.ValidarNumero(numero);
-                    '        empresas.Eliminar();
-                    'End If
+
                 End If
             End If
         ElseIf (e.KeyData = Keys.Enter) Then
-            ControlarSpreadEnter()
+            ControlarSpreadEnter() ' Metodo descontinuado.
         End If
 
     End Sub
@@ -262,5 +279,25 @@
         Opcion2 = 2
 
     End Enum
+
+    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+
+        If (Me.opcionSeleccionada = Reportes.Areas) Then
+            GuardarEditarAreas()
+        ElseIf (Me.opcionSeleccionada = Reportes.Opcion2) Then
+
+        End If
+
+    End Sub
+
+    Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
+
+        If (Me.opcionSeleccionada = Reportes.Areas) Then
+            EliminarAreas()
+        ElseIf (Me.opcionSeleccionada = Reportes.Opcion2) Then
+
+        End If
+
+    End Sub
 
 End Class

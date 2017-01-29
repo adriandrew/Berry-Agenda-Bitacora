@@ -115,6 +115,24 @@ Public Class Areas
 
     End Sub
 
+    Public Sub EliminarTodo()
+
+        Try
+            Dim comando As New SqlCommand()
+            comando.Connection = BaseDatos.conexionCatalogo
+            comando.CommandText = "DELETE FROM Areas"
+            comando.Parameters.AddWithValue("@id", Me.id)
+            BaseDatos.conexionCatalogo.Open()
+            comando.ExecuteNonQuery()
+            BaseDatos.conexionCatalogo.Close()
+        Catch ex As Exception
+            Throw ex
+        Finally
+            BaseDatos.conexionCatalogo.Close()
+        End Try
+
+    End Sub
+
     Public Function ValidarPorNumero() As Boolean
 
         Try
