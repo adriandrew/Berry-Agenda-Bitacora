@@ -23,8 +23,8 @@ Partial Class Principal
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Principal))
-        Dim EnhancedScrollBarRenderer3 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
-        Dim EnhancedScrollBarRenderer4 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
+        Dim EnhancedScrollBarRenderer1 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
+        Dim EnhancedScrollBarRenderer2 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
         Me.pnlContenido = New System.Windows.Forms.Panel()
         Me.pnlCuerpo = New System.Windows.Forms.Panel()
         Me.tbActividades = New System.Windows.Forms.TabControl()
@@ -48,6 +48,12 @@ Partial Class Principal
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtCapturaNombre = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.pnlExterna = New System.Windows.Forms.Panel()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.cbUsuarios = New System.Windows.Forms.ComboBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.cbAreas = New System.Windows.Forms.ComboBox()
+        Me.chkCapturaEsExterna = New System.Windows.Forms.CheckBox()
         Me.tpResolverActividades = New System.Windows.Forms.TabPage()
         Me.btnResolucionFechaAnterior = New System.Windows.Forms.Button()
         Me.btnResolucionFechaSiguiente = New System.Windows.Forms.Button()
@@ -74,6 +80,7 @@ Partial Class Principal
         Me.pnlCuerpo.SuspendLayout()
         Me.tbActividades.SuspendLayout()
         Me.tpCapturarActividades.SuspendLayout()
+        Me.pnlExterna.SuspendLayout()
         Me.tpResolverActividades.SuspendLayout()
         CType(Me.spResolverActividades, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.spResolverActividades_Sheet1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -147,6 +154,7 @@ Partial Class Principal
         Me.tpCapturarActividades.Controls.Add(Me.Label2)
         Me.tpCapturarActividades.Controls.Add(Me.txtCapturaNombre)
         Me.tpCapturarActividades.Controls.Add(Me.Label1)
+        Me.tpCapturarActividades.Controls.Add(Me.pnlExterna)
         Me.tpCapturarActividades.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tpCapturarActividades.Location = New System.Drawing.Point(4, 33)
         Me.tpCapturarActividades.Name = "tpCapturarActividades"
@@ -344,6 +352,66 @@ Partial Class Principal
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Nombre:"
         '
+        'pnlExterna
+        '
+        Me.pnlExterna.Controls.Add(Me.Label11)
+        Me.pnlExterna.Controls.Add(Me.cbUsuarios)
+        Me.pnlExterna.Controls.Add(Me.Label10)
+        Me.pnlExterna.Controls.Add(Me.cbAreas)
+        Me.pnlExterna.Controls.Add(Me.chkCapturaEsExterna)
+        Me.pnlExterna.Location = New System.Drawing.Point(14, 324)
+        Me.pnlExterna.Name = "pnlExterna"
+        Me.pnlExterna.Size = New System.Drawing.Size(685, 120)
+        Me.pnlExterna.TabIndex = 21
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(3, 74)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(87, 24)
+        Me.Label11.TabIndex = 5
+        Me.Label11.Text = "Usuario:"
+        '
+        'cbUsuarios
+        '
+        Me.cbUsuarios.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cbUsuarios.FormattingEnabled = True
+        Me.cbUsuarios.Location = New System.Drawing.Point(96, 71)
+        Me.cbUsuarios.Name = "cbUsuarios"
+        Me.cbUsuarios.Size = New System.Drawing.Size(332, 32)
+        Me.cbUsuarios.TabIndex = 4
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(3, 36)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(60, 24)
+        Me.Label10.TabIndex = 3
+        Me.Label10.Text = "Area:"
+        '
+        'cbAreas
+        '
+        Me.cbAreas.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cbAreas.FormattingEnabled = True
+        Me.cbAreas.Location = New System.Drawing.Point(96, 33)
+        Me.cbAreas.Name = "cbAreas"
+        Me.cbAreas.Size = New System.Drawing.Size(332, 32)
+        Me.cbAreas.TabIndex = 1
+        '
+        'chkCapturaEsExterna
+        '
+        Me.chkCapturaEsExterna.AutoSize = True
+        Me.chkCapturaEsExterna.Location = New System.Drawing.Point(3, 3)
+        Me.chkCapturaEsExterna.Name = "chkCapturaEsExterna"
+        Me.chkCapturaEsExterna.Size = New System.Drawing.Size(121, 28)
+        Me.chkCapturaEsExterna.TabIndex = 0
+        Me.chkCapturaEsExterna.Text = "Es Externa"
+        Me.chkCapturaEsExterna.UseVisualStyleBackColor = True
+        '
         'tpResolverActividades
         '
         Me.tpResolverActividades.BackColor = System.Drawing.Color.White
@@ -483,18 +551,18 @@ Partial Class Principal
         Me.spResolverActividades.BackColor = System.Drawing.Color.White
         Me.spResolverActividades.HorizontalScrollBar.Buttons = New FarPoint.Win.Spread.FpScrollBarButtonCollection("BackwardLineButton,ThumbTrack,ForwardLineButton")
         Me.spResolverActividades.HorizontalScrollBar.Name = ""
-        EnhancedScrollBarRenderer3.ArrowColor = System.Drawing.Color.DarkSlateGray
-        EnhancedScrollBarRenderer3.ArrowHoveredColor = System.Drawing.Color.DarkSlateGray
-        EnhancedScrollBarRenderer3.ArrowSelectedColor = System.Drawing.Color.DarkSlateGray
-        EnhancedScrollBarRenderer3.ButtonBackgroundColor = System.Drawing.Color.CadetBlue
-        EnhancedScrollBarRenderer3.ButtonBorderColor = System.Drawing.Color.SlateGray
-        EnhancedScrollBarRenderer3.ButtonHoveredBackgroundColor = System.Drawing.Color.SlateGray
-        EnhancedScrollBarRenderer3.ButtonHoveredBorderColor = System.Drawing.Color.DarkGray
-        EnhancedScrollBarRenderer3.ButtonSelectedBackgroundColor = System.Drawing.Color.DarkGray
-        EnhancedScrollBarRenderer3.ButtonSelectedBorderColor = System.Drawing.Color.CadetBlue
-        EnhancedScrollBarRenderer3.TrackBarBackgroundColor = System.Drawing.Color.CadetBlue
-        EnhancedScrollBarRenderer3.TrackBarSelectedBackgroundColor = System.Drawing.Color.SlateGray
-        Me.spResolverActividades.HorizontalScrollBar.Renderer = EnhancedScrollBarRenderer3
+        EnhancedScrollBarRenderer1.ArrowColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer1.ArrowHoveredColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer1.ArrowSelectedColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer1.ButtonBackgroundColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer1.ButtonBorderColor = System.Drawing.Color.SlateGray
+        EnhancedScrollBarRenderer1.ButtonHoveredBackgroundColor = System.Drawing.Color.SlateGray
+        EnhancedScrollBarRenderer1.ButtonHoveredBorderColor = System.Drawing.Color.DarkGray
+        EnhancedScrollBarRenderer1.ButtonSelectedBackgroundColor = System.Drawing.Color.DarkGray
+        EnhancedScrollBarRenderer1.ButtonSelectedBorderColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer1.TrackBarBackgroundColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer1.TrackBarSelectedBackgroundColor = System.Drawing.Color.SlateGray
+        Me.spResolverActividades.HorizontalScrollBar.Renderer = EnhancedScrollBarRenderer1
         Me.spResolverActividades.HorizontalScrollBar.TabIndex = 0
         Me.spResolverActividades.Location = New System.Drawing.Point(6, 187)
         Me.spResolverActividades.Name = "spResolverActividades"
@@ -504,18 +572,18 @@ Partial Class Principal
         Me.spResolverActividades.TabIndex = 2
         Me.spResolverActividades.VerticalScrollBar.Buttons = New FarPoint.Win.Spread.FpScrollBarButtonCollection("BackwardLineButton,ThumbTrack,ForwardLineButton")
         Me.spResolverActividades.VerticalScrollBar.Name = ""
-        EnhancedScrollBarRenderer4.ArrowColor = System.Drawing.Color.DarkSlateGray
-        EnhancedScrollBarRenderer4.ArrowHoveredColor = System.Drawing.Color.DarkSlateGray
-        EnhancedScrollBarRenderer4.ArrowSelectedColor = System.Drawing.Color.DarkSlateGray
-        EnhancedScrollBarRenderer4.ButtonBackgroundColor = System.Drawing.Color.CadetBlue
-        EnhancedScrollBarRenderer4.ButtonBorderColor = System.Drawing.Color.SlateGray
-        EnhancedScrollBarRenderer4.ButtonHoveredBackgroundColor = System.Drawing.Color.SlateGray
-        EnhancedScrollBarRenderer4.ButtonHoveredBorderColor = System.Drawing.Color.DarkGray
-        EnhancedScrollBarRenderer4.ButtonSelectedBackgroundColor = System.Drawing.Color.DarkGray
-        EnhancedScrollBarRenderer4.ButtonSelectedBorderColor = System.Drawing.Color.CadetBlue
-        EnhancedScrollBarRenderer4.TrackBarBackgroundColor = System.Drawing.Color.CadetBlue
-        EnhancedScrollBarRenderer4.TrackBarSelectedBackgroundColor = System.Drawing.Color.SlateGray
-        Me.spResolverActividades.VerticalScrollBar.Renderer = EnhancedScrollBarRenderer4
+        EnhancedScrollBarRenderer2.ArrowColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer2.ArrowHoveredColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer2.ArrowSelectedColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer2.ButtonBackgroundColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer2.ButtonBorderColor = System.Drawing.Color.SlateGray
+        EnhancedScrollBarRenderer2.ButtonHoveredBackgroundColor = System.Drawing.Color.SlateGray
+        EnhancedScrollBarRenderer2.ButtonHoveredBorderColor = System.Drawing.Color.DarkGray
+        EnhancedScrollBarRenderer2.ButtonSelectedBackgroundColor = System.Drawing.Color.DarkGray
+        EnhancedScrollBarRenderer2.ButtonSelectedBorderColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer2.TrackBarBackgroundColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer2.TrackBarSelectedBackgroundColor = System.Drawing.Color.SlateGray
+        Me.spResolverActividades.VerticalScrollBar.Renderer = EnhancedScrollBarRenderer2
         Me.spResolverActividades.VerticalScrollBar.TabIndex = 1
         '
         'spResolverActividades_Sheet1
@@ -642,6 +710,8 @@ Partial Class Principal
         Me.tbActividades.ResumeLayout(False)
         Me.tpCapturarActividades.ResumeLayout(False)
         Me.tpCapturarActividades.PerformLayout()
+        Me.pnlExterna.ResumeLayout(False)
+        Me.pnlExterna.PerformLayout()
         Me.tpResolverActividades.ResumeLayout(False)
         Me.tpResolverActividades.PerformLayout()
         CType(Me.spResolverActividades, System.ComponentModel.ISupportInitialize).EndInit()
@@ -698,4 +768,10 @@ Partial Class Principal
     Friend WithEvents btnResolucionFechaSiguiente As System.Windows.Forms.Button
     Private WithEvents lblEncabezadoUsuario As System.Windows.Forms.Label
     Private WithEvents lblEncabezadoArea As System.Windows.Forms.Label
+    Friend WithEvents pnlExterna As System.Windows.Forms.Panel
+    Friend WithEvents chkCapturaEsExterna As System.Windows.Forms.CheckBox
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents cbAreas As System.Windows.Forms.ComboBox
+    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents cbUsuarios As System.Windows.Forms.ComboBox
 End Class

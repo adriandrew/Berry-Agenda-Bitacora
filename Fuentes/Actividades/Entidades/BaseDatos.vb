@@ -36,7 +36,7 @@ Public Module BaseDatos
 
     Public Sub AbrirConexionInformacion()
 
-        BaseDatos.ECadenaConexionInformacion = String.Format("Data Source=.\\SQLEXPRESS;Initial Catalog={0};Integrated Security=True;Connect Timeout=30", BaseDatos.ECadenaConexionInformacion)
+        BaseDatos.ECadenaConexionInformacion = String.Format("Data Source=SYS21ALIEN03-PC\SQLEXPRESS;Initial Catalog={0};Integrated Security=True;Connect Timeout=30", BaseDatos.ECadenaConexionInformacion)
         conexionInformacion.ConnectionString = BaseDatos.ECadenaConexionInformacion
 
     End Sub

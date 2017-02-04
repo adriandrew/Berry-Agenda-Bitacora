@@ -157,7 +157,7 @@ Public Class Principal
                 'If (minutos Mod 2) = 0 Then
                 esRangoValido = True
             Else
-                esRangoValido = False ' TODO. Cambiar a false.
+                esRangoValido = True ' TODO. Cambiar a false.
             End If
             If (esRangoValido) And (esPrimeraVez) Then
                 CargarActividadesVencidas()
