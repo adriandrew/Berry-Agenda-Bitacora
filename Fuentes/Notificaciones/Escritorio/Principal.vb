@@ -6,6 +6,7 @@ Imports System.Text
 Public Class Principal
 
     Dim actividades As New EntidadesNotificaciones.Actividades
+    Dim actividadesExternas As New EntidadesNotificaciones.ActividadesExternas
     Public datosEmpresa As New LogicaNotificaciones.DatosEmpresa()
     Public datosUsuario As New LogicaNotificaciones.DatosUsuario()
     Public datosArea As New LogicaNotificaciones.DatosArea()
@@ -108,9 +109,6 @@ Public Class Principal
 
     Private Sub CargarActividadesVencidas()
 
-        Dim lista As New List(Of EntidadesNotificaciones.Actividades)
-        actividades.EIdArea = Me.datosUsuario.EIdArea
-        lista = actividades.ObtenerListadoSinResolucion()
         If Me.Visible Then
             Me.Hide()
         End If
@@ -121,11 +119,30 @@ Public Class Principal
             System.Threading.Thread.Sleep(5000)
             Listado.Show()
         End If
-        Listado.GenerarListado(lista)
-        Listado.Text &= "    Usuario: " & Me.datosUsuario.ENombre & "   Area: " & Me.datosArea.ENombre
+        'Listado.AcomodarPaneles() ' Esta descontinuado.
+        Dim lista As New List(Of EntidadesNotificaciones.Actividades) : Dim listaExterna As New List(Of EntidadesNotificaciones.ActividadesExternas)
+        Dim listaLocal As New Object
+        ' Actividades internas.
+        actividades.EIdArea = Me.datosUsuario.EIdArea
+        actividades.EIdUsuario = Me.datosUsuario.EId
+        lista = actividades.ObtenerListadoPendientes()
+        listaLocal = lista
         If lista.Count > 0 Then
-            EnviarCorreo(lista)
+            EnviarCorreo(listaLocal, Listado.TipoActividad.internas)
         End If
+        Listado.GenerarListado(listaLocal, Listado.TipoActividad.internas)
+        listaLocal = New Object
+        ' Actividades externas.
+        actividadesExternas.EIdArea = Me.datosUsuario.EIdArea
+        actividadesExternas.EIdUsuario = Me.datosUsuario.EId
+        listaExterna = actividadesExternas.ObtenerListadoPendientesExternas()
+        listaLocal = listaExterna
+        If listaExterna.Count > 0 Then
+            EnviarCorreo(listaLocal, Listado.TipoActividad.externas)
+        End If
+        Listado.GenerarListado(listaLocal, Listado.TipoActividad.externas)
+        listaLocal = New Object
+        Listado.Text &= "    Usuario: " & Me.datosUsuario.ENombre & "   Area: " & Me.datosArea.ENombre
 
     End Sub
 
@@ -174,14 +191,23 @@ Public Class Principal
 
     End Sub
 
-    Private Sub EnviarCorreo(ByVal lista As List(Of EntidadesNotificaciones.Actividades))
+    Private Sub EnviarCorreo(ByVal lista As Object, ByVal tipo As Integer)
 
+        Me.Cursor = Cursors.WaitCursor
+        notificador.BalloonTipTitle = "Correo"
+        notificador.BalloonTipText = "Enviando notificaciones por correo..."
+        notificador.BalloonTipIcon = ToolTipIcon.Info
+        notificador.ShowBalloonTip(1)
+        Dim datosExtra As String = String.Empty
         Dim mail As New MailMessage()
         Dim adjunto1 As Attachment
         Dim emisor As String = "aaandrewlopez@gmail.com"
         Dim emisor2 As String = "Yulianapem@gmail.com"
         Dim contraseña As String = "andrew1007"
-        Dim asunto As String = "Notificaciones de tareas pendientes! " & Me.datosUsuario.ENombre
+        If tipo = Listado.TipoActividad.externas Then
+            datosExtra = "externas "
+        End If
+        Dim asunto As String = "Tareas pendientes " & datosExtra & Today ' Me.datosUsuario.ENombre  
         Dim mensaje As String = Me.datosUsuario.ENombre & " tienes pendientes las siguientes actividades:" & vbNewLine & vbNewLine
         Dim mensajeHtml As String = "<h2>" & mensaje & "</h2><br><br>"
         Dim datosServidor As String = "smtp.gmail.com"
@@ -192,8 +218,12 @@ Public Class Principal
         mail.To.Add(emisor2)
         ' Se crean los mensajes planos y htmls.
         For indice As Integer = 0 To lista.Count - 1
-            mensaje &= lista(indice).EFechaVencimiento & " " & lista(indice).ENombre & " - " & lista(indice).EDescripcion & vbNewLine & vbNewLine
-            mensajeHtml &= "<img src='cid:imagen'/><h3 style='display:inline'>&nbsp;&nbsp;" & lista(indice).EFechaVencimiento & " " & lista(indice).ENombre & " - " & lista(indice).EDescripcion & "<br><br></h3>"
+            datosExtra = String.Empty
+            If tipo = Listado.TipoActividad.externas Then
+                datosExtra = " Solicita " & lista(indice).ENombreUsuario & " "
+            End If
+            mensaje &= lista(indice).EFechaVencimiento & datosExtra & " " & lista(indice).ENombre & " - " & lista(indice).EDescripcion & vbNewLine & vbNewLine
+            mensajeHtml &= "<img src='cid:imagen'/><h3 style='display:inline'>&nbsp;&nbsp;" & lista(indice).EFechaVencimiento & " " & datosExtra & lista(indice).ENombre & " - " & lista(indice).EDescripcion & "<br><br></h3>"
         Next
         ' Se adjunta la imagen del logo de berry.
         Try
@@ -232,10 +262,19 @@ Public Class Principal
         server.EnableSsl = True
         Try
             server.Send(mail)
-            'MsgBox("Notificaciones enviadas por correo.", MsgBoxStyle.ApplicationModal, "Terminado.")
-        Catch ex As Exception
-            MsgBox("Hay un error al enviar correo. " & ex.Message, MsgBoxStyle.Critical, "Error.")
+            'MsgBox("Notificaciones enviadas por correo.", MsgBoxStyle.ApplicationModal, "Terminado.") 
+            notificador.BalloonTipTitle = "Correo"
+            notificador.BalloonTipText = "Notificaciones enviadas por correo!"
+            notificador.BalloonTipIcon = ToolTipIcon.Info
+            notificador.ShowBalloonTip(5)
+        Catch ex As Exception 
+            notificador.BalloonTipTitle = "Correo"
+            notificador.BalloonTipText = "Error al enviar notificaciones por correo. " & ex.Message
+            notificador.BalloonTipIcon = ToolTipIcon.Error
+            notificador.ShowBalloonTip(5)
+            'MsgBox("Hay un error al enviar correo. " & ex.Message, MsgBoxStyle.Critical, "Error.")
         End Try
+        Me.Cursor = Cursors.Default
 
     End Sub
 

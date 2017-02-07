@@ -22,6 +22,7 @@ Partial Class Principal
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Principal))
         Me.pnlContenido = New System.Windows.Forms.Panel()
         Me.pnlCuerpo = New System.Windows.Forms.Panel()
@@ -33,6 +34,7 @@ Partial Class Principal
         Me.lblEncabezadoUsuario = New System.Windows.Forms.Label()
         Me.lblEncabezadoEmpresa = New System.Windows.Forms.Label()
         Me.lblEncabezadoPrograma = New System.Windows.Forms.Label()
+        Me.notificador = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.pnlContenido.SuspendLayout()
         Me.pnlPie.SuspendLayout()
         Me.pnlEncabezado.SuspendLayout()
@@ -158,6 +160,12 @@ Partial Class Principal
         Me.lblEncabezadoPrograma.Size = New System.Drawing.Size(0, 33)
         Me.lblEncabezadoPrograma.TabIndex = 0
         '
+        'notificador
+        '
+        Me.notificador.Icon = CType(resources.GetObject("notificador.Icon"), System.Drawing.Icon)
+        Me.notificador.Text = "Notificaciones"
+        Me.notificador.Visible = True
+        '
         'Principal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -186,4 +194,5 @@ Partial Class Principal
     Friend WithEvents lblDescripcionTooltip As System.Windows.Forms.Label
     Private WithEvents lblEncabezadoUsuario As System.Windows.Forms.Label
     Private WithEvents lblEncabezadoArea As System.Windows.Forms.Label
+    Friend WithEvents notificador As System.Windows.Forms.NotifyIcon
 End Class

@@ -43,12 +43,22 @@
 
 #Region "Metodos Publicos"
 
-    Public Sub GenerarListado(ByVal lista As List(Of EntidadesNotificaciones.Actividades))
+    Public Sub AcomodarPaneles()
 
+        Me.pnlInternas.Location = New Point(0, 0)
+        Me.pnlInternas.Width = Me.Width / 2 - 20
+        Me.pnlExternas.Location = New Point(Me.pnlInternas.Width + 5, 0)
+        Me.pnlExternas.Width = Me.Width / 2 - 20
+
+    End Sub
+
+    Public Sub GenerarListado(ByVal lista As Object, ByVal tipo As Integer)
+
+        Me.Cursor = Cursors.WaitCursor
         ' Se calculan los controles necesarios.
         ' Los tamaños de los controles.
         Dim alto As Integer = 200
-        Dim ancho As Integer = Me.Width - 45
+        Dim ancho As Integer = Me.splitContenedor.Panel1.Width - 25 '- 45
         ' Las posiciones donde inician los controles.
         Dim posicionY As Integer = 0
         Dim posicionX As Integer = 5
@@ -75,28 +85,52 @@
             End If
             etiqueta.Top = posicionY
             etiqueta.Left = posicionX
-            etiqueta.Name = "lbl_" & indice
+            etiqueta.Name = "lbl_" & tipo & indice
             etiqueta.Size = New Size(ancho, alto)
             etiqueta.TabIndex = indice - 1
-            etiqueta.Text = "    " & lista(indice - 1).EFechaVencimiento & "    " & lista(indice - 1).ENombre.ToString() & vbNewLine & lista(indice - 1).EDescripcion.ToString()
+
+            Dim datosExtra As String = String.Empty
+            If tipo = TipoActividad.externas Then
+                datosExtra = "    Solicita " & lista(indice - 1).ENombreUsuario
+            End If
+
+            etiqueta.Text = "    " & lista(indice - 1).EFechaVencimiento & datosExtra & "    " & lista(indice - 1).ENombre.ToString() & vbNewLine & lista(indice - 1).EDescripcion.ToString()
             etiqueta.AutoSize = False
             etiqueta.Image = Global.Notificaciones.My.Resources.Resources.Logo3
             etiqueta.ImageAlign = ContentAlignment.TopLeft
-            ' Se genera el evento desde codigo.
+            ' Se generan los eventos desde codigo.
             'etiqueta.Click += New System.EventHandler(etiqueta_Click)
-            ' Se genera el evento desde codigo.
-            'etiqueta.MouseHover += New System.EventHandler(etiqueta_MouseHover)
-            ' Se genera el evento desde codigo.
-            'etiqueta.MouseLeave += New System.EventHandler(etiqueta_MouseLeave)
-            Me.Controls.Add(etiqueta)
+            'RaiseEvent etiqueta.MouseHover += New System.EventHandler(etiquetaInterna_MouseHover)
+            'etiqueta.MouseLeave += New System.EventHandler(etiquetaInterna_MouseLeave)
+            If tipo = TipoActividad.internas Then
+                Me.splitContenedor.Panel1.Controls.Add(etiqueta)
+            ElseIf tipo = TipoActividad.externas Then
+                Me.splitContenedor.Panel2.Controls.Add(etiqueta)
+            End If
+            'etiqueta.SendToBack()
             Application.DoEvents()
-            System.Threading.Thread.Sleep(50)
+            System.Threading.Thread.Sleep(10)
             ' Se distribuyen hacia abajo. 
             posicionY += alto + margen
         Next
+        Me.Cursor = Cursors.Default
 
     End Sub
 
 #End Region
-     
+
+    Public Enum TipoActividad
+
+        internas = 0
+        externas = 1
+
+    End Enum
+
+
+    Private Sub splitContenedor_Panel1_MouseHover(sender As Object, e As EventArgs) Handles splitContenedor.Panel1.MouseHover
+
+        'splitContenedor.Panel1.BackColor = ControlPaint.Dark(splitContenedor.Panel1.BackColor)
+
+    End Sub
+
 End Class
