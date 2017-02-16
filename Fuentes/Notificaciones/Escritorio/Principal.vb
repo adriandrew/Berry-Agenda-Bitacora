@@ -11,6 +11,7 @@ Public Class Principal
     Public datosUsuario As New LogicaNotificaciones.DatosUsuario()
     Public datosArea As New LogicaNotificaciones.DatosArea()
     Public empresas As New EntidadesNotificaciones.Empresas()
+    Dim notificaciones As New EntidadesNotificaciones.Notificaciones
 
 #Region "Eventos"
 
@@ -52,18 +53,30 @@ Public Class Principal
 
     Private Sub ConfigurarConexiones()
 
-        Dim esPrueba As Boolean = False
+        Dim esPrueba As Boolean = True
         If (esPrueba) Then
             'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf"
             EntidadesNotificaciones.BaseDatos.ECadenaConexionInformacion = "Informacion"
             EntidadesNotificaciones.BaseDatos.ECadenaConexionAgenda = "Agenda"
+            CargarParametros(True)
+        Else
+            EntidadesNotificaciones.BaseDatos.ECadenaConexionInformacion = "Informacion"
+            EntidadesNotificaciones.BaseDatos.ECadenaConexionAgenda = "Agenda"
+            'datosEmpresa.EDirectorio & "\\Agenda.mdf"  
+            CargarParametros(False)
+        End If
+        EntidadesNotificaciones.BaseDatos.AbrirConexionInformacion()
+        EntidadesNotificaciones.BaseDatos.AbrirConexionAgenda()
+
+    End Sub
+
+    Private Sub CargarParametros(ByVal esPrueba As Boolean)
+
+        If esPrueba Then 
             Me.datosUsuario.EId = 1
             Me.datosUsuario.ENombre = "Adrián Andrew"
             Me.datosUsuario.EIdArea = 1
         Else
-            EntidadesNotificaciones.BaseDatos.ECadenaConexionInformacion = "Informacion"
-            EntidadesNotificaciones.BaseDatos.ECadenaConexionAgenda = "Agenda"
-            'datosEmpresa.EDirectorio & "\\Agenda.mdf" 
             Try
                 Me.datosEmpresa.ObtenerParametrosInformacionEmpresa()
                 Me.datosUsuario.ObtenerParametrosInformacionUsuario()
@@ -71,10 +84,8 @@ Public Class Principal
                 'MsgBox("    Usuario: " & Me.datosUsuario.ENombre & "   Area: " & Me.datosArea.ENombre)
             Catch ex As Exception
                 'MsgBox("Error al obtener parametros de información. " & vbNewLine & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Error.")
-            End Try
+            End Try 
         End If
-        EntidadesNotificaciones.BaseDatos.AbrirConexionInformacion()
-        EntidadesNotificaciones.BaseDatos.AbrirConexionAgenda()
 
     End Sub
 
@@ -128,7 +139,7 @@ Public Class Principal
         lista = actividades.ObtenerListadoPendientes()
         listaLocal = lista
         If lista.Count > 0 Then
-            EnviarCorreo(listaLocal, Listado.TipoActividad.internas)
+            'EnviarCorreo(listaLocal, Listado.TipoActividad.internas)
         End If
         Listado.GenerarListado(listaLocal, Listado.TipoActividad.internas)
         listaLocal = New Object
@@ -138,7 +149,7 @@ Public Class Principal
         listaExterna = actividadesExternas.ObtenerListadoPendientesExternas()
         listaLocal = listaExterna
         If listaExterna.Count > 0 Then
-            EnviarCorreo(listaLocal, Listado.TipoActividad.externas)
+            'EnviarCorreo(listaLocal, Listado.TipoActividad.externas)
         End If
         Listado.GenerarListado(listaLocal, Listado.TipoActividad.externas)
         listaLocal = New Object
@@ -279,6 +290,17 @@ Public Class Principal
     End Sub
 
 #End Region
+
+    Public Sub GuardarVisto(ByVal esVisto As Boolean)
+
+        CargarParametros(True) ' TODO. Cambiar a false.
+        notificaciones.EIdArea = Me.datosUsuario.EIdArea
+        notificaciones.EIdUsuario = Me.datosUsuario.EId
+        notificaciones.EEsVisto = esVisto
+        notificaciones.EFecha = DateTime.Today & " " & DateTime.Now.Hour & ":" & DateTime.Now.Minute
+        notificaciones.Guardar()
+
+    End Sub
 
 #End Region
 

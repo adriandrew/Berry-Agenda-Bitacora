@@ -28,7 +28,10 @@ Partial Class Listado
         Me.pnlExternas = New System.Windows.Forms.Panel()
         Me.splitContenedor = New System.Windows.Forms.SplitContainer()
         Me.notificador = New System.Windows.Forms.NotifyIcon(Me.components)
+        Me.pnlMarcarVisto = New System.Windows.Forms.Panel()
+        Me.chkMarcarVisto = New System.Windows.Forms.CheckBox()
         Me.splitContenedor.SuspendLayout()
+        Me.pnlMarcarVisto.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlInternas
@@ -82,6 +85,28 @@ Partial Class Listado
         Me.notificador.Text = "Notificador"
         Me.notificador.Visible = True
         '
+        'pnlMarcarVisto
+        '
+        Me.pnlMarcarVisto.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.pnlMarcarVisto.BackColor = System.Drawing.Color.White
+        Me.pnlMarcarVisto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlMarcarVisto.Controls.Add(Me.chkMarcarVisto)
+        Me.pnlMarcarVisto.Location = New System.Drawing.Point(370, 0)
+        Me.pnlMarcarVisto.Name = "pnlMarcarVisto"
+        Me.pnlMarcarVisto.Size = New System.Drawing.Size(300, 50)
+        Me.pnlMarcarVisto.TabIndex = 0
+        '
+        'chkMarcarVisto
+        '
+        Me.chkMarcarVisto.AutoSize = True
+        Me.chkMarcarVisto.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkMarcarVisto.Location = New System.Drawing.Point(14, 7)
+        Me.chkMarcarVisto.Name = "chkMarcarVisto"
+        Me.chkMarcarVisto.Size = New System.Drawing.Size(271, 35)
+        Me.chkMarcarVisto.TabIndex = 0
+        Me.chkMarcarVisto.Text = "Marcar como leído"
+        Me.chkMarcarVisto.UseVisualStyleBackColor = True
+        '
         'Listado
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -91,6 +116,7 @@ Partial Class Listado
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1039, 635)
+        Me.Controls.Add(Me.pnlMarcarVisto)
         Me.Controls.Add(Me.splitContenedor)
         Me.Controls.Add(Me.pnlInternas)
         Me.Controls.Add(Me.pnlExternas)
@@ -102,6 +128,8 @@ Partial Class Listado
         Me.Text = "Notificaciones - Listado de Actividades Vencidas "
         Me.TopMost = True
         Me.splitContenedor.ResumeLayout(False)
+        Me.pnlMarcarVisto.ResumeLayout(False)
+        Me.pnlMarcarVisto.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -110,4 +138,6 @@ Partial Class Listado
     Friend WithEvents pnlExternas As System.Windows.Forms.Panel
     Friend WithEvents splitContenedor As System.Windows.Forms.SplitContainer
     Friend WithEvents notificador As System.Windows.Forms.NotifyIcon
+    Friend WithEvents pnlMarcarVisto As System.Windows.Forms.Panel
+    Friend WithEvents chkMarcarVisto As System.Windows.Forms.CheckBox
 End Class

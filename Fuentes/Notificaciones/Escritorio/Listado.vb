@@ -1,10 +1,24 @@
 ﻿Public Class Listado
 
+    Public fueVisto As Boolean = False
+
+#Region "Eventos"
+
+    Private Sub Listado_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+
+        If Not fueVisto Then
+            Principal.GuardarVisto(False)
+        End If
+
+    End Sub
+
     Private Sub Listado_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Centrar()
 
     End Sub
+
+#End Region
 
 #Region "Metodos Privados"
 
@@ -14,7 +28,7 @@
 
         Me.CenterToScreen()
         Me.Location = Screen.PrimaryScreen.WorkingArea.Location
-        Me.Size = Screen.PrimaryScreen.WorkingArea.Size        
+        Me.Size = Screen.PrimaryScreen.WorkingArea.Size
         Me.BringToFront()
         Me.Focus()
 
@@ -119,6 +133,8 @@
 
 #End Region
 
+#Region "Numeraciones"
+
     Public Enum TipoActividad
 
         internas = 0
@@ -126,10 +142,35 @@
 
     End Enum
 
+#End Region
 
     Private Sub splitContenedor_Panel1_MouseHover(sender As Object, e As EventArgs) Handles splitContenedor.Panel1.MouseHover
 
         'splitContenedor.Panel1.BackColor = ControlPaint.Dark(splitContenedor.Panel1.BackColor)
+
+    End Sub
+
+    Private Sub pnlMarcarVisto_MouseHover(sender As Object, e As EventArgs) Handles pnlMarcarVisto.MouseHover, chkMarcarVisto.MouseHover
+
+        pnlMarcarVisto.BackColor = Color.Transparent
+        pnlMarcarVisto.ForeColor = Color.White
+
+    End Sub
+
+    Private Sub pnlMarcarVisto_MouseLeave(sender As Object, e As EventArgs) Handles pnlMarcarVisto.MouseLeave, chkMarcarVisto.MouseLeave
+
+        pnlMarcarVisto.BackColor = Color.White
+        pnlMarcarVisto.ForeColor = Color.Black
+
+    End Sub
+
+    Private Sub chkMarcarVisto_CheckedChanged(sender As Object, e As EventArgs) Handles chkMarcarVisto.CheckedChanged
+
+        If chkMarcarVisto.Checked Then
+            pnlMarcarVisto.Visible = False
+            Me.fueVisto = True
+            Principal.GuardarVisto(True)
+        End If
 
     End Sub
 
