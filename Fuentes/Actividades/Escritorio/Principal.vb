@@ -384,7 +384,7 @@
 
     Private Sub ConfigurarConexiones()
 
-        Dim esPrueba As Boolean = False
+        Dim esPrueba As Boolean = True
         If (esPrueba) Then
             'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf"
             EntidadesActividades.BaseDatos.ECadenaConexionAgenda = "Agenda"
@@ -483,6 +483,8 @@
         Dim esExterna As Boolean = chkCapturaEsExterna.Checked
         Dim idAreaDestino As Integer = cbAreas.SelectedValue
         Dim idUsuarioDestino As Integer = cbUsuarios.SelectedValue
+        Dim esAutorizado As Boolean = False
+        Dim esRechazado As Boolean = False
         If (id > 0) And (Not String.IsNullOrEmpty(nombre)) And (IsDate(fechaCreacion)) And IsDate(fechaVencimiento) Then
             actividades.EId = id
             actividades.EIdUsuario = idUsuario
@@ -495,6 +497,8 @@
             actividades.EEsExterna = esExterna
             actividades.EIdAreaDestino = idAreaDestino
             actividades.EIdUsuarioDestino = idUsuarioDestino
+            actividades.EEsAutorizado = esAutorizado
+            actividades.EEsRechazado = esRechazado
             Dim tieneActividades As Boolean = actividades.ValidarPorNumero()
             If tieneActividades Then
                 actividades.Editar()

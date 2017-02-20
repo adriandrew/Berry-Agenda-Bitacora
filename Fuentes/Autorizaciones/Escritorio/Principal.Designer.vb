@@ -22,11 +22,21 @@ Partial Class Principal
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Principal))
         Dim EnhancedScrollBarRenderer1 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
         Dim EnhancedScrollBarRenderer2 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Principal))
         Me.pnlContenido = New System.Windows.Forms.Panel()
         Me.pnlCuerpo = New System.Windows.Forms.Panel()
+        Me.pnlExterna = New System.Windows.Forms.Panel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cbUsuariosDestino = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.cbAreasDestino = New System.Windows.Forms.ComboBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.cbUsuarios = New System.Windows.Forms.ComboBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.cbAreas = New System.Windows.Forms.ComboBox()
+        Me.btnGuardar = New System.Windows.Forms.Button()
         Me.spAutorizaciones = New FarPoint.Win.Spread.FpSpread()
         Me.spAutorizaciones_Sheet1 = New FarPoint.Win.Spread.SheetView()
         Me.pnlPie = New System.Windows.Forms.Panel()
@@ -37,19 +47,13 @@ Partial Class Principal
         Me.lblEncabezadoUsuario = New System.Windows.Forms.Label()
         Me.lblEncabezadoEmpresa = New System.Windows.Forms.Label()
         Me.lblEncabezadoPrograma = New System.Windows.Forms.Label()
-        Me.btnGuardar = New System.Windows.Forms.Button()
-        Me.pnlExterna = New System.Windows.Forms.Panel()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.cbUsuarios = New System.Windows.Forms.ComboBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.cbAreas = New System.Windows.Forms.ComboBox()
         Me.pnlContenido.SuspendLayout()
         Me.pnlCuerpo.SuspendLayout()
+        Me.pnlExterna.SuspendLayout()
         CType(Me.spAutorizaciones, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.spAutorizaciones_Sheet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlPie.SuspendLayout()
         Me.pnlEncabezado.SuspendLayout()
-        Me.pnlExterna.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlContenido
@@ -78,10 +82,117 @@ Partial Class Principal
         Me.pnlCuerpo.Controls.Add(Me.pnlExterna)
         Me.pnlCuerpo.Controls.Add(Me.btnGuardar)
         Me.pnlCuerpo.Controls.Add(Me.spAutorizaciones)
-        Me.pnlCuerpo.Location = New System.Drawing.Point(3, 135)
+        Me.pnlCuerpo.Location = New System.Drawing.Point(3, 133)
         Me.pnlCuerpo.Name = "pnlCuerpo"
-        Me.pnlCuerpo.Size = New System.Drawing.Size(1029, 429)
+        Me.pnlCuerpo.Size = New System.Drawing.Size(1029, 434)
         Me.pnlCuerpo.TabIndex = 9
+        '
+        'pnlExterna
+        '
+        Me.pnlExterna.Controls.Add(Me.Label1)
+        Me.pnlExterna.Controls.Add(Me.cbUsuariosDestino)
+        Me.pnlExterna.Controls.Add(Me.Label2)
+        Me.pnlExterna.Controls.Add(Me.cbAreasDestino)
+        Me.pnlExterna.Controls.Add(Me.Label11)
+        Me.pnlExterna.Controls.Add(Me.cbUsuarios)
+        Me.pnlExterna.Controls.Add(Me.Label10)
+        Me.pnlExterna.Controls.Add(Me.cbAreas)
+        Me.pnlExterna.Location = New System.Drawing.Point(9, 4)
+        Me.pnlExterna.Name = "pnlExterna"
+        Me.pnlExterna.Size = New System.Drawing.Size(1013, 76)
+        Me.pnlExterna.TabIndex = 22
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.White
+        Me.Label1.Location = New System.Drawing.Point(369, 44)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(163, 24)
+        Me.Label1.TabIndex = 9
+        Me.Label1.Text = "Usuario Destino:"
+        '
+        'cbUsuariosDestino
+        '
+        Me.cbUsuariosDestino.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cbUsuariosDestino.FormattingEnabled = True
+        Me.cbUsuariosDestino.Location = New System.Drawing.Point(534, 41)
+        Me.cbUsuariosDestino.Name = "cbUsuariosDestino"
+        Me.cbUsuariosDestino.Size = New System.Drawing.Size(220, 32)
+        Me.cbUsuariosDestino.TabIndex = 8
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.White
+        Me.Label2.Location = New System.Drawing.Point(3, 44)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(136, 24)
+        Me.Label2.TabIndex = 7
+        Me.Label2.Text = "Area Destino:"
+        '
+        'cbAreasDestino
+        '
+        Me.cbAreasDestino.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cbAreasDestino.FormattingEnabled = True
+        Me.cbAreasDestino.Location = New System.Drawing.Point(143, 41)
+        Me.cbAreasDestino.Name = "cbAreasDestino"
+        Me.cbAreasDestino.Size = New System.Drawing.Size(220, 32)
+        Me.cbAreasDestino.TabIndex = 6
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.ForeColor = System.Drawing.Color.White
+        Me.Label11.Location = New System.Drawing.Point(369, 7)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(157, 24)
+        Me.Label11.TabIndex = 5
+        Me.Label11.Text = "Usuario Origen:"
+        '
+        'cbUsuarios
+        '
+        Me.cbUsuarios.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cbUsuarios.FormattingEnabled = True
+        Me.cbUsuarios.Location = New System.Drawing.Point(534, 4)
+        Me.cbUsuarios.Name = "cbUsuarios"
+        Me.cbUsuarios.Size = New System.Drawing.Size(220, 32)
+        Me.cbUsuarios.TabIndex = 4
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.ForeColor = System.Drawing.Color.White
+        Me.Label10.Location = New System.Drawing.Point(3, 7)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(130, 24)
+        Me.Label10.TabIndex = 3
+        Me.Label10.Text = "Area Origen:"
+        '
+        'cbAreas
+        '
+        Me.cbAreas.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cbAreas.FormattingEnabled = True
+        Me.cbAreas.Location = New System.Drawing.Point(143, 4)
+        Me.cbAreas.Name = "cbAreas"
+        Me.cbAreas.Size = New System.Drawing.Size(220, 32)
+        Me.cbAreas.TabIndex = 1
+        '
+        'btnGuardar
+        '
+        Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnGuardar.BackColor = System.Drawing.Color.White
+        Me.btnGuardar.Image = CType(resources.GetObject("btnGuardar.Image"), System.Drawing.Image)
+        Me.btnGuardar.Location = New System.Drawing.Point(965, 371)
+        Me.btnGuardar.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnGuardar.Name = "btnGuardar"
+        Me.btnGuardar.Size = New System.Drawing.Size(60, 60)
+        Me.btnGuardar.TabIndex = 12
+        Me.btnGuardar.UseVisualStyleBackColor = False
         '
         'spAutorizaciones
         '
@@ -105,10 +216,10 @@ Partial Class Principal
         EnhancedScrollBarRenderer1.TrackBarSelectedBackgroundColor = System.Drawing.Color.SlateGray
         Me.spAutorizaciones.HorizontalScrollBar.Renderer = EnhancedScrollBarRenderer1
         Me.spAutorizaciones.HorizontalScrollBar.TabIndex = 0
-        Me.spAutorizaciones.Location = New System.Drawing.Point(16, 63)
+        Me.spAutorizaciones.Location = New System.Drawing.Point(9, 86)
         Me.spAutorizaciones.Name = "spAutorizaciones"
         Me.spAutorizaciones.Sheets.AddRange(New FarPoint.Win.Spread.SheetView() {Me.spAutorizaciones_Sheet1})
-        Me.spAutorizaciones.Size = New System.Drawing.Size(1003, 297)
+        Me.spAutorizaciones.Size = New System.Drawing.Size(1013, 282)
         Me.spAutorizaciones.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell
         Me.spAutorizaciones.TabIndex = 3
         Me.spAutorizaciones.VerticalScrollBar.Buttons = New FarPoint.Win.Spread.FpScrollBarButtonCollection("BackwardLineButton,ThumbTrack,ForwardLineButton")
@@ -237,69 +348,6 @@ Partial Class Principal
         Me.lblEncabezadoPrograma.Size = New System.Drawing.Size(0, 33)
         Me.lblEncabezadoPrograma.TabIndex = 0
         '
-        'btnGuardar
-        '
-        Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnGuardar.BackColor = System.Drawing.Color.White
-        Me.btnGuardar.Image = CType(resources.GetObject("btnGuardar.Image"), System.Drawing.Image)
-        Me.btnGuardar.Location = New System.Drawing.Point(959, 363)
-        Me.btnGuardar.Margin = New System.Windows.Forms.Padding(0)
-        Me.btnGuardar.Name = "btnGuardar"
-        Me.btnGuardar.Size = New System.Drawing.Size(60, 60)
-        Me.btnGuardar.TabIndex = 12
-        Me.btnGuardar.UseVisualStyleBackColor = False
-        '
-        'pnlExterna
-        '
-        Me.pnlExterna.Controls.Add(Me.Label11)
-        Me.pnlExterna.Controls.Add(Me.cbUsuarios)
-        Me.pnlExterna.Controls.Add(Me.Label10)
-        Me.pnlExterna.Controls.Add(Me.cbAreas)
-        Me.pnlExterna.Location = New System.Drawing.Point(16, 7)
-        Me.pnlExterna.Name = "pnlExterna"
-        Me.pnlExterna.Size = New System.Drawing.Size(1003, 50)
-        Me.pnlExterna.TabIndex = 22
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.ForeColor = System.Drawing.Color.White
-        Me.Label11.Location = New System.Drawing.Point(446, 12)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(87, 24)
-        Me.Label11.TabIndex = 5
-        Me.Label11.Text = "Usuario:"
-        '
-        'cbUsuarios
-        '
-        Me.cbUsuarios.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cbUsuarios.FormattingEnabled = True
-        Me.cbUsuarios.Location = New System.Drawing.Point(539, 9)
-        Me.cbUsuarios.Name = "cbUsuarios"
-        Me.cbUsuarios.Size = New System.Drawing.Size(332, 32)
-        Me.cbUsuarios.TabIndex = 4
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.ForeColor = System.Drawing.Color.White
-        Me.Label10.Location = New System.Drawing.Point(3, 12)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(60, 24)
-        Me.Label10.TabIndex = 3
-        Me.Label10.Text = "Area:"
-        '
-        'cbAreas
-        '
-        Me.cbAreas.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cbAreas.FormattingEnabled = True
-        Me.cbAreas.Location = New System.Drawing.Point(69, 9)
-        Me.cbAreas.Name = "cbAreas"
-        Me.cbAreas.Size = New System.Drawing.Size(332, 32)
-        Me.cbAreas.TabIndex = 1
-        '
         'Principal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -311,14 +359,14 @@ Partial Class Principal
         Me.Text = "Autorizaciones"
         Me.pnlContenido.ResumeLayout(False)
         Me.pnlCuerpo.ResumeLayout(False)
+        Me.pnlExterna.ResumeLayout(False)
+        Me.pnlExterna.PerformLayout()
         CType(Me.spAutorizaciones, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.spAutorizaciones_Sheet1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlPie.ResumeLayout(False)
         Me.pnlPie.PerformLayout()
         Me.pnlEncabezado.ResumeLayout(False)
         Me.pnlEncabezado.PerformLayout()
-        Me.pnlExterna.ResumeLayout(False)
-        Me.pnlExterna.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -340,4 +388,8 @@ Partial Class Principal
     Friend WithEvents cbUsuarios As System.Windows.Forms.ComboBox
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents cbAreas As System.Windows.Forms.ComboBox
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents cbUsuariosDestino As System.Windows.Forms.ComboBox
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents cbAreasDestino As System.Windows.Forms.ComboBox
 End Class

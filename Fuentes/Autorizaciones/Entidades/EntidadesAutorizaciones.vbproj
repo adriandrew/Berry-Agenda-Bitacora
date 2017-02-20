@@ -85,8 +85,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActividadesExternas.vb" />
-    <Compile Include="ActividadesResueltas.vb" />
-    <Compile Include="Actividades.vb" />
     <Compile Include="Areas.vb" />
     <Compile Include="BaseDatos.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

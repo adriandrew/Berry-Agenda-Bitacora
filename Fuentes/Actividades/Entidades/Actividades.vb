@@ -13,6 +13,8 @@ Public Class Actividades
     Private esExterna As Boolean
     Private idAreaDestino As Integer
     Private idUsuarioDestino As Integer
+    Private esAutorizado As Boolean
+    Private esRechazado As Boolean
 
     Public Property EId() As Integer
         Get
@@ -100,6 +102,22 @@ Public Class Actividades
         End Get
         Set(value As Integer)
             Me.idUsuarioDestino = value
+        End Set
+    End Property
+    Public Property EEsAutorizado() As Boolean
+        Get
+            Return Me.esAutorizado
+        End Get
+        Set(value As Boolean)
+            Me.esAutorizado = value
+        End Set
+    End Property
+    Public Property EEsRechazado() As Boolean
+        Get
+            Return Me.esRechazado
+        End Get
+        Set(value As Boolean)
+            Me.esRechazado = value
         End Set
     End Property
 
@@ -212,7 +230,7 @@ Public Class Actividades
         Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
-            comando.CommandText = "INSERT INTO Actividades VALUES (@id, @idArea, @idUsuario, @nombre, @descripcion, @fechaCreacion, @fechaVencimiento, @esUrgente, @esExterna, @idAreaDestino, @idUsuarioDestino)"
+            comando.CommandText = "INSERT INTO Actividades VALUES (@id, @idArea, @idUsuario, @nombre, @descripcion, @fechaCreacion, @fechaVencimiento, @esUrgente, @esExterna, @idAreaDestino, @idUsuarioDestino, @esAutorizado, @esRechazado)"
             comando.Parameters.AddWithValue("@id", Me.EId)
             comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
             comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
@@ -224,6 +242,8 @@ Public Class Actividades
             comando.Parameters.AddWithValue("@esExterna", Me.EEsExterna)
             comando.Parameters.AddWithValue("@idAreaDestino", Me.EIdAreaDestino)
             comando.Parameters.AddWithValue("@idUsuarioDestino", Me.EIdUsuarioDestino)
+            comando.Parameters.AddWithValue("@esAutorizado", Me.EEsAutorizado)
+            comando.Parameters.AddWithValue("@esRechazado", Me.EEsRechazado)
             BaseDatos.conexionAgenda.Open()
             comando.ExecuteNonQuery()
             BaseDatos.conexionAgenda.Close()
@@ -240,7 +260,7 @@ Public Class Actividades
         Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
-            comando.CommandText = "UPDATE Actividades SET IdUsuario=@idUsuario, Nombre=@nombre, Descripcion=@descripcion, FechaCreacion=@fechaCreacion, FechaVencimiento=@fechaVencimiento, EsUrgente=@esUrgente, EsExterna=@esExterna, IdAreaDestino=@idAreaDestino, IdUsuarioDestino=@idUsuarioDestino WHERE Id=@id AND IdArea=@idArea"
+            comando.CommandText = "UPDATE Actividades SET IdUsuario=@idUsuario, Nombre=@nombre, Descripcion=@descripcion, FechaCreacion=@fechaCreacion, FechaVencimiento=@fechaVencimiento, EsUrgente=@esUrgente, EsExterna=@esExterna, IdAreaDestino=@idAreaDestino, IdUsuarioDestino=@idUsuarioDestino, EsAutorizado=@esAutorizado, EsRechazado=@esRechazado WHERE Id=@id AND IdArea=@idArea"
             comando.Parameters.AddWithValue("@id", Me.EId)
             comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
             comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
@@ -252,6 +272,8 @@ Public Class Actividades
             comando.Parameters.AddWithValue("@esExterna", Me.EEsExterna)
             comando.Parameters.AddWithValue("@idAreaDestino", Me.EIdAreaDestino)
             comando.Parameters.AddWithValue("@idUsuarioDestino", Me.EIdUsuarioDestino)
+            comando.Parameters.AddWithValue("@esAutorizado", Me.EEsAutorizado)
+            comando.Parameters.AddWithValue("@esRechazado", Me.EEsRechazado)
             BaseDatos.conexionAgenda.Open()
             comando.ExecuteNonQuery()
             BaseDatos.conexionAgenda.Close()
