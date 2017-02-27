@@ -53,7 +53,7 @@ Public Class Principal
 
     Private Sub ConfigurarConexiones()
 
-        Dim esPrueba As Boolean = True
+        Dim esPrueba As Boolean = False
         If (esPrueba) Then
             'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf"
             EntidadesNotificaciones.BaseDatos.ECadenaConexionInformacion = "Informacion"
@@ -73,9 +73,9 @@ Public Class Principal
     Private Sub CargarParametros(ByVal esPrueba As Boolean)
 
         If esPrueba Then 
-            Me.datosUsuario.EId = 1
+            Me.datosUsuario.EId = 2
             Me.datosUsuario.ENombre = "Adrián Andrew"
-            Me.datosUsuario.EIdArea = 1
+            Me.datosUsuario.EIdArea = 2
         Else
             Try
                 Me.datosEmpresa.ObtenerParametrosInformacionEmpresa()

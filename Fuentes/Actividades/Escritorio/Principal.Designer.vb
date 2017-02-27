@@ -55,6 +55,7 @@ Partial Class Principal
         Me.cbAreas = New System.Windows.Forms.ComboBox()
         Me.chkCapturaEsExterna = New System.Windows.Forms.CheckBox()
         Me.tpResolverActividades = New System.Windows.Forms.TabPage()
+        Me.btnAdministrarImagen = New System.Windows.Forms.Button()
         Me.btnResolucionFechaAnterior = New System.Windows.Forms.Button()
         Me.btnResolucionFechaSiguiente = New System.Windows.Forms.Button()
         Me.btnResolucionGuardar = New System.Windows.Forms.Button()
@@ -76,6 +77,7 @@ Partial Class Principal
         Me.lblEncabezadoUsuario = New System.Windows.Forms.Label()
         Me.lblEncabezadoEmpresa = New System.Windows.Forms.Label()
         Me.lblEncabezadoPrograma = New System.Windows.Forms.Label()
+        Me.pbImagen = New System.Windows.Forms.PictureBox()
         Me.pnlContenido.SuspendLayout()
         Me.pnlCuerpo.SuspendLayout()
         Me.tbActividades.SuspendLayout()
@@ -86,6 +88,7 @@ Partial Class Principal
         CType(Me.spResolverActividades_Sheet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlPie.SuspendLayout()
         Me.pnlEncabezado.SuspendLayout()
+        CType(Me.pbImagen, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlContenido
@@ -415,6 +418,8 @@ Partial Class Principal
         'tpResolverActividades
         '
         Me.tpResolverActividades.BackColor = System.Drawing.Color.White
+        Me.tpResolverActividades.Controls.Add(Me.pbImagen)
+        Me.tpResolverActividades.Controls.Add(Me.btnAdministrarImagen)
         Me.tpResolverActividades.Controls.Add(Me.btnResolucionFechaAnterior)
         Me.tpResolverActividades.Controls.Add(Me.btnResolucionFechaSiguiente)
         Me.tpResolverActividades.Controls.Add(Me.btnResolucionGuardar)
@@ -433,6 +438,17 @@ Partial Class Principal
         Me.tpResolverActividades.Size = New System.Drawing.Size(1015, 392)
         Me.tpResolverActividades.TabIndex = 1
         Me.tpResolverActividades.Text = "Resolver Actividades"
+        '
+        'btnAdministrarImagen
+        '
+        Me.btnAdministrarImagen.BackColor = System.Drawing.Color.White
+        Me.btnAdministrarImagen.Image = CType(resources.GetObject("btnAdministrarImagen.Image"), System.Drawing.Image)
+        Me.btnAdministrarImagen.Location = New System.Drawing.Point(750, 18)
+        Me.btnAdministrarImagen.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnAdministrarImagen.Name = "btnAdministrarImagen"
+        Me.btnAdministrarImagen.Size = New System.Drawing.Size(60, 60)
+        Me.btnAdministrarImagen.TabIndex = 24
+        Me.btnAdministrarImagen.UseVisualStyleBackColor = False
         '
         'btnResolucionFechaAnterior
         '
@@ -696,6 +712,16 @@ Partial Class Principal
         Me.lblEncabezadoPrograma.Size = New System.Drawing.Size(0, 33)
         Me.lblEncabezadoPrograma.TabIndex = 0
         '
+        'pbImagen
+        '
+        Me.pbImagen.BackColor = System.Drawing.Color.Transparent
+        Me.pbImagen.Location = New System.Drawing.Point(823, 18)
+        Me.pbImagen.Name = "pbImagen"
+        Me.pbImagen.Size = New System.Drawing.Size(160, 160)
+        Me.pbImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.pbImagen.TabIndex = 25
+        Me.pbImagen.TabStop = False
+        '
         'Principal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -720,6 +746,7 @@ Partial Class Principal
         Me.pnlPie.PerformLayout()
         Me.pnlEncabezado.ResumeLayout(False)
         Me.pnlEncabezado.PerformLayout()
+        CType(Me.pbImagen, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -774,4 +801,6 @@ Partial Class Principal
     Friend WithEvents cbAreas As System.Windows.Forms.ComboBox
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents cbUsuarios As System.Windows.Forms.ComboBox
+    Private WithEvents btnAdministrarImagen As System.Windows.Forms.Button
+    Friend WithEvents pbImagen As System.Windows.Forms.PictureBox
 End Class

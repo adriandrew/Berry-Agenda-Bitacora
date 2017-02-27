@@ -15,6 +15,8 @@ Public Class ActividadesExternas
     Private esExterna As Boolean
     Private idAreaDestino As Integer
     Private idUsuarioDestino As Integer
+    Private esAutorizado As Boolean
+    Private esRechazado As Boolean
 
     Public Property EId() As Integer
         Get
@@ -120,6 +122,22 @@ Public Class ActividadesExternas
             Me.idUsuarioDestino = value
         End Set
     End Property
+    Public Property EEsAutorizado() As Boolean
+        Get
+            Return Me.esAutorizado
+        End Get
+        Set(value As Boolean)
+            Me.esAutorizado = value
+        End Set
+    End Property
+    Public Property EEsRechazado() As Boolean
+        Get
+            Return Me.esRechazado
+        End Get
+        Set(value As Boolean)
+            Me.esRechazado = value
+        End Set
+    End Property
 
     Public Function ObtenerListadoPendientesExternas() As List(Of ActividadesExternas)
 
@@ -127,10 +145,10 @@ Public Class ActividadesExternas
         Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
-            comando.CommandText = "SELECT A.Id, A.IdArea, Areas.Nombre AS NombreArea, A.IdUsuario, U.Nombre AS NombreUsuario, A.Nombre, A.Descripcion, A.FechaCreacion, A.FechaVencimiento, A.EsUrgente, A.EsExterna, A.IdAreaDestino, A.IdUsuarioDestino " & _
+            comando.CommandText = "SELECT A.Id, A.IdArea, Areas.Nombre AS NombreArea, A.IdUsuario, U.Nombre AS NombreUsuario, A.Nombre, A.Descripcion, A.FechaCreacion, A.FechaVencimiento, A.EsUrgente, A.EsExterna, A.IdAreaDestino, A.IdUsuarioDestino, A.EsAutorizado, A.EsRechazado " & _
             " FROM ((Actividades AS A LEFT JOIN ActividadesResueltas AS AR ON A.Id = AR.IdActividad AND A.IdArea = AR.IdArea) " & _
             " LEFT JOIN [INFORMACION].dbo.Usuarios AS U ON A.IdUsuario = U.Id) LEFT JOIN CATALOGOS.dbo.Areas ON A.IdArea = Areas.Id " & _
-            " WHERE A.IdAreaDestino=@idArea AND A.IdUsuarioDestino=@idUsuario AND AR.IdActividad IS NULL AND AR.IdArea IS NULL"
+            " WHERE A.EsAutorizado='TRUE' AND A.IdAreaDestino=@idArea AND A.IdUsuarioDestino=@idUsuario AND AR.IdActividad IS NULL AND AR.IdArea IS NULL"
             comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
             comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
             BaseDatos.conexionAgenda.Open()
@@ -152,6 +170,8 @@ Public Class ActividadesExternas
                 actividades.esExterna = IIf(Not IsDBNull(dataReader("EsExterna")), dataReader("EsExterna"), False)
                 actividades.idAreaDestino = Convert.ToInt32(IIf(IsNumeric(dataReader("IdAreaDestino")), dataReader("IdAreaDestino"), 0))
                 actividades.idUsuarioDestino = Convert.ToInt32(IIf(IsNumeric(dataReader("IdUsuarioDestino")), dataReader("IdUsuarioDestino"), 0))
+                actividades.esAutorizado = IIf(Not IsDBNull(dataReader("EsAutorizado")), dataReader("EsAutorizado"), False)
+                actividades.esRechazado = IIf(Not IsDBNull(dataReader("EsRechazado")), dataReader("EsRechazado"), False)
                 lista.Add(actividades)
             End While
             BaseDatos.conexionAgenda.Close()

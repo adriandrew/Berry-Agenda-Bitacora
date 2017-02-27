@@ -1,11 +1,11 @@
 ﻿Public Class Principal
 
-    Dim actividadesExternas As New EntidadesActividades.ActividadesExternas
-    Dim areas As New EntidadesActividades.Areas
-    Dim usuarios As New EntidadesActividades.Usuarios
-    Public datosEmpresa As New LogicaActividades.DatosEmpresa()
-    Public datosUsuario As New LogicaActividades.DatosUsuario()
-    Public datosArea As New LogicaActividades.DatosArea()
+    Dim actividadesExternas As New EntidadesAutorizaciones.ActividadesExternas
+    Dim areas As New EntidadesAutorizaciones.Areas
+    Dim usuarios As New EntidadesAutorizaciones.Usuarios
+    Public datosEmpresa As New LogicaAutorizaciones.DatosEmpresa()
+    Public datosUsuario As New LogicaAutorizaciones.DatosUsuario()
+    Public datosArea As New LogicaAutorizaciones.DatosArea()
     Public tipoTexto As New FarPoint.Win.Spread.CellType.TextCellType()
     Public tipoEntero As New FarPoint.Win.Spread.CellType.NumberCellType()
     Public tipoDoble As New FarPoint.Win.Spread.CellType.NumberCellType()
@@ -20,11 +20,11 @@
 #Region "Eventos"
 
     Private Sub Principal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-         
+
         Centrar()
         AsignarTooltips()
         ConfigurarConexiones()
-        CargarEncabezados()  
+        CargarEncabezados()
         CargarTiposDeDatos()
         CargarComboAreas()
         CargarComboUsuarios()
@@ -49,14 +49,16 @@
     Private Sub spAutorizaciones_CellClick(sender As Object, e As FarPoint.Win.Spread.CellClickEventArgs) Handles spAutorizaciones.CellClick
 
         Dim filas As Integer = spAutorizaciones.ActiveSheet.Rows.Count
-        If filas > 0 Then 
+        If filas > 0 Then
             If spAutorizaciones.ActiveSheet.Cells(e.Row, spAutorizaciones.ActiveSheet.Columns("autorizar").Index).Value Then
                 spAutorizaciones.ActiveSheet.Rows(e.Row).BackColor = Color.White
                 spAutorizaciones.ActiveSheet.Cells(e.Row, spAutorizaciones.ActiveSheet.Columns("autorizar").Index).Value = False
+                spAutorizaciones.ActiveSheet.Cells(e.Row, spAutorizaciones.ActiveSheet.Columns("rechazar").Index).Value = False
             Else
                 spAutorizaciones.ActiveSheet.Rows(e.Row).BackColor = Color.GreenYellow
                 spAutorizaciones.ActiveSheet.Cells(e.Row, spAutorizaciones.ActiveSheet.Columns("autorizar").Index).Value = True
-            End If 
+                spAutorizaciones.ActiveSheet.Cells(e.Row, spAutorizaciones.ActiveSheet.Columns("rechazar").Index).Value = False
+            End If
         End If
 
     End Sub
@@ -70,6 +72,71 @@
     Private Sub btnSalir_MouseHover(sender As Object, e As EventArgs) Handles btnSalir.MouseHover
 
         AsignarTooltips("Salir.")
+
+    End Sub
+
+    Private Sub cbAreas_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbAreas.SelectedIndexChanged
+
+        If cbAreas.Items.Count > 1 Then
+            If cbAreas.SelectedIndex > 0 Then
+                CargarComboUsuarios()
+            Else
+                ComenzarCargarAutorizaciones()
+            End If
+        End If
+
+    End Sub
+
+    Private Sub cbAreasDestino_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbAreasDestino.SelectedIndexChanged
+
+        If cbAreasDestino.Items.Count > 1 Then
+            If cbAreasDestino.SelectedIndex > 0 Then
+                CargarComboUsuariosDestino()
+            Else
+                ComenzarCargarAutorizaciones()
+            End If
+        End If
+
+    End Sub
+
+    Private Sub cbUsuarios_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbUsuarios.SelectedIndexChanged
+
+        ComenzarCargarAutorizaciones()
+
+    End Sub
+
+    Private Sub cbUsuariosDestino_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbUsuariosDestino.SelectedIndexChanged
+
+        ComenzarCargarAutorizaciones()
+
+    End Sub
+
+    Private Sub Principal_Paint(sender As Object, e As PaintEventArgs) Handles MyBase.Paint
+
+        Me.pintado = True
+
+    End Sub
+
+    Private Sub spAutorizaciones_CellDoubleClick(sender As Object, e As FarPoint.Win.Spread.CellClickEventArgs) Handles spAutorizaciones.CellDoubleClick
+
+        Dim filas As Integer = spAutorizaciones.ActiveSheet.Rows.Count
+        If filas > 0 Then
+            If spAutorizaciones.ActiveSheet.Cells(e.Row, spAutorizaciones.ActiveSheet.Columns("rechazar").Index).Value Then
+                spAutorizaciones.ActiveSheet.Rows(e.Row).BackColor = Color.White
+                spAutorizaciones.ActiveSheet.Cells(e.Row, spAutorizaciones.ActiveSheet.Columns("rechazar").Index).Value = False
+                spAutorizaciones.ActiveSheet.Cells(e.Row, spAutorizaciones.ActiveSheet.Columns("autorizar").Index).Value = False
+            Else
+                spAutorizaciones.ActiveSheet.Rows(e.Row).BackColor = Color.OrangeRed
+                spAutorizaciones.ActiveSheet.Cells(e.Row, spAutorizaciones.ActiveSheet.Columns("rechazar").Index).Value = True
+                spAutorizaciones.ActiveSheet.Cells(e.Row, spAutorizaciones.ActiveSheet.Columns("autorizar").Index).Value = False
+            End If
+        End If
+
+    End Sub
+
+    Private Sub pnlCuerpo_MouseHover(sender As Object, e As EventArgs) Handles pnlCuerpo.MouseHover
+
+        AsignarTooltips(String.Empty)
 
     End Sub
 
@@ -139,9 +206,9 @@
         Dim esPrueba As Boolean = True
         If (esPrueba) Then
             'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf"
-            EntidadesActividades.BaseDatos.ECadenaConexionAgenda = "Agenda"
-            EntidadesActividades.BaseDatos.ECadenaConexionCatalogo = "Catalogos"
-            EntidadesActividades.BaseDatos.ECadenaConexionInformacion = "Informacion"
+            EntidadesAutorizaciones.BaseDatos.ECadenaConexionAgenda = "Agenda"
+            EntidadesAutorizaciones.BaseDatos.ECadenaConexionCatalogo = "Catalogos"
+            EntidadesAutorizaciones.BaseDatos.ECadenaConexionInformacion = "Informacion"
             Me.datosUsuario.EId = 1
             Me.datosUsuario.EIdArea = 1
             Me.datosEmpresa.EId = 1
@@ -150,13 +217,13 @@
             Me.datosUsuario.ObtenerParametrosInformacionUsuario()
             Me.datosArea.ObtenerParametrosInformacionArea()
             'EntidadesActividades.BaseDatos.ECadenaConexionAgenda = datosEmpresa.EDirectorio & "\\Agenda.mdf"
-            EntidadesActividades.BaseDatos.ECadenaConexionAgenda = "Agenda"
-            EntidadesActividades.BaseDatos.ECadenaConexionCatalogo = "Catalogos"
-            EntidadesActividades.BaseDatos.ECadenaConexionInformacion = "Informacion"
+            EntidadesAutorizaciones.BaseDatos.ECadenaConexionAgenda = "Agenda"
+            EntidadesAutorizaciones.BaseDatos.ECadenaConexionCatalogo = "Catalogos"
+            EntidadesAutorizaciones.BaseDatos.ECadenaConexionInformacion = "Informacion"
         End If
-        EntidadesActividades.BaseDatos.AbrirConexionAgenda()
-        EntidadesActividades.BaseDatos.AbrirConexionCatalogo()
-        EntidadesActividades.BaseDatos.AbrirConexionInformacion()
+        EntidadesAutorizaciones.BaseDatos.AbrirConexionAgenda()
+        EntidadesAutorizaciones.BaseDatos.AbrirConexionCatalogo()
+        EntidadesAutorizaciones.BaseDatos.AbrirConexionInformacion()
 
     End Sub
 
@@ -190,7 +257,7 @@
 
         ' Actividades externas.
         'spAutorizaciones.ActiveSheetIndex = 1
-        Dim listaExterna As New List(Of EntidadesActividades.ActividadesExternas)
+        Dim listaExterna As New List(Of EntidadesAutorizaciones.ActividadesExternas)
         If Me.pintado Then
             actividadesExternas.EIdArea = cbAreas.SelectedValue
             actividadesExternas.EIdUsuario = cbUsuarios.SelectedValue
@@ -292,7 +359,7 @@
 
     Private Sub Editar()
 
-        For fila = 0 To spAutorizaciones.ActiveSheet.Rows.Count - 1 
+        For fila = 0 To spAutorizaciones.ActiveSheet.Rows.Count - 1
             Dim id As Integer = spAutorizaciones.ActiveSheet.Cells(fila, spAutorizaciones.ActiveSheet.Columns("id").Index).Value 'LogicaActividadesExternas.Funciones.ValidarNumero(txtCapturaId.Text)
             Dim idArea As Integer = spAutorizaciones.ActiveSheet.Cells(fila, spAutorizaciones.ActiveSheet.Columns("idArea").Index).Value
             Dim idUsuario As Integer = spAutorizaciones.ActiveSheet.Cells(fila, spAutorizaciones.ActiveSheet.Columns("idUsuario").Index).Value
@@ -315,10 +382,10 @@
         Next
 
     End Sub
- 
+
     Private Sub CargarComboAreas()
 
-        Dim lista As New List(Of EntidadesActividades.Areas)
+        Dim lista As New List(Of EntidadesAutorizaciones.Areas)
         lista = areas.ObtenerListado()
         cbAreas.DataSource = lista
         cbAreas.ValueMember = "EId"
@@ -330,7 +397,7 @@
 
         Try
             Dim idArea As Integer = cbAreas.SelectedValue()
-            Dim lista As New List(Of EntidadesActividades.Usuarios)
+            Dim lista As New List(Of EntidadesAutorizaciones.Usuarios)
             usuarios.EIdEmpresa = datosEmpresa.EId
             usuarios.EIdArea = idArea
             lista = usuarios.ObtenerListadoDeEmpresa()
@@ -346,7 +413,7 @@
 
     Private Sub CargarComboAreasDestino()
 
-        Dim lista As New List(Of EntidadesActividades.Areas)
+        Dim lista As New List(Of EntidadesAutorizaciones.Areas)
         lista = areas.ObtenerListado()
         cbAreasDestino.DataSource = lista
         cbAreasDestino.ValueMember = "EId"
@@ -358,7 +425,7 @@
 
         Try
             Dim idArea As Integer = cbAreasDestino.SelectedValue()
-            Dim lista As New List(Of EntidadesActividades.Usuarios)
+            Dim lista As New List(Of EntidadesAutorizaciones.Usuarios)
             usuarios.EIdEmpresa = datosEmpresa.EId
             usuarios.EIdArea = idArea
             lista = usuarios.ObtenerListadoDeEmpresa()
@@ -374,62 +441,5 @@
 #End Region
 
 #End Region
-     
-    Private Sub cbAreas_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbAreas.SelectedIndexChanged
-         
-        If cbAreas.Items.Count > 1 Then
-            If cbAreas.SelectedIndex > 0 Then
-                CargarComboUsuarios()
-            Else 
-                ComenzarCargarAutorizaciones()
-            End If
-        End If
 
-    End Sub
-
-    Private Sub cbAreasDestino_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbAreasDestino.SelectedIndexChanged
-
-        If cbAreasDestino.Items.Count > 1 Then
-            If cbAreasDestino.SelectedIndex > 0 Then
-                CargarComboUsuariosDestino()
-            Else
-                ComenzarCargarAutorizaciones()
-            End If
-        End If
-
-    End Sub
-
-    Private Sub cbUsuarios_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbUsuarios.SelectedIndexChanged
-
-        ComenzarCargarAutorizaciones()
-
-    End Sub
-
-    Private Sub cbUsuariosDestino_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbUsuariosDestino.SelectedIndexChanged
-
-        ComenzarCargarAutorizaciones()
-
-    End Sub
-
-    Private Sub Principal_Paint(sender As Object, e As PaintEventArgs) Handles MyBase.Paint
-
-        Me.pintado = True
-
-    End Sub
-
-    Private Sub spAutorizaciones_CellDoubleClick(sender As Object, e As FarPoint.Win.Spread.CellClickEventArgs) Handles spAutorizaciones.CellDoubleClick
-
-        Dim filas As Integer = spAutorizaciones.ActiveSheet.Rows.Count
-        If filas > 0 Then
-            If spAutorizaciones.ActiveSheet.Cells(e.Row, spAutorizaciones.ActiveSheet.Columns("rechazar").Index).Value Then
-                spAutorizaciones.ActiveSheet.Rows(e.Row).BackColor = Color.White
-                spAutorizaciones.ActiveSheet.Cells(e.Row, spAutorizaciones.ActiveSheet.Columns("rechazar").Index).Value = False
-            Else
-                spAutorizaciones.ActiveSheet.Rows(e.Row).BackColor = Color.OrangeRed
-                spAutorizaciones.ActiveSheet.Cells(e.Row, spAutorizaciones.ActiveSheet.Columns("rechazar").Index).Value = True
-            End If
-        End If 
-
-    End Sub
-     
 End Class

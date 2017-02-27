@@ -99,13 +99,14 @@ Partial Class Listado
         'chkMarcarVisto
         '
         Me.chkMarcarVisto.AutoSize = True
+        Me.chkMarcarVisto.BackColor = System.Drawing.Color.Transparent
         Me.chkMarcarVisto.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkMarcarVisto.Location = New System.Drawing.Point(14, 7)
         Me.chkMarcarVisto.Name = "chkMarcarVisto"
         Me.chkMarcarVisto.Size = New System.Drawing.Size(271, 35)
         Me.chkMarcarVisto.TabIndex = 0
         Me.chkMarcarVisto.Text = "Marcar como leído"
-        Me.chkMarcarVisto.UseVisualStyleBackColor = True
+        Me.chkMarcarVisto.UseVisualStyleBackColor = False
         '
         'Listado
         '
