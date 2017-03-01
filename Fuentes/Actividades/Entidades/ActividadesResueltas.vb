@@ -9,6 +9,7 @@ Public Class ActividadesResueltas
     Private fechaResolucion As Date
     Private idAreaOrigen As Integer
     Private idUsuarioOrigen As Integer
+    Private rutaImagen As String
 
     Public Property EDescripcionResolucion() As String
         Get
@@ -50,13 +51,21 @@ Public Class ActividadesResueltas
             Me.idUsuarioOrigen = value
         End Set
     End Property
+    Public Property ERutaImagen() As String
+        Get
+            Return Me.rutaImagen
+        End Get
+        Set(value As String)
+            Me.rutaImagen = value
+        End Set
+    End Property
 
     Public Overloads Sub Guardar()
 
         Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
-            comando.CommandText = "INSERT INTO ActividadesResueltas VALUES (@id, @idArea, @descripcion, @motivoRetraso, @fechaResolucion, @idAreaOrigen, @idUsuarioOrigen)"
+            comando.CommandText = "INSERT INTO ActividadesResueltas VALUES (@id, @idArea, @descripcion, @motivoRetraso, @fechaResolucion, @idAreaOrigen, @idUsuarioOrigen, @rutaImagen)"
             comando.Parameters.AddWithValue("@id", Me.EId)
             comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
             comando.Parameters.AddWithValue("@descripcion", Me.EDescripcionResolucion)
@@ -64,6 +73,7 @@ Public Class ActividadesResueltas
             comando.Parameters.AddWithValue("@fechaResolucion", Me.EFechaResolucion)
             comando.Parameters.AddWithValue("@idAreaOrigen", Me.EIdAreaOrigen)
             comando.Parameters.AddWithValue("@idUsuarioOrigen", Me.EIdUsuarioOrigen)
+            comando.Parameters.AddWithValue("@rutaImagen", Me.ERutaImagen)
             BaseDatos.conexionAgenda.Open()
             comando.ExecuteNonQuery()
             BaseDatos.conexionAgenda.Close()
@@ -80,7 +90,7 @@ Public Class ActividadesResueltas
         Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
-            comando.CommandText = "UPDATE ActividadesResueltas SET Descripcion=@descripcionResolucion, MotivoRetraso=@motivoRetraso, FechaResolucion=@fechaResolucion, IdAreaOrigen=@idAreaOrigen, IdUsuarioOrigen=@idUsuarioOrigen WHERE IdActividad=@id AND IdArea=@idArea"
+            comando.CommandText = "UPDATE ActividadesResueltas SET Descripcion=@descripcionResolucion, MotivoRetraso=@motivoRetraso, FechaResolucion=@fechaResolucion, IdAreaOrigen=@idAreaOrigen, IdUsuarioOrigen=@idUsuarioOrigen, RutaImagen=@rutaImagen WHERE IdActividad=@id AND IdArea=@idArea"
             comando.Parameters.AddWithValue("@id", Me.EId)
             comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
             comando.Parameters.AddWithValue("@descripcionResolucion", Me.EDescripcionResolucion)
@@ -88,6 +98,7 @@ Public Class ActividadesResueltas
             comando.Parameters.AddWithValue("@fechaResolucion", Me.EFechaResolucion)
             comando.Parameters.AddWithValue("@idAreaOrigen", Me.EIdAreaOrigen)
             comando.Parameters.AddWithValue("@idUsuarioOrigen", Me.EIdUsuarioOrigen)
+            comando.Parameters.AddWithValue("@rutaImagen", Me.ERutaImagen)
             BaseDatos.conexionAgenda.Open()
             comando.ExecuteNonQuery()
             BaseDatos.conexionAgenda.Close()

@@ -17,6 +17,7 @@
     Public tipoBooleano As New FarPoint.Win.Spread.CellType.CheckBoxCellType()
 
     Public tieneImagen As Boolean = False
+    Public rutaImagen As String = String.Empty
     Public opcionSeleccionada As Integer = 0
 
 #Region "Eventos"
@@ -189,9 +190,11 @@
             spResolverActividades.ActiveSheet.Rows(e.Row).BackColor = Color.GreenYellow
             spResolverActividades.ActiveSheet.ActiveRowIndex = e.Row
             CargarActividadesPendientes()
-            CargarValoresImagenes()
-            Imagen.CargarValores()
-            Imagen.Mostrar()
+            If spResolverActividades.ActiveSheetIndex = 1 Then
+                CargarValoresImagenes()
+                Imagen.CargarValores()
+                Imagen.Mostrar()
+            End If
             PonerFocoEnControl(txtResolucionDescripcion)
         End If
 
@@ -412,15 +415,15 @@
 
     Private Sub ConfigurarConexiones()
 
-        Dim esPrueba As Boolean = False
+        Dim esPrueba As Boolean = True
         If (esPrueba) Then
             'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf"
             EntidadesActividades.BaseDatos.ECadenaConexionAgenda = "Agenda"
             EntidadesActividades.BaseDatos.ECadenaConexionCatalogo = "Catalogos"
             EntidadesActividades.BaseDatos.ECadenaConexionInformacion = "Informacion"
-            Me.datosUsuario.EId = 2
-            Me.datosUsuario.EIdArea = 2
-            Me.datosEmpresa.EId = 2
+            Me.datosUsuario.EId = 1
+            Me.datosUsuario.EIdArea = 1
+            Me.datosEmpresa.EId = 1
         Else
             Me.datosEmpresa.ObtenerParametrosInformacionEmpresa()
             Me.datosUsuario.ObtenerParametrosInformacionUsuario()
@@ -651,6 +654,7 @@
             actividadesResueltas.EDescripcionResolucion = descripcion
             actividadesResueltas.EMotivoRetraso = motivoRetraso
             actividadesResueltas.EFechaResolucion = fechaResolucion
+            actividadesResueltas.ERutaImagen = Me.rutaImagen
             Dim tieneActividades As Boolean = actividadesResueltas.ValidarPorNumero()
             If tieneActividades Then
                 actividadesResueltas.Editar()
@@ -674,7 +678,7 @@
         Dim fechaResolucion As Date = dtpResolucionFecha.Text
         Dim idAreaOrigen As Integer = Me.datosUsuario.EIdArea ' Se toma el area que resuelve.
         Dim idUsuarioOrigen As Integer = Me.datosUsuario.EId ' Se toma el usuario que resuelve.
-        If (id > 0) And (Not String.IsNullOrEmpty(descripcion)) And IsDate(fechaResolucion) Then
+        If (id > 0) And (Not String.IsNullOrEmpty(descripcion)) And (IsDate(fechaResolucion)) And (Not String.IsNullOrEmpty(Me.rutaImagen)) Then
             actividadesResueltas.EId = id
             actividadesResueltas.EIdArea = idArea
             actividadesResueltas.EDescripcionResolucion = descripcion
@@ -682,6 +686,7 @@
             actividadesResueltas.EFechaResolucion = fechaResolucion
             actividadesResueltas.EIdAreaOrigen = idAreaOrigen
             actividadesResueltas.EIdUsuarioOrigen = idUsuarioOrigen
+            actividadesResueltas.ERutaImagen = Me.rutaImagen
             Dim tieneActividades As Boolean = actividadesResueltas.ValidarPorNumero()
             If tieneActividades Then
                 actividadesResueltas.Editar()
@@ -851,6 +856,7 @@
         txtResolucionDescripcion.Clear()
         txtResolucionMotivoRetraso.Clear()
         dtpResolucionFecha.Value = Today
+        pbImagen.Visible = False
         Dim filas As Integer = spResolverActividades.ActiveSheet.Rows.Count
         If filas > 0 Then
             spResolverActividades.ActiveSheet.Rows(0, filas - 1).BackColor = Color.White

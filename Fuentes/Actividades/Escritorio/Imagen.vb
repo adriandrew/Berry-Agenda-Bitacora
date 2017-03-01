@@ -116,9 +116,9 @@ Public Class Imagen
                     pbImagen.Image = Nothing
                 End If
                 Dim fs As IO.FileStream = Nothing
-                My.Computer.FileSystem.CopyFile(opdDialogo.FileName, ruta + Me.nombreArchivo + ".jpg", True)
+                My.Computer.FileSystem.CopyFile(opdDialogo.FileName, Me.ruta + Me.nombreArchivo + ".jpg", True)
                 Try
-                    fs = New IO.FileStream(ruta + Me.nombreArchivo + ".jpg", FileMode.Open, FileAccess.Read)
+                    fs = New IO.FileStream(Me.ruta + Me.nombreArchivo + ".jpg", FileMode.Open, FileAccess.Read)
                     pbImagen.Image = Image.FromStream(fs)
                 Catch e As Exception
                     pbImagen.Image = Image.FromStream(imagenError)
@@ -128,12 +128,14 @@ Public Class Imagen
                         fs.Dispose()
                     End If
                 End Try
+                Principal.rutaImagen = Me.ruta + Me.nombreArchivo + ".jpg"
                 Principal.tieneImagen = True
             Catch ex As Exception
                 Try
                     pbImagen.Image = Image.FromStream(imagenError)
                 Catch ex1 As Exception
                 End Try
+                Principal.rutaImagen = String.Empty
                 Principal.tieneImagen = False
             End Try
             Principal.pbImagen.Image = Me.pbImagen.Image
@@ -147,11 +149,13 @@ Public Class Imagen
             Try
                 pbImagen.Image.Dispose()
                 pbImagen.Image = Nothing
-                My.Computer.FileSystem.DeleteFile(ruta + Me.nombreArchivo + ".jpg")
+                My.Computer.FileSystem.DeleteFile(Me.ruta + Me.nombreArchivo + ".jpg")
                 pbImagen.Image = Image.FromStream(imagenError)
+                Principal.rutaImagen = String.Empty
+                Principal.tieneImagen = False
             Catch ex As Exception
+                Principal.tieneImagen = True
             End Try
-            Principal.tieneImagen = False
             Principal.pbImagen.Image = Me.pbImagen.Image
         End If
 
@@ -170,11 +174,15 @@ Public Class Imagen
         Try
             pImagen = New IO.FileStream(Me.ruta + Me.nombreArchivo + ".jpg", FileMode.Open, FileAccess.Read)
             pbImagen.SizeMode = PictureBoxSizeMode.StretchImage
-            pbImagen.Image = Image.FromStream(pImagen) 
+            pbImagen.Image = Image.FromStream(pImagen)
+            Principal.rutaImagen = Me.ruta + Me.nombreArchivo + ".jpg"
+            Principal.tieneImagen = True
         Catch e As Exception
             Try
                 pbImagen.Image = Image.FromStream(imagenError) 'pbFotoEmpleado.ErrorImage
                 pbImagen.SizeMode = PictureBoxSizeMode.StretchImage
+                Principal.rutaImagen = String.Empty
+                Principal.tieneImagen = False
             Catch ex As Exception
             End Try
         Finally
@@ -190,8 +198,8 @@ Public Class Imagen
     Public Function ObtenerRutaCarpeta() As String
 
         Dim ruta As String
-        ''ruta = "V:\"
-        ruta = CurDir() ' TODO. Descomentar
+        ruta = "V:\"
+        'ruta = CurDir() ' TODO. Descomentar
         Return ruta
 
     End Function
@@ -199,16 +207,16 @@ Public Class Imagen
     Public Sub CargarValores()
 
         Me.nombreArchivo = Me.idArea.ToString.PadLeft(2, "0") + "-" + Me.idUsuario.ToString.PadLeft(3, "0").ToString + "-" + Me.idActividad.ToString.PadLeft(6, "0")
-        Me.ruta = ObtenerRutaCarpeta() + "\ImagenesEvidencia\"
+        Me.ruta = ObtenerRutaCarpeta() + "\ImagenesEvidencia\" 
         Me.imagenError = New IO.FileStream(Me.ruta + "NoFoto.jpg", FileMode.OpenOrCreate, FileAccess.Read)
 
     End Sub
 
     Private Sub Cargar()
 
-        If (Me.idActividad > 0) And (Me.idArea > 0) And (Me.idUsuario > 0) Then
-            Mostrar()
-        End If
+        'If (Me.idActividad > 0) And (Me.idArea > 0) And (Me.idUsuario > 0) Then
+        Mostrar()
+        'End If
 
     End Sub
 

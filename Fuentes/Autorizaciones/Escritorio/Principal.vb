@@ -203,7 +203,7 @@
 
     Private Sub ConfigurarConexiones()
 
-        Dim esPrueba As Boolean = True
+        Dim esPrueba As Boolean = False
         If (esPrueba) Then
             'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf"
             EntidadesAutorizaciones.BaseDatos.ECadenaConexionAgenda = "Agenda"
@@ -376,10 +376,10 @@
                 actividadesExternas.EEsAutorizado = autorizar
                 actividadesExternas.EEsRechazado = rechazar
                 actividadesExternas.Editar()
-                MsgBox("Editado finalizado.", MsgBoxStyle.ApplicationModal, "Finalizado.")
-                ComenzarCargarAutorizaciones()
             End If
         Next
+        MsgBox("Editado finalizado.", MsgBoxStyle.ApplicationModal, "Finalizado.")
+        ComenzarCargarAutorizaciones()
 
     End Sub
 
