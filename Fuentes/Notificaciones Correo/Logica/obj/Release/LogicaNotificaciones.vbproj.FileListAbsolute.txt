@@ -1,0 +1,16 @@
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones\Logica\bin\Release\LogicaNotificaciones.dll
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones\Logica\bin\Release\LogicaNotificaciones.pdb
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones\Logica\bin\Release\LogicaNotificaciones.xml
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones\Logica\obj\Release\LogicaNotificaciones.Resources.resources
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones\Logica\obj\Release\LogicaNotificaciones.vbproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones\Logica\obj\Release\LogicaNotificaciones.dll
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones\Logica\obj\Release\LogicaNotificaciones.xml
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones\Logica\obj\Release\LogicaNotificaciones.pdb
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones Correo\Logica\bin\Release\LogicaNotificacionesCorreo.dll
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones Correo\Logica\bin\Release\LogicaNotificacionesCorreo.pdb
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones Correo\Logica\bin\Release\LogicaNotificacionesCorreo.xml
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones Correo\Logica\obj\Release\LogicaNotificacionesCorreo.Resources.resources
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones Correo\Logica\obj\Release\LogicaNotificaciones.vbproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones Correo\Logica\obj\Release\LogicaNotificacionesCorreo.dll
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones Correo\Logica\obj\Release\LogicaNotificacionesCorreo.xml
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones Correo\Logica\obj\Release\LogicaNotificacionesCorreo.pdb

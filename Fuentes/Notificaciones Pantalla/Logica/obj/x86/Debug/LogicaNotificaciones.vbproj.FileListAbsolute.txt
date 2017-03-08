@@ -1,0 +1,8 @@
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones Pantalla\Logica\bin\x86\Debug\LogicaNotificacionesPantalla.dll
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones Pantalla\Logica\bin\x86\Debug\LogicaNotificacionesPantalla.pdb
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones Pantalla\Logica\bin\x86\Debug\LogicaNotificacionesPantalla.xml
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones Pantalla\Logica\obj\x86\Debug\LogicaNotificacionesPantalla.Resources.resources
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones Pantalla\Logica\obj\x86\Debug\LogicaNotificaciones.vbproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones Pantalla\Logica\obj\x86\Debug\LogicaNotificacionesPantalla.dll
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones Pantalla\Logica\obj\x86\Debug\LogicaNotificacionesPantalla.xml
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones Pantalla\Logica\obj\x86\Debug\LogicaNotificacionesPantalla.pdb

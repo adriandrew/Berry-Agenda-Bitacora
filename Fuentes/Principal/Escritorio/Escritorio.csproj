@@ -7,7 +7,7 @@
     <ProjectGuid>{0322D78E-B7D5-44A3-98DC-F7221648E5FA}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Principal</RootNamespace>
+    <RootNamespace>PrincipalBerry</RootNamespace>
     <AssemblyName>PrincipalBerry</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

@@ -25,7 +25,7 @@ namespace Escritorio
         Entidades.BloqueoUsuarios bloqueoUsuarios = new Entidades.BloqueoUsuarios();
         public Logica.DatosEmpresa datosEmpresa = new Logica.DatosEmpresa();
         Logica.DatosUsuario datosUsuario = new Logica.DatosUsuario();
-        Logica.DatosArea datosAreas = new Logica.DatosArea();
+        Logica.DatosArea datosArea = new Logica.DatosArea();
         ProcessStartInfo ejecutarProgramaPrincipal = new ProcessStartInfo();
         public int numeroEmpresa;
         public bool ocupaParametros;
@@ -189,7 +189,7 @@ namespace Escritorio
             }
             else
             {
-                pnlContenido.BackgroundImage = global::Principal.Properties.Resources.Logo3;
+                pnlContenido.BackgroundImage = global::PrincipalBerry.Properties.Resources.Logo3;
                 pnlContenido.BackgroundImageLayout = ImageLayout.Zoom;
                 pnlContenido.BackColor = Color.DarkSlateGray;
                 //pnlContenido.BackgroundImage = global::Principal.Properties.Resources.hiedra;
@@ -249,9 +249,10 @@ namespace Escritorio
                         GenerarMenu();
                         ConsultarInformacionUsuario();
                         ConsultarInformacionArea();
-                        CerrarPrograma("Notificaciones");
+                        CargarEncabezados();
+                        CerrarPrograma("NotificacionesPantalla");
                         System.Threading.Thread.Sleep(1000);
-                        AbrirPrograma("Notificaciones", false);
+                        AbrirPrograma("NotificacionesPantalla", false);
                     }
                     else
                     {
@@ -374,9 +375,9 @@ namespace Escritorio
 
             areas.Id = datosUsuario.IdArea;
             string[] datos = areas.ObtenerListadoPorId().Split('|');
-            datosAreas.Id = Convert.ToInt32(datos[0]);
-            datosAreas.Nombre = datos[1];
-            datosAreas.Clave = datos[2]; 
+            datosArea.Id = Convert.ToInt32(datos[0]);
+            datosArea.Nombre = datos[1];
+            datosArea.Clave = datos[2]; 
 
         }
         
@@ -483,6 +484,8 @@ namespace Escritorio
 
             lblEncabezadoPrograma.Text = "Programa: " + this.Text;
             lblEncabezadoEmpresa.Text = "Empresa: " + datosEmpresa.Nombre;
+            lblEncabezadoUsuario.Text = "Usuario: " + datosUsuario.Nombre;
+            lblEncabezadoArea.Text = "Area: " + datosArea.Nombre;
 
         }
 
@@ -504,7 +507,7 @@ namespace Escritorio
             ejecutarProgramaPrincipal.UseShellExecute = true;
             ejecutarProgramaPrincipal.FileName = nombre + ".exe";
             ejecutarProgramaPrincipal.WorkingDirectory = Directory.GetCurrentDirectory();
-            ejecutarProgramaPrincipal.Arguments = datosEmpresa.Numero.ToString().Trim().Replace(" ", "|") + " " + datosEmpresa.Nombre.Trim().Replace(" ", "|") + " " + datosEmpresa.Descripcion.Trim().Replace(" ", "|") + " " + datosEmpresa.Domicilio.Trim().Replace(" ", "|") + " " + datosEmpresa.Localidad.Trim().Replace(" ", "|") + " " + datosEmpresa.Rfc.Trim().Replace(" ", "|") + " " + datosEmpresa.Directorio.Trim().Replace(" ", "|") + " " + datosEmpresa.Logo.Trim().Replace(" ", "|") + " " + datosEmpresa.Activa.ToString().Trim().Replace(" ", "|") + " " + datosEmpresa.Equipo.Trim().Replace(" ", "|") + " " + "Aquí terminan los de empresa, indice 11 ;)".Replace(" ", "|") + " " + datosUsuario.Id.ToString().Trim().Replace(" ", "|") + " " + datosUsuario.Nombre.Trim().Replace(" ", "|") + " " + datosUsuario.Contrasena.Trim().Replace(" ", "|") + " " + datosUsuario.Nivel.ToString().Trim().Replace(" ", "|") + " " + datosUsuario.AccesoTotal.ToString().Trim().Replace(" ", "|") + " " + datosUsuario.IdArea.ToString().Trim().Replace(" ", "|") + " " + "Aquí terminan los de usuario, indice 18 ;)".Replace(" ", "|") + " " + datosAreas.Id.ToString().Trim().Replace(" ", "|") + " " + datosAreas.Nombre.ToString().Trim().Replace(" ", "|") + " " + datosAreas.Clave.ToString().Trim().Replace(" ", "|") + " " + "Aquí terminan los de area, indice 22 ;)".Replace(" ", "|");
+            ejecutarProgramaPrincipal.Arguments = datosEmpresa.Numero.ToString().Trim().Replace(" ", "|") + " " + datosEmpresa.Nombre.Trim().Replace(" ", "|") + " " + datosEmpresa.Descripcion.Trim().Replace(" ", "|") + " " + datosEmpresa.Domicilio.Trim().Replace(" ", "|") + " " + datosEmpresa.Localidad.Trim().Replace(" ", "|") + " " + datosEmpresa.Rfc.Trim().Replace(" ", "|") + " " + datosEmpresa.Directorio.Trim().Replace(" ", "|") + " " + datosEmpresa.Logo.Trim().Replace(" ", "|") + " " + datosEmpresa.Activa.ToString().Trim().Replace(" ", "|") + " " + datosEmpresa.Equipo.Trim().Replace(" ", "|") + " " + "Aquí terminan los de empresa, indice 11 ;)".Replace(" ", "|") + " " + datosUsuario.Id.ToString().Trim().Replace(" ", "|") + " " + datosUsuario.Nombre.Trim().Replace(" ", "|") + " " + datosUsuario.Contrasena.Trim().Replace(" ", "|") + " " + datosUsuario.Nivel.ToString().Trim().Replace(" ", "|") + " " + datosUsuario.AccesoTotal.ToString().Trim().Replace(" ", "|") + " " + datosUsuario.IdArea.ToString().Trim().Replace(" ", "|") + " " + "Aquí terminan los de usuario, indice 18 ;)".Replace(" ", "|") + " " + datosArea.Id.ToString().Trim().Replace(" ", "|") + " " + datosArea.Nombre.ToString().Trim().Replace(" ", "|") + " " + datosArea.Clave.ToString().Trim().Replace(" ", "|") + " " + "Aquí terminan los de area, indice 22 ;)".Replace(" ", "|");
             try
             {
                 Process.Start(ejecutarProgramaPrincipal);

@@ -1,0 +1,8 @@
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones Correo\Entidades\bin\x86\Debug\EntidadesNotificacionesCorreo.dll
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones Correo\Entidades\bin\x86\Debug\EntidadesNotificacionesCorreo.pdb
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones Correo\Entidades\bin\x86\Debug\EntidadesNotificacionesCorreo.xml
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones Correo\Entidades\obj\x86\Debug\EntidadesNotificacionesCorreo.Resources.resources
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones Correo\Entidades\obj\x86\Debug\EntidadesNotificacionesCorreo.vbproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones Correo\Entidades\obj\x86\Debug\EntidadesNotificacionesCorreo.dll
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones Correo\Entidades\obj\x86\Debug\EntidadesNotificacionesCorreo.xml
+C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Notificaciones Correo\Entidades\obj\x86\Debug\EntidadesNotificacionesCorreo.pdb
