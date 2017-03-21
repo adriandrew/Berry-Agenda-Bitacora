@@ -198,8 +198,11 @@ Public Class Imagen
     Public Function ObtenerRutaCarpeta() As String
 
         Dim ruta As String
-        ruta = "V:\"
-        'ruta = CurDir() ' TODO. Descomentar
+        If Principal.esPrueba Then
+            ruta = "Z:\"
+        Else
+            ruta = CurDir() ' TODO. Descomentar
+        End If
         Return ruta
 
     End Function

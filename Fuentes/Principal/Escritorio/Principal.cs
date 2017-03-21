@@ -23,6 +23,7 @@ namespace Escritorio
         Entidades.BaseDatos baseDatos = new Entidades.BaseDatos();
         Entidades.Modulos modulos = new Entidades.Modulos();
         Entidades.BloqueoUsuarios bloqueoUsuarios = new Entidades.BloqueoUsuarios();
+        Entidades.EmpresasPrincipal empresasPrincipal = new Entidades.EmpresasPrincipal();
         public Logica.DatosEmpresa datosEmpresa = new Logica.DatosEmpresa();
         Logica.DatosUsuario datosUsuario = new Logica.DatosUsuario();
         Logica.DatosArea datosArea = new Logica.DatosArea();
@@ -31,7 +32,9 @@ namespace Escritorio
         public bool ocupaParametros;
         public bool esInicioSesion = true;
         public int idEmpresaSesion = 0; public int idUsuarioSesion = 0; public int idModuloSesion = 1;
-                     
+
+        public bool esPrueba = false;
+
         #region Eventos
 
         public Principal()
@@ -46,6 +49,8 @@ namespace Escritorio
             Centrar();
             AsignarTooltips();
             AsignarFocos();
+            ConfigurarConexionPrincipal();
+            ConsultarInformacionEmpresaPrincipalPredeterminada();
             ConfigurarConexiones();
             ConsultarInformacionEmpresa();
             //CargarTitulosEmpresa();
@@ -311,28 +316,42 @@ namespace Escritorio
 
         }
 
+        private void ConfigurarConexionPrincipal() 
+        {
+
+            if (this.esPrueba)
+            {
+                baseDatos.CadenaConexionPrincipal = "C:\\Berry-Bitacora\\Principal.sdf";
+            }
+            else
+            {
+                string ruta = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+                ruta = ruta.Replace("file:\\", null);
+                baseDatos.CadenaConexionPrincipal = string.Format("{0}\\Principal.sdf", ruta); 
+            }
+            baseDatos.AbrirConexionPrincipal();
+        
+        }
+
         private void ConfigurarConexiones() 
         {
 
-            bool esPrueba = false;
-            if (esPrueba)
+            if (this.esPrueba)
             {
-                //baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\Informacion.mdf";
-                baseDatos.CadenaConexionInformacion = "Informacion";
-                baseDatos.CadenaConexionCatalogo = "Catalogos";
-                //string[] nombre = InstanciaSql().Split('|');
-                //string servidor = nombre[0];
-                //string instancia = nombre[1];
+                //baseDatos.CadenaConexionPrincipal = "C:\\Berry-Bitacora\\Principal.sdf"; 
+                //string[] activa = InstanciaSql().Split('|'); ' Es para obtener las instancias sql. Nunca se usó ya que no es lo correcto.
+                //string servidor = activa[0];
+                //string instancia = activa[1];
                 //MessageBox.Show(servidor + " " + instancia);
             }
             else
             {
                 //string ruta = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
                 //ruta = ruta.Replace("file:\\", null);
-                //baseDatos.CadenaConexionInformacion = string.Format("{0}\\Informacion.mdf", ruta);
-                baseDatos.CadenaConexionInformacion = "Informacion";
-                baseDatos.CadenaConexionCatalogo = "Catalogos";
-            }
+                //baseDatos.CadenaConexionInformacion = string.Format("{0}\\Informacion.mdf", ruta); 
+            } 
+            baseDatos.CadenaConexionInformacion = "Informacion";
+            baseDatos.CadenaConexionCatalogo = "Catalogos";
             baseDatos.AbrirConexionInformacion();
             baseDatos.AbrirConexionCatalogo();
 
@@ -353,10 +372,24 @@ namespace Escritorio
 
         }
 
+        private void ConsultarInformacionEmpresaPrincipalPredeterminada()
+        {
+             
+            List<Entidades.EmpresasPrincipal> lista = new List<Entidades.EmpresasPrincipal>();
+            lista = empresasPrincipal.ObtenerPredeterminada();
+            Logica.DatosEmpresaPrincipal.idEmpresa = Convert.ToInt32(lista[0].IdEmpresa);
+            Logica.DatosEmpresaPrincipal.activa = Convert.ToBoolean(lista[0].Activa.ToString());
+            Logica.DatosEmpresaPrincipal.instanciaSql = Convert.ToString(lista[0].InstanciaSql.ToString());
+            Logica.DatosEmpresaPrincipal.rutaBd = lista[0].RutaBd.ToString();
+            Logica.DatosEmpresaPrincipal.usuarioSql = lista[0].UsuarioSql.ToString();
+            Logica.DatosEmpresaPrincipal.contrasenaSql = lista[0].ContrasenaSql.ToString();
+
+        }
+
         private void ConsultarInformacionEmpresa()
         {
 
-            string[] datos = empresas.ObtenerPredeterminada().Split('|');            
+            string[] datos = empresas.ObtenerPredeterminada().Split('|');
             datosEmpresa.Numero = Convert.ToInt32(datos[0]);
             datosEmpresa.Nombre = datos[1];
             datosEmpresa.Descripcion = datos[2];
@@ -366,7 +399,7 @@ namespace Escritorio
             datosEmpresa.Directorio = datos[6];
             datosEmpresa.Logo = datos[7];
             datosEmpresa.Activa = Convert.ToBoolean(datos[8]);
-            datosEmpresa.Equipo = datos[9]; 
+            datosEmpresa.Equipo = datos[9];
 
         }
 
@@ -438,7 +471,7 @@ namespace Escritorio
                 //etiqueta.BackColor = Color.Black;
                 etiqueta.Height = 40;
                 etiqueta.Left = 0;
-                etiqueta.Text = lista[indice-1].Nombre.ToString(); //"numero " + indice; 
+                etiqueta.Text = lista[indice-1].Nombre.ToString(); //"idEmpresa " + indice; 
                 etiqueta.ForeColor = Color.White;
                 etiqueta.Font = new Font( "Microsoft Sans Serif", 20, FontStyle.Regular);
                 cuadro.Controls.Add(etiqueta); Application.DoEvents();
@@ -507,7 +540,9 @@ namespace Escritorio
             ejecutarProgramaPrincipal.UseShellExecute = true;
             ejecutarProgramaPrincipal.FileName = nombre + ".exe";
             ejecutarProgramaPrincipal.WorkingDirectory = Directory.GetCurrentDirectory();
-            ejecutarProgramaPrincipal.Arguments = datosEmpresa.Numero.ToString().Trim().Replace(" ", "|") + " " + datosEmpresa.Nombre.Trim().Replace(" ", "|") + " " + datosEmpresa.Descripcion.Trim().Replace(" ", "|") + " " + datosEmpresa.Domicilio.Trim().Replace(" ", "|") + " " + datosEmpresa.Localidad.Trim().Replace(" ", "|") + " " + datosEmpresa.Rfc.Trim().Replace(" ", "|") + " " + datosEmpresa.Directorio.Trim().Replace(" ", "|") + " " + datosEmpresa.Logo.Trim().Replace(" ", "|") + " " + datosEmpresa.Activa.ToString().Trim().Replace(" ", "|") + " " + datosEmpresa.Equipo.Trim().Replace(" ", "|") + " " + "Aquí terminan los de empresa, indice 11 ;)".Replace(" ", "|") + " " + datosUsuario.Id.ToString().Trim().Replace(" ", "|") + " " + datosUsuario.Nombre.Trim().Replace(" ", "|") + " " + datosUsuario.Contrasena.Trim().Replace(" ", "|") + " " + datosUsuario.Nivel.ToString().Trim().Replace(" ", "|") + " " + datosUsuario.AccesoTotal.ToString().Trim().Replace(" ", "|") + " " + datosUsuario.IdArea.ToString().Trim().Replace(" ", "|") + " " + "Aquí terminan los de usuario, indice 18 ;)".Replace(" ", "|") + " " + datosArea.Id.ToString().Trim().Replace(" ", "|") + " " + datosArea.Nombre.ToString().Trim().Replace(" ", "|") + " " + datosArea.Clave.ToString().Trim().Replace(" ", "|") + " " + "Aquí terminan los de area, indice 22 ;)".Replace(" ", "|");
+            ejecutarProgramaPrincipal.Arguments = Logica.DatosEmpresaPrincipal.idEmpresa.ToString().Trim().Replace(" ", "|") + " " + Logica.DatosEmpresaPrincipal.activa.ToString().Trim().Replace(" ", "|") + " " + Logica.DatosEmpresaPrincipal.instanciaSql.ToString().Trim().Replace(" ", "|") + " " + Logica.DatosEmpresaPrincipal.rutaBd.ToString().Trim().Replace(" ", "|") + " " + Logica.DatosEmpresaPrincipal.usuarioSql.ToString().Trim().Replace(" ", "|") + " " + Logica.DatosEmpresaPrincipal.contrasenaSql.ToString().Trim().Replace(" ", "|") + " " + "Aquí terminan los de empresa principal, indice 7 ;)".Replace(" ", "|") + " " +
+
+                datosEmpresa.Numero.ToString().Trim().Replace(" ", "|") + " " + datosEmpresa.Nombre.Trim().Replace(" ", "|") + " " + datosEmpresa.Descripcion.Trim().Replace(" ", "|") + " " + datosEmpresa.Domicilio.Trim().Replace(" ", "|") + " " + datosEmpresa.Localidad.Trim().Replace(" ", "|") + " " + datosEmpresa.Rfc.Trim().Replace(" ", "|") + " " + datosEmpresa.Directorio.Trim().Replace(" ", "|") + " " + datosEmpresa.Logo.Trim().Replace(" ", "|") + " " + datosEmpresa.Activa.ToString().Trim().Replace(" ", "|") + " " + datosEmpresa.Equipo.Trim().Replace(" ", "|") + " " + "Aquí terminan los de empresa, indice 18 ;)".Replace(" ", "|") + " " + datosUsuario.Id.ToString().Trim().Replace(" ", "|") + " " + datosUsuario.Nombre.Trim().Replace(" ", "|") + " " + datosUsuario.Contrasena.Trim().Replace(" ", "|") + " " + datosUsuario.Nivel.ToString().Trim().Replace(" ", "|") + " " + datosUsuario.AccesoTotal.ToString().Trim().Replace(" ", "|") + " " + datosUsuario.IdArea.ToString().Trim().Replace(" ", "|") + " " + "Aquí terminan los de usuario, indice 25 ;)".Replace(" ", "|") + " " + datosArea.Id.ToString().Trim().Replace(" ", "|") + " " + datosArea.Nombre.ToString().Trim().Replace(" ", "|") + " " + datosArea.Clave.ToString().Trim().Replace(" ", "|") + " " + "Aquí terminan los de area, indice 29 ;)".Replace(" ", "|");
             try
             {
                 Process.Start(ejecutarProgramaPrincipal);

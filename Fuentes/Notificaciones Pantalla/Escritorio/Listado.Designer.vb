@@ -74,6 +74,7 @@ Partial Class Listado
         '
         'splitContenedor.Panel2
         '
+        Me.splitContenedor.Panel2.AutoScroll = True
         Me.splitContenedor.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.splitContenedor.Size = New System.Drawing.Size(1039, 633)
         Me.splitContenedor.SplitterDistance = 519

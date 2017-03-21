@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="DatosArea.cs" />
     <Compile Include="DatosEmpresa.cs" />
+    <Compile Include="DatosEmpresaPrincipal.cs" />
     <Compile Include="DatosUsuario.cs" />
     <Compile Include="Funciones.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

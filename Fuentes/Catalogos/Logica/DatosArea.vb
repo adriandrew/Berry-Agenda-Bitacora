@@ -33,9 +33,10 @@
 
         Dim parametros() = Environment.GetCommandLineArgs().ToArray()
         If (parametros.Length > 0) Then
-            Me.EId = Convert.ToInt32(parametros(19).Replace("|", " "))
-            Me.ENombre = parametros(20).Replace("|", " ")
-            Me.EClave = parametros(21).Replace("|", " ")
+            Dim numeracion As Integer = 26
+            Me.EId = Convert.ToInt32(parametros(numeracion).Replace("|", " ")) : numeracion += 1
+            Me.ENombre = parametros(numeracion).Replace("|", " ") : numeracion += 1
+            Me.EClave = parametros(numeracion).Replace("|", " ") : numeracion += 1
         End If
 
     End Sub

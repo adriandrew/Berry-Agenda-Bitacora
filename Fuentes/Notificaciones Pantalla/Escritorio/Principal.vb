@@ -5,14 +5,21 @@ Imports System.Text
 
 Public Class Principal
 
+    Dim empresasPrincipal As New EntidadesNotificacionesPantalla.EmpresasPrincipal()
+    Dim empresas As New EntidadesNotificacionesPantalla.Empresas()
+    Dim usuarios As New EntidadesNotificacionesPantalla.Usuarios()
+    Dim areas As New EntidadesNotificacionesPantalla.Areas()
+    Dim registro As New EntidadesNotificacionesPantalla.Registro()
+    Dim notificaciones As New EntidadesNotificacionesPantalla.Notificaciones
     Dim actividades As New EntidadesNotificacionesPantalla.Actividades
     Dim actividadesExternas As New EntidadesNotificacionesPantalla.ActividadesExternas
     Public datosEmpresa As New LogicaNotificacionesPantalla.DatosEmpresa()
     Public datosUsuario As New LogicaNotificacionesPantalla.DatosUsuario()
     Public datosArea As New LogicaNotificacionesPantalla.DatosArea()
-    Public empresas As New EntidadesNotificacionesPantalla.Empresas()
-    Dim notificaciones As New EntidadesNotificacionesPantalla.Notificaciones
-    Public esPrueba As Boolean = False ' TODO. Cambiar a false.
+    Public tieneParametros As Boolean = False
+    Public nombreEsteEquipo As String = My.Computer.Name
+
+    Public esPrueba As Boolean = False
 
 #Region "Eventos"
 
@@ -21,7 +28,6 @@ Public Class Principal
         Centrar()
         ConfigurarConexiones()
         'CargarEncabezados()
-        ConsultarInformacionEmpresa()
         IniciarProceso()
 
     End Sub
@@ -52,39 +58,71 @@ Public Class Principal
 
     End Sub
 
-    Private Sub ConfigurarConexiones()
+    Private Sub ConfigurarConexionPrincipal()
 
-        If (Me.esPrueba) Then
-            'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf"
-            EntidadesNotificacionesPantalla.BaseDatos.ECadenaConexionInformacion = "Informacion"
-            EntidadesNotificacionesPantalla.BaseDatos.ECadenaConexionAgenda = "Agenda"
-            CargarParametros(Me.esPrueba)
+        If Me.esPrueba Then
+            EntidadesNotificacionesPantalla.BaseDatos.ECadenaConexionPrincipal = "C:\Berry-Bitacora\Principal.sdf"
         Else
-            EntidadesNotificacionesPantalla.BaseDatos.ECadenaConexionInformacion = "Informacion"
-            EntidadesNotificacionesPantalla.BaseDatos.ECadenaConexionAgenda = "Agenda"
-            'datosEmpresa.EDirectorio & "\\Agenda.mdf"  
-            CargarParametros(Me.esPrueba)
+            Dim ruta As String = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase)
+            ruta = ruta.Replace("file:\", Nothing)
+            EntidadesNotificacionesPantalla.BaseDatos.ECadenaConexionPrincipal = String.Format("{0}\Principal.sdf", ruta)
         End If
-        EntidadesNotificacionesPantalla.BaseDatos.AbrirConexionInformacion()
-        EntidadesNotificacionesPantalla.BaseDatos.AbrirConexionAgenda()
+        EntidadesNotificacionesPantalla.BaseDatos.AbrirConexionPrincipal()
 
     End Sub
 
-    Private Sub CargarParametros(ByVal esPrueba As Boolean)
+    Private Sub ConfigurarConexiones()
 
-        If esPrueba Then
-            Me.datosUsuario.EId = 2
-            Me.datosUsuario.ENombre = "Adrián Andrew"
-            Me.datosUsuario.EIdArea = 2
+        ' Se obtiene si tiene parametros.
+        Dim parametros() = Environment.GetCommandLineArgs().ToArray()
+        If (parametros.Length > 1) Then
+            Me.tieneParametros = True
+        End If
+        If (Me.esPrueba) Then
+            'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf"
+            'LogicaNotificacionesPantalla.DatosEmpresaPrincipal.instanciaSql = "ANDREW-MAC\SQLEXPRESS"
+            'LogicaNotificacionesPantalla.DatosEmpresaPrincipal.usuarioSql = "AdminBerry"
+            'LogicaNotificacionesPantalla.DatosEmpresaPrincipal.contrasenaSql = "@berry"
+            ConfigurarConexionPrincipal()
+            ConsultarInformacionEmpresaPrincipal()
         Else
-            Try
+            'baseDatos.CadenaConexionInformacion = datosEmpresa.EDirectorio & "\\Agenda.mdf"
+            ' Si tiene parametros se toman de ahí.
+            If Me.tieneParametros Then
+                LogicaNotificacionesPantalla.DatosEmpresaPrincipal.ObtenerParametrosInformacionEmpresa()
+            Else ' Si no tiene parametros se consulta la empresa por defecto, despues de eso se consulta el equipo, para saber que usuario es.
+                ConfigurarConexionPrincipal()
+                ConsultarInformacionEmpresaPrincipal()
+            End If
+        End If
+        EntidadesNotificacionesPantalla.BaseDatos.ECadenaConexionInformacion = "Informacion"
+        EntidadesNotificacionesPantalla.BaseDatos.ECadenaConexionCatalogo = "Catalogos"
+        EntidadesNotificacionesPantalla.BaseDatos.ECadenaConexionAgenda = "Agenda"
+        EntidadesNotificacionesPantalla.BaseDatos.AbrirConexionInformacion()
+        EntidadesNotificacionesPantalla.BaseDatos.AbrirConexionCatalogo()
+        EntidadesNotificacionesPantalla.BaseDatos.AbrirConexionAgenda()
+        CargarParametros() 
+
+    End Sub
+
+    Private Sub CargarParametros()
+
+        If Me.esPrueba Then
+            'Me.datosUsuario.EId = 2
+            'Me.datosUsuario.ENombre = "Adrián Andrew"
+            'Me.datosUsuario.EIdArea = 2
+            ObtenerRegistroPorIdEmpresaYNombreEquipo()
+        Else
+            If Me.tieneParametros Then
                 Me.datosEmpresa.ObtenerParametrosInformacionEmpresa()
                 Me.datosUsuario.ObtenerParametrosInformacionUsuario()
                 Me.datosArea.ObtenerParametrosInformacionArea()
-                'MsgBox("    Usuario: " & Me.datosUsuario.ENombre & "   Area: " & Me.datosArea.ENombre)
-            Catch ex As Exception
-                'MsgBox("Error al obtener parametros de información. " & vbNewLine & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Error.")
-            End Try
+                ' Se guarda registro de que equipos tienen notificaciones en pantalla.
+                GuardarEditarRegistro()
+            Else
+                ' Se obtienen registros de lo que corresponda a esta empresa y este nombre de equipo.
+                ObtenerRegistroPorIdEmpresaYNombreEquipo()
+            End If
         End If
 
     End Sub
@@ -98,25 +136,103 @@ Public Class Principal
 
     End Sub
 
+    Private Sub ConsultarInformacionEmpresaPrincipal()
+
+        Dim lista As New List(Of EntidadesNotificacionesPantalla.EmpresasPrincipal)()
+        lista = empresasPrincipal.ObtenerPredeterminada()
+        LogicaNotificacionesPantalla.DatosEmpresaPrincipal.idEmpresa = Convert.ToInt32(lista(0).EIdEmpresa)
+        LogicaNotificacionesPantalla.DatosEmpresaPrincipal.activa = Convert.ToBoolean(lista(0).EActiva.ToString())
+        LogicaNotificacionesPantalla.DatosEmpresaPrincipal.instanciaSql = Convert.ToString(lista(0).EInstanciaSql.ToString())
+        LogicaNotificacionesPantalla.DatosEmpresaPrincipal.rutaBd = lista(0).ERutaBd.ToString()
+        LogicaNotificacionesPantalla.DatosEmpresaPrincipal.usuarioSql = lista(0).EUsuarioSql.ToString()
+        LogicaNotificacionesPantalla.DatosEmpresaPrincipal.contrasenaSql = lista(0).EContrasenaSql.ToString()
+
+    End Sub
+
+    Private Sub ConsultarInformacionEmpresa(ByVal idEmpresa As Integer)
+
+        empresas.EId = idEmpresa
+        Dim datos As New List(Of EntidadesNotificacionesPantalla.Empresas)
+        datos = empresas.ObtenerPorId()
+        datosEmpresa.EId = datos(0).EId
+        datosEmpresa.ENombre = datos(0).ENombre
+        datosEmpresa.EDescripcion = datos(0).EDescripcion
+        datosEmpresa.EDomicilio = datos(0).EDomicilio
+        datosEmpresa.ELocalidad = datos(0).ELocalidad
+        datosEmpresa.ERfc = datos(0).ERfc
+        datosEmpresa.EDirectorio = datos(0).EDirectorio
+        datosEmpresa.ELogo = datos(0).ELogo
+        datosEmpresa.EActiva = datos(0).EActiva
+        datosEmpresa.EEquipo = datos(0).EEquipo
+
+    End Sub
+
+    Public Sub ConsultarInformacionUsuario(ByVal idEmpresa As Integer, ByVal idUsuario As Integer)
+         
+        usuarios.EIdEmpresa = idEmpresa
+        usuarios.EId = idUsuario
+        Dim datos As New List(Of EntidadesNotificacionesPantalla.Usuarios)
+        datos = usuarios.ObtenerPorId()
+        datosUsuario.EId = datos(0).EId
+        datosUsuario.ENombre = datos(0).ENombre
+        datosUsuario.EContrasena = datos(0).EContrasena
+        datosUsuario.ENivel = datos(0).ENivel
+        datosUsuario.EAccesoTotal = datos(0).EAccesoTotal
+        datosUsuario.EIdArea = datos(0).EIdArea
+
+    End Sub
+
+    Public Sub ConsultarInformacionArea(ByVal idArea As Integer)
+
+        areas.EId = idArea
+        Dim datos As New List(Of EntidadesNotificacionesPantalla.Areas)
+        datos = areas.ObtenerPorId()
+        datosArea.EId = datos(0).EId
+        datosArea.ENombre = datos(0).ENombre
+        datosArea.EClave = datos(0).EClave
+
+    End Sub
+
+    Private Sub GuardarEditarRegistro()
+
+        Dim idEmpresa As Integer = Me.datosEmpresa.EId
+        Dim idUsuario As Integer = Me.datosUsuario.EId
+        Dim idArea As Integer = Me.datosArea.EId
+        Dim idModulo As Integer = 0 ' Aquí van a ir cuando sean distintos modulos.
+        Dim nombreEquipo As String = Me.nombreEsteEquipo
+        If (idEmpresa > 0) And (Not String.IsNullOrEmpty(nombreEquipo)) Then
+            registro.EIdEmpresa = idEmpresa
+            registro.EIdArea = idArea
+            registro.EIdUsuario = idUsuario
+            registro.EIdModulo = idModulo
+            registro.ENombreEquipo = nombreEquipo
+            Dim tieneRegistro As Boolean = registro.ValidarPorId()
+            If tieneRegistro Then
+                registro.Editar()
+            Else
+                registro.Guardar()
+            End If
+        End If
+
+    End Sub
+
+    Private Sub ObtenerRegistroPorIdEmpresaYNombreEquipo()
+
+        Dim lista As New List(Of EntidadesNotificacionesPantalla.Registro)
+        registro.EIdEmpresa = LogicaNotificacionesPantalla.DatosEmpresaPrincipal.idEmpresa
+        registro.ENombreEquipo = Me.nombreEsteEquipo
+        lista = registro.ObtenerPorIdEmpresayNombreEquipo()
+        ConsultarInformacionEmpresa(LogicaNotificacionesPantalla.DatosEmpresaPrincipal.idEmpresa)
+        If lista.Count > 0 Then
+            ConsultarInformacionUsuario(LogicaNotificacionesPantalla.DatosEmpresaPrincipal.idEmpresa, lista(0).EIdUsuario)
+            ConsultarInformacionArea(lista(0).EIdArea)
+        End If
+
+    End Sub
+
 #End Region
 
 #Region "Notificaciones"
-
-    Private Sub ConsultarInformacionEmpresa()
-
-        Dim datos As String() = empresas.ObtenerPredeterminada().Split("|")
-        datosEmpresa.EId = Convert.ToInt32(datos(0))
-        datosEmpresa.ENombre = datos(1)
-        datosEmpresa.EDescripcion = datos(2)
-        datosEmpresa.EDomicilio = datos(3)
-        datosEmpresa.ELocalidad = datos(4)
-        datosEmpresa.ERfc = datos(5)
-        datosEmpresa.EDirectorio = datos(6)
-        datosEmpresa.ELogo = datos(7)
-        datosEmpresa.EActiva = Convert.ToBoolean(datos(8))
-        datosEmpresa.EEquipo = datos(9)
-
-    End Sub
 
     Private Sub CargarActividadesVencidas()
 
@@ -170,8 +286,9 @@ Public Class Principal
 
         Dim hora As Integer = 0
         Dim minutos As Integer = 0
-        Dim esRangoValido As Boolean = False
-        Dim esPrimeraVez As Boolean = True
+        Dim esPrimeraVezAbierto As Boolean = True ' Es para cuando se abre este programa.
+        Dim esRangoValido As Boolean = False ' Es el rango de tiempo valido.
+        Dim esPrimeraVezRango As Boolean = True ' Es el contadador de la primera vez que se entra de nuevo al rango.
         While True
             hora = Date.Now.Hour
             minutos = Date.Now.Minute
@@ -179,21 +296,17 @@ Public Class Principal
                 'If (minutos Mod 2) = 0 Then
                 esRangoValido = True
             Else
-                'If Me.esPrueba Then
                 esRangoValido = False
-                'Else
-                '    esRangoValido = False
-                'End If
             End If
-            If ((esRangoValido) And (esPrimeraVez)) Then
+            If ((esRangoValido) And (esPrimeraVezRango)) Or (esPrimeraVezAbierto) Then
                 CargarActividadesVencidas()
-                esPrimeraVez = False
+                esPrimeraVezAbierto = False
+                esPrimeraVezRango = False
                 Application.DoEvents()
-            ElseIf ((esRangoValido) And (Not esPrimeraVez)) Then
-                esPrimeraVez = False
+            ElseIf (Not esRangoValido) Then
+                esPrimeraVezRango = True
                 Application.DoEvents()
             Else
-                esPrimeraVez = True
                 Application.DoEvents()
             End If
         End While
@@ -202,7 +315,7 @@ Public Class Principal
 
     Public Sub GuardarVisto(ByVal esVisto As Boolean)
 
-        CargarParametros(Me.esPrueba)
+        CargarParametros()
         notificaciones.EIdArea = Me.datosUsuario.EIdArea
         notificaciones.EIdUsuario = Me.datosUsuario.EId
         notificaciones.EEsVisto = esVisto

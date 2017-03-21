@@ -124,4 +124,39 @@ Public Class Empresas
 
     End Function
 
+    Public Function ObtenerPorId() As List(Of Empresas)
+
+        Dim lista As New List(Of Empresas)()
+        Try
+            Dim comando As New SqlCommand()
+            comando.Connection = BaseDatos.conexionInformacion
+            comando.CommandText = "SELECT * FROM Empresas WHERE Id = @id"
+            comando.Parameters.AddWithValue("@id", Me.EId)
+            BaseDatos.conexionInformacion.Open()
+            Dim dataReader As SqlDataReader = comando.ExecuteReader()
+            Dim empresas As Empresas
+            While dataReader.Read()
+                empresas = New Empresas()
+                empresas.id = Convert.ToInt32(dataReader("id").ToString())
+                empresas.nombre = dataReader("nombre").ToString()
+                empresas.descripcion = dataReader("descripcion").ToString()
+                empresas.domicilio = dataReader("domicilio").ToString()
+                empresas.localidad = dataReader("localidad").ToString()
+                empresas.rfc = dataReader("rfc").ToString()
+                empresas.directorio = dataReader("directorio").ToString()
+                empresas.logo = dataReader("logo").ToString()
+                empresas.activa = Convert.ToBoolean(dataReader("activa").ToString())
+                empresas.equipo = dataReader("equipo").ToString()
+                lista.Add(empresas)
+            End While
+            BaseDatos.conexionInformacion.Close()
+            Return lista
+        Catch ex As Exception
+            Throw ex
+        Finally
+            BaseDatos.conexionInformacion.Close()
+        End Try
+
+    End Function
+
 End Class

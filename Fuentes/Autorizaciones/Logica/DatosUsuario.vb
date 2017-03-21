@@ -15,9 +15,7 @@
         Set(value As Integer)
             Me.idEmpresa = value
         End Set
-    End Property
-
-
+    End Property 
     Public Property EId() As Integer
         Get
             Return Id
@@ -71,12 +69,13 @@
 
         Dim parametros() = Environment.GetCommandLineArgs().ToArray()
         If (parametros.Length > 0) Then
-            Me.EId = Convert.ToInt32(parametros(12).Replace("|", " "))
-            Me.ENombre = parametros(13).Replace("|", " ")
-            Me.EContrasena = parametros(14).Replace("|", " ")
-            Me.ENivel = Convert.ToInt32(parametros(15).Replace("|", " "))
-            Me.EAccesoTotal = Convert.ToBoolean(parametros(16).Replace("|", " ")) 
-            Me.EIdArea = Convert.ToInt32(parametros(17).Replace("|", " "))
+            Dim numeracion As Integer = 19
+            Me.EId = Convert.ToInt32(parametros(numeracion).Replace("|", " ")) : numeracion += 1
+            Me.ENombre = parametros(numeracion).Replace("|", " ") : numeracion += 1
+            Me.EContrasena = parametros(numeracion).Replace("|", " ") : numeracion += 1
+            Me.ENivel = Convert.ToInt32(parametros(numeracion).Replace("|", " ")) : numeracion += 1
+            Me.EAccesoTotal = Convert.ToBoolean(parametros(numeracion).Replace("|", " ")) : numeracion += 1
+            Me.EIdArea = Convert.ToInt32(parametros(numeracion).Replace("|", " ")) : numeracion += 1
         End If
 
     End Sub

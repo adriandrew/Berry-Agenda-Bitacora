@@ -1,0 +1,12 @@
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\bin\Release\EntidadesNotificacionesPantalla.dll
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\bin\Release\EntidadesNotificacionesPantalla.pdb
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\bin\Release\EntidadesNotificacionesPantalla.xml
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\bin\Release\LogicaNotificacionesPantalla.dll
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\bin\Release\LogicaNotificacionesPantalla.pdb
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\bin\Release\LogicaNotificacionesPantalla.xml
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\obj\Release\EntidadesNotificacionesPantalla.vbprojResolveAssemblyReference.cache
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\obj\Release\EntidadesNotificacionesPantalla.Resources.resources
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\obj\Release\EntidadesNotificacionesPantalla.vbproj.GenerateResource.Cache
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\obj\Release\EntidadesNotificacionesPantalla.dll
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\obj\Release\EntidadesNotificacionesPantalla.xml
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\obj\Release\EntidadesNotificacionesPantalla.pdb

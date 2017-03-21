@@ -95,17 +95,18 @@
     Public Sub ObtenerParametrosInformacionEmpresa()
 
         Dim parametros() = Environment.GetCommandLineArgs().ToArray()
-        If (parametros.Length > 0) Then 
-            Me.numero = Convert.ToInt32(parametros(1).Replace("|", " "))
-            Me.nombre = parametros(2).Replace("|", " ")
-            Me.descripcion = parametros(3).Replace("|", " ")
-            Me.domicilio = parametros(4).Replace("|", " ")
-            Me.localidad = parametros(5).Replace("|", " ")
-            Me.rfc = parametros(6).Replace("|", " ")
-            Me.directorio = parametros(7).Replace("|", " ")
-            Me.logo = parametros(8).Replace("|", " ")
-            Me.activa = True 'Convert.ToBoolean(parametros(9).Replace("|", " "))
-            Me.equipo = parametros(10).Replace("|", " ")
+        If (parametros.Length > 0) Then
+            Dim numeracion As Integer = 8
+            Me.numero = Convert.ToInt32(parametros(numeracion).Replace("|", " ")) : numeracion += 1
+            Me.nombre = parametros(numeracion).Replace("|", " ") : numeracion += 1
+            Me.descripcion = parametros(numeracion).Replace("|", " ") : numeracion += 1
+            Me.domicilio = parametros(numeracion).Replace("|", " ") : numeracion += 1
+            Me.localidad = parametros(numeracion).Replace("|", " ") : numeracion += 1
+            Me.rfc = parametros(numeracion).Replace("|", " ") : numeracion += 1
+            Me.directorio = parametros(numeracion).Replace("|", " ") : numeracion += 1
+            Me.logo = parametros(numeracion).Replace("|", " ") : numeracion += 1
+            Me.activa = True : numeracion += 1 'Convert.ToBoolean(parametros(9).Replace("|", " "))
+            Me.equipo = parametros(numeracion).Replace("|", " ") : numeracion += 1
         End If
 
     End Sub

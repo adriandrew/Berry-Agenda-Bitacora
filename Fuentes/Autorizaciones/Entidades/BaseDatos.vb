@@ -36,23 +36,21 @@ Public Module BaseDatos
 
     Public Sub AbrirConexionInformacion()
 
-        BaseDatos.ECadenaConexionInformacion = String.Format("Data Source=SYS21ALIEN03-PC\SQLEXPRESS;Initial Catalog={0};Integrated Security=True;Connect Timeout=30", BaseDatos.ECadenaConexionInformacion)
+        BaseDatos.ECadenaConexionInformacion = String.Format("Data Source={0};Initial Catalog={1};User Id={2};Password={3}", LogicaAutorizaciones.DatosEmpresaPrincipal.instanciaSql, BaseDatos.ECadenaConexionInformacion, LogicaAutorizaciones.DatosEmpresaPrincipal.usuarioSql, LogicaAutorizaciones.DatosEmpresaPrincipal.contrasenaSql)
         conexionInformacion.ConnectionString = BaseDatos.ECadenaConexionInformacion
 
     End Sub
 
     Public Sub AbrirConexionCatalogo()
 
-        BaseDatos.ECadenaConexionCatalogo = String.Format("Data Source=SYS21ALIEN03-PC\SQLEXPRESS;Initial Catalog={0};User Id=AdminBerry;Password=@berry", BaseDatos.ECadenaConexionCatalogo)
-        'BaseDatos.ECadenaConexionCatalogo = "Data Source=LOCALHOST\SQLEXPRESS;Initial Catalog=CATALOGOS;Integrated Security=True"
+        BaseDatos.ECadenaConexionCatalogo = String.Format("Data Source={0};Initial Catalog={1};User Id={2};Password={3}", LogicaAutorizaciones.DatosEmpresaPrincipal.instanciaSql, BaseDatos.ECadenaConexionCatalogo, LogicaAutorizaciones.DatosEmpresaPrincipal.usuarioSql, LogicaAutorizaciones.DatosEmpresaPrincipal.contrasenaSql) 
         conexionCatalogo.ConnectionString = BaseDatos.ECadenaConexionCatalogo
 
     End Sub
 
     Public Sub AbrirConexionAgenda()
 
-        BaseDatos.ECadenaConexionAgenda = String.Format("Data Source=SYS21ALIEN03-PC\SQLEXPRESS;Initial Catalog={0};User Id=AdminBerry;Password=@berry", BaseDatos.ECadenaConexionAgenda)
-        'BaseDatos.ECadenaConexionAgenda = "Data Source=LOCALHOST\SQLEXPRESS;Initial Catalog=AGENDA;Integrated Security=True"
+        BaseDatos.ECadenaConexionAgenda = String.Format("Data Source={0};Initial Catalog={1};User Id={2};Password={3}", LogicaAutorizaciones.DatosEmpresaPrincipal.instanciaSql, BaseDatos.ECadenaConexionAgenda, LogicaAutorizaciones.DatosEmpresaPrincipal.usuarioSql, LogicaAutorizaciones.DatosEmpresaPrincipal.contrasenaSql)
         conexionAgenda.ConnectionString = BaseDatos.ECadenaConexionAgenda
 
     End Sub

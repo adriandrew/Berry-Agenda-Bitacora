@@ -13,9 +13,10 @@
     Public tipoHora As New FarPoint.Win.Spread.CellType.DateTimeCellType()
     Public tipoFecha As New FarPoint.Win.Spread.CellType.DateTimeCellType()
     Public tipoBooleano As New FarPoint.Win.Spread.CellType.CheckBoxCellType()
-
     Public opcionSeleccionada As Integer = 0
     Public pintado As Boolean = False
+     
+    Dim esPrueba As Boolean = False
 
 #Region "Eventos"
 
@@ -203,24 +204,24 @@
 
     Private Sub ConfigurarConexiones()
 
-        Dim esPrueba As Boolean = False
-        If (esPrueba) Then
+        If (Me.esPrueba) Then
             'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf"
-            EntidadesAutorizaciones.BaseDatos.ECadenaConexionAgenda = "Agenda"
-            EntidadesAutorizaciones.BaseDatos.ECadenaConexionCatalogo = "Catalogos"
-            EntidadesAutorizaciones.BaseDatos.ECadenaConexionInformacion = "Informacion"
             Me.datosUsuario.EId = 1
             Me.datosUsuario.EIdArea = 1
             Me.datosEmpresa.EId = 1
+            LogicaAutorizaciones.DatosEmpresaPrincipal.instanciaSql = "ANDREW-MAC\SQLEXPRESS"
+            LogicaAutorizaciones.DatosEmpresaPrincipal.usuarioSql = "AdminBerry"
+            LogicaAutorizaciones.DatosEmpresaPrincipal.contrasenaSql = "@berry"
         Else
+            'EntidadesActividades.BaseDatos.ECadenaConexionAgenda = datosEmpresa.EDirectorio & "\\Agenda.mdf"
+            LogicaAutorizaciones.DatosEmpresaPrincipal.ObtenerParametrosInformacionEmpresa()
             Me.datosEmpresa.ObtenerParametrosInformacionEmpresa()
             Me.datosUsuario.ObtenerParametrosInformacionUsuario()
             Me.datosArea.ObtenerParametrosInformacionArea()
-            'EntidadesActividades.BaseDatos.ECadenaConexionAgenda = datosEmpresa.EDirectorio & "\\Agenda.mdf"
-            EntidadesAutorizaciones.BaseDatos.ECadenaConexionAgenda = "Agenda"
-            EntidadesAutorizaciones.BaseDatos.ECadenaConexionCatalogo = "Catalogos"
-            EntidadesAutorizaciones.BaseDatos.ECadenaConexionInformacion = "Informacion"
         End If
+        EntidadesAutorizaciones.BaseDatos.ECadenaConexionAgenda = "Agenda"
+        EntidadesAutorizaciones.BaseDatos.ECadenaConexionCatalogo = "Catalogos"
+        EntidadesAutorizaciones.BaseDatos.ECadenaConexionInformacion = "Informacion"
         EntidadesAutorizaciones.BaseDatos.AbrirConexionAgenda()
         EntidadesAutorizaciones.BaseDatos.AbrirConexionCatalogo()
         EntidadesAutorizaciones.BaseDatos.AbrirConexionInformacion()

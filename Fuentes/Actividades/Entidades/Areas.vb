@@ -53,6 +53,8 @@ Public Class Areas
             Return lista
         Catch ex As Exception
             Throw ex
+        Finally
+            BaseDatos.conexionCatalogo.Close()
         End Try
 
     End Function

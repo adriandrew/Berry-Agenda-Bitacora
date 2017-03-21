@@ -26,7 +26,7 @@ Public Module BaseDatos
 
     Public Sub AbrirConexionInformacion()
 
-        BaseDatos.ECadenaConexionInformacion = String.Format("Data Source=.\\SQLEXPRESS;Initial Catalog={0};Integrated Security=True;Connect Timeout=30", BaseDatos.ECadenaConexionInformacion)
+        BaseDatos.ECadenaConexionInformacion = String.Format("Data Source={0};Initial Catalog={1};User Id={2};Password={3}", LogicaCatalogos.DatosEmpresaPrincipal.instanciaSql, BaseDatos.ECadenaConexionInformacion, LogicaCatalogos.DatosEmpresaPrincipal.usuarioSql, LogicaCatalogos.DatosEmpresaPrincipal.contrasenaSql)
         conexionInformacion.ConnectionString = BaseDatos.ECadenaConexionInformacion
 
     End Sub
@@ -34,8 +34,7 @@ Public Module BaseDatos
 
     Public Sub AbrirConexionCatalogo()
 
-        BaseDatos.ECadenaConexionCatalogo = String.Format("Data Source=SYS21ALIEN03-PC\SQLEXPRESS;Initial Catalog={0};User Id=AdminBerry;Password=@berry", BaseDatos.ECadenaConexionCatalogo)
-        'BaseDatos.ECadenaConexionCatalogo = "Data Source=LOCALHOST\SQLEXPRESS;Initial Catalog=CATALOGOS;Integrated Security=True"
+        BaseDatos.ECadenaConexionCatalogo = String.Format("Data Source={0};Initial Catalog={1};User Id={2};Password={3}", LogicaCatalogos.DatosEmpresaPrincipal.instanciaSql, BaseDatos.ECadenaConexionCatalogo, LogicaCatalogos.DatosEmpresaPrincipal.usuarioSql, LogicaCatalogos.DatosEmpresaPrincipal.contrasenaSql)
         conexionCatalogo.ConnectionString = BaseDatos.ECadenaConexionCatalogo
 
     End Sub

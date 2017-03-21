@@ -151,7 +151,7 @@ Public Class ActividadesResueltas
         Catch ex As Exception
             Throw ex
         Finally
-            BaseDatos.conexionInformacion.Close()
+            BaseDatos.conexionAgenda.Close()
         End Try
 
     End Function

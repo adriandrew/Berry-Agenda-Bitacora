@@ -1,14 +1,25 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Data.SqlServerCe
 
 Public Module BaseDatos
 
+    Private cadenaConexionPrincipal As String
     Private cadenaConexionInformacion As String
     Private cadenaConexionCatalogo As String
     Private cadenaConexionAgenda As String
+    Public conexionPrincipal As New SqlCeConnection()
     Public conexionInformacion As New SqlConnection()
     Public conexionCatalogo As New SqlConnection()
     Public conexionAgenda As New SqlConnection()
 
+    Public Property ECadenaConexionPrincipal() As String
+        Get
+            Return BaseDatos.cadenaConexionPrincipal
+        End Get
+        Set(value As String)
+            BaseDatos.cadenaConexionPrincipal = value
+        End Set
+    End Property
     Public Property ECadenaConexionInformacion() As String
         Get
             Return BaseDatos.cadenaConexionInformacion
@@ -34,25 +45,30 @@ Public Module BaseDatos
         End Set
     End Property
 
+    Public Sub AbrirConexionPrincipal()
+
+        BaseDatos.ECadenaConexionPrincipal = String.Format("Data Source={0};", BaseDatos.ECadenaConexionPrincipal)
+        conexionPrincipal.ConnectionString = BaseDatos.ECadenaConexionPrincipal
+
+    End Sub
+
     Public Sub AbrirConexionInformacion()
 
-        BaseDatos.ECadenaConexionInformacion = String.Format("Data Source=SYS21ALIEN03-PC\SQLEXPRESS;Initial Catalog={0};User Id=AdminBerry;Password=@berry", BaseDatos.ECadenaConexionInformacion)
+        BaseDatos.ECadenaConexionInformacion = String.Format("Data Source={0};Initial Catalog={1};User Id={2};Password={3}", LogicaNotificacionesPantalla.DatosEmpresaPrincipal.instanciaSql, BaseDatos.ECadenaConexionInformacion, LogicaNotificacionesPantalla.DatosEmpresaPrincipal.usuarioSql, LogicaNotificacionesPantalla.DatosEmpresaPrincipal.contrasenaSql) 
         conexionInformacion.ConnectionString = BaseDatos.ECadenaConexionInformacion
 
     End Sub
 
     Public Sub AbrirConexionCatalogo()
 
-        BaseDatos.ECadenaConexionCatalogo = String.Format("Data Source=SYS21ALIEN03-PC\SQLEXPRESS;Initial Catalog={0};User Id=AdminBerry;Password=@berry", BaseDatos.ECadenaConexionCatalogo)
-        'BaseDatos.ECadenaConexionCatalogo = "Data Source=LOCALHOST\SQLEXPRESS;Initial Catalog=CATALOGOS;Integrated Security=True"
+        BaseDatos.ECadenaConexionCatalogo = String.Format("Data Source={0};Initial Catalog={1};User Id={2};Password={3}", LogicaNotificacionesPantalla.DatosEmpresaPrincipal.instanciaSql, BaseDatos.ECadenaConexionCatalogo, LogicaNotificacionesPantalla.DatosEmpresaPrincipal.usuarioSql, LogicaNotificacionesPantalla.DatosEmpresaPrincipal.contrasenaSql) 
         conexionCatalogo.ConnectionString = BaseDatos.ECadenaConexionCatalogo
 
     End Sub
 
     Public Sub AbrirConexionAgenda()
 
-        BaseDatos.ECadenaConexionAgenda = String.Format("Data Source=SYS21ALIEN03-PC\SQLEXPRESS;Initial Catalog={0};User Id=AdminBerry;Password=@berry", BaseDatos.ECadenaConexionAgenda)
-        'BaseDatos.ECadenaConexionAgenda = "Data Source=LOCALHOST\SQLEXPRESS;Initial Catalog=AGENDA;Integrated Security=True"
+        BaseDatos.ECadenaConexionAgenda = String.Format("Data Source={0};Initial Catalog={1};User Id={2};Password={3}", LogicaNotificacionesPantalla.DatosEmpresaPrincipal.instanciaSql, BaseDatos.ECadenaConexionAgenda, LogicaNotificacionesPantalla.DatosEmpresaPrincipal.usuarioSql, LogicaNotificacionesPantalla.DatosEmpresaPrincipal.contrasenaSql) 
         conexionAgenda.ConnectionString = BaseDatos.ECadenaConexionAgenda
 
     End Sub

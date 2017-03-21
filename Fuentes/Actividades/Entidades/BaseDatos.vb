@@ -1,4 +1,4 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.Data.SqlClient 
 
 Public Module BaseDatos
 
@@ -36,23 +36,21 @@ Public Module BaseDatos
 
     Public Sub AbrirConexionInformacion()
 
-        BaseDatos.ECadenaConexionInformacion = String.Format("Data Source=SYS21ALIEN03-PC\SQLEXPRESS;Initial Catalog={0};Integrated Security=True;Connect Timeout=30", BaseDatos.ECadenaConexionInformacion)
+        BaseDatos.ECadenaConexionInformacion = String.Format("Data Source={0};Initial Catalog={1};User Id={2};Password={3}", LogicaActividades.DatosEmpresaPrincipal.instanciaSql, BaseDatos.ECadenaConexionInformacion, LogicaActividades.DatosEmpresaPrincipal.usuarioSql, LogicaActividades.DatosEmpresaPrincipal.contrasenaSql)
         conexionInformacion.ConnectionString = BaseDatos.ECadenaConexionInformacion
 
     End Sub
 
     Public Sub AbrirConexionCatalogo()
 
-        BaseDatos.ECadenaConexionCatalogo = String.Format("Data Source=SYS21ALIEN03-PC\SQLEXPRESS;Initial Catalog={0};User Id=AdminBerry;Password=@berry", BaseDatos.ECadenaConexionCatalogo)
-        'BaseDatos.ECadenaConexionCatalogo = "Data Source=LOCALHOST\SQLEXPRESS;Initial Catalog=CATALOGOS;Integrated Security=True"
+        BaseDatos.ECadenaConexionCatalogo = String.Format("Data Source={0};Initial Catalog={1};User Id={2};Password={3}", LogicaActividades.DatosEmpresaPrincipal.instanciaSql, BaseDatos.ECadenaConexionCatalogo, LogicaActividades.DatosEmpresaPrincipal.usuarioSql, LogicaActividades.DatosEmpresaPrincipal.contrasenaSql)
         conexionCatalogo.ConnectionString = BaseDatos.ECadenaConexionCatalogo
 
     End Sub
 
     Public Sub AbrirConexionAgenda()
 
-        BaseDatos.ECadenaConexionAgenda = String.Format("Data Source=SYS21ALIEN03-PC\SQLEXPRESS;Initial Catalog={0};User Id=AdminBerry;Password=@berry", BaseDatos.ECadenaConexionAgenda)
-        'BaseDatos.ECadenaConexionAgenda = "Data Source=LOCALHOST\SQLEXPRESS;Initial Catalog=AGENDA;Integrated Security=True"
+        BaseDatos.ECadenaConexionAgenda = String.Format("Data Source={0};Initial Catalog={1};User Id={2};Password={3}", LogicaActividades.DatosEmpresaPrincipal.instanciaSql, BaseDatos.ECadenaConexionAgenda, LogicaActividades.DatosEmpresaPrincipal.usuarioSql, LogicaActividades.DatosEmpresaPrincipal.contrasenaSql)
         conexionAgenda.ConnectionString = BaseDatos.ECadenaConexionAgenda
 
     End Sub

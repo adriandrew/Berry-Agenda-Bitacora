@@ -5,6 +5,7 @@
     Dim actividadesResueltas As New EntidadesActividades.ActividadesResueltas
     Dim areas As New EntidadesActividades.Areas
     Dim usuarios As New EntidadesActividades.Usuarios
+    Public datosEmpresaPrincipal As New LogicaActividades.DatosEmpresaPrincipal()
     Public datosEmpresa As New LogicaActividades.DatosEmpresa()
     Public datosUsuario As New LogicaActividades.DatosUsuario()
     Public datosArea As New LogicaActividades.DatosArea()
@@ -15,10 +16,11 @@
     Public tipoHora As New FarPoint.Win.Spread.CellType.DateTimeCellType()
     Public tipoFecha As New FarPoint.Win.Spread.CellType.DateTimeCellType()
     Public tipoBooleano As New FarPoint.Win.Spread.CellType.CheckBoxCellType()
-
     Public tieneImagen As Boolean = False
     Public rutaImagen As String = String.Empty
     Public opcionSeleccionada As Integer = 0
+
+    Public esPrueba As Boolean = False
 
 #Region "Eventos"
 
@@ -415,24 +417,24 @@
 
     Private Sub ConfigurarConexiones()
 
-        Dim esPrueba As Boolean = True
-        If (esPrueba) Then
+        If (Me.esPrueba) Then
             'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf"
-            EntidadesActividades.BaseDatos.ECadenaConexionAgenda = "Agenda"
-            EntidadesActividades.BaseDatos.ECadenaConexionCatalogo = "Catalogos"
-            EntidadesActividades.BaseDatos.ECadenaConexionInformacion = "Informacion"
             Me.datosUsuario.EId = 1
             Me.datosUsuario.EIdArea = 1
             Me.datosEmpresa.EId = 1
+            LogicaActividades.DatosEmpresaPrincipal.instanciaSql = "ANDREW-MAC\SQLEXPRESS"
+            LogicaActividades.DatosEmpresaPrincipal.usuarioSql = "AdminBerry"
+            LogicaActividades.DatosEmpresaPrincipal.contrasenaSql = "@berry"
         Else
+            'EntidadesActividades.BaseDatos.ECadenaConexionAgenda = datosEmpresa.EDirectorio & "\\Agenda.mdf"
+            LogicaActividades.DatosEmpresaPrincipal.ObtenerParametrosInformacionEmpresa()
             Me.datosEmpresa.ObtenerParametrosInformacionEmpresa()
             Me.datosUsuario.ObtenerParametrosInformacionUsuario()
             Me.datosArea.ObtenerParametrosInformacionArea()
-            'EntidadesActividades.BaseDatos.ECadenaConexionAgenda = datosEmpresa.EDirectorio & "\\Agenda.mdf"
-            EntidadesActividades.BaseDatos.ECadenaConexionAgenda = "Agenda"
-            EntidadesActividades.BaseDatos.ECadenaConexionCatalogo = "Catalogos"
-            EntidadesActividades.BaseDatos.ECadenaConexionInformacion = "Informacion"
         End If
+        EntidadesActividades.BaseDatos.ECadenaConexionAgenda = "Agenda"
+        EntidadesActividades.BaseDatos.ECadenaConexionCatalogo = "Catalogos"
+        EntidadesActividades.BaseDatos.ECadenaConexionInformacion = "Informacion"
         EntidadesActividades.BaseDatos.AbrirConexionAgenda()
         EntidadesActividades.BaseDatos.AbrirConexionCatalogo()
         EntidadesActividades.BaseDatos.AbrirConexionInformacion()
@@ -530,7 +532,7 @@
             actividades.EIdUsuarioDestino = idUsuarioDestino
             actividades.EEsAutorizado = esAutorizado
             actividades.EEsRechazado = esRechazado
-            Dim tieneActividades As Boolean = actividades.ValidarPorNumero()
+            Dim tieneActividades As Boolean = actividades.ValidarPorId()
             If tieneActividades Then
                 actividades.Editar()
             Else

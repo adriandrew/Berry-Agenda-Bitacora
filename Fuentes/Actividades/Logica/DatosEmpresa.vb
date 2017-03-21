@@ -96,16 +96,17 @@
 
         Dim parametros() = Environment.GetCommandLineArgs().ToArray()
         If (parametros.Length > 0) Then
-            Me.EId = Convert.ToInt32(parametros(1).Replace("|", " "))
-            Me.ENombre = parametros(2).Replace("|", " ")
-            Me.EDescripcion = parametros(3).Replace("|", " ")
-            Me.EDomicilio = parametros(4).Replace("|", " ")
-            Me.ELocalidad = parametros(5).Replace("|", " ")
-            Me.ERfc = parametros(6).Replace("|", " ")
-            Me.EDirectorio = parametros(7).Replace("|", " ")
-            Me.ELogo = parametros(8).Replace("|", " ")
-            Me.EActiva = True 'Convert.ToBoolean(parametros(9).Replace("|", " "))
-            Me.EEquipo = parametros(10).Replace("|", " ") 
+            Dim numeracion As Integer = 8
+            Me.EId = Convert.ToInt32(parametros(numeracion).Replace("|", " ")) : numeracion += 1
+            Me.ENombre = parametros(numeracion).Replace("|", " ") : numeracion += 1
+            Me.EDescripcion = parametros(numeracion).Replace("|", " ") : numeracion += 1
+            Me.EDomicilio = parametros(numeracion).Replace("|", " ") : numeracion += 1
+            Me.ELocalidad = parametros(numeracion).Replace("|", " ") : numeracion += 1
+            Me.ERfc = parametros(numeracion).Replace("|", " ") : numeracion += 1
+            Me.EDirectorio = parametros(numeracion).Replace("|", " ") : numeracion += 1
+            Me.ELogo = parametros(numeracion).Replace("|", " ") : numeracion += 1
+            Me.EActiva = True : numeracion += 1 'Convert.ToBoolean(parametros(9).Replace("|", " "))
+            Me.EEquipo = parametros(numeracion).Replace("|", " ") : numeracion += 1
         End If
 
     End Sub

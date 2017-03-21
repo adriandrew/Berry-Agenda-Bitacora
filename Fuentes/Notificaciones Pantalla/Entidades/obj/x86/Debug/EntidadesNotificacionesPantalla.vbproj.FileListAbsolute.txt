@@ -1,0 +1,12 @@
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\bin\x86\Debug\EntidadesNotificacionesPantalla.dll
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\bin\x86\Debug\EntidadesNotificacionesPantalla.pdb
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\bin\x86\Debug\EntidadesNotificacionesPantalla.xml
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\bin\x86\Debug\LogicaNotificacionesPantalla.dll
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\bin\x86\Debug\LogicaNotificacionesPantalla.pdb
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\bin\x86\Debug\LogicaNotificacionesPantalla.xml
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\obj\x86\Debug\EntidadesNotificacionesPantalla.vbprojResolveAssemblyReference.cache
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\obj\x86\Debug\EntidadesNotificacionesPantalla.Resources.resources
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\obj\x86\Debug\EntidadesNotificacionesPantalla.vbproj.GenerateResource.Cache
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\obj\x86\Debug\EntidadesNotificacionesPantalla.dll
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\obj\x86\Debug\EntidadesNotificacionesPantalla.xml
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\obj\x86\Debug\EntidadesNotificacionesPantalla.pdb

@@ -5,36 +5,33 @@ Imports System.Text
 
 Public Class Principal
 
+    Dim empresasPrincipal As New EntidadesNotificacionesCorreo.EmpresasPrincipal()
+    Dim empresas As New EntidadesNotificacionesCorreo.Empresas()
     Dim actividades As New EntidadesNotificacionesCorreo.Actividades
     Dim actividadesExternas As New EntidadesNotificacionesCorreo.ActividadesExternas
     Dim usuarios As New EntidadesNotificacionesCorreo.Usuarios
+    Dim notificaciones As New EntidadesNotificacionesCorreo.Notificaciones
     Public datosEmpresa As New LogicaNotificacionesCorreo.DatosEmpresa()
     Public datosUsuario As New LogicaNotificacionesCorreo.DatosUsuario()
     Public datosArea As New LogicaNotificacionesCorreo.DatosArea()
-    Public empresas As New EntidadesNotificacionesCorreo.Empresas()
-    Dim notificaciones As New EntidadesNotificacionesCorreo.Notificaciones
-    Public esPrueba As Boolean = False ' TODO. Cambiar a false.
     Public filaActivaSpread As Integer = 0
     Public esDivisible As Boolean = False
+
+    Public esPrueba As Boolean = False
 
 #Region "Eventos"
 
     Private Sub Principal_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
 
-        Try
-            Application.ExitThread()
-            'Application.Exit()
-            'Me.Close()
-            End
-        Catch ex As Exception
-            End
-        End Try
+        Cerrar()
 
     End Sub
 
     Private Sub Principal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Centrar()
+        ConfigurarConexionPrincipal() 
+        ConsultarInformacionEmpresaPrincipalPredeterminada()
         ConfigurarConexiones()
         ConsultarInformacionEmpresa()
         CargarEncabezados()
@@ -46,13 +43,7 @@ Public Class Principal
 
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
 
-        'Application.Exit()
-
-    End Sub
-
-    Private Sub Principal_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-
-        'Me.Hide()
+        Cerrar()
 
     End Sub
 
@@ -70,50 +61,70 @@ Public Class Principal
 
     End Sub
 
+    Private Sub ConfigurarConexionPrincipal()
+
+        If Me.esPrueba Then
+            EntidadesNotificacionesCorreo.BaseDatos.ECadenaConexionPrincipal = "C:\Berry-Bitacora\Principal.sdf"
+        Else
+            Dim ruta As String = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase)
+            ruta = ruta.Replace("file:\", Nothing)
+            EntidadesNotificacionesCorreo.BaseDatos.ECadenaConexionPrincipal = String.Format("{0}\Principal.sdf", ruta)
+        End If
+        EntidadesNotificacionesCorreo.BaseDatos.AbrirConexionPrincipal()
+
+    End Sub
+
     Private Sub ConfigurarConexiones()
 
         If (Me.esPrueba) Then
-            'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf"
-            EntidadesNotificacionesCorreo.BaseDatos.ECadenaConexionInformacion = "Informacion"
-            EntidadesNotificacionesCorreo.BaseDatos.ECadenaConexionAgenda = "Agenda"
-            'CargarParametros(Me.esPrueba)
+            'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf" 
         Else
-            EntidadesNotificacionesCorreo.BaseDatos.ECadenaConexionInformacion = "Informacion"
-            EntidadesNotificacionesCorreo.BaseDatos.ECadenaConexionAgenda = "Agenda"
-            'datosEmpresa.EDirectorio & "\\Agenda.mdf"  
-            'CargarParametros(Me.esPrueba)
+            'baseDatos.CadenaConexionInformacion = datosEmpresa.EDirectorio & "\\Agenda.mdf"  
         End If
+        EntidadesNotificacionesCorreo.BaseDatos.ECadenaConexionInformacion = "Informacion"
+        EntidadesNotificacionesCorreo.BaseDatos.ECadenaConexionAgenda = "Agenda"
         EntidadesNotificacionesCorreo.BaseDatos.AbrirConexionInformacion()
         EntidadesNotificacionesCorreo.BaseDatos.AbrirConexionAgenda()
 
     End Sub
 
-    Private Sub CargarParametros(ByVal esPrueba As Boolean)
+    Private Sub ConsultarInformacionEmpresaPrincipalPredeterminada()
 
-        If esPrueba Then
-            Me.datosUsuario.EId = 2
-            Me.datosUsuario.ENombre = "Adrián Andrew"
-            Me.datosUsuario.EIdArea = 2
-            Me.datosEmpresa.EId = 1 ' TODO. Fijo por ahora a la empresa de PODC.
-        Else
-            Try
-                Me.datosEmpresa.ObtenerParametrosInformacionEmpresa()
-                Me.datosUsuario.ObtenerParametrosInformacionUsuario()
-                Me.datosArea.ObtenerParametrosInformacionArea()
-                Me.datosEmpresa.EId = 1 ' TODO. Fijo por ahora a la empresa de PODC. 
-            Catch ex As Exception
-                Throw ex
-            End Try
-        End If
+        Dim lista As New List(Of EntidadesNotificacionesCorreo.EmpresasPrincipal)()
+        lista = empresasPrincipal.ObtenerPredeterminada()
+        LogicaNotificacionesCorreo.DatosEmpresaPrincipal.idEmpresa = Convert.ToInt32(lista(0).EIdEmpresa)
+        LogicaNotificacionesCorreo.DatosEmpresaPrincipal.activa = Convert.ToBoolean(lista(0).EActiva.ToString())
+        LogicaNotificacionesCorreo.DatosEmpresaPrincipal.instanciaSql = Convert.ToString(lista(0).EInstanciaSql.ToString())
+        LogicaNotificacionesCorreo.DatosEmpresaPrincipal.rutaBd = lista(0).ERutaBd.ToString()
+        LogicaNotificacionesCorreo.DatosEmpresaPrincipal.usuarioSql = lista(0).EUsuarioSql.ToString()
+        LogicaNotificacionesCorreo.DatosEmpresaPrincipal.contrasenaSql = lista(0).EContrasenaSql.ToString()
+
+    End Sub
+
+    Private Sub ConsultarInformacionEmpresa()
+
+        empresas.EId = LogicaNotificacionesCorreo.DatosEmpresaPrincipal.idEmpresa
+        Dim datos As New List(Of EntidadesNotificacionesCorreo.Empresas)
+        datos = empresas.ObtenerPorId()
+        datosEmpresa.EId = datos(0).EId
+        datosEmpresa.ENombre = datos(0).ENombre
+        datosEmpresa.EDescripcion = datos(0).EDescripcion
+        datosEmpresa.EDomicilio = datos(0).EDomicilio
+        datosEmpresa.ELocalidad = datos(0).ELocalidad
+        datosEmpresa.ERfc = datos(0).ERfc
+        datosEmpresa.EDirectorio = datos(0).EDirectorio
+        datosEmpresa.ELogo = datos(0).ELogo
+        datosEmpresa.EActiva = datos(0).EActiva
+        datosEmpresa.EEquipo = datos(0).EEquipo
 
     End Sub
 
     Private Sub CargarEncabezados()
 
         lblEncabezadoPrograma.Text = "Programa: " + Me.Text
-        lblEncabezadoEmpresa.Text = "Empresa: " + datosEmpresa.ENombre
-        lblEncabezadoUsuario.Text = "Usuario: " + "Todos" 'datosUsuario.ENombre
-        lblEncabezadoArea.Text = "Area: " + "Todos" ' datosArea.ENombre
+        lblEncabezadoEmpresa.Text = "Empresa: " + Me.datosEmpresa.ENombre
+        lblEncabezadoUsuario.Text = "Usuario: " + "Todos"
+        lblEncabezadoArea.Text = "Area: " + "Todos"
 
     End Sub
 
@@ -121,19 +132,14 @@ Public Class Principal
 
 #Region "Notificaciones"
 
-    Private Sub ConsultarInformacionEmpresa()
+    Private Sub Cerrar()
 
-        Dim datos As String() = empresas.ObtenerPredeterminada().Split("|")
-        datosEmpresa.EId = Convert.ToInt32(datos(0))
-        datosEmpresa.ENombre = datos(1)
-        datosEmpresa.EDescripcion = datos(2)
-        datosEmpresa.EDomicilio = datos(3)
-        datosEmpresa.ELocalidad = datos(4)
-        datosEmpresa.ERfc = datos(5)
-        datosEmpresa.EDirectorio = datos(6)
-        datosEmpresa.ELogo = datos(7)
-        datosEmpresa.EActiva = Convert.ToBoolean(datos(8))
-        datosEmpresa.EEquipo = datos(9)
+        Try
+            Application.ExitThread()
+            End
+        Catch ex As Exception
+            End
+        End Try
 
     End Sub
 
@@ -142,7 +148,7 @@ Public Class Principal
         ' Se obtienen los distintos usuarios existentes.
         Dim listaUsuarios As New List(Of EntidadesNotificacionesCorreo.Usuarios)
         usuarios.EIdEmpresa = Me.datosEmpresa.EId
-        listaUsuarios = usuarios.ObtenerListadoDeEmpresa
+        listaUsuarios = usuarios.ObtenerListadoPorEmpresa
         ' Se recorre cada uno y se envian sus actividades pendientes, internas y externas.
         For fila = 0 To listaUsuarios.Count - 1
             Dim lista As New List(Of EntidadesNotificacionesCorreo.Actividades) : Dim listaExterna As New List(Of EntidadesNotificacionesCorreo.ActividadesExternas)
@@ -172,7 +178,7 @@ Public Class Principal
     End Sub
 
     Private Sub IniciarProceso()
-         
+
         Dim hilo As New Thread(AddressOf CiclarInfinitamente)
         CheckForIllegalCrossThreadCalls = False
         Try
@@ -189,7 +195,7 @@ Public Class Principal
 
         Dim hora As Integer = 0
         Dim minutos As Integer = 0
-        Dim esRangoValido As Boolean = False 
+        Dim esRangoValido As Boolean = False
         While True
             hora = Date.Now.Hour
             minutos = Date.Now.Minute
@@ -197,7 +203,7 @@ Public Class Principal
                 'If (minutos Mod 2) = 0 Then
                 esRangoValido = True
             Else
-                esRangoValido = False ' TODO. Cambiar a false.
+                esRangoValido = False
             End If
             If (esRangoValido) Then
                 If Me.esDivisible Then
@@ -250,7 +256,7 @@ Public Class Principal
         Try
             Dim rutaLogoPng As String = String.Empty
             If Me.esPrueba Then
-                rutaLogoPng = "C:\BERRY-AGENDA\logo3.png"
+                rutaLogoPng = "C:\BERRY-BITACORA\logo3.png"
             Else
                 rutaLogoPng = CurDir() & "\logo3.png" ' TODO. Corregir ruta.
             End If
@@ -268,7 +274,7 @@ Public Class Principal
         ' Creamos el recurso a incrustar. Observad que el ID que le asignamos (arbitrario) está referenciado desde el código HTML como origen de la imagen (resaltado en amarillo)...
         Dim rutaLogoJpg As String = String.Empty
         If Me.esPrueba Then
-            rutaLogoJpg = "C:\BERRY-AGENDA\logo3.jpg"
+            rutaLogoJpg = "C:\BERRY-BITACORA\logo3.jpg"
         Else
             rutaLogoJpg = CurDir() & "\logo3.jpg"
         End If

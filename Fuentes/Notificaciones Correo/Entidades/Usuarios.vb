@@ -70,14 +70,14 @@ Public Class Usuarios
         End Set
     End Property
 
-    Public Function ObtenerListadoDeEmpresa() As List(Of Usuarios)
+    Public Function ObtenerListadoPorEmpresa() As List(Of Usuarios)
 
         Dim lista As New List(Of Usuarios)()
         Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionInformacion
             comando.CommandText = "SELECT * FROM Usuarios WHERE IdEmpresa=@idEmpresa"
-            comando.Parameters.AddWithValue("@idEmpresa", Me.idEmpresa) 
+            comando.Parameters.AddWithValue("@idEmpresa", Me.idEmpresa)
             BaseDatos.conexionInformacion.Open()
             Dim dataReader As SqlDataReader = comando.ExecuteReader()
             Dim usuarios As Usuarios

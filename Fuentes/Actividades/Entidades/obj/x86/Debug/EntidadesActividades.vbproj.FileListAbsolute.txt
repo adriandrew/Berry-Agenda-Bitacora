@@ -6,3 +6,15 @@ C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUE
 C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Actividades\Entidades\obj\x86\Debug\EntidadesActividades.dll
 C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Actividades\Entidades\obj\x86\Debug\EntidadesActividades.xml
 C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Actividades\Entidades\obj\x86\Debug\EntidadesActividades.pdb
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Actividades\Entidades\bin\x86\Debug\EntidadesActividades.dll
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Actividades\Entidades\bin\x86\Debug\EntidadesActividades.pdb
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Actividades\Entidades\bin\x86\Debug\EntidadesActividades.xml
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Actividades\Entidades\bin\x86\Debug\LogicaActividades.dll
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Actividades\Entidades\bin\x86\Debug\LogicaActividades.pdb
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Actividades\Entidades\bin\x86\Debug\LogicaActividades.xml
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Actividades\Entidades\obj\x86\Debug\EntidadesActividades.vbprojResolveAssemblyReference.cache
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Actividades\Entidades\obj\x86\Debug\EntidadesActividades.Resources.resources
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Actividades\Entidades\obj\x86\Debug\EntidadesActividades.vbproj.GenerateResource.Cache
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Actividades\Entidades\obj\x86\Debug\EntidadesActividades.dll
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Actividades\Entidades\obj\x86\Debug\EntidadesActividades.xml
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Actividades\Entidades\obj\x86\Debug\EntidadesActividades.pdb

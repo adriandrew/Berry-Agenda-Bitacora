@@ -75,10 +75,10 @@ namespace Escritorio
                     spAdministrar.ActiveSheet.Rows.Remove(fila, 1);
                     //else if (rbtnEmpresas.Checked)
                     //{
-                    //    string numero = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["numero"].Index].Text;
-                    //    if (!string.IsNullOrEmpty(numero))
+                    //    string idEmpresa = spAdministrar.ActiveSheet.Cells[fila, spAdministrar.ActiveSheet.Columns["idEmpresa"].Index].Text;
+                    //    if (!string.IsNullOrEmpty(idEmpresa))
                     //    {                            
-                    //        empresas.Id = Logica.Funciones.ValidarNumero(numero);
+                    //        empresas.IdEmpresa = Logica.Funciones.ValidarNumero(idEmpresa);
                     //        empresas.Eliminar();
                     //    }
                     //}

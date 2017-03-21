@@ -137,6 +137,8 @@ Public Class Actividades
             Return lista
         Catch ex As Exception
             Throw ex
+        Finally
+            BaseDatos.conexionAgenda.Close()
         End Try
 
     End Function

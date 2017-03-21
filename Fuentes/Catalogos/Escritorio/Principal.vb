@@ -12,6 +12,8 @@
     Public tipoFecha As New FarPoint.Win.Spread.CellType.DateTimeCellType()
     Public opcionSeleccionada As Integer = 0
 
+    Public esPrueba As Boolean = False
+
 #Region "Eventos"
 
     Private Sub Principal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -45,6 +47,57 @@
         miOpcion2.BackColor = Color.LightSeaGreen
         miArea.BackColor = msMenu.BackColor
         Me.opcionSeleccionada = Reportes.Opcion2
+
+    End Sub
+
+    Private Sub spCatalogos_DialogKey(sender As Object, e As FarPoint.Win.Spread.DialogKeyEventArgs) Handles spCatalogos.DialogKey
+
+        If (e.KeyData = Keys.Enter) Then
+            ControlarSpreadEnter() ' Metodo descontinuado.
+        End If
+
+    End Sub
+
+    Private Sub spCatalogos_KeyDown(sender As Object, e As KeyEventArgs) Handles spCatalogos.KeyDown
+
+        If e.KeyData = Keys.F1 Then ' Abrir catalogos.
+            'Dim columnaActiva As Integer = spCatalogos.ActiveSheet.ActiveColumnIndex
+            '    if (columnaActiva = spCatalogos.ActiveSheet.Columns["idProductor"].Index) then
+            '         Catalogos.opcionSeleccionada = (int)LogicaTarima.NumeracionCatalogos.Numeracion.productor;
+            '        new Escritorio.Catalogos().Show();
+            'End If
+        ElseIf e.KeyData = Keys.F5 Then ' Eliminar un registro.
+            If (MessageBox.Show("Confirmas que deseas eliminar el registro seleccionado?", "Confirmación.", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes) Then
+                Dim fila As Integer = spCatalogos.ActiveSheet.ActiveRowIndex
+                If (Me.opcionSeleccionada = Reportes.Areas) Then
+                    spCatalogos.ActiveSheet.Rows.Remove(fila, 1)
+                ElseIf (Me.opcionSeleccionada = Reportes.Opcion2) Then
+
+                End If
+            End If
+        ElseIf (e.KeyData = Keys.Enter) Then
+            ControlarSpreadEnter() ' Metodo descontinuado.
+        End If
+
+    End Sub
+
+    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+
+        If (Me.opcionSeleccionada = Reportes.Areas) Then
+            GuardarEditarAreas()
+        ElseIf (Me.opcionSeleccionada = Reportes.Opcion2) Then
+
+        End If
+
+    End Sub
+
+    Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
+
+        If (Me.opcionSeleccionada = Reportes.Areas) Then
+            EliminarAreas()
+        ElseIf (Me.opcionSeleccionada = Reportes.Opcion2) Then
+
+        End If
 
     End Sub
 
@@ -101,16 +154,19 @@
 
     Private Sub ConfigurarConexiones()
 
-        Dim esPrueba As Boolean = False
-        If (esPrueba) Then
-            'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Catalogos.mdf"
-            EntidadesCatalogos.BaseDatos.ECadenaConexionCatalogo = "Catalogos"
+        If (Me.esPrueba) Then
+            'EntidadesCatalogos.BaseDatos.ECadenaConexionCatalogo = "C:\\Berry-Agenda\\BD\\PODC\\Catalogos.mdf"
+            LogicaCatalogos.DatosEmpresaPrincipal.instanciaSql = "ANDREW-MAC\SQLEXPRESS"
+            LogicaCatalogos.DatosEmpresaPrincipal.usuarioSql = "AdminBerry"
+            LogicaCatalogos.DatosEmpresaPrincipal.contrasenaSql = "@berry"
         Else
+            'EntidadesCatalogos.BaseDatos.ECadenaConexionCatalogo = datosEmpresa.EDirectorio & "\\Catalogos.mdf" 
+            LogicaCatalogos.DatosEmpresaPrincipal.ObtenerParametrosInformacionEmpresa()
             Me.datosEmpresa.ObtenerParametrosInformacionEmpresa()
             Me.datosUsuario.ObtenerParametrosInformacionUsuario()
             Me.datosArea.ObtenerParametrosInformacionArea()
-            EntidadesCatalogos.BaseDatos.ECadenaConexionCatalogo = "Catalogos" 'datosEmpresa.EDirectorio & "\\Catalogos.mdf" 
         End If
+        EntidadesCatalogos.BaseDatos.ECadenaConexionCatalogo = "Catalogos"
         EntidadesCatalogos.BaseDatos.AbrirConexionCatalogo()
 
     End Sub
@@ -242,36 +298,7 @@
 
 #End Region
 
-    Private Sub spCatalogos_DialogKey(sender As Object, e As FarPoint.Win.Spread.DialogKeyEventArgs) Handles spCatalogos.DialogKey
-
-        If (e.KeyData = Keys.Enter) Then
-            ControlarSpreadEnter() ' Metodo descontinuado.
-        End If
-
-    End Sub
-
-    Private Sub spCatalogos_KeyDown(sender As Object, e As KeyEventArgs) Handles spCatalogos.KeyDown
-
-        If e.KeyData = Keys.F1 Then ' Abrir catalogos.
-            'Dim columnaActiva As Integer = spCatalogos.ActiveSheet.ActiveColumnIndex
-            '    if (columnaActiva = spCatalogos.ActiveSheet.Columns["idProductor"].Index) then
-            '         Catalogos.opcionSeleccionada = (int)LogicaTarima.NumeracionCatalogos.Numeracion.productor;
-            '        new Escritorio.Catalogos().Show();
-            'End If
-        ElseIf e.KeyData = Keys.F5 Then ' Eliminar un registro.
-            If (MessageBox.Show("Confirmas que deseas eliminar el registro seleccionado?", "Confirmación.", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes) Then
-                Dim fila As Integer = spCatalogos.ActiveSheet.ActiveRowIndex
-                If (Me.opcionSeleccionada = Reportes.Areas) Then
-                    spCatalogos.ActiveSheet.Rows.Remove(fila, 1)
-                ElseIf (Me.opcionSeleccionada = Reportes.Opcion2) Then
-
-                End If
-            End If
-        ElseIf (e.KeyData = Keys.Enter) Then
-            ControlarSpreadEnter() ' Metodo descontinuado.
-        End If
-
-    End Sub
+#Region "Enumeraciones"
 
     Public Enum Reportes
 
@@ -280,24 +307,6 @@
 
     End Enum
 
-    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
-
-        If (Me.opcionSeleccionada = Reportes.Areas) Then
-            GuardarEditarAreas()
-        ElseIf (Me.opcionSeleccionada = Reportes.Opcion2) Then
-
-        End If
-
-    End Sub
-
-    Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
-
-        If (Me.opcionSeleccionada = Reportes.Areas) Then
-            EliminarAreas()
-        ElseIf (Me.opcionSeleccionada = Reportes.Opcion2) Then
-
-        End If
-
-    End Sub
+#End Region
 
 End Class

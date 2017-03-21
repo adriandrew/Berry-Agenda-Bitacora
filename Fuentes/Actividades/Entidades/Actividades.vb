@@ -306,7 +306,7 @@ Public Class Actividades
 
     End Sub
 
-    Public Function ValidarPorNumero() As Boolean
+    Public Function ValidarPorId() As Boolean
 
         Try
             Dim resultado As Boolean = False
@@ -328,7 +328,7 @@ Public Class Actividades
         Catch ex As Exception
             Throw ex
         Finally
-            BaseDatos.conexionInformacion.Close()
+            BaseDatos.conexionAgenda.Close()
         End Try
 
     End Function
