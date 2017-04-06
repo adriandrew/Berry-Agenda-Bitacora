@@ -28,10 +28,11 @@ namespace Escritorio
         Logica.DatosUsuario datosUsuario = new Logica.DatosUsuario();
         Logica.DatosArea datosArea = new Logica.DatosArea();
         ProcessStartInfo ejecutarProgramaPrincipal = new ProcessStartInfo();
-        public int numeroEmpresa;
-        public bool ocupaParametros;
+        public int numeroEmpresa; 
+        public bool tieneParametros = false;
         public bool esInicioSesion = true;
         public int idEmpresaSesion = 0; public int idUsuarioSesion = 0; public int idModuloSesion = 1;
+        public string nombrePrograma = string.Empty;
 
         public bool esPrueba = false;
 
@@ -45,42 +46,12 @@ namespace Escritorio
         private void Principal_Load(object sender, EventArgs e)
         {
 
-            this.ocupaParametros = false; // Este programa siempre será false.
             Centrar();
             AsignarTooltips();
             AsignarFocos();
-            ConfigurarConexionPrincipal();
-            ConsultarInformacionEmpresaPrincipalPredeterminada();
-            ConfigurarConexiones();
-            ConsultarInformacionEmpresa();
-            //CargarTitulosEmpresa();
+            ConfigurarConexiones(); 
             CargarEncabezados();
-                        
-        }
-
-        private void Principal_FormClosed(object sender, FormClosedEventArgs e)
-        {
-
-            if (this.ocupaParametros)
-            {
-                //ejecutarProgramaPrincipal.UseShellExecute = true;
-                //ejecutarProgramaPrincipal.FileName = "Tarimas.exe";
-                //ejecutarProgramaPrincipal.WorkingDirectory = Directory.GetCurrentDirectory();
-                //ejecutarProgramaPrincipal.Arguments = datosEmpresa.Numero.ToString().Trim().Replace(" ", "|") + " " + datosEmpresa.Nombre.Trim().Replace(" ", "|") + " " + datosEmpresa.Descripcion.Trim().Replace(" ", "|") + " " + datosEmpresa.Domicilio.Trim().Replace(" ", "|") + " " + datosEmpresa.Localidad.Trim().Replace(" ", "|") + " " + datosEmpresa.Rfc.Trim().Replace(" ", "|") + " " + datosEmpresa.Directorio.Trim().Replace(" ", "|") + " " + datosEmpresa.Logo.Trim().Replace(" ", "|") + " " + datosEmpresa.Activa.ToString().Trim().Replace(" ", "|") + " " + datosEmpresa.Equipo.Trim().Replace(" ", "|") + " " + "Aquí terminan ;)".Replace(" ", "|");
-                ////MessageBox.Show(ejecutarProgramaPrincipal.Arguments);
-                //try
-                //{
-                //    Process.Start(ejecutarProgramaPrincipal);
-                //}
-                //catch (Exception ex)
-                //{
-                //    MessageBox.Show("No se puede abrir el programa principal en la ruta : " + ejecutarProgramaPrincipal.WorkingDirectory + " " + ex.Message, "Error.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //}                
-            }
-            else
-            {
-                Application.Exit();
-            }
+            CargarTitulosEmpresa();
 
         }
         
@@ -150,7 +121,7 @@ namespace Escritorio
 
         private void txtUsuario_KeyDown(object sender, KeyEventArgs e)
         {
-             
+
             if (e.KeyCode == Keys.Enter)
             {
                 if (!string.IsNullOrEmpty(this.txtUsuario.Text))
@@ -209,9 +180,73 @@ namespace Escritorio
 
         }
 
+        private void Principal_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+            Application.ExitThread();
+            Application.Exit();
+
+        }
+
+        private void btnEntrar_MouseHover(object sender, EventArgs e)
+        {
+
+            AsignarTooltips("Entrar.");
+
+        }
+
+        private void btnSalir_MouseHover(object sender, EventArgs e)
+        {
+
+            if (this.esInicioSesion)
+            {
+                AsignarTooltips("Salir."); 
+            }
+            else
+            {
+                AsignarTooltips("Volver a Iniciar Sesión."); 
+            }
+
+        }
+         
+        private void pnlEncabezado_MouseHover(object sender, EventArgs e)
+        {
+
+            AsignarTooltips(string.Empty); 
+
+        }
+
+        private void pnlContenido_MouseHover(object sender, EventArgs e)
+        {
+
+            AsignarTooltips(string.Empty); 
+
+        }
+
+        private void pnlMenu_MouseHover(object sender, EventArgs e)
+        {
+
+            AsignarTooltips(string.Empty); 
+
+        }
+
+        private void pnlIniciarSesion_MouseHover(object sender, EventArgs e)
+        {
+
+            AsignarTooltips(string.Empty); 
+
+        }
+
+        private void pnlPie_MouseHover(object sender, EventArgs e)
+        {
+
+            AsignarTooltips(string.Empty); 
+
+        }
+
         #endregion
 
-        #region Metodos Privados
+        #region Metodos
 
         private bool ValidarAccesso(int idModulo, int idPrograma)
         { 
@@ -235,29 +270,17 @@ namespace Escritorio
                 if ((txtUsuario.Text.ToUpper().Equals("Admin".ToUpper())) && (txtContraseña.Text.Equals("@berry")))
                 {
                     this.Hide();
+                    PanelControl.nombreEmpresa = this.datosEmpresa.Nombre; 
                     new PanelControl().Show();
                 }
                 else
                 {
                     usuarios.Nombre = this.txtUsuario.Text;
-                    usuarios.IdEmpresa = datosEmpresa.Numero;
+                    usuarios.IdEmpresa = datosEmpresa.Id;
                     string[] datos = usuarios.ObtenerPorNombre().Split('|');
                     if (this.txtContraseña.Text.Equals(datos[3]))
                     {
-                        //this.ocupaParametros = true;
-                        //Application.Exit();
-                        pnlIniciarSesion.Visible = false; Application.DoEvents();
-                        pnlMenu.Visible = true; Application.DoEvents();
-                        this.esInicioSesion = false;
-                        this.idEmpresaSesion = Convert.ToInt32(datos[0]);
-                        this.idUsuarioSesion = Convert.ToInt32(datos[1]);
-                        GenerarMenu();
-                        ConsultarInformacionUsuario();
-                        ConsultarInformacionArea();
-                        CargarEncabezados();
-                        CerrarPrograma("NotificacionesPantalla");
-                        System.Threading.Thread.Sleep(1000);
-                        AbrirPrograma("NotificacionesPantalla", false);
+                        PermitirAcceso(Convert.ToInt32(datos[0]), Convert.ToInt32(datos[1]), true);
                     }
                     else
                     {
@@ -284,9 +307,31 @@ namespace Escritorio
 
         }
 
+        private void PermitirAcceso(int idEmpresa, int idUsuario, bool abrirNotificaciones)
+        {
+
+            pnlIniciarSesion.Visible = false; Application.DoEvents();
+            pnlMenu.Visible = true; Application.DoEvents();
+            this.esInicioSesion = false;
+            this.idEmpresaSesion = idEmpresa; //Convert.ToInt32(datos[0]);
+            this.idUsuarioSesion = idUsuario; //Convert.ToInt32(datos[1]);
+            GenerarMenu();
+            ConsultarInformacionUsuario(this.idEmpresaSesion, this.idUsuarioSesion);
+            ConsultarInformacionArea(datosUsuario.IdArea);
+            CargarEncabezados();
+            CargarTitulosEmpresa();
+            if (abrirNotificaciones){
+                CerrarPrograma("NotificacionesPantalla");
+                System.Threading.Thread.Sleep(1000);
+                AbrirPrograma("NotificacionesPantalla", false);
+            }
+
+        }
+
         private void Centrar()
         {
 
+            this.nombrePrograma = this.Text;
             this.CenterToScreen();
             //this.Opacity = .97; //Está bien perro esto.  
             this.Location = Screen.PrimaryScreen.WorkingArea.Location;
@@ -306,6 +351,13 @@ namespace Escritorio
             tp.SetToolTip(this.btnEntrar, "Entrar.");
             tp.SetToolTip(this.btnMostrarOpciones, "Mostrar Opciones.");
             tp.SetToolTip(this.btnSalir, "Salir.");
+
+        }
+
+        private void AsignarTooltips(string texto)
+        {
+
+            lblDescripcionTooltip.Text = texto;
 
         }
 
@@ -334,11 +386,21 @@ namespace Escritorio
         }
 
         private void ConfigurarConexiones() 
-        {
-
+        { 
+            
+            // Se obtiene si tiene parametros.  
+	        string[] parametros = Environment.GetCommandLineArgs().ToArray();
+	        if ((parametros.Length > 1)) 
+            {
+		        this.tieneParametros = true;
+	        } 
             if (this.esPrueba)
             {
-                //baseDatos.CadenaConexionPrincipal = "C:\\Berry-Bitacora\\Principal.sdf"; 
+                baseDatos.CadenaConexionPrincipal = "C:\\Berry-Bitacora\\Principal.sdf";
+                Logica.DatosEmpresaPrincipal.instanciaSql = "ANDREW-MAC\\SQLEXPRESS";
+                Logica.DatosEmpresaPrincipal.usuarioSql = "AdminBerry";
+                Logica.DatosEmpresaPrincipal.contrasenaSql = "@berry";
+                Logica.DatosEmpresaPrincipal.idEmpresa = 1;
                 //string[] activa = InstanciaSql().Split('|'); ' Es para obtener las instancias sql. Nunca se usó ya que no es lo correcto.
                 //string servidor = activa[0];
                 //string instancia = activa[1];
@@ -349,11 +411,34 @@ namespace Escritorio
                 //string ruta = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
                 //ruta = ruta.Replace("file:\\", null);
                 //baseDatos.CadenaConexionInformacion = string.Format("{0}\\Informacion.mdf", ruta); 
+                if (this.tieneParametros)
+                {
+                    Logica.DatosEmpresaPrincipal.ObtenerParametrosInformacionEmpresa();
+                    this.datosEmpresa.ObtenerParametrosInformacionEmpresa();
+                    this.datosUsuario.ObtenerParametrosInformacionUsuario();
+                    this.datosArea.ObtenerParametrosInformacionArea();
+                }
+                else
+                {
+                    ConfigurarConexionPrincipal();
+                    ConsultarInformacionEmpresaPrincipalPredeterminada();
+                }
             } 
             baseDatos.CadenaConexionInformacion = "Informacion";
             baseDatos.CadenaConexionCatalogo = "Catalogos";
             baseDatos.AbrirConexionInformacion();
             baseDatos.AbrirConexionCatalogo();
+            if (this.tieneParametros)
+            {
+                ConsultarInformacionEmpresa(datosEmpresa.Id);
+                PermitirAcceso(datosEmpresa.Id, datosUsuario.Id, false);
+            }
+            else
+            { 
+                ConsultarInformacionEmpresa(Logica.DatosEmpresaPrincipal.idEmpresa);
+                //ConsultarInformacionUsuario(this.idEmpresaSesion, this.idUsuarioSesion);
+                //ConsultarInformacionArea(datosUsuario.IdArea);
+            }
 
         }
 
@@ -390,7 +475,7 @@ namespace Escritorio
         {
 
             string[] datos = empresas.ObtenerPredeterminada().Split('|');
-            datosEmpresa.Numero = Convert.ToInt32(datos[0]);
+            datosEmpresa.Id = Convert.ToInt32(datos[0]);
             datosEmpresa.Nombre = datos[1];
             datosEmpresa.Descripcion = datos[2];
             datosEmpresa.Domicilio = datos[3];
@@ -403,31 +488,77 @@ namespace Escritorio
 
         }
 
-        private void ConsultarInformacionArea()
+        private void ConsultarInformacionEmpresa(int idEmpresa)
         {
 
-            areas.Id = datosUsuario.IdArea;
-            string[] datos = areas.ObtenerListadoPorId().Split('|');
-            datosArea.Id = Convert.ToInt32(datos[0]);
-            datosArea.Nombre = datos[1];
-            datosArea.Clave = datos[2]; 
+            empresas.Id = idEmpresa;
+            List<Entidades.Empresas> datos = new List<Entidades.Empresas>();
+            datos = empresas.ObtenerPorId();
+            datosEmpresa.Id = datos[0].Id;
+            datosEmpresa.Nombre = datos[0].Nombre;
+            datosEmpresa.Descripcion = datos[0].Descripcion;
+            datosEmpresa.Domicilio = datos[0].Domicilio;
+            datosEmpresa.Localidad = datos[0].Localidad;
+            datosEmpresa.Rfc = datos[0].Rfc;
+            datosEmpresa.Directorio = datos[0].Directorio;
+            datosEmpresa.Logo = datos[0].Logo;
+            datosEmpresa.Activa = datos[0].Activa;
+            datosEmpresa.Equipo = datos[0].Equipo;
 
         }
-        
-        private void ConsultarInformacionUsuario()
+
+        public void ConsultarInformacionUsuario(int idEmpresa, int idUsuario)
         {
 
-            usuarios.Id = this.idUsuarioSesion;
-            string[] datos = usuarios.ObtenerPorId().Split('|');
-            datosUsuario.IdEmpresa = Convert.ToInt32(datos[0]);
-            datosUsuario.Id = Convert.ToInt32(datos[1]);
-            datosUsuario.Nombre = datos[2];
-            datosUsuario.Contrasena = datos[3];
-            datosUsuario.Nivel = Convert.ToInt32(datos[4]);
-            datosUsuario.AccesoTotal = Convert.ToBoolean(datos[5]);
-            datosUsuario.IdArea = Convert.ToInt32(datos[6]); 
+            usuarios.IdEmpresa = idEmpresa;
+            usuarios.Id = idUsuario;
+            List<Entidades.Usuarios> datos = new List<Entidades.Usuarios>();
+            datos = usuarios.ObtenerListaPorId();
+            datosUsuario.Id = datos[0].Id;
+            datosUsuario.Nombre = datos[0].Nombre;
+            datosUsuario.Contrasena = datos[0].Contrasena;
+            datosUsuario.Nivel = datos[0].Nivel;
+            datosUsuario.AccesoTotal = datos[0].AccesoTotal;
+            datosUsuario.IdArea = datos[0].IdArea;
+
+        } 
+
+        public void ConsultarInformacionArea(int idArea)
+        {
+            areas.Id = idArea;
+            List<Entidades.Areas> datos = new List<Entidades.Areas>();
+            datos = areas.ObtenerListaPorId();
+            datosArea.Id = datos[0].Id;
+            datosArea.Nombre = datos[0].Nombre;
+            datosArea.Clave = datos[0].Clave;
 
         }
+
+        //private void ConsultarInformacionArea()
+        //{
+
+        //    areas.Id = datosUsuario.IdArea;
+        //    string[] datos = areas.ObtenerPorId().Split('|');
+        //    datosArea.Id = Convert.ToInt32(datos[0]);
+        //    datosArea.Nombre = datos[1];
+        //    datosArea.Clave = datos[2];
+
+        //}
+
+        //private void ConsultarInformacionUsuario()
+        //{
+
+        //    usuarios.Id = this.idUsuarioSesion;
+        //    string[] datos = usuarios.ObtenerPorId().Split('|');
+        //    datosUsuario.IdEmpresa = Convert.ToInt32(datos[0]);
+        //    datosUsuario.Id = Convert.ToInt32(datos[1]);
+        //    datosUsuario.Nombre = datos[2];
+        //    datosUsuario.Contrasena = datos[3];
+        //    datosUsuario.Nivel = Convert.ToInt32(datos[4]);
+        //    datosUsuario.AccesoTotal = Convert.ToBoolean(datos[5]);
+        //    datosUsuario.IdArea = Convert.ToInt32(datos[6]);
+
+        //}
 
         private void GenerarMenu()
         {
@@ -508,14 +639,14 @@ namespace Escritorio
         private void CargarTitulosEmpresa()
         {
 
-            this.Text += ": " + datosEmpresa.Numero + " - " + datosEmpresa.Nombre;
+            this.Text = this.nombrePrograma + ": " +  datosEmpresa.Nombre;
 
         }
 
         private void CargarEncabezados()
         { 
 
-            lblEncabezadoPrograma.Text = "Programa: " + this.Text;
+            lblEncabezadoPrograma.Text = "Programa: " + this.nombrePrograma;
             lblEncabezadoEmpresa.Text = "Empresa: " + datosEmpresa.Nombre;
             lblEncabezadoUsuario.Text = "Usuario: " + datosUsuario.Nombre;
             lblEncabezadoArea.Text = "Area: " + datosArea.Nombre;
@@ -540,9 +671,7 @@ namespace Escritorio
             ejecutarProgramaPrincipal.UseShellExecute = true;
             ejecutarProgramaPrincipal.FileName = nombre + ".exe";
             ejecutarProgramaPrincipal.WorkingDirectory = Directory.GetCurrentDirectory();
-            ejecutarProgramaPrincipal.Arguments = Logica.DatosEmpresaPrincipal.idEmpresa.ToString().Trim().Replace(" ", "|") + " " + Logica.DatosEmpresaPrincipal.activa.ToString().Trim().Replace(" ", "|") + " " + Logica.DatosEmpresaPrincipal.instanciaSql.ToString().Trim().Replace(" ", "|") + " " + Logica.DatosEmpresaPrincipal.rutaBd.ToString().Trim().Replace(" ", "|") + " " + Logica.DatosEmpresaPrincipal.usuarioSql.ToString().Trim().Replace(" ", "|") + " " + Logica.DatosEmpresaPrincipal.contrasenaSql.ToString().Trim().Replace(" ", "|") + " " + "Aquí terminan los de empresa principal, indice 7 ;)".Replace(" ", "|") + " " +
-
-                datosEmpresa.Numero.ToString().Trim().Replace(" ", "|") + " " + datosEmpresa.Nombre.Trim().Replace(" ", "|") + " " + datosEmpresa.Descripcion.Trim().Replace(" ", "|") + " " + datosEmpresa.Domicilio.Trim().Replace(" ", "|") + " " + datosEmpresa.Localidad.Trim().Replace(" ", "|") + " " + datosEmpresa.Rfc.Trim().Replace(" ", "|") + " " + datosEmpresa.Directorio.Trim().Replace(" ", "|") + " " + datosEmpresa.Logo.Trim().Replace(" ", "|") + " " + datosEmpresa.Activa.ToString().Trim().Replace(" ", "|") + " " + datosEmpresa.Equipo.Trim().Replace(" ", "|") + " " + "Aquí terminan los de empresa, indice 18 ;)".Replace(" ", "|") + " " + datosUsuario.Id.ToString().Trim().Replace(" ", "|") + " " + datosUsuario.Nombre.Trim().Replace(" ", "|") + " " + datosUsuario.Contrasena.Trim().Replace(" ", "|") + " " + datosUsuario.Nivel.ToString().Trim().Replace(" ", "|") + " " + datosUsuario.AccesoTotal.ToString().Trim().Replace(" ", "|") + " " + datosUsuario.IdArea.ToString().Trim().Replace(" ", "|") + " " + "Aquí terminan los de usuario, indice 25 ;)".Replace(" ", "|") + " " + datosArea.Id.ToString().Trim().Replace(" ", "|") + " " + datosArea.Nombre.ToString().Trim().Replace(" ", "|") + " " + datosArea.Clave.ToString().Trim().Replace(" ", "|") + " " + "Aquí terminan los de area, indice 29 ;)".Replace(" ", "|");
+            ejecutarProgramaPrincipal.Arguments = Logica.DatosEmpresaPrincipal.idEmpresa.ToString().Trim().Replace(" ", "|") + " " + Logica.DatosEmpresaPrincipal.activa.ToString().Trim().Replace(" ", "|") + " " + Logica.DatosEmpresaPrincipal.instanciaSql.ToString().Trim().Replace(" ", "|") + " " + Logica.DatosEmpresaPrincipal.rutaBd.ToString().Trim().Replace(" ", "|") + " " + Logica.DatosEmpresaPrincipal.usuarioSql.ToString().Trim().Replace(" ", "|") + " " + Logica.DatosEmpresaPrincipal.contrasenaSql.ToString().Trim().Replace(" ", "|") + " " + "Aquí terminan los de empresa principal, indice 7 ;)".Replace(" ", "|") + " " + datosEmpresa.Id.ToString().Trim().Replace(" ", "|") + " " + datosEmpresa.Nombre.Trim().Replace(" ", "|") + " " + datosEmpresa.Descripcion.Trim().Replace(" ", "|") + " " + datosEmpresa.Domicilio.Trim().Replace(" ", "|") + " " + datosEmpresa.Localidad.Trim().Replace(" ", "|") + " " + datosEmpresa.Rfc.Trim().Replace(" ", "|") + " " + datosEmpresa.Directorio.Trim().Replace(" ", "|") + " " + datosEmpresa.Logo.Trim().Replace(" ", "|") + " " + datosEmpresa.Activa.ToString().Trim().Replace(" ", "|") + " " + datosEmpresa.Equipo.Trim().Replace(" ", "|") + " " + "Aquí terminan los de empresa, indice 18 ;)".Replace(" ", "|") + " " + datosUsuario.Id.ToString().Trim().Replace(" ", "|") + " " + datosUsuario.Nombre.Trim().Replace(" ", "|") + " " + datosUsuario.Contrasena.Trim().Replace(" ", "|") + " " + datosUsuario.Nivel.ToString().Trim().Replace(" ", "|") + " " + datosUsuario.AccesoTotal.ToString().Trim().Replace(" ", "|") + " " + datosUsuario.IdArea.ToString().Trim().Replace(" ", "|") + " " + "Aquí terminan los de usuario, indice 25 ;)".Replace(" ", "|") + " " + datosArea.Id.ToString().Trim().Replace(" ", "|") + " " + datosArea.Nombre.ToString().Trim().Replace(" ", "|") + " " + datosArea.Clave.ToString().Trim().Replace(" ", "|") + " " + "Aquí terminan los de area, indice 29 ;)".Replace(" ", "|");
             try
             {
                 Process.Start(ejecutarProgramaPrincipal);
@@ -559,6 +688,6 @@ namespace Escritorio
         }
 
         #endregion
-                           
+
     }
 }

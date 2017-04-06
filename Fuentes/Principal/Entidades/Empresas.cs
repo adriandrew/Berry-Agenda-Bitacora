@@ -299,5 +299,47 @@ namespace Entidades
 
         }
 
+        public List<Empresas> ObtenerPorId()
+        {
+
+            List<Empresas> lista = new List<Empresas>();
+            try
+            {
+                SqlCommand comando = new SqlCommand();
+                comando.Connection = BaseDatos.conexionInformacion;
+                comando.CommandText = "SELECT * FROM Empresas WHERE Id = @id";
+                comando.Parameters.AddWithValue("@id", this.id);
+                BaseDatos.conexionInformacion.Open();
+                SqlDataReader dataReader = comando.ExecuteReader();
+                Empresas empresas = default(Empresas);
+                while (dataReader.Read())
+                {
+                    empresas = new Empresas();
+                    empresas.id = Convert.ToInt32(dataReader["id"].ToString());
+                    empresas.nombre = dataReader["nombre"].ToString();
+                    empresas.descripcion = dataReader["descripcion"].ToString();
+                    empresas.domicilio = dataReader["domicilio"].ToString();
+                    empresas.localidad = dataReader["localidad"].ToString();
+                    empresas.rfc = dataReader["rfc"].ToString();
+                    empresas.directorio = dataReader["directorio"].ToString();
+                    empresas.logo = dataReader["logo"].ToString();
+                    empresas.activa = Convert.ToBoolean(dataReader["activa"].ToString());
+                    empresas.equipo = dataReader["equipo"].ToString();
+                    lista.Add(empresas);
+                }
+                BaseDatos.conexionInformacion.Close();
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                BaseDatos.conexionInformacion.Close();
+            }
+
+        }
+
     }
 }

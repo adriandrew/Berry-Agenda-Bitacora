@@ -55,6 +55,7 @@ Partial Class Principal
         Me.cbAreas = New System.Windows.Forms.ComboBox()
         Me.chkCapturaEsExterna = New System.Windows.Forms.CheckBox()
         Me.tpResolverActividades = New System.Windows.Forms.TabPage()
+        Me.pbImagen = New System.Windows.Forms.PictureBox()
         Me.btnAdministrarImagen = New System.Windows.Forms.Button()
         Me.btnResolucionFechaAnterior = New System.Windows.Forms.Button()
         Me.btnResolucionFechaSiguiente = New System.Windows.Forms.Button()
@@ -77,18 +78,17 @@ Partial Class Principal
         Me.lblEncabezadoUsuario = New System.Windows.Forms.Label()
         Me.lblEncabezadoEmpresa = New System.Windows.Forms.Label()
         Me.lblEncabezadoPrograma = New System.Windows.Forms.Label()
-        Me.pbImagen = New System.Windows.Forms.PictureBox()
         Me.pnlContenido.SuspendLayout()
         Me.pnlCuerpo.SuspendLayout()
         Me.tbActividades.SuspendLayout()
         Me.tpCapturarActividades.SuspendLayout()
         Me.pnlExterna.SuspendLayout()
         Me.tpResolverActividades.SuspendLayout()
+        CType(Me.pbImagen, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.spResolverActividades, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.spResolverActividades_Sheet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlPie.SuspendLayout()
         Me.pnlEncabezado.SuspendLayout()
-        CType(Me.pbImagen, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlContenido
@@ -115,9 +115,9 @@ Partial Class Principal
         Me.pnlCuerpo.AutoScroll = True
         Me.pnlCuerpo.BackColor = System.Drawing.Color.Transparent
         Me.pnlCuerpo.Controls.Add(Me.tbActividades)
-        Me.pnlCuerpo.Location = New System.Drawing.Point(3, 135)
+        Me.pnlCuerpo.Location = New System.Drawing.Point(3, 78)
         Me.pnlCuerpo.Name = "pnlCuerpo"
-        Me.pnlCuerpo.Size = New System.Drawing.Size(1029, 429)
+        Me.pnlCuerpo.Size = New System.Drawing.Size(1029, 489)
         Me.pnlCuerpo.TabIndex = 9
         '
         'tbActividades
@@ -131,7 +131,7 @@ Partial Class Principal
         Me.tbActividades.Location = New System.Drawing.Point(3, 0)
         Me.tbActividades.Name = "tbActividades"
         Me.tbActividades.SelectedIndex = 0
-        Me.tbActividades.Size = New System.Drawing.Size(1023, 429)
+        Me.tbActividades.Size = New System.Drawing.Size(1023, 489)
         Me.tbActividades.TabIndex = 1
         '
         'tpCapturarActividades
@@ -162,7 +162,7 @@ Partial Class Principal
         Me.tpCapturarActividades.Location = New System.Drawing.Point(4, 33)
         Me.tpCapturarActividades.Name = "tpCapturarActividades"
         Me.tpCapturarActividades.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpCapturarActividades.Size = New System.Drawing.Size(1015, 392)
+        Me.tpCapturarActividades.Size = New System.Drawing.Size(1015, 452)
         Me.tpCapturarActividades.TabIndex = 0
         Me.tpCapturarActividades.Text = "Capturar Actividades"
         '
@@ -213,6 +213,8 @@ Partial Class Principal
         'btnCapturaEliminar
         '
         Me.btnCapturaEliminar.BackColor = System.Drawing.Color.White
+        Me.btnCapturaEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine
+        Me.btnCapturaEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCapturaEliminar.Image = CType(resources.GetObject("btnCapturaEliminar.Image"), System.Drawing.Image)
         Me.btnCapturaEliminar.Location = New System.Drawing.Point(579, 324)
         Me.btnCapturaEliminar.Margin = New System.Windows.Forms.Padding(0)
@@ -260,6 +262,8 @@ Partial Class Principal
         'btnCapturaGuardar
         '
         Me.btnCapturaGuardar.BackColor = System.Drawing.Color.White
+        Me.btnCapturaGuardar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine
+        Me.btnCapturaGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCapturaGuardar.Image = CType(resources.GetObject("btnCapturaGuardar.Image"), System.Drawing.Image)
         Me.btnCapturaGuardar.Location = New System.Drawing.Point(639, 324)
         Me.btnCapturaGuardar.Margin = New System.Windows.Forms.Padding(0)
@@ -435,13 +439,25 @@ Partial Class Principal
         Me.tpResolverActividades.Location = New System.Drawing.Point(4, 33)
         Me.tpResolverActividades.Name = "tpResolverActividades"
         Me.tpResolverActividades.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpResolverActividades.Size = New System.Drawing.Size(1015, 392)
+        Me.tpResolverActividades.Size = New System.Drawing.Size(1015, 452)
         Me.tpResolverActividades.TabIndex = 1
         Me.tpResolverActividades.Text = "Resolver Actividades"
+        '
+        'pbImagen
+        '
+        Me.pbImagen.BackColor = System.Drawing.Color.Transparent
+        Me.pbImagen.Location = New System.Drawing.Point(823, 18)
+        Me.pbImagen.Name = "pbImagen"
+        Me.pbImagen.Size = New System.Drawing.Size(160, 160)
+        Me.pbImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.pbImagen.TabIndex = 25
+        Me.pbImagen.TabStop = False
         '
         'btnAdministrarImagen
         '
         Me.btnAdministrarImagen.BackColor = System.Drawing.Color.White
+        Me.btnAdministrarImagen.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine
+        Me.btnAdministrarImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAdministrarImagen.Image = CType(resources.GetObject("btnAdministrarImagen.Image"), System.Drawing.Image)
         Me.btnAdministrarImagen.Location = New System.Drawing.Point(750, 18)
         Me.btnAdministrarImagen.Margin = New System.Windows.Forms.Padding(0)
@@ -475,6 +491,8 @@ Partial Class Principal
         'btnResolucionGuardar
         '
         Me.btnResolucionGuardar.BackColor = System.Drawing.Color.White
+        Me.btnResolucionGuardar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine
+        Me.btnResolucionGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnResolucionGuardar.Image = CType(resources.GetObject("btnResolucionGuardar.Image"), System.Drawing.Image)
         Me.btnResolucionGuardar.Location = New System.Drawing.Point(750, 121)
         Me.btnResolucionGuardar.Margin = New System.Windows.Forms.Padding(0)
@@ -583,7 +601,7 @@ Partial Class Principal
         Me.spResolverActividades.Location = New System.Drawing.Point(6, 187)
         Me.spResolverActividades.Name = "spResolverActividades"
         Me.spResolverActividades.Sheets.AddRange(New FarPoint.Win.Spread.SheetView() {Me.spResolverActividades_Sheet1})
-        Me.spResolverActividades.Size = New System.Drawing.Size(1003, 199)
+        Me.spResolverActividades.Size = New System.Drawing.Size(1003, 259)
         Me.spResolverActividades.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell
         Me.spResolverActividades.TabIndex = 2
         Me.spResolverActividades.VerticalScrollBar.Buttons = New FarPoint.Win.Spread.FpScrollBarButtonCollection("BackwardLineButton,ThumbTrack,ForwardLineButton")
@@ -647,6 +665,8 @@ Partial Class Principal
         '
         Me.btnSalir.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSalir.BackColor = System.Drawing.Color.White
+        Me.btnSalir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine
+        Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSalir.Image = CType(resources.GetObject("btnSalir.Image"), System.Drawing.Image)
         Me.btnSalir.Location = New System.Drawing.Point(973, -1)
         Me.btnSalir.Margin = New System.Windows.Forms.Padding(0)
@@ -667,7 +687,7 @@ Partial Class Principal
         Me.pnlEncabezado.Controls.Add(Me.lblEncabezadoPrograma)
         Me.pnlEncabezado.Location = New System.Drawing.Point(0, 0)
         Me.pnlEncabezado.Name = "pnlEncabezado"
-        Me.pnlEncabezado.Size = New System.Drawing.Size(1035, 129)
+        Me.pnlEncabezado.Size = New System.Drawing.Size(1035, 75)
         Me.pnlEncabezado.TabIndex = 7
         '
         'lblEncabezadoArea
@@ -676,7 +696,7 @@ Partial Class Principal
         Me.lblEncabezadoArea.AutoSize = True
         Me.lblEncabezadoArea.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEncabezadoArea.ForeColor = System.Drawing.Color.White
-        Me.lblEncabezadoArea.Location = New System.Drawing.Point(600, 9)
+        Me.lblEncabezadoArea.Location = New System.Drawing.Point(600, 0)
         Me.lblEncabezadoArea.Name = "lblEncabezadoArea"
         Me.lblEncabezadoArea.Size = New System.Drawing.Size(0, 33)
         Me.lblEncabezadoArea.TabIndex = 3
@@ -687,7 +707,7 @@ Partial Class Principal
         Me.lblEncabezadoUsuario.AutoSize = True
         Me.lblEncabezadoUsuario.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEncabezadoUsuario.ForeColor = System.Drawing.Color.White
-        Me.lblEncabezadoUsuario.Location = New System.Drawing.Point(600, 50)
+        Me.lblEncabezadoUsuario.Location = New System.Drawing.Point(600, 35)
         Me.lblEncabezadoUsuario.Name = "lblEncabezadoUsuario"
         Me.lblEncabezadoUsuario.Size = New System.Drawing.Size(0, 33)
         Me.lblEncabezadoUsuario.TabIndex = 2
@@ -697,7 +717,7 @@ Partial Class Principal
         Me.lblEncabezadoEmpresa.AutoSize = True
         Me.lblEncabezadoEmpresa.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEncabezadoEmpresa.ForeColor = System.Drawing.Color.White
-        Me.lblEncabezadoEmpresa.Location = New System.Drawing.Point(12, 50)
+        Me.lblEncabezadoEmpresa.Location = New System.Drawing.Point(12, 35)
         Me.lblEncabezadoEmpresa.Name = "lblEncabezadoEmpresa"
         Me.lblEncabezadoEmpresa.Size = New System.Drawing.Size(0, 33)
         Me.lblEncabezadoEmpresa.TabIndex = 1
@@ -707,20 +727,10 @@ Partial Class Principal
         Me.lblEncabezadoPrograma.AutoSize = True
         Me.lblEncabezadoPrograma.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEncabezadoPrograma.ForeColor = System.Drawing.Color.White
-        Me.lblEncabezadoPrograma.Location = New System.Drawing.Point(12, 9)
+        Me.lblEncabezadoPrograma.Location = New System.Drawing.Point(12, 0)
         Me.lblEncabezadoPrograma.Name = "lblEncabezadoPrograma"
         Me.lblEncabezadoPrograma.Size = New System.Drawing.Size(0, 33)
         Me.lblEncabezadoPrograma.TabIndex = 0
-        '
-        'pbImagen
-        '
-        Me.pbImagen.BackColor = System.Drawing.Color.Transparent
-        Me.pbImagen.Location = New System.Drawing.Point(823, 18)
-        Me.pbImagen.Name = "pbImagen"
-        Me.pbImagen.Size = New System.Drawing.Size(160, 160)
-        Me.pbImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pbImagen.TabIndex = 25
-        Me.pbImagen.TabStop = False
         '
         'Principal
         '
@@ -740,13 +750,13 @@ Partial Class Principal
         Me.pnlExterna.PerformLayout()
         Me.tpResolverActividades.ResumeLayout(False)
         Me.tpResolverActividades.PerformLayout()
+        CType(Me.pbImagen, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.spResolverActividades, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.spResolverActividades_Sheet1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlPie.ResumeLayout(False)
         Me.pnlPie.PerformLayout()
         Me.pnlEncabezado.ResumeLayout(False)
         Me.pnlEncabezado.PerformLayout()
-        CType(Me.pbImagen, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

@@ -44,11 +44,40 @@ Public Class Principal
 
     End Sub
 
+    Private Sub btnSalir_MouseHover(sender As Object, e As EventArgs) Handles btnSalir.MouseHover
+
+        AsignarTooltips("Salir.")
+
+    End Sub
+
+    Private Sub pnlEncabezado_MouseHover(sender As Object, e As EventArgs) Handles pnlPie.MouseHover, pnlEncabezado.MouseHover, pnlCuerpo.MouseHover
+
+        AsignarTooltips(String.Empty)
+
+    End Sub
+
 #End Region
 
 #Region "Métodos"
 
 #Region "Genericos"
+
+    Private Sub AsignarTooltips()
+
+        Dim tp As New ToolTip()
+        tp.AutoPopDelay = 5000
+        tp.InitialDelay = 0
+        tp.ReshowDelay = 100
+        tp.ShowAlways = True
+        tp.SetToolTip(Me.btnSalir, "Salir.")
+
+    End Sub
+
+    Private Sub AsignarTooltips(ByVal texto As String)
+
+        lblDescripcionTooltip.Text = texto
+
+    End Sub
 
     Private Sub Centrar()
 
@@ -232,7 +261,7 @@ Public Class Principal
 
 #End Region
 
-#Region "Notificaciones"
+#Region "Todos"
 
     Private Sub CargarActividadesVencidas()
 
@@ -253,14 +282,14 @@ Public Class Principal
         actividades.EIdArea = Me.datosUsuario.EIdArea
         actividades.EIdUsuario = Me.datosUsuario.EId
         lista = actividades.ObtenerListadoPendientes()
-        listaLocal = lista 
+        listaLocal = lista
         Listado.GenerarListado(listaLocal, Listado.TipoActividad.internas)
         listaLocal = New Object
         ' Actividades externas.
         actividadesExternas.EIdArea = Me.datosUsuario.EIdArea
         actividadesExternas.EIdUsuario = Me.datosUsuario.EId
         listaExterna = actividadesExternas.ObtenerListadoPendientesExternas()
-        listaLocal = listaExterna 
+        listaLocal = listaExterna
         Listado.GenerarListado(listaLocal, Listado.TipoActividad.externas)
         listaLocal = New Object
         Listado.Text &= "    Usuario: " & Me.datosUsuario.ENombre & "   Area: " & Me.datosArea.ENombre

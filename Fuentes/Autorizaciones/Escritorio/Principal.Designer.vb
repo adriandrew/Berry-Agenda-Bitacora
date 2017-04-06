@@ -82,9 +82,9 @@ Partial Class Principal
         Me.pnlCuerpo.Controls.Add(Me.pnlExterna)
         Me.pnlCuerpo.Controls.Add(Me.btnGuardar)
         Me.pnlCuerpo.Controls.Add(Me.spAutorizaciones)
-        Me.pnlCuerpo.Location = New System.Drawing.Point(3, 133)
+        Me.pnlCuerpo.Location = New System.Drawing.Point(3, 78)
         Me.pnlCuerpo.Name = "pnlCuerpo"
-        Me.pnlCuerpo.Size = New System.Drawing.Size(1029, 434)
+        Me.pnlCuerpo.Size = New System.Drawing.Size(1029, 489)
         Me.pnlCuerpo.TabIndex = 9
         '
         'pnlExterna
@@ -97,9 +97,9 @@ Partial Class Principal
         Me.pnlExterna.Controls.Add(Me.cbUsuarios)
         Me.pnlExterna.Controls.Add(Me.Label10)
         Me.pnlExterna.Controls.Add(Me.cbAreas)
-        Me.pnlExterna.Location = New System.Drawing.Point(9, 4)
+        Me.pnlExterna.Location = New System.Drawing.Point(5, 4)
         Me.pnlExterna.Name = "pnlExterna"
-        Me.pnlExterna.Size = New System.Drawing.Size(1013, 76)
+        Me.pnlExterna.Size = New System.Drawing.Size(1021, 76)
         Me.pnlExterna.TabIndex = 22
         '
         'Label1
@@ -186,8 +186,10 @@ Partial Class Principal
         '
         Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnGuardar.BackColor = System.Drawing.Color.White
+        Me.btnGuardar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine
+        Me.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnGuardar.Image = CType(resources.GetObject("btnGuardar.Image"), System.Drawing.Image)
-        Me.btnGuardar.Location = New System.Drawing.Point(965, 371)
+        Me.btnGuardar.Location = New System.Drawing.Point(966, 426)
         Me.btnGuardar.Margin = New System.Windows.Forms.Padding(0)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(60, 60)
@@ -216,10 +218,10 @@ Partial Class Principal
         EnhancedScrollBarRenderer1.TrackBarSelectedBackgroundColor = System.Drawing.Color.SlateGray
         Me.spAutorizaciones.HorizontalScrollBar.Renderer = EnhancedScrollBarRenderer1
         Me.spAutorizaciones.HorizontalScrollBar.TabIndex = 0
-        Me.spAutorizaciones.Location = New System.Drawing.Point(9, 86)
+        Me.spAutorizaciones.Location = New System.Drawing.Point(5, 86)
         Me.spAutorizaciones.Name = "spAutorizaciones"
         Me.spAutorizaciones.Sheets.AddRange(New FarPoint.Win.Spread.SheetView() {Me.spAutorizaciones_Sheet1})
-        Me.spAutorizaciones.Size = New System.Drawing.Size(1013, 282)
+        Me.spAutorizaciones.Size = New System.Drawing.Size(1021, 337)
         Me.spAutorizaciones.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell
         Me.spAutorizaciones.TabIndex = 3
         Me.spAutorizaciones.VerticalScrollBar.Buttons = New FarPoint.Win.Spread.FpScrollBarButtonCollection("BackwardLineButton,ThumbTrack,ForwardLineButton")
@@ -283,6 +285,8 @@ Partial Class Principal
         '
         Me.btnSalir.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSalir.BackColor = System.Drawing.Color.White
+        Me.btnSalir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine
+        Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSalir.Image = CType(resources.GetObject("btnSalir.Image"), System.Drawing.Image)
         Me.btnSalir.Location = New System.Drawing.Point(973, -1)
         Me.btnSalir.Margin = New System.Windows.Forms.Padding(0)
@@ -303,7 +307,7 @@ Partial Class Principal
         Me.pnlEncabezado.Controls.Add(Me.lblEncabezadoPrograma)
         Me.pnlEncabezado.Location = New System.Drawing.Point(0, 0)
         Me.pnlEncabezado.Name = "pnlEncabezado"
-        Me.pnlEncabezado.Size = New System.Drawing.Size(1035, 129)
+        Me.pnlEncabezado.Size = New System.Drawing.Size(1035, 75)
         Me.pnlEncabezado.TabIndex = 7
         '
         'lblEncabezadoArea
@@ -312,7 +316,7 @@ Partial Class Principal
         Me.lblEncabezadoArea.AutoSize = True
         Me.lblEncabezadoArea.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEncabezadoArea.ForeColor = System.Drawing.Color.White
-        Me.lblEncabezadoArea.Location = New System.Drawing.Point(600, 9)
+        Me.lblEncabezadoArea.Location = New System.Drawing.Point(600, 0)
         Me.lblEncabezadoArea.Name = "lblEncabezadoArea"
         Me.lblEncabezadoArea.Size = New System.Drawing.Size(0, 33)
         Me.lblEncabezadoArea.TabIndex = 3
@@ -323,7 +327,7 @@ Partial Class Principal
         Me.lblEncabezadoUsuario.AutoSize = True
         Me.lblEncabezadoUsuario.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEncabezadoUsuario.ForeColor = System.Drawing.Color.White
-        Me.lblEncabezadoUsuario.Location = New System.Drawing.Point(600, 50)
+        Me.lblEncabezadoUsuario.Location = New System.Drawing.Point(600, 35)
         Me.lblEncabezadoUsuario.Name = "lblEncabezadoUsuario"
         Me.lblEncabezadoUsuario.Size = New System.Drawing.Size(0, 33)
         Me.lblEncabezadoUsuario.TabIndex = 2
@@ -333,7 +337,7 @@ Partial Class Principal
         Me.lblEncabezadoEmpresa.AutoSize = True
         Me.lblEncabezadoEmpresa.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEncabezadoEmpresa.ForeColor = System.Drawing.Color.White
-        Me.lblEncabezadoEmpresa.Location = New System.Drawing.Point(12, 50)
+        Me.lblEncabezadoEmpresa.Location = New System.Drawing.Point(12, 35)
         Me.lblEncabezadoEmpresa.Name = "lblEncabezadoEmpresa"
         Me.lblEncabezadoEmpresa.Size = New System.Drawing.Size(0, 33)
         Me.lblEncabezadoEmpresa.TabIndex = 1
@@ -343,7 +347,7 @@ Partial Class Principal
         Me.lblEncabezadoPrograma.AutoSize = True
         Me.lblEncabezadoPrograma.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEncabezadoPrograma.ForeColor = System.Drawing.Color.White
-        Me.lblEncabezadoPrograma.Location = New System.Drawing.Point(12, 9)
+        Me.lblEncabezadoPrograma.Location = New System.Drawing.Point(12, 0)
         Me.lblEncabezadoPrograma.Name = "lblEncabezadoPrograma"
         Me.lblEncabezadoPrograma.Size = New System.Drawing.Size(0, 33)
         Me.lblEncabezadoPrograma.TabIndex = 0

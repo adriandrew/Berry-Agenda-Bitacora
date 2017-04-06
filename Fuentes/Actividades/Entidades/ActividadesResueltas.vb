@@ -85,6 +85,26 @@ Public Class ActividadesResueltas
 
     End Sub
 
+    Public Sub GuardarEstatusResuelto()
+
+        Try
+            Dim comando As New SqlCommand()
+            comando.Connection = BaseDatos.conexionAgenda
+            comando.CommandText = "UPDATE Actividades SET EstaResuelto=@estaResuelto WHERE Id=@id AND IdArea=@idArea"
+            comando.Parameters.AddWithValue("@id", Me.EId)
+            comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
+            comando.Parameters.AddWithValue("@estaResuelto", Me.EEstaResuelto)
+            BaseDatos.conexionAgenda.Open()
+            comando.ExecuteNonQuery()
+            BaseDatos.conexionAgenda.Close()
+        Catch ex As Exception
+            Throw ex
+        Finally
+            BaseDatos.conexionAgenda.Close()
+        End Try
+
+    End Sub
+
     Public Overloads Sub Editar()
 
         Try
@@ -129,7 +149,7 @@ Public Class ActividadesResueltas
 
     End Sub
 
-    Public Overloads Function ValidarPorNumero() As Boolean
+    Public Overloads Function ValidarPorId() As Boolean
 
         Try
             Dim resultado As Boolean = False

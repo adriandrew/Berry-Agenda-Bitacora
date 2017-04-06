@@ -8,7 +8,7 @@ namespace Logica
     public class DatosEmpresa
     {
 
-        private int numero;
+        private int id;
         private string nombre;
         private string descripcion;
         private string domicilio;
@@ -19,10 +19,10 @@ namespace Logica
         private bool activa;
         private string equipo;
 
-        public int Numero
+        public int Id 
         {
-            get { return numero; }
-            set { numero = value; }
+            get { return id; }
+            set { id = value; }
         }
         public string Nombre
         {
@@ -76,18 +76,21 @@ namespace Logica
             string[] parametros = Environment.GetCommandLineArgs();
             //for (int i = 0; i < parametros.Length; i++)
             //{
-            //    //MessageBox.Show("Parámetro " + parametros[i]);                
+            //    //MessageBox.Show("Parámetro " + parametros[i]);
             //} 
-            this.Numero = Convert.ToInt32(parametros[0]);
-            this.Nombre = parametros[1];
-            this.Descripcion = parametros[2];
-            this.Domicilio = parametros[3];
-            this.Localidad = parametros[4];
-            this.Rfc = parametros[5];
-            this.Directorio = parametros[6];
-            this.Logo = parametros[7];
-            this.Activa = Convert.ToBoolean(parametros[8]);
-            this.Equipo = parametros[9];
+	        if (parametros.Length > 1) {
+                int numeracion = 8;
+                this.Id = Convert.ToInt32(parametros[numeracion].Replace("|", " ")); numeracion += 1;
+                this.Nombre = parametros[numeracion].Replace("|", " "); numeracion += 1;
+                this.Descripcion = parametros[numeracion].Replace("|", " "); numeracion += 1;
+                this.Domicilio = parametros[numeracion].Replace("|", " "); numeracion += 1;
+                this.Localidad = parametros[numeracion].Replace("|", " "); numeracion += 1;
+                this.Rfc = parametros[numeracion].Replace("|", " "); numeracion += 1;
+                this.Directorio = parametros[numeracion].Replace("|", " "); numeracion += 1;
+                this.Logo = parametros[numeracion].Replace("|", " "); numeracion += 1;
+                this.Activa = Convert.ToBoolean(parametros[numeracion].Replace("|", " ")); numeracion += 1;
+                this.Equipo = parametros[numeracion].Replace("|", " "); numeracion += 1;
+            }
 
         }
 

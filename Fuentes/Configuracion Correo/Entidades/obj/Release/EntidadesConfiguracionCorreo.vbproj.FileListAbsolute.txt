@@ -1,0 +1,12 @@
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Entidades\bin\Release\EntidadesConfiguracionCorreo.dll
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Entidades\bin\Release\EntidadesConfiguracionCorreo.pdb
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Entidades\bin\Release\EntidadesConfiguracionCorreo.xml
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Entidades\bin\Release\LogicaConfiguracionCorreo.dll
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Entidades\bin\Release\LogicaConfiguracionCorreo.pdb
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Entidades\bin\Release\LogicaConfiguracionCorreo.xml
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Entidades\obj\Release\EntidadesConfiguracionCorreo.vbprojResolveAssemblyReference.cache
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Entidades\obj\Release\EntidadesConfiguracionCorreo.Resources.resources
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Entidades\obj\Release\EntidadesConfiguracionCorreo.vbproj.GenerateResource.Cache
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Entidades\obj\Release\EntidadesConfiguracionCorreo.dll
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Entidades\obj\Release\EntidadesConfiguracionCorreo.xml
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Entidades\obj\Release\EntidadesConfiguracionCorreo.pdb

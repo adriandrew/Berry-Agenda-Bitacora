@@ -19,6 +19,7 @@ Public Class ActividadesExternas
     Private esExterna As Boolean
     Private esAutorizado As Boolean
     Private esRechazado As Boolean
+    Private estaResuelto As Boolean
 
     Public Property EId() As Integer
         Get
@@ -156,6 +157,14 @@ Public Class ActividadesExternas
             Me.esRechazado = value
         End Set
     End Property
+    Public Property EEstaResuelto() As Boolean
+        Get
+            Return Me.estaResuelto
+        End Get
+        Set(value As Boolean)
+            Me.estaResuelto = value
+        End Set
+    End Property
 
     Public Function ObtenerListadoPendientesExternas() As List(Of ActividadesExternas)
 
@@ -180,7 +189,7 @@ Public Class ActividadesExternas
             Else
                 consultaWhere &= " AND NOT A.IdUsuarioDestino IS NULL AND A.IdUsuarioDestino > 0 "
             End If
-            comando.CommandText = "SELECT A.Id, A.IdArea, Areas.Nombre AS NombreArea, A.IdUsuario, U.Nombre AS NombreUsuario, A.Nombre, A.IdAreaDestino, AreasDestino.Nombre AS NombreAreaDestino, A.IdUsuarioDestino, UD.Nombre AS NombreUsuarioDestino, A.Descripcion, A.FechaCreacion, A.FechaVencimiento, A.EsUrgente, A.EsExterna, A.EsAutorizado, A.EsRechazado " & _
+            comando.CommandText = "SELECT A.Id, A.IdArea, Areas.Nombre AS NombreArea, A.IdUsuario, U.Nombre AS NombreUsuario, A.Nombre, A.IdAreaDestino, AreasDestino.Nombre AS NombreAreaDestino, A.IdUsuarioDestino, UD.Nombre AS NombreUsuarioDestino, A.Descripcion, A.FechaCreacion, A.FechaVencimiento, A.EsUrgente, A.EsExterna, A.EsAutorizado, A.EsRechazado, A.EstaResuelto " & _
             " FROM ((((Actividades AS A LEFT JOIN ActividadesResueltas AS AR ON A.Id = AR.IdActividad AND A.IdArea = AR.IdArea) " & _
             " LEFT JOIN [INFORMACION].dbo.Usuarios AS U ON A.IdUsuario = U.Id) " & _
             " LEFT JOIN [INFORMACION].dbo.Usuarios AS UD ON A.IdUsuarioDestino = UD.Id) " & _
@@ -214,12 +223,15 @@ Public Class ActividadesExternas
                 actividades.esExterna = IIf(Not IsDBNull(dataReader("EsExterna")), dataReader("EsExterna"), False)
                 actividades.esAutorizado = IIf(Not IsDBNull(dataReader("EsAutorizado")), dataReader("EsAutorizado"), False)
                 actividades.esRechazado = IIf(Not IsDBNull(dataReader("EsRechazado")), dataReader("EsRechazado"), False)
+                actividades.estaResuelto = IIf(Not IsDBNull(dataReader("EstaResuelto")), dataReader("EstaResuelto"), False)
                 lista.Add(actividades)
             End While
             BaseDatos.conexionAgenda.Close()
             Return lista
         Catch ex As Exception
             Throw ex
+        Finally
+            BaseDatos.conexionAgenda.Close()
         End Try
 
     End Function

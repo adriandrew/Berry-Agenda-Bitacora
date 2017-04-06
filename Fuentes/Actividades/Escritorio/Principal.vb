@@ -1,4 +1,6 @@
-﻿Public Class Principal
+﻿Imports System.IO
+
+Public Class Principal
 
     Dim actividades As New EntidadesActividades.Actividades
     Dim actividadesExternas As New EntidadesActividades.ActividadesExternas
@@ -19,10 +21,18 @@
     Public tieneImagen As Boolean = False
     Public rutaImagen As String = String.Empty
     Public opcionSeleccionada As Integer = 0
+    Dim ejecutarProgramaPrincipal As New ProcessStartInfo()
 
     Public esPrueba As Boolean = False
 
 #Region "Eventos"
+
+    Private Sub Principal_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
+
+        Dim nombrePrograma As String = "PrincipalBerry"
+        AbrirPrograma(nombrePrograma, True)
+
+    End Sub
 
     Private Sub Principal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -257,7 +267,7 @@
 
     Private Sub btnResolucionGuardar_MouseHover(sender As Object, e As EventArgs) Handles btnResolucionGuardar.MouseHover
 
-        AsignarTooltips("Guardar o Editar.")
+        AsignarTooltips("Guardar.")
 
     End Sub
 
@@ -379,7 +389,7 @@
         tp.SetToolTip(Me.btnResolucionFechaSiguiente, "Fecha Siguiente.")
         tp.SetToolTip(Me.spResolverActividades, "Click para Seleccionar una Actividad a Resolver.")
         tp.SetToolTip(Me.btnAdministrarImagen, "Administrar Imagenes de Evidencia.")
-         
+
     End Sub
 
     Private Sub AsignarTooltips(ByVal texto As String)
@@ -456,6 +466,23 @@
 
     End Sub
 
+    Private Sub AbrirPrograma(nombre As String, salir As Boolean)
+
+        ejecutarProgramaPrincipal.UseShellExecute = True
+        ejecutarProgramaPrincipal.FileName = nombre & Convert.ToString(".exe")
+        ejecutarProgramaPrincipal.WorkingDirectory = Directory.GetCurrentDirectory()
+        ejecutarProgramaPrincipal.Arguments = LogicaActividades.DatosEmpresaPrincipal.idEmpresa.ToString().Trim().Replace(" ", "|") & " " & LogicaActividades.DatosEmpresaPrincipal.activa.ToString().Trim().Replace(" ", "|") & " " & LogicaActividades.DatosEmpresaPrincipal.instanciaSql.ToString().Trim().Replace(" ", "|") & " " & LogicaActividades.DatosEmpresaPrincipal.rutaBd.ToString().Trim().Replace(" ", "|") & " " & LogicaActividades.DatosEmpresaPrincipal.usuarioSql.ToString().Trim().Replace(" ", "|") & " " & LogicaActividades.DatosEmpresaPrincipal.contrasenaSql.ToString().Trim().Replace(" ", "|") & " " & "Aquí terminan los de empresa principal, indice 7 ;)".Replace(" ", "|") & " " & datosEmpresa.EId.ToString().Trim().Replace(" ", "|") & " " & datosEmpresa.ENombre.Trim().Replace(" ", "|") & " " & datosEmpresa.EDescripcion.Trim().Replace(" ", "|") & " " & datosEmpresa.EDomicilio.Trim().Replace(" ", "|") & " " & datosEmpresa.ELocalidad.Trim().Replace(" ", "|") & " " & datosEmpresa.ERfc.Trim().Replace(" ", "|") & " " & datosEmpresa.EDirectorio.Trim().Replace(" ", "|") & " " & datosEmpresa.ELogo.Trim().Replace(" ", "|") & " " & datosEmpresa.EActiva.ToString().Trim().Replace(" ", "|") & " " & datosEmpresa.EEquipo.Trim().Replace(" ", "|") & " " & "Aquí terminan los de empresa, indice 18 ;)".Replace(" ", "|") & " " & datosUsuario.EId.ToString().Trim().Replace(" ", "|") & " " & datosUsuario.ENombre.Trim().Replace(" ", "|") & " " & datosUsuario.EContrasena.Trim().Replace(" ", "|") & " " & datosUsuario.ENivel.ToString().Trim().Replace(" ", "|") & " " & datosUsuario.EAccesoTotal.ToString().Trim().Replace(" ", "|") & " " & datosUsuario.EIdArea.ToString().Trim().Replace(" ", "|") & " " & "Aquí terminan los de usuario, indice 25 ;)".Replace(" ", "|") & " " & datosArea.EId.ToString().Trim().Replace(" ", "|") & " " & datosArea.ENombre.ToString().Trim().Replace(" ", "|") & " " & datosArea.EClave.ToString().Trim().Replace(" ", "|") & " " & "Aquí terminan los de area, indice 29 ;)".Replace(" ", "|")
+        Try
+            Process.Start(ejecutarProgramaPrincipal)
+            If salir Then
+                Application.Exit()
+            End If
+        Catch ex As Exception
+            MessageBox.Show((Convert.ToString("No se puede abrir el programa principal en la ruta : " & ejecutarProgramaPrincipal.WorkingDirectory & "\") & nombre) & Environment.NewLine & Environment.NewLine & ex.Message, "Error.", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+    End Sub
+
 #End Region
 
 #Region "Captura de Actividades"
@@ -480,6 +507,13 @@
         actividades.EIdArea = Me.datosUsuario.EIdArea
         lista = actividades.ObtenerListadoPorId()
         If lista.Count = 1 Then
+            If (lista(0).EEstaResuelto) Then
+                btnCapturaGuardar.Enabled = False
+                btnCapturaEliminar.Enabled = False
+            Else
+                btnCapturaGuardar.Enabled = True
+                btnCapturaEliminar.Enabled = True
+            End If 
             txtCapturaNombre.Text = lista(0).ENombre
             txtCapturaDescripcion.Text = lista(0).EDescripcion
             dtpCapturaFechaCreacion.Value = lista(0).EFechaCreacion
@@ -518,6 +552,7 @@
         Dim idUsuarioDestino As Integer = cbUsuarios.SelectedValue
         Dim esAutorizado As Boolean = False
         Dim esRechazado As Boolean = False
+        Dim estaResuelto As Boolean = False
         If (id > 0) And (Not String.IsNullOrEmpty(nombre)) And (IsDate(fechaCreacion)) And IsDate(fechaVencimiento) Then
             actividades.EId = id
             actividades.EIdUsuario = idUsuario
@@ -532,15 +567,25 @@
             actividades.EIdUsuarioDestino = idUsuarioDestino
             actividades.EEsAutorizado = esAutorizado
             actividades.EEsRechazado = esRechazado
-            Dim tieneActividades As Boolean = actividades.ValidarPorId()
-            If tieneActividades Then
-                actividades.Editar()
-            Else
-                actividades.Guardar()
+            actividades.EEstaResuelto = estaResuelto
+            Dim estaResuelta As Boolean = actividades.ValidarResueltaPorId()
+            If (estaResuelta) Then
+                MsgBox("Actividad resuelta, no se puede guardar.", MsgBoxStyle.Exclamation, "No permitido.")
+            Else ' Se valida que no haya sido resuelta anteriormente.
+                If (DateDiff(DateInterval.Day, fechaVencimiento, fechaCreacion) > 0) Then
+                    MsgBox("Fecha de creación mayor a fecha de vencimiento, no se puede guardar.", MsgBoxStyle.Exclamation, "No permitido.")
+                Else
+                    Dim tieneActividades As Boolean = actividades.ValidarPorId()
+                    If (tieneActividades) Then
+                        actividades.Editar()
+                    Else
+                        actividades.Guardar()
+                    End If
+                    MsgBox("Guardado finalizado.", MsgBoxStyle.ApplicationModal, "Finalizado.")
+                    CargarConsecutivoActividades()
+                    LimpiarPantallaActividades()
+                End If
             End If
-            MsgBox("Guardado o editado finalizado.", MsgBoxStyle.ApplicationModal, "Finalizado.")
-            CargarConsecutivoActividades()
-            LimpiarPantallaActividades()
         End If
 
     End Sub
@@ -558,8 +603,10 @@
         End If
         If cbUsuarios.Items.Count > 0 Then
             cbUsuarios.SelectedIndex = 0
-        End If        
+        End If
         PonerFocoEnControl(txtCapturaId)
+        btnCapturaGuardar.Enabled = True
+        btnCapturaEliminar.Enabled = True
         Application.DoEvents()
 
     End Sub
@@ -570,8 +617,14 @@
         If (id > 0) Then
             actividades.EId = id
             actividades.EIdArea = Me.datosUsuario.EIdArea
-            actividades.Eliminar()
-            CargarActividades()
+            Dim estaResuelta As Boolean = actividades.ValidarResueltaPorId()
+            If (estaResuelta) Then
+                MsgBox("Actividad resuelta, no se puede modificar.", MsgBoxStyle.Exclamation, "No permitido.")
+            Else ' Se valida que no haya sido resuelta anteriormente.
+                actividades.Eliminar()
+                MsgBox("Eliminado finalizado.", MsgBoxStyle.ApplicationModal, "Finalizado.")
+                CargarActividades()
+            End If
         End If
 
     End Sub
@@ -593,7 +646,7 @@
             Dim lista As New List(Of EntidadesActividades.Usuarios)
             usuarios.EIdEmpresa = datosEmpresa.EId
             usuarios.EIdArea = idArea
-            lista = usuarios.ObtenerListadoDeEmpresa()
+            lista = usuarios.ObtenerListadoPorEmpresa()
             cbUsuarios.DataSource = lista
             cbUsuarios.ValueMember = "EId"
             cbUsuarios.DisplayMember = "ENombre"
@@ -609,7 +662,7 @@
 
     Private Sub ComenzarCargarActividadesPendientes()
 
-        FormatearSpreadGeneralActividadesPendientes()
+        FormatearSpread()
         CargarActividadesPendientesSpread()
 
     End Sub
@@ -630,7 +683,7 @@
         actividades.EIdUsuario = Me.datosUsuario.EId
         lista = actividades.ObtenerListadoPendientes()
         spResolverActividades.ActiveSheet.DataSource = lista
-        FormatearSpreadActividadesPendientes(spResolverActividades.ActiveSheet.Columns.Count) 
+        FormatearSpreadActividadesPendientes(spResolverActividades.ActiveSheet.Columns.Count)
         ' Actividades externas.
         spResolverActividades.ActiveSheetIndex = 1
         Dim listaExterna As New List(Of EntidadesActividades.ActividadesExternas)
@@ -638,7 +691,7 @@
         actividadesExternas.EIdUsuario = Me.datosUsuario.EId
         listaExterna = actividadesExternas.ObtenerListadoPendientesExternas()
         spResolverActividades.ActiveSheet.DataSource = listaExterna
-        FormatearSpreadActividadesPendientesExternas(spResolverActividades.ActiveSheet.Columns.Count) 
+        FormatearSpreadActividadesPendientesExternas(spResolverActividades.ActiveSheet.Columns.Count)
 
     End Sub
 
@@ -650,6 +703,7 @@
         Dim descripcion As String = txtResolucionDescripcion.Text
         Dim motivoRetraso As String = txtResolucionMotivoRetraso.Text
         Dim fechaResolucion As Date = dtpResolucionFecha.Text
+        Dim estaResuelto As Boolean = True
         If (id > 0) And (Not String.IsNullOrEmpty(descripcion)) And IsDate(fechaResolucion) Then
             actividadesResueltas.EId = id
             actividadesResueltas.EIdArea = idArea
@@ -657,15 +711,27 @@
             actividadesResueltas.EMotivoRetraso = motivoRetraso
             actividadesResueltas.EFechaResolucion = fechaResolucion
             actividadesResueltas.ERutaImagen = Me.rutaImagen
-            Dim tieneActividades As Boolean = actividadesResueltas.ValidarPorNumero()
-            If tieneActividades Then
-                actividadesResueltas.Editar()
+            actividadesResueltas.EEstaResuelto = estaResuelto
+            Dim listaLocal As New List(Of EntidadesActividades.Actividades)
+            Dim actividadesLocal As New EntidadesActividades.Actividades
+            actividadesLocal.EId = id
+            actividadesLocal.EIdArea = idArea
+            listaLocal = actividadesLocal.ObtenerListadoPorId()
+            Dim fechaCreacion As Date = listaLocal(0).EFechaCreacion
+            If (DateDiff(DateInterval.Day, fechaResolucion, fechaCreacion) > 0) Then
+                MsgBox("Fecha de creación mayor a fecha de resolución, no se puede guardar.", MsgBoxStyle.Exclamation, "No permitido.")
             Else
-                actividadesResueltas.Guardar()
+                Dim tieneActividades As Boolean = actividadesResueltas.ValidarPorId()
+                If (tieneActividades) Then
+                    actividadesResueltas.Editar()
+                Else
+                    actividadesResueltas.Guardar()
+                End If
+                actividadesResueltas.GuardarEstatusResuelto()
+                MsgBox("Guardado finalizado.", MsgBoxStyle.ApplicationModal, "Finalizado.")
+                CargarActividadesPendientesSpread()
+                LimpiarPantallaActividadesResueltas()
             End If
-            MsgBox("Guardado o editado finalizado.", MsgBoxStyle.ApplicationModal, "Finalizado.")
-            CargarActividadesPendientesSpread()
-            LimpiarPantallaActividadesResueltas()
         End If
 
     End Sub
@@ -680,6 +746,7 @@
         Dim fechaResolucion As Date = dtpResolucionFecha.Text
         Dim idAreaOrigen As Integer = Me.datosUsuario.EIdArea ' Se toma el area que resuelve.
         Dim idUsuarioOrigen As Integer = Me.datosUsuario.EId ' Se toma el usuario que resuelve.
+        Dim estaResuelto As Boolean = True
         If (id > 0) And (Not String.IsNullOrEmpty(descripcion)) And (IsDate(fechaResolucion)) And (Not String.IsNullOrEmpty(Me.rutaImagen)) Then
             actividadesResueltas.EId = id
             actividadesResueltas.EIdArea = idArea
@@ -689,31 +756,43 @@
             actividadesResueltas.EIdAreaOrigen = idAreaOrigen
             actividadesResueltas.EIdUsuarioOrigen = idUsuarioOrigen
             actividadesResueltas.ERutaImagen = Me.rutaImagen
-            Dim tieneActividades As Boolean = actividadesResueltas.ValidarPorNumero()
-            If tieneActividades Then
-                actividadesResueltas.Editar()
+            actividadesResueltas.EEstaResuelto = estaResuelto
+            Dim listaLocal As New List(Of EntidadesActividades.Actividades)
+            Dim actividadesLocal As New EntidadesActividades.Actividades
+            actividadesLocal.EId = id
+            actividadesLocal.EIdArea = idArea
+            listaLocal = actividadesLocal.ObtenerListadoPorId()
+            Dim fechaCreacion As Date = listaLocal(0).EFechaCreacion
+            If (DateDiff(DateInterval.Day, fechaResolucion, fechaCreacion) > 0) Then
+                MsgBox("Fecha de creación mayor a fecha de resolución, no se puede guardar.", MsgBoxStyle.Exclamation, "No permitido.")
             Else
-                actividadesResueltas.Guardar()
+                Dim tieneActividades As Boolean = actividadesResueltas.ValidarPorId()
+                If (tieneActividades) Then
+                    actividadesResueltas.Editar()
+                Else
+                    actividadesResueltas.Guardar()
+                End If
+                actividadesResueltas.GuardarEstatusResuelto()
+                MsgBox("Guardado finalizado.", MsgBoxStyle.ApplicationModal, "Finalizado.")
+                CargarActividadesPendientesSpread()
+                LimpiarPantallaActividadesResueltas()
             End If
-            MsgBox("Guardado o editado finalizado.", MsgBoxStyle.ApplicationModal, "Finalizado.")
-            CargarActividadesPendientesSpread()
-            LimpiarPantallaActividadesResueltas()
         End If
 
     End Sub
 
-    Private Sub FormatearSpreadGeneralActividadesPendientes()
+    Private Sub FormatearSpread()
 
         spResolverActividades.Reset() : Application.DoEvents()
-        spResolverActividades.Sheets.Count = 2
-        spResolverActividades.Sheets(0).SheetName = "Internas"
-        spResolverActividades.Sheets(1).SheetName = "Externas"
-        spResolverActividades.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell
-        'ControlarSpreadEnter(spResolverActividades)
+        spResolverActividades.Sheets.Count = 2 : Application.DoEvents()
+        spResolverActividades.Sheets(0).SheetName = "Internas" : Application.DoEvents()
+        spResolverActividades.Sheets(1).SheetName = "Externas" : Application.DoEvents()
+        spResolverActividades.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell : Application.DoEvents() 
         spResolverActividades.Visible = True : Application.DoEvents()
-        spResolverActividades.Font = New Font("Microsoft Sans Serif", 14, FontStyle.Regular) : Application.DoEvents() 
-        spResolverActividades.HorizontalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded
-        spResolverActividades.VerticalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded
+        spResolverActividades.Font = New Font("Microsoft Sans Serif", 12, FontStyle.Regular) : Application.DoEvents()
+        spResolverActividades.HorizontalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded : Application.DoEvents()
+        spResolverActividades.VerticalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded : Application.DoEvents()
+        spResolverActividades.TabStrip.DefaultSheetTab.Font = New Font("Microsoft Sans Serif", 10, FontStyle.Bold) : Application.DoEvents()
 
     End Sub
 
@@ -721,8 +800,8 @@
 
         spResolverActividades.ActiveSheetIndex = 0
         spResolverActividades.ActiveSheet.GrayAreaBackColor = Color.White : Application.DoEvents()
-        spResolverActividades.ActiveSheet.Rows(-1).Height = 50 : Application.DoEvents()
-        spResolverActividades.ActiveSheet.ColumnHeader.Rows(0).Font = New Font("Microsoft Sans Serif", 14, FontStyle.Bold) : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Rows(-1).Height = 50 : Application.DoEvents() 
+        spResolverActividades.ActiveSheet.ColumnHeader.Rows(0).Font = New Font("Microsoft Sans Serif", 12, FontStyle.Bold) : Application.DoEvents()
         Dim numeracion As Integer = 0
         spResolverActividades.ActiveSheet.Columns.Count = cantidadColumnas
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "id" : numeracion += 1
@@ -738,6 +817,7 @@
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "idUsuarioDestino" : numeracion += 1
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "esAutorizado" : numeracion += 1
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "esRechazado" : numeracion += 1
+        spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "estaResuelto" : numeracion += 1
         spResolverActividades.ActiveSheet.Columns("id").Width = 100 : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("nombre").Width = 300 : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("descripcion").Width = 500 : Application.DoEvents()
@@ -760,6 +840,7 @@
         spResolverActividades.ActiveSheet.Columns("idUsuarioDestino").Visible = False : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("esAutorizado").Visible = False : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("esRechazado").Visible = False : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("estaResuelto").Visible = False : Application.DoEvents()
         spResolverActividades.ActiveSheet.ColumnHeader.Rows(0).Height = 45 : Application.DoEvents()
         spResolverActividades.ActiveSheet.OperationMode = FarPoint.Win.Spread.OperationMode.SingleSelect
 
@@ -769,8 +850,8 @@
 
         spResolverActividades.ActiveSheetIndex = 1
         spResolverActividades.ActiveSheet.GrayAreaBackColor = Color.White : Application.DoEvents()
-        spResolverActividades.ActiveSheet.Rows(-1).Height = 50 : Application.DoEvents()
-        spResolverActividades.ActiveSheet.ColumnHeader.Rows(0).Font = New Font("Microsoft Sans Serif", 14, FontStyle.Bold) : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Rows(-1).Height = 50 : Application.DoEvents() 
+        spResolverActividades.ActiveSheet.ColumnHeader.Rows(0).Font = New Font("Microsoft Sans Serif", 12, FontStyle.Bold) : Application.DoEvents()
         Dim numeracion As Integer = 0
         spResolverActividades.ActiveSheet.Columns.Count = cantidadColumnas
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "id" : numeracion += 1
@@ -784,10 +865,11 @@
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "fechaVencimiento" : numeracion += 1
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "esUrgente" : numeracion += 1
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "esExterna" : numeracion += 1
-        spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "idAreaDestino" : numeracion += 1 
+        spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "idAreaDestino" : numeracion += 1
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "idUsuarioDestino" : numeracion += 1
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "esAutorizado" : numeracion += 1
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "esRechazado" : numeracion += 1
+        spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "estaResuelto" : numeracion += 1
         spResolverActividades.ActiveSheet.Columns("id").Width = 80 : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("idArea").Width = 110 : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("nombreArea").Width = 160 : Application.DoEvents()
@@ -818,6 +900,7 @@
         spResolverActividades.ActiveSheet.Columns("idUsuarioDestino").Visible = False : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("esAutorizado").Visible = False : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("esRechazado").Visible = False : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("estaResuelto").Visible = False : Application.DoEvents()
         spResolverActividades.ActiveSheet.ColumnHeader.Rows(0).Height = 45 : Application.DoEvents()
         spResolverActividades.ActiveSheet.OperationMode = FarPoint.Win.Spread.OperationMode.SingleSelect
 
@@ -868,7 +951,7 @@
     End Sub
 
     Private Sub CargarValoresImagenes()
-         
+
         spResolverActividades.ActiveSheetIndex = 1
         Imagen.idActividad = LogicaActividades.Funciones.ValidarNumero(txtResolucionId.Text)
         Imagen.idUsuario = Me.datosUsuario.EId

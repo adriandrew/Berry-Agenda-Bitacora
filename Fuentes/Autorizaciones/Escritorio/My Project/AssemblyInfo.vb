@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Autorizaciones de actividades solo disponible para usuario tipo Gerente.")> 
 <Assembly: AssemblyCompany("Berry")> 
 <Assembly: AssemblyProduct("Autorizaciones")> 
-<Assembly: AssemblyCopyright("Copyright © Berry 2016")> 
+<Assembly: AssemblyCopyright("Copyright © Berry 2017")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>

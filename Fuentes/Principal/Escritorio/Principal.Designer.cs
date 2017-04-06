@@ -40,6 +40,7 @@
             this.picUsuario = new System.Windows.Forms.PictureBox();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.pnlPie = new System.Windows.Forms.Panel();
+            this.lblDescripcionTooltip = new System.Windows.Forms.Label();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnCambiarEmpresa = new System.Windows.Forms.Button();
             this.pnlEncabezado = new System.Windows.Forms.Panel();
@@ -71,6 +72,7 @@
             this.pnlContenido.Name = "pnlContenido";
             this.pnlContenido.Size = new System.Drawing.Size(1035, 633);
             this.pnlContenido.TabIndex = 1;
+            this.pnlContenido.MouseHover += new System.EventHandler(this.pnlContenido_MouseHover);
             // 
             // pnlIniciarSesion
             // 
@@ -86,10 +88,11 @@
             this.pnlIniciarSesion.Controls.Add(this.lblUsuario);
             this.pnlIniciarSesion.Controls.Add(this.picUsuario);
             this.pnlIniciarSesion.ForeColor = System.Drawing.Color.Black;
-            this.pnlIniciarSesion.Location = new System.Drawing.Point(303, 212);
+            this.pnlIniciarSesion.Location = new System.Drawing.Point(303, 225);
             this.pnlIniciarSesion.Name = "pnlIniciarSesion";
             this.pnlIniciarSesion.Size = new System.Drawing.Size(422, 206);
             this.pnlIniciarSesion.TabIndex = 6;
+            this.pnlIniciarSesion.MouseHover += new System.EventHandler(this.pnlIniciarSesion_MouseHover);
             // 
             // txtContraseña
             // 
@@ -121,6 +124,8 @@
             this.btnEntrar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnEntrar.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.btnEntrar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEntrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
+            this.btnEntrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEntrar.ForeColor = System.Drawing.Color.White;
             this.btnEntrar.Image = ((System.Drawing.Image)(resources.GetObject("btnEntrar.Image")));
             this.btnEntrar.Location = new System.Drawing.Point(353, 142);
@@ -129,6 +134,7 @@
             this.btnEntrar.TabIndex = 23;
             this.btnEntrar.UseVisualStyleBackColor = false;
             this.btnEntrar.Click += new System.EventHandler(this.btnIniciarSesion_Click);
+            this.btnEntrar.MouseHover += new System.EventHandler(this.btnEntrar_MouseHover);
             // 
             // btnMostrarOpciones
             // 
@@ -187,11 +193,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlMenu.AutoScroll = true;
             this.pnlMenu.BackColor = System.Drawing.Color.Transparent;
-            this.pnlMenu.Location = new System.Drawing.Point(3, 135);
+            this.pnlMenu.Location = new System.Drawing.Point(3, 78);
             this.pnlMenu.Name = "pnlMenu";
-            this.pnlMenu.Size = new System.Drawing.Size(1029, 429);
+            this.pnlMenu.Size = new System.Drawing.Size(1029, 489);
             this.pnlMenu.TabIndex = 9;
             this.pnlMenu.Visible = false;
+            this.pnlMenu.MouseHover += new System.EventHandler(this.pnlMenu_MouseHover);
             // 
             // pnlPie
             // 
@@ -199,17 +206,31 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlPie.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.pnlPie.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlPie.Controls.Add(this.lblDescripcionTooltip);
             this.pnlPie.Controls.Add(this.btnSalir);
             this.pnlPie.Controls.Add(this.btnCambiarEmpresa);
             this.pnlPie.Location = new System.Drawing.Point(0, 570);
             this.pnlPie.Name = "pnlPie";
             this.pnlPie.Size = new System.Drawing.Size(1035, 60);
             this.pnlPie.TabIndex = 8;
+            this.pnlPie.MouseHover += new System.EventHandler(this.pnlPie_MouseHover);
+            // 
+            // lblDescripcionTooltip
+            // 
+            this.lblDescripcionTooltip.AutoSize = true;
+            this.lblDescripcionTooltip.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescripcionTooltip.ForeColor = System.Drawing.Color.White;
+            this.lblDescripcionTooltip.Location = new System.Drawing.Point(101, 17);
+            this.lblDescripcionTooltip.Name = "lblDescripcionTooltip";
+            this.lblDescripcionTooltip.Size = new System.Drawing.Size(0, 31);
+            this.lblDescripcionTooltip.TabIndex = 4;
             // 
             // btnSalir
             // 
             this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSalir.BackColor = System.Drawing.Color.White;
+            this.btnSalir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
             this.btnSalir.Location = new System.Drawing.Point(973, -1);
             this.btnSalir.Margin = new System.Windows.Forms.Padding(0);
@@ -218,12 +239,14 @@
             this.btnSalir.TabIndex = 2;
             this.btnSalir.UseVisualStyleBackColor = false;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            this.btnSalir.MouseHover += new System.EventHandler(this.btnSalir_MouseHover);
             // 
             // btnCambiarEmpresa
             // 
             this.btnCambiarEmpresa.BackColor = System.Drawing.Color.White;
+            this.btnCambiarEmpresa.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
             this.btnCambiarEmpresa.Image = ((System.Drawing.Image)(resources.GetObject("btnCambiarEmpresa.Image")));
-            this.btnCambiarEmpresa.Location = new System.Drawing.Point(878, -1);
+            this.btnCambiarEmpresa.Location = new System.Drawing.Point(913, -1);
             this.btnCambiarEmpresa.Margin = new System.Windows.Forms.Padding(0);
             this.btnCambiarEmpresa.Name = "btnCambiarEmpresa";
             this.btnCambiarEmpresa.Size = new System.Drawing.Size(60, 60);
@@ -244,8 +267,9 @@
             this.pnlEncabezado.Controls.Add(this.lblEncabezadoPrograma);
             this.pnlEncabezado.Location = new System.Drawing.Point(0, 0);
             this.pnlEncabezado.Name = "pnlEncabezado";
-            this.pnlEncabezado.Size = new System.Drawing.Size(1035, 129);
+            this.pnlEncabezado.Size = new System.Drawing.Size(1035, 75);
             this.pnlEncabezado.TabIndex = 7;
+            this.pnlEncabezado.MouseHover += new System.EventHandler(this.pnlEncabezado_MouseHover);
             // 
             // lblEncabezadoArea
             // 
@@ -253,7 +277,7 @@
             this.lblEncabezadoArea.AutoSize = true;
             this.lblEncabezadoArea.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEncabezadoArea.ForeColor = System.Drawing.Color.White;
-            this.lblEncabezadoArea.Location = new System.Drawing.Point(600, 9);
+            this.lblEncabezadoArea.Location = new System.Drawing.Point(600, 0);
             this.lblEncabezadoArea.Name = "lblEncabezadoArea";
             this.lblEncabezadoArea.Size = new System.Drawing.Size(0, 33);
             this.lblEncabezadoArea.TabIndex = 5;
@@ -264,7 +288,7 @@
             this.lblEncabezadoUsuario.AutoSize = true;
             this.lblEncabezadoUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEncabezadoUsuario.ForeColor = System.Drawing.Color.White;
-            this.lblEncabezadoUsuario.Location = new System.Drawing.Point(600, 50);
+            this.lblEncabezadoUsuario.Location = new System.Drawing.Point(600, 35);
             this.lblEncabezadoUsuario.Name = "lblEncabezadoUsuario";
             this.lblEncabezadoUsuario.Size = new System.Drawing.Size(0, 33);
             this.lblEncabezadoUsuario.TabIndex = 4;
@@ -274,7 +298,7 @@
             this.lblEncabezadoEmpresa.AutoSize = true;
             this.lblEncabezadoEmpresa.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEncabezadoEmpresa.ForeColor = System.Drawing.Color.White;
-            this.lblEncabezadoEmpresa.Location = new System.Drawing.Point(12, 50);
+            this.lblEncabezadoEmpresa.Location = new System.Drawing.Point(10, 35);
             this.lblEncabezadoEmpresa.Name = "lblEncabezadoEmpresa";
             this.lblEncabezadoEmpresa.Size = new System.Drawing.Size(0, 33);
             this.lblEncabezadoEmpresa.TabIndex = 1;
@@ -284,7 +308,7 @@
             this.lblEncabezadoPrograma.AutoSize = true;
             this.lblEncabezadoPrograma.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEncabezadoPrograma.ForeColor = System.Drawing.Color.White;
-            this.lblEncabezadoPrograma.Location = new System.Drawing.Point(12, 9);
+            this.lblEncabezadoPrograma.Location = new System.Drawing.Point(10, 0);
             this.lblEncabezadoPrograma.Name = "lblEncabezadoPrograma";
             this.lblEncabezadoPrograma.Size = new System.Drawing.Size(0, 33);
             this.lblEncabezadoPrograma.TabIndex = 0;
@@ -307,6 +331,7 @@
             this.pnlIniciarSesion.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUsuario)).EndInit();
             this.pnlPie.ResumeLayout(false);
+            this.pnlPie.PerformLayout();
             this.pnlEncabezado.ResumeLayout(false);
             this.pnlEncabezado.PerformLayout();
             this.ResumeLayout(false);
@@ -327,12 +352,13 @@
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Panel pnlEncabezado;
         private System.Windows.Forms.Label lblEncabezadoPrograma;
-        private System.Windows.Forms.Label lblEncabezadoEmpresa;
         private System.Windows.Forms.Panel pnlPie;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Panel pnlMenu;
         private System.Windows.Forms.Label lblEncabezadoArea;
         private System.Windows.Forms.Label lblEncabezadoUsuario;
+        public System.Windows.Forms.Label lblEncabezadoEmpresa;
+        internal System.Windows.Forms.Label lblDescripcionTooltip;
 
     }
 }

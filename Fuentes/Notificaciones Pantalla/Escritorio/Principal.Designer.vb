@@ -63,9 +63,9 @@ Partial Class Principal
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCuerpo.AutoScroll = True
         Me.pnlCuerpo.BackColor = System.Drawing.Color.Transparent
-        Me.pnlCuerpo.Location = New System.Drawing.Point(3, 135)
+        Me.pnlCuerpo.Location = New System.Drawing.Point(3, 79)
         Me.pnlCuerpo.Name = "pnlCuerpo"
-        Me.pnlCuerpo.Size = New System.Drawing.Size(1029, 429)
+        Me.pnlCuerpo.Size = New System.Drawing.Size(1029, 488)
         Me.pnlCuerpo.TabIndex = 9
         '
         'pnlPie
@@ -115,7 +115,7 @@ Partial Class Principal
         Me.pnlEncabezado.Controls.Add(Me.lblEncabezadoPrograma)
         Me.pnlEncabezado.Location = New System.Drawing.Point(0, 0)
         Me.pnlEncabezado.Name = "pnlEncabezado"
-        Me.pnlEncabezado.Size = New System.Drawing.Size(1035, 129)
+        Me.pnlEncabezado.Size = New System.Drawing.Size(1035, 75)
         Me.pnlEncabezado.TabIndex = 7
         '
         'lblEncabezadoArea
@@ -124,7 +124,7 @@ Partial Class Principal
         Me.lblEncabezadoArea.AutoSize = True
         Me.lblEncabezadoArea.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEncabezadoArea.ForeColor = System.Drawing.Color.White
-        Me.lblEncabezadoArea.Location = New System.Drawing.Point(600, 9)
+        Me.lblEncabezadoArea.Location = New System.Drawing.Point(600, 0)
         Me.lblEncabezadoArea.Name = "lblEncabezadoArea"
         Me.lblEncabezadoArea.Size = New System.Drawing.Size(0, 33)
         Me.lblEncabezadoArea.TabIndex = 3
@@ -135,7 +135,7 @@ Partial Class Principal
         Me.lblEncabezadoUsuario.AutoSize = True
         Me.lblEncabezadoUsuario.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEncabezadoUsuario.ForeColor = System.Drawing.Color.White
-        Me.lblEncabezadoUsuario.Location = New System.Drawing.Point(600, 50)
+        Me.lblEncabezadoUsuario.Location = New System.Drawing.Point(600, 35)
         Me.lblEncabezadoUsuario.Name = "lblEncabezadoUsuario"
         Me.lblEncabezadoUsuario.Size = New System.Drawing.Size(0, 33)
         Me.lblEncabezadoUsuario.TabIndex = 2
@@ -145,7 +145,7 @@ Partial Class Principal
         Me.lblEncabezadoEmpresa.AutoSize = True
         Me.lblEncabezadoEmpresa.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEncabezadoEmpresa.ForeColor = System.Drawing.Color.White
-        Me.lblEncabezadoEmpresa.Location = New System.Drawing.Point(12, 50)
+        Me.lblEncabezadoEmpresa.Location = New System.Drawing.Point(12, 35)
         Me.lblEncabezadoEmpresa.Name = "lblEncabezadoEmpresa"
         Me.lblEncabezadoEmpresa.Size = New System.Drawing.Size(0, 33)
         Me.lblEncabezadoEmpresa.TabIndex = 1
@@ -155,7 +155,7 @@ Partial Class Principal
         Me.lblEncabezadoPrograma.AutoSize = True
         Me.lblEncabezadoPrograma.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEncabezadoPrograma.ForeColor = System.Drawing.Color.White
-        Me.lblEncabezadoPrograma.Location = New System.Drawing.Point(12, 9)
+        Me.lblEncabezadoPrograma.Location = New System.Drawing.Point(12, 0)
         Me.lblEncabezadoPrograma.Name = "lblEncabezadoPrograma"
         Me.lblEncabezadoPrograma.Size = New System.Drawing.Size(0, 33)
         Me.lblEncabezadoPrograma.TabIndex = 0

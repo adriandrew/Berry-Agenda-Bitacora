@@ -278,45 +278,6 @@ namespace Entidades
 
         }
 
-        public List<Usuarios> ObtenerListadoDeEmpresa()
-        {
-
-            List<Usuarios> lista = new List<Usuarios>();
-            try
-            {
-                SqlCommand comando = new SqlCommand();
-                comando.Connection = BaseDatos.conexionInformacion;
-                comando.CommandText = "SELECT * FROM Usuarios WHERE IdEmpresa=@idEmpresa";
-                comando.Parameters.AddWithValue("@idEmpresa", this.IdEmpresa);
-                BaseDatos.conexionInformacion.Open();
-                SqlDataReader dataReader = comando.ExecuteReader();
-                Usuarios usuarios;
-                while (dataReader.Read())
-                {
-                    usuarios = new Usuarios();
-                    usuarios.IdEmpresa = Convert.ToInt32(dataReader["idEmpresa"].ToString());
-                    usuarios.Id = Convert.ToInt32(dataReader["id"].ToString());
-                    usuarios.Nombre = dataReader["nombre"].ToString();
-                    usuarios.Contrasena = dataReader["contrasena"].ToString();
-                    usuarios.Nivel = Convert.ToInt32(dataReader["nivel"].ToString());
-                    usuarios.AccesoTotal = Convert.ToBoolean(dataReader["accesoTotal"].ToString());
-                    usuarios.IdArea = Convert.ToInt32(dataReader["idArea"].ToString());
-                    lista.Add(usuarios);
-                }
-                BaseDatos.conexionInformacion.Close();
-                return lista;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                BaseDatos.conexionInformacion.Close();
-            }
-
-        }
-
         public List<Usuarios> ObtenerListado()
         {
 
@@ -339,6 +300,46 @@ namespace Entidades
                     usuarios.Nivel = Convert.ToInt32(dataReader["nivel"].ToString());
                     usuarios.AccesoTotal = Convert.ToBoolean(dataReader["accesoTotal"].ToString());
                     usuarios.IdArea =Convert.ToInt32(dataReader["idArea"].ToString());
+                    lista.Add(usuarios);
+                }
+                BaseDatos.conexionInformacion.Close();
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                BaseDatos.conexionInformacion.Close();
+            }
+
+        }
+
+        public List<Usuarios> ObtenerListaPorId()
+        {
+
+            List<Usuarios> lista = new List<Usuarios>();
+            try
+            {
+                SqlCommand comando = new SqlCommand();
+                comando.Connection = BaseDatos.conexionInformacion;
+                comando.CommandText = "SELECT * FROM Usuarios WHERE IdEmpresa=@idEmpresa AND Id=@id";
+                comando.Parameters.AddWithValue("@idEmpresa", this.idEmpresa);
+                comando.Parameters.AddWithValue("@id", this.id);
+                BaseDatos.conexionInformacion.Open();
+                SqlDataReader dataReader = comando.ExecuteReader();
+                Usuarios usuarios = default(Usuarios);
+                while (dataReader.Read())
+                {
+                    usuarios = new Usuarios();
+                    usuarios.idEmpresa = Convert.ToInt32(dataReader["idEmpresa"].ToString());
+                    usuarios.id = Convert.ToInt32(dataReader["id"].ToString());
+                    usuarios.nombre = dataReader["nombre"].ToString();
+                    usuarios.contrasena = dataReader["contrasena"].ToString();
+                    usuarios.nivel = Convert.ToInt32(dataReader["nivel"].ToString());
+                    usuarios.accesoTotal = Convert.ToBoolean(dataReader["accesoTotal"].ToString());
+                    usuarios.idArea = Convert.ToInt32(dataReader["idArea"].ToString());
                     lista.Add(usuarios);
                 }
                 BaseDatos.conexionInformacion.Close();

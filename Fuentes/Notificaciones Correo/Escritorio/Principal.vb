@@ -30,6 +30,7 @@ Public Class Principal
     Private Sub Principal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Centrar()
+        AsignarTooltips()
         ConfigurarConexionPrincipal() 
         ConsultarInformacionEmpresaPrincipalPredeterminada()
         ConfigurarConexiones()
@@ -47,11 +48,51 @@ Public Class Principal
 
     End Sub
 
+    Private Sub btnSalir_MouseHover(sender As Object, e As EventArgs) Handles btnSalir.MouseHover
+
+        AsignarTooltips("Salir.")
+
+    End Sub
+
+    Private Sub pnlCuerpo_MouseHover(sender As Object, e As EventArgs) Handles pnlPie.MouseHover, pnlEncabezado.MouseHover, pnlCuerpo.MouseHover
+
+        AsignarTooltips(String.Empty)
+
+    End Sub
+
 #End Region
 
 #Region "Métodos"
 
 #Region "Genericos"
+
+    Private Sub AsignarTooltips()
+
+        Dim tp As New ToolTip()
+        tp.AutoPopDelay = 5000
+        tp.InitialDelay = 0
+        tp.ReshowDelay = 100
+        tp.ShowAlways = True
+        tp.SetToolTip(Me.btnSalir, "Salir.") 
+
+    End Sub
+
+    Private Sub AsignarTooltips(ByVal texto As String)
+
+        lblDescripcionTooltip.Text = texto
+
+    End Sub
+
+    Private Sub Cerrar()
+
+        Try
+            Application.ExitThread()
+            End
+        Catch ex As Exception
+            End
+        End Try
+
+    End Sub
 
     Private Sub Centrar()
 
@@ -130,18 +171,7 @@ Public Class Principal
 
 #End Region
 
-#Region "Notificaciones"
-
-    Private Sub Cerrar()
-
-        Try
-            Application.ExitThread()
-            End
-        Catch ex As Exception
-            End
-        End Try
-
-    End Sub
+#Region "Todos"
 
     Private Sub CargarActividadesVencidas()
 
@@ -340,7 +370,7 @@ Public Class Principal
         spNotificaciones.Reset() : Application.DoEvents()
         spNotificaciones.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell
         spNotificaciones.Visible = True : Application.DoEvents()
-        spNotificaciones.Font = New Font("Microsoft Sans Serif", 14, FontStyle.Regular) : Application.DoEvents()
+        spNotificaciones.Font = New Font("Microsoft Sans Serif", 12, FontStyle.Regular) : Application.DoEvents()
         spNotificaciones.HorizontalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded
         spNotificaciones.VerticalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded
 
@@ -351,7 +381,7 @@ Public Class Principal
         spNotificaciones.ActiveSheet.GrayAreaBackColor = Color.White : Application.DoEvents()
         spNotificaciones.ActiveSheet.ColumnHeader.Rows(0).Height = 30 : Application.DoEvents()
         spNotificaciones.ActiveSheet.Rows(-1).Height = 25 : Application.DoEvents()
-        spNotificaciones.ActiveSheet.ColumnHeader.Rows(0).Font = New Font("Microsoft Sans Serif", 14, FontStyle.Bold) : Application.DoEvents()
+        spNotificaciones.ActiveSheet.ColumnHeader.Rows(0).Font = New Font("Microsoft Sans Serif", 12, FontStyle.Bold) : Application.DoEvents()
         Dim numeracion As Integer = 0
         spNotificaciones.ActiveSheet.Columns.Count = 4
         spNotificaciones.ActiveSheet.Rows.Count = 1

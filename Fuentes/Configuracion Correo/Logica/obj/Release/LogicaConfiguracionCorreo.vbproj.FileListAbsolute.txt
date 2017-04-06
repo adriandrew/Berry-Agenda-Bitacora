@@ -1,0 +1,8 @@
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Logica\bin\Release\LogicaConfiguracionCorreo.dll
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Logica\bin\Release\LogicaConfiguracionCorreo.pdb
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Logica\bin\Release\LogicaConfiguracionCorreo.xml
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Logica\obj\Release\LogicaConfiguracionCorreo.Resources.resources
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Logica\obj\Release\LogicaConfiguracionCorreo.vbproj.GenerateResource.Cache
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Logica\obj\Release\LogicaConfiguracionCorreo.dll
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Logica\obj\Release\LogicaConfiguracionCorreo.xml
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Logica\obj\Release\LogicaConfiguracionCorreo.pdb

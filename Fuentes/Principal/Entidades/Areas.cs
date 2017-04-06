@@ -29,30 +29,73 @@ namespace Entidades
             set { this.clave = value; }
         }
 
-        public string ObtenerListadoPorId()
+        public List<Areas> ObtenerListaPorId()
         {
 
+            List<Areas> lista = new List<Areas>();
             try
             {
                 SqlCommand comando = new SqlCommand();
                 comando.Connection = BaseDatos.conexionCatalogo;
-                comando.CommandText = "SELECT * FROM Areas WHERE Id=@id";
-                comando.Parameters.AddWithValue("@id", this.Id);
+                comando.CommandText = "SELECT * FROM Areas WHERE Id = @id";
+                comando.Parameters.AddWithValue("@id", this.id);
                 BaseDatos.conexionCatalogo.Open();
                 SqlDataReader dataReader = default(SqlDataReader);
-                dataReader = comando.ExecuteReader(); 
+                dataReader = comando.ExecuteReader();
+                Areas areas = new Areas();
                 while ((dataReader.Read()))
-                { 
-                    this.Id = Convert.ToInt32(dataReader["Id"]);
-                    this.Nombre = dataReader["Nombre"].ToString();
-                    this.Clave = dataReader["Clave"].ToString(); 
+                {
+                    areas = new Areas();
+                    areas.id = Convert.ToInt32(dataReader["Id"]);
+                    areas.nombre = dataReader["Nombre"].ToString();
+                    areas.clave = dataReader["Clave"].ToString();
+                    lista.Add(areas);
                 }
                 BaseDatos.conexionCatalogo.Close();
-                return this.Id + "|" + this.Nombre + "|" + this.Clave;
+                return lista;
             }
             catch (Exception ex)
             {
                 throw ex;
+            }
+            finally
+            {
+                BaseDatos.conexionCatalogo.Close();
+            }
+
+        }
+
+        public List<Areas> ObtenerListado()
+        {
+
+            List<Areas> lista = new List<Areas>();
+            try
+            {
+                SqlCommand comando = new SqlCommand();
+                comando.Connection = BaseDatos.conexionCatalogo;
+                comando.CommandText = "SELECT * FROM Areas";
+                BaseDatos.conexionCatalogo.Open();
+                SqlDataReader dataReader = default(SqlDataReader);
+                dataReader = comando.ExecuteReader();
+                Areas areas = new Areas();
+                while ((dataReader.Read()))
+                {
+                    areas = new Areas();
+                    areas.id = Convert.ToInt32(dataReader["Id"]);
+                    areas.nombre = dataReader["Nombre"].ToString();
+                    areas.clave = dataReader["Clave"].ToString();
+                    lista.Add(areas);
+                }
+                BaseDatos.conexionCatalogo.Close();
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                BaseDatos.conexionCatalogo.Close();
             }
 
         }

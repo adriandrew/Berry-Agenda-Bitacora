@@ -10,14 +10,14 @@
     Public Shared Sub ObtenerParametrosInformacionEmpresa()
 
         Dim parametros() = Environment.GetCommandLineArgs().ToArray()
-        If (parametros.Length > 0) Then
+        If (parametros.Length > 1) Then
             Dim numeracion As Integer = 1
-            idEmpresa = Convert.ToInt32(parametros(numeracion).Replace("|", " ")) : numeracion += 1
-            activa = parametros(numeracion).Replace("|", " ") : numeracion += 1
-            instanciaSql = parametros(numeracion).Replace("|", " ") : numeracion += 1
-            rutaBd = parametros(numeracion).Replace("|", " ") : numeracion += 1
-            usuarioSql = parametros(numeracion).Replace("|", " ") : numeracion += 1
-            contrasenaSql = parametros(numeracion).Replace("|", " ") : numeracion += 1
+            idEmpresa = Funciones.ValidarNumero(parametros(numeracion).Replace("|", " ")) : numeracion += 1
+            activa = Funciones.ValidarNumero(parametros(numeracion).Replace("|", " ")) : numeracion += 1
+            instanciaSql = Funciones.ValidarLetra(parametros(numeracion).Replace("|", " ")) : numeracion += 1
+            rutaBd = Funciones.ValidarLetra(parametros(numeracion).Replace("|", " ")) : numeracion += 1
+            usuarioSql = Funciones.ValidarLetra(parametros(numeracion).Replace("|", " ")) : numeracion += 1
+            contrasenaSql = Funciones.ValidarLetra(parametros(numeracion).Replace("|", " ")) : numeracion += 1
         End If
 
     End Sub

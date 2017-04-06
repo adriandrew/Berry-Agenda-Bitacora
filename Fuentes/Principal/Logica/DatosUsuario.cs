@@ -50,7 +50,23 @@ namespace Logica
         {
             get { return idArea; }
             set { idArea = value; }
+        } 
+
+        public void ObtenerParametrosInformacionUsuario()
+        {
+
+	        string[] parametros = Environment.GetCommandLineArgs().ToArray();
+	        if ((parametros.Length > 1)) {
+		        int numeracion = 19;
+		        this.Id = Convert.ToInt32(parametros[numeracion].Replace("|", " ")); numeracion += 1;
+                this.Nombre = parametros[numeracion].Replace("|", " "); numeracion += 1;
+                this.Contrasena = parametros[numeracion].Replace("|", " "); numeracion += 1;
+                this.Nivel = Convert.ToInt32(parametros[numeracion].Replace("|", " ")); numeracion += 1;
+                this.AccesoTotal = Convert.ToBoolean(parametros[numeracion].Replace("|", " ")); numeracion += 1;
+                this.IdArea = Convert.ToInt32(parametros[numeracion].Replace("|", " ")); numeracion += 1;
+	        }
+
         }
-         
+
     }
 }

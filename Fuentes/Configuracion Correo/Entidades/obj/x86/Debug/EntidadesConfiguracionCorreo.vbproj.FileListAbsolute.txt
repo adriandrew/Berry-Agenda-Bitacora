@@ -1,0 +1,12 @@
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Entidades\bin\x86\Debug\EntidadesConfiguracionCorreo.dll
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Entidades\bin\x86\Debug\EntidadesConfiguracionCorreo.pdb
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Entidades\bin\x86\Debug\EntidadesConfiguracionCorreo.xml
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Entidades\bin\x86\Debug\LogicaConfiguracionCorreo.dll
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Entidades\bin\x86\Debug\LogicaConfiguracionCorreo.pdb
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Entidades\bin\x86\Debug\LogicaConfiguracionCorreo.xml
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Entidades\obj\x86\Debug\EntidadesConfiguracionCorreo.vbprojResolveAssemblyReference.cache
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Entidades\obj\x86\Debug\EntidadesConfiguracionCorreo.Resources.resources
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Entidades\obj\x86\Debug\EntidadesConfiguracionCorreo.vbproj.GenerateResource.Cache
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Entidades\obj\x86\Debug\EntidadesConfiguracionCorreo.dll
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Entidades\obj\x86\Debug\EntidadesConfiguracionCorreo.xml
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Entidades\obj\x86\Debug\EntidadesConfiguracionCorreo.pdb

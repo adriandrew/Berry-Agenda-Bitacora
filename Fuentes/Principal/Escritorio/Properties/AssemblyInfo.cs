@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // conjunto de atributos. Cambie estos atributos para modificar la información
 // asociada con un ensamblado.
 [assembly: AssemblyTitle("Principal")]
-[assembly: AssemblyDescription("Programa base.")]
+[assembly: AssemblyDescription("Programa principal base.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Berry")]
 [assembly: AssemblyProduct("Principal")]

@@ -70,7 +70,7 @@ Public Class Usuarios
         End Set
     End Property
 
-    Public Function ObtenerListadoDeEmpresa() As List(Of Usuarios)
+    Public Function ObtenerListadoPorEmpresa() As List(Of Usuarios)
 
         Dim lista As New List(Of Usuarios)()
         Try

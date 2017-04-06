@@ -53,6 +53,8 @@ Public Class Areas
             Return lista
         Catch ex As Exception
             Throw ex
+        Finally
+            BaseDatos.conexionCatalogo.Close()
         End Try
 
     End Function
@@ -121,7 +123,6 @@ Public Class Areas
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionCatalogo
             comando.CommandText = "DELETE FROM Areas"
-            comando.Parameters.AddWithValue("@id", Me.id)
             BaseDatos.conexionCatalogo.Open()
             comando.ExecuteNonQuery()
             BaseDatos.conexionCatalogo.Close()
@@ -133,7 +134,7 @@ Public Class Areas
 
     End Sub
 
-    Public Function ValidarPorNumero() As Boolean
+    Public Function ValidarPorId() As Boolean
 
         Try
             Dim resultado As Boolean = False
@@ -154,7 +155,7 @@ Public Class Areas
         Catch ex As Exception
             Throw ex
         Finally
-            BaseDatos.conexionInformacion.Close()
+            BaseDatos.conexionCatalogo.Close()
         End Try
 
     End Function

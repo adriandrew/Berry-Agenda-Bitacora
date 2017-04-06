@@ -28,6 +28,18 @@ namespace Logica
             get { return this.clave; }
             set { this.clave = value; }
         }
-         
+
+        public void ObtenerParametrosInformacionArea()
+        {
+
+            string[] parametros = Environment.GetCommandLineArgs().ToArray();
+            if ((parametros.Length > 1)) {
+	            int numeracion = 26;
+	            this.Id = Convert.ToInt32(parametros[numeracion].Replace("|", " ")); numeracion += 1;
+                this.Nombre = parametros[numeracion].Replace("|", " "); numeracion += 1;
+                this.Clave = parametros[numeracion].Replace("|", " "); numeracion += 1; 
+            }
+
+        }
     }
 }

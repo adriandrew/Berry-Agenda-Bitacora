@@ -1,4 +1,6 @@
-﻿Public Class Principal
+﻿Imports System.IO
+
+Public Class Principal
 
     Dim actividadesExternas As New EntidadesAutorizaciones.ActividadesExternas
     Dim areas As New EntidadesAutorizaciones.Areas
@@ -15,10 +17,18 @@
     Public tipoBooleano As New FarPoint.Win.Spread.CellType.CheckBoxCellType()
     Public opcionSeleccionada As Integer = 0
     Public pintado As Boolean = False
-     
-    Dim esPrueba As Boolean = False
+    Dim ejecutarProgramaPrincipal As New ProcessStartInfo()
+
+    Public esPrueba As Boolean = False
 
 #Region "Eventos"
+
+    Private Sub Principal_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
+
+        Dim nombrePrograma As String = "PrincipalBerry"
+        AbrirPrograma(nombrePrograma, True)
+
+    End Sub
 
     Private Sub Principal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -135,7 +145,7 @@
 
     End Sub
 
-    Private Sub pnlCuerpo_MouseHover(sender As Object, e As EventArgs) Handles pnlCuerpo.MouseHover
+    Private Sub pnlCuerpo_MouseHover(sender As Object, e As EventArgs) Handles pnlPie.MouseHover, pnlEncabezado.MouseHover, pnlCuerpo.MouseHover
 
         AsignarTooltips(String.Empty)
 
@@ -243,6 +253,23 @@
 
     End Sub
 
+    Private Sub AbrirPrograma(nombre As String, salir As Boolean)
+
+        ejecutarProgramaPrincipal.UseShellExecute = True
+        ejecutarProgramaPrincipal.FileName = nombre & Convert.ToString(".exe")
+        ejecutarProgramaPrincipal.WorkingDirectory = Directory.GetCurrentDirectory()
+        ejecutarProgramaPrincipal.Arguments = LogicaAutorizaciones.DatosEmpresaPrincipal.idEmpresa.ToString().Trim().Replace(" ", "|") & " " & LogicaAutorizaciones.DatosEmpresaPrincipal.activa.ToString().Trim().Replace(" ", "|") & " " & LogicaAutorizaciones.DatosEmpresaPrincipal.instanciaSql.ToString().Trim().Replace(" ", "|") & " " & LogicaAutorizaciones.DatosEmpresaPrincipal.rutaBd.ToString().Trim().Replace(" ", "|") & " " & LogicaAutorizaciones.DatosEmpresaPrincipal.usuarioSql.ToString().Trim().Replace(" ", "|") & " " & LogicaAutorizaciones.DatosEmpresaPrincipal.contrasenaSql.ToString().Trim().Replace(" ", "|") & " " & "Aquí terminan los de empresa principal, indice 7 ;)".Replace(" ", "|") & " " & datosEmpresa.EId.ToString().Trim().Replace(" ", "|") & " " & datosEmpresa.ENombre.Trim().Replace(" ", "|") & " " & datosEmpresa.EDescripcion.Trim().Replace(" ", "|") & " " & datosEmpresa.EDomicilio.Trim().Replace(" ", "|") & " " & datosEmpresa.ELocalidad.Trim().Replace(" ", "|") & " " & datosEmpresa.ERfc.Trim().Replace(" ", "|") & " " & datosEmpresa.EDirectorio.Trim().Replace(" ", "|") & " " & datosEmpresa.ELogo.Trim().Replace(" ", "|") & " " & datosEmpresa.EActiva.ToString().Trim().Replace(" ", "|") & " " & datosEmpresa.EEquipo.Trim().Replace(" ", "|") & " " & "Aquí terminan los de empresa, indice 18 ;)".Replace(" ", "|") & " " & datosUsuario.EId.ToString().Trim().Replace(" ", "|") & " " & datosUsuario.ENombre.Trim().Replace(" ", "|") & " " & datosUsuario.EContrasena.Trim().Replace(" ", "|") & " " & datosUsuario.ENivel.ToString().Trim().Replace(" ", "|") & " " & datosUsuario.EAccesoTotal.ToString().Trim().Replace(" ", "|") & " " & datosUsuario.EIdArea.ToString().Trim().Replace(" ", "|") & " " & "Aquí terminan los de usuario, indice 25 ;)".Replace(" ", "|") & " " & datosArea.EId.ToString().Trim().Replace(" ", "|") & " " & datosArea.ENombre.ToString().Trim().Replace(" ", "|") & " " & datosArea.EClave.ToString().Trim().Replace(" ", "|") & " " & "Aquí terminan los de area, indice 29 ;)".Replace(" ", "|")
+        Try
+            Process.Start(ejecutarProgramaPrincipal)
+            If salir Then
+                Application.Exit()
+            End If
+        Catch ex As Exception
+            MessageBox.Show((Convert.ToString("No se puede abrir el programa principal en la ruta : " & ejecutarProgramaPrincipal.WorkingDirectory & "\") & nombre) & Environment.NewLine & Environment.NewLine & ex.Message, "Error.", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+    End Sub
+
 #End Region
 
 #Region "Todos"
@@ -280,7 +307,7 @@
         spAutorizaciones.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell
         'ControlarSpreadEnter(spAutorizaciones)
         spAutorizaciones.Visible = True : Application.DoEvents()
-        spAutorizaciones.Font = New Font("Microsoft Sans Serif", 14, FontStyle.Regular) : Application.DoEvents()
+        spAutorizaciones.Font = New Font("Microsoft Sans Serif", 12, FontStyle.Regular) : Application.DoEvents()
         spAutorizaciones.HorizontalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded
         spAutorizaciones.VerticalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded
 
@@ -292,7 +319,7 @@
         spAutorizaciones.ActiveSheet.GrayAreaBackColor = Color.White : Application.DoEvents()
         spAutorizaciones.ActiveSheet.ColumnHeader.Rows(0).Height = 65 : Application.DoEvents()
         spAutorizaciones.ActiveSheet.Rows(-1).Height = 50 : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.ColumnHeader.Rows(0).Font = New Font("Microsoft Sans Serif", 14, FontStyle.Bold) : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.ColumnHeader.Rows(0).Font = New Font("Microsoft Sans Serif", 12, FontStyle.Bold) : Application.DoEvents()
         Dim numeracion As Integer = 0
         spAutorizaciones.ActiveSheet.Columns.Count = cantidadColumnas + 2 ' Es una columna para autorizar y otra para rechazar.
         spAutorizaciones.ActiveSheet.Columns(numeracion).Tag = "id" : numeracion += 1
@@ -312,15 +339,16 @@
         spAutorizaciones.ActiveSheet.Columns(numeracion).Tag = "esExterna" : numeracion += 1
         spAutorizaciones.ActiveSheet.Columns(numeracion).Tag = "esAutorizado" : numeracion += 1
         spAutorizaciones.ActiveSheet.Columns(numeracion).Tag = "esRechazado" : numeracion += 1
+        spAutorizaciones.ActiveSheet.Columns(numeracion).Tag = "estaResuelto" : numeracion += 1
         spAutorizaciones.ActiveSheet.Columns(numeracion).Tag = "autorizar" : numeracion += 1
         spAutorizaciones.ActiveSheet.Columns(numeracion).Tag = "rechazar" : numeracion += 1
-        spAutorizaciones.ActiveSheet.Columns("id").Width = 80 : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.Columns("idArea").Width = 90 : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.Columns("nombreArea").Width = 110 : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.Columns("id").Width = 60 : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.Columns("idArea").Width = 70 : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.Columns("nombreArea").Width = 120 : Application.DoEvents()
         spAutorizaciones.ActiveSheet.Columns("idUsuario").Width = 100 : Application.DoEvents()
         spAutorizaciones.ActiveSheet.Columns("nombreUsuario").Width = 110 : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.Columns("idAreaDestino").Width = 90 : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.Columns("nombreAreaDestino").Width = 110 : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.Columns("idAreaDestino").Width = 100 : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.Columns("nombreAreaDestino").Width = 120 : Application.DoEvents()
         spAutorizaciones.ActiveSheet.Columns("idUsuarioDestino").Width = 100 : Application.DoEvents()
         spAutorizaciones.ActiveSheet.Columns("nombreUsuarioDestino").Width = 110 : Application.DoEvents()
         spAutorizaciones.ActiveSheet.Columns("nombre").Width = 300 : Application.DoEvents()
@@ -354,6 +382,7 @@
         spAutorizaciones.ActiveSheet.Columns("esExterna").Visible = False : Application.DoEvents()
         spAutorizaciones.ActiveSheet.Columns("esAutorizado").Visible = False : Application.DoEvents()
         spAutorizaciones.ActiveSheet.Columns("esRechazado").Visible = False : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.Columns("estaResuelto").Visible = False : Application.DoEvents()
         spAutorizaciones.ActiveSheet.OperationMode = FarPoint.Win.Spread.OperationMode.SingleSelect
 
     End Sub
@@ -379,7 +408,7 @@
                 actividadesExternas.Editar()
             End If
         Next
-        MsgBox("Editado finalizado.", MsgBoxStyle.ApplicationModal, "Finalizado.")
+        MsgBox("Guardado finalizado.", MsgBoxStyle.ApplicationModal, "Finalizado.")
         ComenzarCargarAutorizaciones()
 
     End Sub

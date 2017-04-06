@@ -68,7 +68,7 @@
     Public Sub ObtenerParametrosInformacionUsuario()
 
         Dim parametros() = Environment.GetCommandLineArgs().ToArray()
-        If (parametros.Length > 0) Then
+        If (parametros.Length > 1) Then
             Dim numeracion As Integer = 19
             Me.EId = Convert.ToInt32(parametros(numeracion).Replace("|", " ")) : numeracion += 1
             Me.ENombre = parametros(numeracion).Replace("|", " ") : numeracion += 1
