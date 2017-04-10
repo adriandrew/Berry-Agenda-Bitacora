@@ -54,8 +54,8 @@ Public Class CorreosUsuarios
             Dim correos As New CorreosUsuarios
             While (dataReader.Read())
                 correos = New CorreosUsuarios()
-                correos.idEmpresa = Convert.ToInt32(dataReader("IdEmpresa"))
-                correos.idUsuario = Convert.ToInt32(dataReader("IdUsuario"))
+                correos.idEmpresa = Convert.ToInt32(dataReader("IdEmpresa").ToString())
+                correos.idUsuario = Convert.ToInt32(dataReader("IdUsuario").ToString())
                 correos.nombreUsuario = dataReader("NombreUsuario").ToString()
                 correos.direccion = dataReader("Direccion").ToString()
                 lista.Add(correos)

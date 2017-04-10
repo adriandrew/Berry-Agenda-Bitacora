@@ -16,10 +16,10 @@ C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUE
 C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Catalogos\Escritorio\obj\x86\Release\EYE04.exe
 C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Catalogos\Escritorio\obj\x86\Release\EYE04.xml
 C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Catalogos\Escritorio\obj\x86\Release\EYE04.pdb
-C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\bin\x86\Release\EYE04.exe.config
-C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\bin\x86\Release\EYE04.exe
-C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\bin\x86\Release\EYE04.pdb
-C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\bin\x86\Release\EYE04.xml
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\bin\x86\Release\EYE01.exe.config
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\bin\x86\Release\EYE01.exe
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\bin\x86\Release\EYE01.pdb
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\bin\x86\Release\EYE01.xml
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\bin\x86\Release\EntidadesCatalogos.dll
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\bin\x86\Release\LogicaCatalogos.dll
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\bin\x86\Release\EntidadesCatalogos.pdb
@@ -30,7 +30,7 @@ C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Mo
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\obj\x86\Release\Catalogos.Resources.resources
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\obj\x86\Release\Catalogos.Principal.resources
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\obj\x86\Release\Escritorio.vbproj.GenerateResource.Cache
-C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\obj\x86\Release\EYE04.exe.licenses
-C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\obj\x86\Release\EYE04.exe
-C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\obj\x86\Release\EYE04.xml
-C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\obj\x86\Release\EYE04.pdb
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\obj\x86\Release\EYE01.exe.licenses
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\obj\x86\Release\EYE01.exe
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\obj\x86\Release\EYE01.xml
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\obj\x86\Release\EYE01.pdb

@@ -190,12 +190,12 @@ Public Class ActividadesExternas
                 consultaWhere &= " AND NOT A.IdUsuarioDestino IS NULL AND A.IdUsuarioDestino > 0 "
             End If
             comando.CommandText = "SELECT A.Id, A.IdArea, Areas.Nombre AS NombreArea, A.IdUsuario, U.Nombre AS NombreUsuario, A.Nombre, A.IdAreaDestino, AreasDestino.Nombre AS NombreAreaDestino, A.IdUsuarioDestino, UD.Nombre AS NombreUsuarioDestino, A.Descripcion, A.FechaCreacion, A.FechaVencimiento, A.EsUrgente, A.EsExterna, A.EsAutorizado, A.EsRechazado, A.EstaResuelto " & _
-            " FROM ((((Actividades AS A LEFT JOIN ActividadesResueltas AS AR ON A.Id = AR.IdActividad AND A.IdArea = AR.IdArea) " & _
+            " FROM ((((Actividades AS A LEFT JOIN ActividadesResueltas AS AR ON A.Id = AR.IdActividad AND A.IdArea = AR.IdArea AND A.IdUsuario = AR.IdUsuario) " & _
             " LEFT JOIN [INFORMACION].dbo.Usuarios AS U ON A.IdUsuario = U.Id) " & _
             " LEFT JOIN [INFORMACION].dbo.Usuarios AS UD ON A.IdUsuarioDestino = UD.Id) " & _
             " LEFT JOIN [CATALOGOS].dbo.Areas ON A.IdArea = Areas.Id) " & _
             " LEFT JOIN [CATALOGOS].dbo.Areas AS AreasDestino ON A.IdAreaDestino = AreasDestino.Id " & _
-            " WHERE AR.IdActividad IS NULL AND AR.IdArea IS NULL AND (A.EsAutorizado = 'FALSE' OR A.EsAutorizado IS NULL) AND (A.EsRechazado = 'FALSE' OR A.EsRechazado IS NULL) " & consultaWhere
+            " WHERE AR.IdActividad IS NULL AND AR.IdArea IS NULL AND AR.IdUsuario IS NULL AND (A.EsAutorizado = 'FALSE' OR A.EsAutorizado IS NULL) AND (A.EsRechazado = 'FALSE' OR A.EsRechazado IS NULL) " & consultaWhere
             comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
             comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
             comando.Parameters.AddWithValue("@idAreaDestino", Me.EIdAreaDestino)
@@ -241,25 +241,10 @@ Public Class ActividadesExternas
         Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda 
-            'Dim consultaWhere As String = String.Empty
-            'If Me.EIdArea > 0 Then
-            '    consultaWhere &= " AND A.IdArea=@idArea "
-            'End If
-            'If Me.EIdUsuario > 0 Then
-            '    consultaWhere &= " AND A.IdUsuario=@idUsuario "
-            'End If
-            'If Me.EIdAreaDestino > 0 Then
-            '    consultaWhere &= " AND A.IdAreaDestino=@idAreaDestino " 
-            'End If
-            'If Me.EIdUsuarioDestino > 0 Then
-            '    consultaWhere &= " AND A.IdUsuarioDestino=@idUsuarioDestino " 
-            'End If
             comando.CommandText = "UPDATE Actividades SET EsAutorizado=@esAutorizado, EsRechazado=@esRechazado WHERE Id=@id AND IdArea=@idArea AND IdUsuario=@idUsuario"
             comando.Parameters.AddWithValue("@id", Me.EId)
             comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
             comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
-            'comando.Parameters.AddWithValue("@idAreaDestino", Me.EIdAreaDestino)
-            'comando.Parameters.AddWithValue("@idUsuarioDestino", Me.EIdUsuarioDestino)
             comando.Parameters.AddWithValue("@esAutorizado", Me.EEsAutorizado)
             comando.Parameters.AddWithValue("@esRechazado", Me.EEsRechazado)
             BaseDatos.conexionAgenda.Open()

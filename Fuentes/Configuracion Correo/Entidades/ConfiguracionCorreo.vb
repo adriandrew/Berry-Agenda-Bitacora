@@ -61,7 +61,7 @@ Public Class ConfiguracionCorreo
             comando.CommandText = "SELECT * FROM ConfiguracionCorreo"
             BaseDatos.conexionAgenda.Open()
             Dim dataReader As SqlDataReader = comando.ExecuteReader()
-            Dim configuracionCorreo As ConfiguracionCorreo
+            Dim configuracionCorreo As New ConfiguracionCorreo
             While dataReader.Read()
                 configuracionCorreo = New ConfiguracionCorreo()
                 configuracionCorreo.direccion = dataReader("Direccion").ToString()

@@ -65,9 +65,10 @@ Public Class ActividadesResueltas
         Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
-            comando.CommandText = "INSERT INTO ActividadesResueltas VALUES (@id, @idArea, @descripcion, @motivoRetraso, @fechaResolucion, @idAreaOrigen, @idUsuarioOrigen, @rutaImagen)"
+            comando.CommandText = "INSERT INTO ActividadesResueltas (IdActividad, IdArea, IdUsuario, Descripcion, MotivoRetraso, FechaResolucion, IdAreaOrigen, IdUsuarioOrigen, RutaImagen) VALUES (@id, @idArea, @idUsuario, @descripcion, @motivoRetraso, @fechaResolucion, @idAreaOrigen, @idUsuarioOrigen, @rutaImagen)"
             comando.Parameters.AddWithValue("@id", Me.EId)
             comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
+            comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
             comando.Parameters.AddWithValue("@descripcion", Me.EDescripcionResolucion)
             comando.Parameters.AddWithValue("@motivoRetraso", Me.EMotivoRetraso)
             comando.Parameters.AddWithValue("@fechaResolucion", Me.EFechaResolucion)
@@ -90,9 +91,10 @@ Public Class ActividadesResueltas
         Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
-            comando.CommandText = "UPDATE Actividades SET EstaResuelto=@estaResuelto WHERE Id=@id AND IdArea=@idArea"
+            comando.CommandText = "UPDATE Actividades SET EstaResuelto=@estaResuelto WHERE Id=@id AND IdArea=@idArea AND IdUsuario=@idUsuario"
             comando.Parameters.AddWithValue("@id", Me.EId)
             comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
+            comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
             comando.Parameters.AddWithValue("@estaResuelto", Me.EEstaResuelto)
             BaseDatos.conexionAgenda.Open()
             comando.ExecuteNonQuery()
@@ -110,9 +112,10 @@ Public Class ActividadesResueltas
         Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
-            comando.CommandText = "UPDATE ActividadesResueltas SET Descripcion=@descripcionResolucion, MotivoRetraso=@motivoRetraso, FechaResolucion=@fechaResolucion, IdAreaOrigen=@idAreaOrigen, IdUsuarioOrigen=@idUsuarioOrigen, RutaImagen=@rutaImagen WHERE IdActividad=@id AND IdArea=@idArea"
+            comando.CommandText = "UPDATE ActividadesResueltas SET Descripcion=@descripcionResolucion, MotivoRetraso=@motivoRetraso, FechaResolucion=@fechaResolucion, IdAreaOrigen=@idAreaOrigen, IdUsuarioOrigen=@idUsuarioOrigen, RutaImagen=@rutaImagen WHERE IdActividad=@id AND IdArea=@idArea AND IdUsuario=@idUsuario"
             comando.Parameters.AddWithValue("@id", Me.EId)
             comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
+            comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
             comando.Parameters.AddWithValue("@descripcionResolucion", Me.EDescripcionResolucion)
             comando.Parameters.AddWithValue("@motivoRetraso", Me.EMotivoRetraso)
             comando.Parameters.AddWithValue("@fechaResolucion", Me.EFechaResolucion)
@@ -135,9 +138,10 @@ Public Class ActividadesResueltas
         Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
-            comando.CommandText = "DELETE FROM ActividadesResueltas WHERE IdActividad=@id AND IdArea=@idArea"
+            comando.CommandText = "DELETE FROM ActividadesResueltas WHERE IdActividad=@id AND IdArea=@idArea AND IdUsuario=@idUsuario"
             comando.Parameters.AddWithValue("@id", Me.EId)
             comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
+            comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
             BaseDatos.conexionAgenda.Open()
             comando.ExecuteNonQuery()
             BaseDatos.conexionAgenda.Close()
@@ -155,9 +159,10 @@ Public Class ActividadesResueltas
             Dim resultado As Boolean = False
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
-            comando.CommandText = "SELECT * FROM ActividadesResueltas WHERE IdActividad=@id AND IdArea=@idArea"
+            comando.CommandText = "SELECT IdActividad FROM ActividadesResueltas WHERE IdActividad=@id AND IdArea=@idArea AND IdUsuario=@idUsuario"
             comando.Parameters.AddWithValue("@id", Me.EId)
             comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
+            comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
             BaseDatos.conexionAgenda.Open()
             Dim dataReader As SqlDataReader
             dataReader = comando.ExecuteReader()

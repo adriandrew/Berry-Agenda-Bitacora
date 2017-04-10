@@ -61,29 +61,44 @@ Public Class EmpresasPrincipal
     Public Function ObtenerPredeterminada() As List(Of EmpresasPrincipal)
 
         Dim lista As New List(Of EmpresasPrincipal)()
-        Try
-            Dim comando As New SqlCeCommand()
-            comando.Connection = BaseDatos.conexionPrincipal
-            comando.CommandText = "SELECT * FROM Empresas WHERE Activa='TRUE'"
-            BaseDatos.conexionPrincipal.Open()
-            Dim dataReader As SqlCeDataReader = Nothing
-            dataReader = comando.ExecuteReader()
-            Dim empresasPrincipal As EmpresasPrincipal
-            While (dataReader.Read())
-                empresasPrincipal = New EmpresasPrincipal()
-                empresasPrincipal.EIdEmpresa = Convert.ToInt32(dataReader("IdEmpresa"))
-                empresasPrincipal.EActiva = Convert.ToBoolean(dataReader("Activa").ToString())
-                empresasPrincipal.EInstanciaSql = dataReader("InstanciaSql").ToString()
-                empresasPrincipal.ERutaBd = dataReader("RutaBd").ToString()
-                empresasPrincipal.EUsuarioSql = dataReader("UsuarioSql").ToString()
-                empresasPrincipal.EContrasenaSql = dataReader("ContrasenaSql").ToString()
-                lista.Add(empresasPrincipal)
-            End While
-            BaseDatos.conexionPrincipal.Close()
-            Return lista
-        Catch ex As Exception
-            Throw ex
-        End Try
+        Dim conexionCorrecta As Boolean = False
+        While (Not conexionCorrecta)
+            Try
+                Dim comando As New SqlCeCommand()
+                comando.Connection = BaseDatos.conexionPrincipal
+                comando.CommandText = "SELECT * FROM Empresas WHERE Activa='TRUE'"
+                BaseDatos.conexionPrincipal.Open() 
+                Dim dataReader As SqlCeDataReader = Nothing
+                dataReader = comando.ExecuteReader()
+                Dim empresasPrincipal As EmpresasPrincipal
+                While (dataReader.Read())
+                    empresasPrincipal = New EmpresasPrincipal()
+                    empresasPrincipal.EIdEmpresa = Convert.ToInt32(dataReader("IdEmpresa"))
+                    empresasPrincipal.EActiva = Convert.ToBoolean(dataReader("Activa").ToString())
+                    empresasPrincipal.EInstanciaSql = dataReader("InstanciaSql").ToString()
+                    empresasPrincipal.ERutaBd = dataReader("RutaBd").ToString()
+                    empresasPrincipal.EUsuarioSql = dataReader("UsuarioSql").ToString()
+                    empresasPrincipal.EContrasenaSql = dataReader("ContrasenaSql").ToString()
+                    lista.Add(empresasPrincipal)
+                End While
+                BaseDatos.conexionPrincipal.Close()
+                conexionCorrecta = True
+                'Return lista
+            Catch ex As SqlCeException
+                If ex.NativeError = 25035 Then
+                    conexionCorrecta = False
+                Else
+                    conexionCorrecta = True
+                    Throw ex
+                End If
+            Catch ex As Exception
+                conexionCorrecta = True
+                Throw ex
+            Finally
+                BaseDatos.conexionPrincipal.Close()
+            End Try
+        End While
+        Return lista
 
     End Function
 

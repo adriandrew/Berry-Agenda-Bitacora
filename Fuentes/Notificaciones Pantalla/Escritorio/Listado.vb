@@ -101,7 +101,7 @@
         Me.Cursor = Cursors.WaitCursor
         ' Se calculan los controles necesarios.
         ' Los tamaños de los controles.
-        Dim alto As Integer = 200
+        Dim alto As Integer = 120
         Dim ancho As Integer = Me.splitContenedor.Panel1.Width - 25 '- 45
         ' Las posiciones donde inician los controles.
         Dim posicionY As Integer = 0
@@ -118,27 +118,24 @@
             'etiqueta.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) Or System.Windows.Forms.AnchorStyles.Left) Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
             etiqueta.BackColor = Color.Transparent
             etiqueta.BorderStyle = BorderStyle.FixedSingle
-            etiqueta.Font = New Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            etiqueta.Font = New Font("Microsoft Sans Serif", 16, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Dim diferenciaDias As Integer = DateDiff(DateInterval.Day, CDate(lista(indice - 1).EFechaVencimiento), Now, FirstDayOfWeek.System, FirstWeekOfYear.Jan1)
-            If diferenciaDias > 10 Then
-                etiqueta.ForeColor = Color.Red
-            ElseIf diferenciaDias > 5 And diferenciaDias < 10 Then
-                etiqueta.ForeColor = Color.Orange
-            Else
-                etiqueta.ForeColor = Color.Yellow
-            End If
+            'If diferenciaDias > 5 Then 
+            '    etiqueta.FlatStyle = FlatStyle.Flat
+            '    'etiqueta.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine
+            'End If
+            etiqueta.ForeColor = Color.White
+            etiqueta.AutoSize = True
             etiqueta.Top = posicionY
             etiqueta.Left = posicionX
             etiqueta.Name = "lbl_" & tipo & indice
             etiqueta.Size = New Size(ancho, alto)
             etiqueta.TabIndex = indice - 1
-
             Dim datosExtra As String = String.Empty
             If tipo = TipoActividad.externas Then
                 datosExtra = "    Solicita " & lista(indice - 1).ENombreUsuario
             End If
-
-            etiqueta.Text = "    " & lista(indice - 1).EFechaVencimiento & datosExtra & "    " & lista(indice - 1).ENombre.ToString() & vbNewLine & lista(indice - 1).EDescripcion.ToString()
+            etiqueta.Text = "      " & lista(indice - 1).EFechaVencimiento & datosExtra & "    " & lista(indice - 1).ENombre.ToString() & vbNewLine & lista(indice - 1).EDescripcion.ToString()
             etiqueta.AutoSize = False
             etiqueta.Image = Global.NotificacionesPantalla.My.Resources.Resources.Logo3
             etiqueta.ImageAlign = ContentAlignment.TopLeft
@@ -154,7 +151,7 @@
             'etiqueta.SendToBack()
             Application.DoEvents()
             System.Threading.Thread.Sleep(10)
-            ' Se distribuyen hacia abajo. 
+            ' Se distribuyen hacia abajo.
             posicionY += alto + margen
         Next
         Me.Cursor = Cursors.Default

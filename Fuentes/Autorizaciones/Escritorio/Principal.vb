@@ -401,8 +401,6 @@ Public Class Principal
                 actividadesExternas.EId = id
                 actividadesExternas.EIdArea = idArea
                 actividadesExternas.EIdUsuario = idUsuario
-                'actividadesExternas.EIdAreaDestino = idAreaDestino
-                'actividadesExternas.EIdUsuarioDestino = idUsuarioDestino
                 actividadesExternas.EEsAutorizado = autorizar
                 actividadesExternas.EEsRechazado = rechazar
                 actividadesExternas.Editar()

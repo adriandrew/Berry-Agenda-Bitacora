@@ -401,6 +401,8 @@ namespace Escritorio
                 Logica.DatosEmpresaPrincipal.usuarioSql = "AdminBerry";
                 Logica.DatosEmpresaPrincipal.contrasenaSql = "@berry";
                 Logica.DatosEmpresaPrincipal.idEmpresa = 1;
+                //ConfigurarConexionPrincipal();
+                //ConsultarInformacionEmpresaPrincipalPredeterminada();
                 //string[] activa = InstanciaSql().Split('|'); ' Es para obtener las instancias sql. Nunca se usó ya que no es lo correcto.
                 //string servidor = activa[0];
                 //string instancia = activa[1];
@@ -597,10 +599,19 @@ namespace Escritorio
                 pnlMenu.Controls.Add(cuadro); Application.DoEvents();
                 // Se crean las etiquetas de los paneles.
                 Label etiqueta = new Label();
-                etiqueta.Width = ancho;
-                etiqueta.Top = cuadro.Height - etiqueta.Height - 15;
-                //etiqueta.BackColor = Color.Black;
-                etiqueta.Height = 40;
+                etiqueta.Width = ancho; 
+                if (lista[indice - 1].Nombre.ToString().Length > 24)
+                {
+                    etiqueta.Top = cuadro.Height - etiqueta.Height - 45;
+                    etiqueta.Height = 80;
+                }
+                else
+                { 
+                    etiqueta.Top = cuadro.Height - etiqueta.Height - 15;
+                    etiqueta.Height = 40;
+                }
+                //etiqueta.BackColor = Color.Black; 
+                etiqueta.BorderStyle = BorderStyle.None;
                 etiqueta.Left = 0;
                 etiqueta.Text = lista[indice-1].Nombre.ToString(); //"idEmpresa " + indice; 
                 etiqueta.ForeColor = Color.White;
@@ -667,7 +678,11 @@ namespace Escritorio
 
         private void AbrirPrograma(string nombre, bool salir)
         {
-             
+            
+            if (this.esPrueba)
+            {
+                return;
+            }
             ejecutarProgramaPrincipal.UseShellExecute = true;
             ejecutarProgramaPrincipal.FileName = nombre + ".exe";
             ejecutarProgramaPrincipal.WorkingDirectory = Directory.GetCurrentDirectory();

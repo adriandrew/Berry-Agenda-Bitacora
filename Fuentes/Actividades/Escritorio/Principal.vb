@@ -429,8 +429,8 @@ Public Class Principal
 
         If (Me.esPrueba) Then
             'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf"
-            Me.datosUsuario.EId = 1
-            Me.datosUsuario.EIdArea = 1
+            Me.datosUsuario.EId = 2
+            Me.datosUsuario.EIdArea = 2
             Me.datosEmpresa.EId = 1
             LogicaActividades.DatosEmpresaPrincipal.instanciaSql = "ANDREW-MAC\SQLEXPRESS"
             LogicaActividades.DatosEmpresaPrincipal.usuarioSql = "AdminBerry"
@@ -442,12 +442,12 @@ Public Class Principal
             Me.datosUsuario.ObtenerParametrosInformacionUsuario()
             Me.datosArea.ObtenerParametrosInformacionArea()
         End If
-        EntidadesActividades.BaseDatos.ECadenaConexionAgenda = "Agenda"
-        EntidadesActividades.BaseDatos.ECadenaConexionCatalogo = "Catalogos"
         EntidadesActividades.BaseDatos.ECadenaConexionInformacion = "Informacion"
-        EntidadesActividades.BaseDatos.AbrirConexionAgenda()
-        EntidadesActividades.BaseDatos.AbrirConexionCatalogo()
+        EntidadesActividades.BaseDatos.ECadenaConexionCatalogo = "Catalogos"
+        EntidadesActividades.BaseDatos.ECadenaConexionAgenda = "Agenda"
         EntidadesActividades.BaseDatos.AbrirConexionInformacion()
+        EntidadesActividades.BaseDatos.AbrirConexionCatalogo()
+        EntidadesActividades.BaseDatos.AbrirConexionAgenda()
 
     End Sub
 
@@ -496,6 +496,7 @@ Public Class Principal
     Private Sub CargarConsecutivoActividades()
 
         actividades.EIdArea = Me.datosUsuario.EIdArea
+        actividades.EIdUsuario = Me.datosUsuario.EId
         txtCapturaId.Text = actividades.ObtenerMaximo()
 
     End Sub
@@ -505,6 +506,7 @@ Public Class Principal
         Dim lista As New List(Of EntidadesActividades.Actividades)
         actividades.EId = LogicaActividades.Funciones.ValidarNumero(txtCapturaId.Text)
         actividades.EIdArea = Me.datosUsuario.EIdArea
+        actividades.EIdUsuario = Me.datosUsuario.EId
         lista = actividades.ObtenerListadoPorId()
         If lista.Count = 1 Then
             If (lista(0).EEstaResuelto) Then
@@ -555,8 +557,8 @@ Public Class Principal
         Dim estaResuelto As Boolean = False
         If (id > 0) And (Not String.IsNullOrEmpty(nombre)) And (IsDate(fechaCreacion)) And IsDate(fechaVencimiento) Then
             actividades.EId = id
-            actividades.EIdUsuario = idUsuario
             actividades.EIdArea = idArea
+            actividades.EIdUsuario = idUsuario
             actividades.ENombre = nombre
             actividades.EDescripcion = descripcion
             actividades.EFechaCreacion = fechaCreacion
@@ -617,6 +619,7 @@ Public Class Principal
         If (id > 0) Then
             actividades.EId = id
             actividades.EIdArea = Me.datosUsuario.EIdArea
+            actividades.EIdUsuario = Me.datosUsuario.EId
             Dim estaResuelta As Boolean = actividades.ValidarResueltaPorId()
             If (estaResuelta) Then
                 MsgBox("Actividad resuelta, no se puede modificar.", MsgBoxStyle.Exclamation, "No permitido.")
@@ -670,7 +673,10 @@ Public Class Principal
     Private Sub CargarActividadesPendientes()
 
         Dim fila As Integer = spResolverActividades.ActiveSheet.ActiveRowIndex
-        txtResolucionId.Text = spResolverActividades.ActiveSheet.Cells(fila, spResolverActividades.ActiveSheet.Columns("id").Index).Value
+        Try
+            txtResolucionId.Text = spResolverActividades.ActiveSheet.Cells(fila, spResolverActividades.ActiveSheet.Columns("id").Index).Value
+        Catch ex As Exception
+        End Try
 
     End Sub
 
@@ -700,6 +706,7 @@ Public Class Principal
         Dim fila As Integer = spResolverActividades.ActiveSheet.ActiveRowIndex
         Dim id As Integer = LogicaActividades.Funciones.ValidarNumero(spResolverActividades.ActiveSheet.Cells(fila, spResolverActividades.ActiveSheet.Columns("id").Index).Value)
         Dim idArea As Integer = Me.datosUsuario.EIdArea
+        Dim idUsuario As Integer = Me.datosUsuario.EId
         Dim descripcion As String = txtResolucionDescripcion.Text
         Dim motivoRetraso As String = txtResolucionMotivoRetraso.Text
         Dim fechaResolucion As Date = dtpResolucionFecha.Text
@@ -707,6 +714,7 @@ Public Class Principal
         If (id > 0) And (Not String.IsNullOrEmpty(descripcion)) And IsDate(fechaResolucion) Then
             actividadesResueltas.EId = id
             actividadesResueltas.EIdArea = idArea
+            actividadesResueltas.EIdUsuario = idUsuario
             actividadesResueltas.EDescripcionResolucion = descripcion
             actividadesResueltas.EMotivoRetraso = motivoRetraso
             actividadesResueltas.EFechaResolucion = fechaResolucion
@@ -716,6 +724,7 @@ Public Class Principal
             Dim actividadesLocal As New EntidadesActividades.Actividades
             actividadesLocal.EId = id
             actividadesLocal.EIdArea = idArea
+            actividadesLocal.EIdUsuario = idUsuario
             listaLocal = actividadesLocal.ObtenerListadoPorId()
             Dim fechaCreacion As Date = listaLocal(0).EFechaCreacion
             If (DateDiff(DateInterval.Day, fechaResolucion, fechaCreacion) > 0) Then
@@ -741,6 +750,7 @@ Public Class Principal
         Dim fila As Integer = spResolverActividades.ActiveSheet.ActiveRowIndex
         Dim id As Integer = LogicaActividades.Funciones.ValidarNumero(spResolverActividades.ActiveSheet.Cells(fila, spResolverActividades.ActiveSheet.Columns("id").Index).Value)
         Dim idArea As Integer = LogicaActividades.Funciones.ValidarNumero(spResolverActividades.ActiveSheet.Cells(fila, spResolverActividades.ActiveSheet.Columns("idArea").Index).Value) ' Se toma el area que la pidió, de la cual se va a resolver.
+        Dim idUsuario As Integer = LogicaActividades.Funciones.ValidarNumero(spResolverActividades.ActiveSheet.Cells(fila, spResolverActividades.ActiveSheet.Columns("idUsuario").Index).Value) ' Se toma el usuario que la pidió, de la cual se va a resolver.
         Dim descripcion As String = txtResolucionDescripcion.Text
         Dim motivoRetraso As String = txtResolucionMotivoRetraso.Text
         Dim fechaResolucion As Date = dtpResolucionFecha.Text
@@ -750,6 +760,7 @@ Public Class Principal
         If (id > 0) And (Not String.IsNullOrEmpty(descripcion)) And (IsDate(fechaResolucion)) And (Not String.IsNullOrEmpty(Me.rutaImagen)) Then
             actividadesResueltas.EId = id
             actividadesResueltas.EIdArea = idArea
+            actividadesResueltas.EIdUsuario = idUsuario
             actividadesResueltas.EDescripcionResolucion = descripcion
             actividadesResueltas.EMotivoRetraso = motivoRetraso
             actividadesResueltas.EFechaResolucion = fechaResolucion
@@ -761,6 +772,7 @@ Public Class Principal
             Dim actividadesLocal As New EntidadesActividades.Actividades
             actividadesLocal.EId = id
             actividadesLocal.EIdArea = idArea
+            actividadesLocal.EIdUsuario = idUsuario
             listaLocal = actividadesLocal.ObtenerListadoPorId()
             Dim fechaCreacion As Date = listaLocal(0).EFechaCreacion
             If (DateDiff(DateInterval.Day, fechaResolucion, fechaCreacion) > 0) Then

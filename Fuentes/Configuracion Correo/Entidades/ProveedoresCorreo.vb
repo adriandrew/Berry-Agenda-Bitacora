@@ -59,15 +59,15 @@ Public Class ProveedoresCorreo
             BaseDatos.conexionAgenda.Open()
             Dim dataReader As SqlDataReader
             dataReader = comando.ExecuteReader()
-            Dim areas As New ProveedoresCorreo
+            Dim proveedoresCorreo As New ProveedoresCorreo
             While (dataReader.Read())
-                areas = New ProveedoresCorreo()
-                areas.id = Convert.ToInt32(dataReader("Id"))
-                areas.nombre = dataReader("Nombre").ToString()
-                areas.servidor = dataReader("Servidor").ToString()
-                areas.dominio = dataReader("Dominio").ToString()
-                areas.puerto = dataReader("Puerto").ToString()
-                lista.Add(areas)
+                proveedoresCorreo = New ProveedoresCorreo()
+                proveedoresCorreo.id = Convert.ToInt32(dataReader("Id").ToString())
+                proveedoresCorreo.nombre = dataReader("Nombre").ToString()
+                proveedoresCorreo.servidor = dataReader("Servidor").ToString()
+                proveedoresCorreo.dominio = dataReader("Dominio").ToString()
+                proveedoresCorreo.puerto = dataReader("Puerto").ToString()
+                lista.Add(proveedoresCorreo)
             End While
             BaseDatos.conexionAgenda.Close()
             Return lista

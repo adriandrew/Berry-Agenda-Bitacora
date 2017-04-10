@@ -75,7 +75,7 @@ Partial Class Listado
         'splitContenedor.Panel2
         '
         Me.splitContenedor.Panel2.AutoScroll = True
-        Me.splitContenedor.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.splitContenedor.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.splitContenedor.Size = New System.Drawing.Size(1039, 633)
         Me.splitContenedor.SplitterDistance = 519
         Me.splitContenedor.TabIndex = 2
@@ -92,19 +92,20 @@ Partial Class Listado
         Me.pnlMarcarVisto.BackColor = System.Drawing.Color.White
         Me.pnlMarcarVisto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlMarcarVisto.Controls.Add(Me.chkMarcarVisto)
-        Me.pnlMarcarVisto.Location = New System.Drawing.Point(370, 0)
+        Me.pnlMarcarVisto.Location = New System.Drawing.Point(405, 0)
         Me.pnlMarcarVisto.Name = "pnlMarcarVisto"
-        Me.pnlMarcarVisto.Size = New System.Drawing.Size(300, 50)
+        Me.pnlMarcarVisto.Size = New System.Drawing.Size(232, 39)
         Me.pnlMarcarVisto.TabIndex = 0
         '
         'chkMarcarVisto
         '
         Me.chkMarcarVisto.AutoSize = True
         Me.chkMarcarVisto.BackColor = System.Drawing.Color.Transparent
-        Me.chkMarcarVisto.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkMarcarVisto.Location = New System.Drawing.Point(14, 7)
+        Me.chkMarcarVisto.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine
+        Me.chkMarcarVisto.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkMarcarVisto.Location = New System.Drawing.Point(4, 4)
         Me.chkMarcarVisto.Name = "chkMarcarVisto"
-        Me.chkMarcarVisto.Size = New System.Drawing.Size(271, 35)
+        Me.chkMarcarVisto.Size = New System.Drawing.Size(225, 29)
         Me.chkMarcarVisto.TabIndex = 0
         Me.chkMarcarVisto.Text = "Marcar como leído"
         Me.chkMarcarVisto.UseVisualStyleBackColor = False

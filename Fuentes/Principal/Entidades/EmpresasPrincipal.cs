@@ -52,33 +52,56 @@ namespace Entidades
         {
 
             List<EmpresasPrincipal> lista = new List<EmpresasPrincipal>();
-            try
-            {
-                SqlCeCommand comando = new SqlCeCommand();
-                comando.Connection = BaseDatos.conexionPrincipal;
-                comando.CommandText = "SELECT * FROM Empresas WHERE Activa='TRUE'";
-                BaseDatos.conexionPrincipal.Open();
-                SqlCeDataReader dataReader = default(SqlCeDataReader);
-                dataReader = comando.ExecuteReader();
-                EmpresasPrincipal empresasPrincipal;
-                while ((dataReader.Read()))
+            bool conexionCorrecta = false;
+            while (!conexionCorrecta)
+            { 
+                try
                 {
-                    empresasPrincipal = new EmpresasPrincipal();
-                    empresasPrincipal.IdEmpresa = Convert.ToInt32(dataReader["IdEmpresa"]);
-                    empresasPrincipal.Activa = Convert.ToBoolean(dataReader["Activa"].ToString());
-                    empresasPrincipal.InstanciaSql = dataReader["InstanciaSql"].ToString();
-                    empresasPrincipal.RutaBd = dataReader["RutaBd"].ToString();
-                    empresasPrincipal.UsuarioSql = dataReader["UsuarioSql"].ToString();
-                    empresasPrincipal.ContrasenaSql = dataReader["ContrasenaSql"].ToString(); 
-                    lista.Add(empresasPrincipal);
+                    SqlCeCommand comando = new SqlCeCommand();
+                    comando.Connection = BaseDatos.conexionPrincipal;
+                    comando.CommandText = "SELECT * FROM Empresas WHERE Activa='TRUE'";
+                    BaseDatos.conexionPrincipal.Open(); 
+                    SqlCeDataReader dataReader = default(SqlCeDataReader);
+                    dataReader = comando.ExecuteReader();
+                    EmpresasPrincipal empresasPrincipal;
+                    while ((dataReader.Read()))
+                    {
+                        empresasPrincipal = new EmpresasPrincipal();
+                        empresasPrincipal.IdEmpresa = Convert.ToInt32(dataReader["IdEmpresa"]);
+                        empresasPrincipal.Activa = Convert.ToBoolean(dataReader["Activa"].ToString());
+                        empresasPrincipal.InstanciaSql = dataReader["InstanciaSql"].ToString();
+                        empresasPrincipal.RutaBd = dataReader["RutaBd"].ToString();
+                        empresasPrincipal.UsuarioSql = dataReader["UsuarioSql"].ToString();
+                        empresasPrincipal.ContrasenaSql = dataReader["ContrasenaSql"].ToString();
+                        lista.Add(empresasPrincipal);
+                    }
+                    BaseDatos.conexionPrincipal.Close();
+                    conexionCorrecta = true;
+                    //return lista;
                 }
-                BaseDatos.conexionPrincipal.Close();
-                return lista;
+                catch (SqlCeException ex)
+                {
+                    if (ex.NativeError == 25035)
+                    {
+                        conexionCorrecta = false;
+                    }
+                    else
+                    {
+                        conexionCorrecta = true;
+                        throw ex;
+                    }
+                }
+                catch(Exception ex)
+                {
+                    conexionCorrecta = true;
+                    throw ex; 
+                }
+                finally
+                {
+                    BaseDatos.conexionPrincipal.Close();
+                }
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return lista;
 
         }
 

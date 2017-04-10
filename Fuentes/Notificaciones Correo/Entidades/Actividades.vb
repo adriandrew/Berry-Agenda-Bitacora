@@ -109,8 +109,9 @@ Public Class Actividades
         Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
-            comando.CommandText = "SELECT A.* FROM Actividades AS A LEFT JOIN ActividadesResueltas AS AR ON A.Id = AR.IdActividad AND A.IdArea = AR.IdArea " & _
-            " WHERE A.IdArea=@idArea AND A.IdUsuario=@idUsuario AND AR.IdActividad IS NULL AND AR.IdArea IS NULL AND CONVERT(CHAR(10), A.FechaVencimiento, 121) < CONVERT(CHAR(10), GETDATE(), 121) " & _
+            comando.CommandText = "SELECT A.* " & _
+            " FROM Actividades AS A LEFT JOIN ActividadesResueltas AS AR ON A.Id = AR.IdActividad AND A.IdArea = AR.IdArea AND A.IdUsuario = AR.IdUsuario " & _
+            " WHERE A.IdArea=@idArea AND A.IdUsuario=@idUsuario AND AR.IdActividad IS NULL AND AR.IdArea IS NULL AND AR.IdUsuario IS NULL AND CONVERT(CHAR(10), A.FechaVencimiento, 121) < CONVERT(CHAR(10), GETDATE(), 121) " & _
             " ORDER BY A.FechaVencimiento ASC"
             comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
             comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)

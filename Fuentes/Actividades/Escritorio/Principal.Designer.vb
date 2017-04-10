@@ -213,10 +213,14 @@ Partial Class Principal
         'btnCapturaEliminar
         '
         Me.btnCapturaEliminar.BackColor = System.Drawing.Color.White
+        Me.btnCapturaEliminar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCapturaEliminar.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.btnCapturaEliminar.FlatAppearance.BorderSize = 3
         Me.btnCapturaEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine
         Me.btnCapturaEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCapturaEliminar.ForeColor = System.Drawing.Color.Black
         Me.btnCapturaEliminar.Image = CType(resources.GetObject("btnCapturaEliminar.Image"), System.Drawing.Image)
-        Me.btnCapturaEliminar.Location = New System.Drawing.Point(579, 324)
+        Me.btnCapturaEliminar.Location = New System.Drawing.Point(578, 324)
         Me.btnCapturaEliminar.Margin = New System.Windows.Forms.Padding(0)
         Me.btnCapturaEliminar.Name = "btnCapturaEliminar"
         Me.btnCapturaEliminar.Size = New System.Drawing.Size(60, 60)
@@ -262,8 +266,12 @@ Partial Class Principal
         'btnCapturaGuardar
         '
         Me.btnCapturaGuardar.BackColor = System.Drawing.Color.White
+        Me.btnCapturaGuardar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCapturaGuardar.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.btnCapturaGuardar.FlatAppearance.BorderSize = 3
         Me.btnCapturaGuardar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine
         Me.btnCapturaGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCapturaGuardar.ForeColor = System.Drawing.Color.Black
         Me.btnCapturaGuardar.Image = CType(resources.GetObject("btnCapturaGuardar.Image"), System.Drawing.Image)
         Me.btnCapturaGuardar.Location = New System.Drawing.Point(639, 324)
         Me.btnCapturaGuardar.Margin = New System.Windows.Forms.Padding(0)
@@ -456,8 +464,12 @@ Partial Class Principal
         'btnAdministrarImagen
         '
         Me.btnAdministrarImagen.BackColor = System.Drawing.Color.White
+        Me.btnAdministrarImagen.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnAdministrarImagen.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.btnAdministrarImagen.FlatAppearance.BorderSize = 3
         Me.btnAdministrarImagen.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine
         Me.btnAdministrarImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAdministrarImagen.ForeColor = System.Drawing.Color.Black
         Me.btnAdministrarImagen.Image = CType(resources.GetObject("btnAdministrarImagen.Image"), System.Drawing.Image)
         Me.btnAdministrarImagen.Location = New System.Drawing.Point(750, 18)
         Me.btnAdministrarImagen.Margin = New System.Windows.Forms.Padding(0)
@@ -491,8 +503,12 @@ Partial Class Principal
         'btnResolucionGuardar
         '
         Me.btnResolucionGuardar.BackColor = System.Drawing.Color.White
+        Me.btnResolucionGuardar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnResolucionGuardar.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.btnResolucionGuardar.FlatAppearance.BorderSize = 3
         Me.btnResolucionGuardar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine
         Me.btnResolucionGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnResolucionGuardar.ForeColor = System.Drawing.Color.Black
         Me.btnResolucionGuardar.Image = CType(resources.GetObject("btnResolucionGuardar.Image"), System.Drawing.Image)
         Me.btnResolucionGuardar.Location = New System.Drawing.Point(750, 121)
         Me.btnResolucionGuardar.Margin = New System.Windows.Forms.Padding(0)
@@ -665,8 +681,12 @@ Partial Class Principal
         '
         Me.btnSalir.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSalir.BackColor = System.Drawing.Color.White
+        Me.btnSalir.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnSalir.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.btnSalir.FlatAppearance.BorderSize = 3
         Me.btnSalir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine
         Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSalir.ForeColor = System.Drawing.Color.Black
         Me.btnSalir.Image = CType(resources.GetObject("btnSalir.Image"), System.Drawing.Image)
         Me.btnSalir.Location = New System.Drawing.Point(973, -1)
         Me.btnSalir.Margin = New System.Windows.Forms.Padding(0)

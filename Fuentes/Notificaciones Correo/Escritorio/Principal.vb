@@ -11,6 +11,8 @@ Public Class Principal
     Dim actividadesExternas As New EntidadesNotificacionesCorreo.ActividadesExternas
     Dim usuarios As New EntidadesNotificacionesCorreo.Usuarios
     Dim notificaciones As New EntidadesNotificacionesCorreo.Notificaciones
+    Dim configuracionProveedoresCorreo As New EntidadesNotificacionesCorreo.ConfiguracionProveedoresCorreo
+    Dim correos As New EntidadesNotificacionesCorreo.Correos
     Public datosEmpresa As New LogicaNotificacionesCorreo.DatosEmpresa()
     Public datosUsuario As New LogicaNotificacionesCorreo.DatosUsuario()
     Public datosArea As New LogicaNotificacionesCorreo.DatosArea()
@@ -123,8 +125,10 @@ Public Class Principal
             'baseDatos.CadenaConexionInformacion = datosEmpresa.EDirectorio & "\\Agenda.mdf"  
         End If
         EntidadesNotificacionesCorreo.BaseDatos.ECadenaConexionInformacion = "Informacion"
+        EntidadesNotificacionesCorreo.BaseDatos.ECadenaConexionCatalogo = "Catalogos"
         EntidadesNotificacionesCorreo.BaseDatos.ECadenaConexionAgenda = "Agenda"
         EntidadesNotificacionesCorreo.BaseDatos.AbrirConexionInformacion()
+        EntidadesNotificacionesCorreo.BaseDatos.AbrirConexionCatalogo()
         EntidadesNotificacionesCorreo.BaseDatos.AbrirConexionAgenda()
 
     End Sub
@@ -178,30 +182,46 @@ Public Class Principal
         ' Se obtienen los distintos usuarios existentes.
         Dim listaUsuarios As New List(Of EntidadesNotificacionesCorreo.Usuarios)
         usuarios.EIdEmpresa = Me.datosEmpresa.EId
-        listaUsuarios = usuarios.ObtenerListadoPorEmpresa
+        listaUsuarios = usuarios.ObtenerListadoPorEmpresa()
+        ' Se obtiene la configuracion de datos de correo.
+        Dim listaConfiguracion As New List(Of EntidadesNotificacionesCorreo.ConfiguracionProveedoresCorreo)
+        listaConfiguracion = configuracionProveedoresCorreo.ObtenerListado()
+        Dim listaConfiguracionLocal As New Object
+        If listaConfiguracion.Count > 0 Then
+            listaConfiguracionLocal = listaConfiguracion(0)
+        Else
+            MostrarEnSpread("Todos.", Now, "Falta configurar datos de correo.", "Gerente")
+            System.Threading.Thread.Sleep(60000)
+            Exit Sub
+        End If 
+        If (String.IsNullOrEmpty(listaConfiguracionLocal.EDireccion) Or String.IsNullOrEmpty(listaConfiguracionLocal.EContrasena) Or String.IsNullOrEmpty(listaConfiguracionLocal.EServidor) Or String.IsNullOrEmpty(listaConfiguracionLocal.EPuerto)) Then
+            MostrarEnSpread("Todos.", Now, "Falta configurar datos de correo.", "Gerente")
+            System.Threading.Thread.Sleep(60000)
+            Exit Sub 
+        End If
         ' Se recorre cada uno y se envian sus actividades pendientes, internas y externas.
         For fila = 0 To listaUsuarios.Count - 1
-            Dim lista As New List(Of EntidadesNotificacionesCorreo.Actividades) : Dim listaExterna As New List(Of EntidadesNotificacionesCorreo.ActividadesExternas)
-            Dim listaLocal As New Object
+            Dim listaActividades As New List(Of EntidadesNotificacionesCorreo.Actividades) : Dim listaExterna As New List(Of EntidadesNotificacionesCorreo.ActividadesExternas)
+            Dim listaActividadesLocal As New Object
             ' Actividades internas.
             actividades.EIdArea = listaUsuarios(fila).EIdArea
             actividades.EIdUsuario = listaUsuarios(fila).EId
-            lista = actividades.ObtenerListadoPendientes()
-            listaLocal = lista
-            If lista.Count > 0 Then
-                EnviarCorreo(listaLocal, TipoActividad.internas, listaUsuarios(fila).ENombre, "Internas")
+            listaActividades = actividades.ObtenerListadoPendientes()
+            listaActividadesLocal = listaActividades
+            If listaActividades.Count > 0 Then
+                EnviarCorreo(listaConfiguracionLocal, listaActividadesLocal, TipoActividad.internas, listaUsuarios(fila).EId, listaUsuarios(fila).ENombre, "Internas")
             End If
             System.Threading.Thread.Sleep(5000)
-            listaLocal = New Object
+            listaActividadesLocal = New Object
             ' Actividades externas.
             actividadesExternas.EIdArea = listaUsuarios(fila).EIdArea
             actividadesExternas.EIdUsuario = listaUsuarios(fila).EId
             listaExterna = actividadesExternas.ObtenerListadoPendientesExternas()
-            listaLocal = listaExterna
+            listaActividadesLocal = listaExterna
             If listaExterna.Count > 0 Then
-                EnviarCorreo(listaLocal, TipoActividad.externas, listaUsuarios(fila).ENombre, "Externas")
+                EnviarCorreo(listaConfiguracionLocal, listaActividadesLocal, TipoActividad.externas, listaUsuarios(fila).EId, listaUsuarios(fila).ENombre, "Externas")
             End If
-            listaLocal = New Object
+            listaActividadesLocal = New Object
             System.Threading.Thread.Sleep(10000)
         Next
 
@@ -233,7 +253,11 @@ Public Class Principal
                 'If (minutos Mod 2) = 0 Then
                 esRangoValido = True
             Else
-                esRangoValido = False
+                If Me.esPrueba Then
+                    esRangoValido = True
+                Else
+                    esRangoValido = False
+                End If
             End If
             If (esRangoValido) Then
                 If Me.esDivisible Then
@@ -248,39 +272,45 @@ Public Class Principal
 
     End Sub
 
-    Private Sub EnviarCorreo(ByVal lista As Object, ByVal tipo As Integer, ByVal nombreUsuario As String, ByVal tipoNombre As String)
+    Private Sub EnviarCorreo(ByVal listaConfiguracion As Object, ByVal listaActividades As Object, ByVal tipo As Integer, ByVal idUsuario As Integer, ByVal nombreUsuario As String, ByVal tipoNombre As String)
 
         Me.Cursor = Cursors.WaitCursor
-        'notificador.BalloonTipTitle = "Correo"
-        'notificador.BalloonTipText = "Enviando notificaciones por correo..."
-        'notificador.BalloonTipIcon = ToolTipIcon.Info
-        'notificador.ShowBalloonTip(1)
+        Dim descripcionError As String = String.Empty
         Dim datosExtra As String = String.Empty
         Dim mail As New MailMessage()
-        Dim adjunto1 As Attachment
-        Dim emisor As String = "aaandrewlopez@gmail.com"
-        Dim emisor2 As String = "yulianapem@gmail.com"
-        Dim contraseña As String = "andrew1007"
+        Dim archivoAdjunto As Attachment
+        Dim emisor As String = listaConfiguracion.EDireccion '"aaandrewlopez@gmail.com"
+        Dim receptor As String = "yulianapem@gmail.com"
+        Dim contrasena As String = listaConfiguracion.EContrasena '"andrew1007"
         If tipo = TipoActividad.externas Then
             datosExtra = "externas "
         End If
-        Dim asunto As String = "Tareas pendientes " & datosExtra & Today ' nombreUsuario
-        Dim mensaje As String = nombreUsuario & " tienes pendientes las siguientes actividades:" & vbNewLine & vbNewLine
+        Dim asunto As String = IIf(String.IsNullOrEmpty(listaConfiguracion.EAsunto), "Tareas pendientes ", listaConfiguracion.EAsunto & " ") & datosExtra & Today
+        Dim mensaje As String = nombreUsuario & IIf(String.IsNullOrEmpty(listaConfiguracion.EMensaje), " tienes pendientes las siguientes actividades:", " " & listaConfiguracion.EMensaje & " ") & vbNewLine & vbNewLine
         Dim mensajeHtml As String = "<h2>" & mensaje & "</h2><br><br>"
-        Dim datosServidor As String = "smtp.gmail.com"
-        Dim puerto As Integer = 587
+        Dim servidorProveedor As String = listaConfiguracion.EServidor '"smtp.gmail.com"
+        Dim puerto As Integer = listaConfiguracion.EPuerto '587
         mail.From = New MailAddress(emisor)
         mail.Priority = MailPriority.High
-        mail.To.Add(emisor)
-        mail.To.Add(emisor2)
+        'mail.To.Add(emisor)
+        'mail.To.Add(receptor)
+        Dim listaCorreos As New List(Of EntidadesNotificacionesCorreo.Correos)
+        correos.EIdUsuario = idUsuario
+        listaCorreos = correos.ObtenerPorIdUsuario()
+        If listaCorreos.Count <= 0 Then
+            descripcionError &= "Debe especificar un destinatario. "
+        End If
+        For indice As Integer = 0 To listaCorreos.Count - 1
+            mail.To.Add(listaCorreos(indice).EDireccion)
+        Next
         ' Se crean los mensajes planos y htmls.
-        For indice As Integer = 0 To lista.Count - 1
+        For indice As Integer = 0 To listaActividades.Count - 1
             datosExtra = String.Empty
             If tipo = TipoActividad.externas Then
-                datosExtra = " Solicita " & lista(indice).ENombreUsuario & " "
+                datosExtra = " Solicita " & listaActividades(indice).ENombreUsuario & " "
             End If
-            mensaje &= lista(indice).EFechaVencimiento & datosExtra & " " & lista(indice).ENombre & " - " & lista(indice).EDescripcion & vbNewLine & vbNewLine
-            mensajeHtml &= "<img src='cid:imagen'/><h3 style='display:inline'>&nbsp;&nbsp;" & lista(indice).EFechaVencimiento & " " & datosExtra & lista(indice).ENombre & " - " & lista(indice).EDescripcion & "<br><br></h3>"
+            mensaje &= listaActividades(indice).EFechaVencimiento & datosExtra & " " & listaActividades(indice).ENombre & " - " & listaActividades(indice).EDescripcion & vbNewLine & vbNewLine
+            mensajeHtml &= "<img src='cid:imagen'/><h3 style='display:inline'>&nbsp;&nbsp;" & listaActividades(indice).EFechaVencimiento & " " & datosExtra & listaActividades(indice).ENombre & " - " & listaActividades(indice).EDescripcion & "<br><br></h3>"
         Next
         ' Se adjunta la imagen del logo de berry.
         Try
@@ -288,12 +318,12 @@ Public Class Principal
             If Me.esPrueba Then
                 rutaLogoPng = "C:\BERRY-BITACORA\logo3.png"
             Else
-                rutaLogoPng = CurDir() & "\logo3.png" ' TODO. Corregir ruta.
+                rutaLogoPng = CurDir() & "\logo3.png"
             End If
-            adjunto1 = New Attachment(rutaLogoPng)
-            mail.Attachments.Add(adjunto1)
+            archivoAdjunto = New Attachment(rutaLogoPng)
+            mail.Attachments.Add(archivoAdjunto)
         Catch ex As Exception
-            adjunto1 = Nothing
+            archivoAdjunto = Nothing
         End Try
         mail.Subject = asunto
         mail.Body = mensaje
@@ -301,36 +331,27 @@ Public Class Principal
         Dim vistaPlana As AlternateView = AlternateView.CreateAlternateViewFromString(mensaje, Encoding.UTF8, MediaTypeNames.Text.Plain)
         ' Ahora creamos la vista para clientes que pueden mostrar contenido HTML...
         Dim vistaHtml As AlternateView = AlternateView.CreateAlternateViewFromString(mensajeHtml, Encoding.UTF8, MediaTypeNames.Text.Html)
-        ' Creamos el recurso a incrustar. Observad que el ID que le asignamos (arbitrario) está referenciado desde el código HTML como origen de la imagen (resaltado en amarillo)...
+        ' Creamos el recurso a incrustar. Observad que el ID que le asignamos (arbitrario) está referenciado desde el código HTML como origen de la imagen.
         Dim rutaLogoJpg As String = String.Empty
         If Me.esPrueba Then
             rutaLogoJpg = "C:\BERRY-BITACORA\logo3.jpg"
         Else
             rutaLogoJpg = CurDir() & "\logo3.jpg"
         End If
-        Dim imagenIcono As New LinkedResource(rutaLogoJpg, MediaTypeNames.Image.Jpeg) ' TODO. Corregir ruta.
+        Dim imagenIcono As New LinkedResource(rutaLogoJpg, MediaTypeNames.Image.Jpeg)
         imagenIcono.ContentId = "imagen"
         ' Lo incrustamos en la vista HTML...
         vistaHtml.LinkedResources.Add(imagenIcono)
         ' Por último, vinculamos ambas vistas al mensaje...
         mail.AlternateViews.Add(vistaPlana)
         mail.AlternateViews.Add(vistaHtml)
-        'For j As Integer = 0 To sp1.Sheets.Count - 1
-        '    For i As Integer = 0 To sp1.Sheets(j).Rows.Count - 1
-        '        If sp1.Sheets(j).Cells(i, 2).Text <> "" Then
-        '            If sp1.Sheets(j).Cells(i, 3).Value = True Then
-        '                mail.To.Add(sp1.Sheets(j).Cells(i, 2).Text)
-        '            End If
-        '        End If
-        '    Next
-        'Next 
-        Dim server As New SmtpClient(datosServidor)
-        server.UseDefaultCredentials = False
-        server.Port = puerto
-        server.Credentials = New System.Net.NetworkCredential(emisor, contraseña)
-        server.EnableSsl = True
+        Dim servidor As New SmtpClient(servidorProveedor)
+        servidor.UseDefaultCredentials = False
+        servidor.Port = puerto
+        servidor.Credentials = New System.Net.NetworkCredential(emisor, contrasena)
+        servidor.EnableSsl = True
         Try
-            server.Send(mail)
+            servidor.Send(mail)
             notificador.BalloonTipTitle = "Correo para " & nombreUsuario
             notificador.BalloonTipText = "Notificaciones enviadas por correo!"
             notificador.BalloonTipIcon = ToolTipIcon.Info
@@ -338,7 +359,7 @@ Public Class Principal
             MostrarEnSpread(tipoNombre, Now, notificador.BalloonTipText, nombreUsuario)
         Catch ex As Exception
             notificador.BalloonTipTitle = "Correo para " & nombreUsuario
-            notificador.BalloonTipText = "Error al enviar notificaciones por correo. " & ex.Message
+            notificador.BalloonTipText = "Error al enviar notificaciones por correo. " & descripcionError & ex.Message
             notificador.BalloonTipIcon = ToolTipIcon.Error
             notificador.ShowBalloonTip(5)
             MostrarEnSpread(tipoNombre, Now, notificador.BalloonTipText, nombreUsuario)
@@ -349,17 +370,22 @@ Public Class Principal
 
     Private Sub MostrarEnSpread(ByVal tipo As String, ByVal fecha As String, ByVal descripcion As String, ByVal usuario As String)
 
-        spNotificaciones.ActiveSheet.Cells(filaActivaSpread, spNotificaciones.ActiveSheet.Columns("tipo").Index).Value = tipo : Application.DoEvents()
-        spNotificaciones.ActiveSheet.Cells(filaActivaSpread, spNotificaciones.ActiveSheet.Columns("descripcion").Index).Value = descripcion : Application.DoEvents()
-        spNotificaciones.ActiveSheet.Cells(filaActivaSpread, spNotificaciones.ActiveSheet.Columns("usuario").Index).Value = usuario : Application.DoEvents()
-        spNotificaciones.ActiveSheet.Cells(filaActivaSpread, spNotificaciones.ActiveSheet.Columns("fecha").Index).Value = fecha : Application.DoEvents()
-        spNotificaciones.ActiveSheet.Rows.Count += 1 : Application.DoEvents()
-        If Me.esDivisible Then
-            spNotificaciones.ActiveSheet.Rows(filaActivaSpread).BackColor = Color.LightCyan
-        Else
-
-        End If
-        spNotificaciones.Refresh()
+        Try
+regresa:
+            spNotificaciones.ActiveSheet.Cells(filaActivaSpread, spNotificaciones.ActiveSheet.Columns("tipo").Index).Value = tipo : Application.DoEvents()
+            spNotificaciones.ActiveSheet.Cells(filaActivaSpread, spNotificaciones.ActiveSheet.Columns("descripcion").Index).Value = descripcion : Application.DoEvents()
+            spNotificaciones.ActiveSheet.Cells(filaActivaSpread, spNotificaciones.ActiveSheet.Columns("usuario").Index).Value = usuario : Application.DoEvents()
+            spNotificaciones.ActiveSheet.Cells(filaActivaSpread, spNotificaciones.ActiveSheet.Columns("fecha").Index).Value = fecha : Application.DoEvents()
+            spNotificaciones.ActiveSheet.Rows.Count += 1 : Application.DoEvents()
+            If Me.esDivisible Then
+                spNotificaciones.ActiveSheet.Rows(filaActivaSpread).BackColor = Color.LightCyan
+            Else
+                spNotificaciones.ActiveSheet.Rows(filaActivaSpread).BackColor = Color.White
+            End If
+            spNotificaciones.Refresh()
+        Catch
+            GoTo regresa
+        End Try
         Me.filaActivaSpread += 1
         System.Threading.Thread.Sleep(2000)
 
@@ -390,7 +416,7 @@ Public Class Principal
         spNotificaciones.ActiveSheet.Columns(numeracion).Tag = "usuario" : numeracion += 1
         spNotificaciones.ActiveSheet.Columns(numeracion).Tag = "fecha" : numeracion += 1
         spNotificaciones.ActiveSheet.Columns("tipo").Width = 100 : Application.DoEvents()
-        spNotificaciones.ActiveSheet.Columns("descripcion").Width = 400 : Application.DoEvents()
+        spNotificaciones.ActiveSheet.Columns("descripcion").Width = 600 : Application.DoEvents()
         spNotificaciones.ActiveSheet.Columns("usuario").Width = 250 : Application.DoEvents()
         spNotificaciones.ActiveSheet.Columns("fecha").Width = 250 : Application.DoEvents()
         spNotificaciones.ActiveSheet.ColumnHeader.Cells(0, spNotificaciones.ActiveSheet.Columns("tipo").Index).Value = "Tipo".ToUpper : Application.DoEvents()
