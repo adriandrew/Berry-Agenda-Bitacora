@@ -18,6 +18,7 @@ Public Class Principal
     Public tipoFecha As New FarPoint.Win.Spread.CellType.DateTimeCellType()
     Public opcionSeleccionada As Integer = 0
     Dim ejecutarProgramaPrincipal As New ProcessStartInfo()
+    Public estaCerrando As Boolean = False
 
     Public esPrueba As Boolean = False
 
@@ -25,8 +26,18 @@ Public Class Principal
 
     Private Sub Principal_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
 
+        Me.Cursor = Cursors.WaitCursor
         Dim nombrePrograma As String = "PrincipalBerry"
         AbrirPrograma(nombrePrograma, True)
+        System.Threading.Thread.Sleep(5000)
+        Me.Cursor = Cursors.Default
+
+    End Sub
+
+    Private Sub Principal_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+
+        Me.estaCerrando = True
+        Desvanecer()
 
     End Sub
 
@@ -39,7 +50,6 @@ Public Class Principal
         SeleccionoAreas()
         ComenzarCargarAreas()
         CargarTiposDeDatos()
-        'Me.opcionSeleccionada = Reportes.Areas
 
     End Sub
 
@@ -138,11 +148,55 @@ Public Class Principal
 
     End Sub
 
+    Private Sub spCatalogos2_CellClick(sender As Object, e As FarPoint.Win.Spread.CellClickEventArgs) Handles spCatalogos2.CellClick
+
+        Dim fila As Integer = e.Row
+        spCatalogos.ActiveSheet.Cells(spCatalogos.ActiveSheet.ActiveRowIndex, spCatalogos.ActiveSheet.Columns("idUsuario").Index).Text = spCatalogos2.ActiveSheet.Cells(fila, spCatalogos2.ActiveSheet.Columns("id").Index).Text
+        spCatalogos.ActiveSheet.Cells(spCatalogos.ActiveSheet.ActiveRowIndex, spCatalogos.ActiveSheet.Columns("nombreUsuario").Index).Text = spCatalogos2.ActiveSheet.Cells(fila, spCatalogos2.ActiveSheet.Columns("nombre").Index).Text
+
+    End Sub
+
+    Private Sub spCatalogos2_CellDoubleClick(sender As Object, e As FarPoint.Win.Spread.CellClickEventArgs) Handles spCatalogos2.CellDoubleClick
+
+        VolverFocoCatalogos()
+
+    End Sub
+
+    Private Sub spCatalogos2_KeyDown(sender As Object, e As KeyEventArgs) Handles spCatalogos2.KeyDown
+
+        If e.KeyCode = Keys.Escape Then
+            VolverFocoCatalogos()
+        End If
+
+    End Sub
+
+    Private Sub temporizador_Tick(sender As Object, e As EventArgs) Handles temporizador.Tick
+
+        If (Me.estaCerrando) Then
+            Desvanecer()
+        End If
+
+    End Sub
+
 #End Region
 
 #Region "Metodos"
 
 #Region "Genericos"
+
+    Private Sub Desvanecer()
+
+        temporizador.Interval = 10
+        temporizador.Enabled = True
+        temporizador.Start()
+        If (Me.Opacity > 0) Then
+            Me.Opacity -= 0.25 : Application.DoEvents()
+        Else
+            temporizador.Enabled = False
+            temporizador.Stop()
+        End If
+
+    End Sub
 
     Private Sub Centrar()
 
@@ -518,27 +572,5 @@ Public Class Principal
     End Enum
 
 #End Region
-      
-    Private Sub spCatalogos2_CellClick(sender As Object, e As FarPoint.Win.Spread.CellClickEventArgs) Handles spCatalogos2.CellClick
-
-        Dim fila As Integer = e.Row
-        spCatalogos.ActiveSheet.Cells(spCatalogos.ActiveSheet.ActiveRowIndex, spCatalogos.ActiveSheet.Columns("idUsuario").Index).Text = spCatalogos2.ActiveSheet.Cells(fila, spCatalogos2.ActiveSheet.Columns("id").Index).Text
-        spCatalogos.ActiveSheet.Cells(spCatalogos.ActiveSheet.ActiveRowIndex, spCatalogos.ActiveSheet.Columns("nombreUsuario").Index).Text = spCatalogos2.ActiveSheet.Cells(fila, spCatalogos2.ActiveSheet.Columns("nombre").Index).Text
-
-    End Sub
-
-    Private Sub spCatalogos2_CellDoubleClick(sender As Object, e As FarPoint.Win.Spread.CellClickEventArgs) Handles spCatalogos2.CellDoubleClick
-         
-        VolverFocoCatalogos()
-
-    End Sub
-
-    Private Sub spCatalogos2_KeyDown(sender As Object, e As KeyEventArgs) Handles spCatalogos2.KeyDown
-
-        If e.KeyCode = Keys.Escape Then
-            VolverFocoCatalogos()
-        End If
-
-    End Sub
 
 End Class

@@ -22,6 +22,7 @@ Partial Class Principal
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Principal))
         Me.pnlContenido = New System.Windows.Forms.Panel()
         Me.pnlCuerpo = New System.Windows.Forms.Panel()
@@ -48,6 +49,7 @@ Partial Class Principal
         Me.lblEncabezadoUsuario = New System.Windows.Forms.Label()
         Me.lblEncabezadoEmpresa = New System.Windows.Forms.Label()
         Me.lblEncabezadoPrograma = New System.Windows.Forms.Label()
+        Me.temporizador = New System.Windows.Forms.Timer(Me.components)
         Me.pnlContenido.SuspendLayout()
         Me.pnlCuerpo.SuspendLayout()
         Me.pnlPie.SuspendLayout()
@@ -112,6 +114,7 @@ Partial Class Principal
         '
         'cbProveedores
         '
+        Me.cbProveedores.Cursor = System.Windows.Forms.Cursors.Hand
         Me.cbProveedores.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbProveedores.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbProveedores.FormattingEnabled = True
@@ -144,6 +147,7 @@ Partial Class Principal
         'CheckBox2
         '
         Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Cursor = System.Windows.Forms.Cursors.Hand
         Me.CheckBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CheckBox2.ForeColor = System.Drawing.Color.Black
         Me.CheckBox2.Location = New System.Drawing.Point(912, 20)
@@ -365,6 +369,10 @@ Partial Class Principal
         Me.lblEncabezadoPrograma.Size = New System.Drawing.Size(0, 33)
         Me.lblEncabezadoPrograma.TabIndex = 0
         '
+        'temporizador
+        '
+        Me.temporizador.Interval = 1
+        '
         'Principal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -409,4 +417,5 @@ Partial Class Principal
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents txtMensaje As System.Windows.Forms.TextBox
+    Friend WithEvents temporizador As System.Windows.Forms.Timer
 End Class

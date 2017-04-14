@@ -10,6 +10,7 @@ Public Class Principal
     Public pintado As Boolean = False
     Dim ejecutarProgramaPrincipal As New ProcessStartInfo()
     Public tieneDatos As Boolean = False
+    Public estaCerrando As Boolean = False
 
     Public esPrueba As Boolean = False
 
@@ -17,8 +18,18 @@ Public Class Principal
 
     Private Sub Principal_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
 
+        Me.Cursor = Cursors.WaitCursor
         Dim nombrePrograma As String = "PrincipalBerry"
         AbrirPrograma(nombrePrograma, True)
+        System.Threading.Thread.Sleep(5000)
+        Me.Cursor = Cursors.Default
+
+    End Sub
+
+    Private Sub Principal_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+
+        Me.estaCerrando = True
+        Desvanecer()
 
     End Sub
 
@@ -118,11 +129,33 @@ Public Class Principal
 
     End Sub
 
+    Private Sub temporizador_Tick(sender As Object, e As EventArgs) Handles temporizador.Tick
+
+        If (Me.estaCerrando) Then
+            Desvanecer()
+        End If
+
+    End Sub
+
 #End Region
 
 #Region "Métodos"
 
 #Region "Genericos"
+
+    Private Sub Desvanecer()
+
+        temporizador.Interval = 10
+        temporizador.Enabled = True
+        temporizador.Start()
+        If (Me.Opacity > 0) Then
+            Me.Opacity -= 0.25 : Application.DoEvents()
+        Else
+            temporizador.Enabled = False
+            temporizador.Stop()
+        End If
+
+    End Sub
 
     Private Sub Centrar()
 

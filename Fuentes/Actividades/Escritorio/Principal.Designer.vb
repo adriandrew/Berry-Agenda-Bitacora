@@ -22,6 +22,7 @@ Partial Class Principal
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Principal))
         Dim EnhancedScrollBarRenderer1 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
         Dim EnhancedScrollBarRenderer2 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
@@ -49,9 +50,9 @@ Partial Class Principal
         Me.txtCapturaNombre = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.pnlExterna = New System.Windows.Forms.Panel()
-        Me.Label11 = New System.Windows.Forms.Label()
+        Me.lblUsuarios = New System.Windows.Forms.Label()
         Me.cbUsuarios = New System.Windows.Forms.ComboBox()
-        Me.Label10 = New System.Windows.Forms.Label()
+        Me.lblAreas = New System.Windows.Forms.Label()
         Me.cbAreas = New System.Windows.Forms.ComboBox()
         Me.chkCapturaEsExterna = New System.Windows.Forms.CheckBox()
         Me.tpResolverActividades = New System.Windows.Forms.TabPage()
@@ -78,6 +79,7 @@ Partial Class Principal
         Me.lblEncabezadoUsuario = New System.Windows.Forms.Label()
         Me.lblEncabezadoEmpresa = New System.Windows.Forms.Label()
         Me.lblEncabezadoPrograma = New System.Windows.Forms.Label()
+        Me.temporizador = New System.Windows.Forms.Timer(Me.components)
         Me.pnlContenido.SuspendLayout()
         Me.pnlCuerpo.SuspendLayout()
         Me.tbActividades.SuspendLayout()
@@ -127,6 +129,7 @@ Partial Class Principal
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tbActividades.Controls.Add(Me.tpCapturarActividades)
         Me.tbActividades.Controls.Add(Me.tpResolverActividades)
+        Me.tbActividades.Cursor = System.Windows.Forms.Cursors.Hand
         Me.tbActividades.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbActividades.Location = New System.Drawing.Point(3, 0)
         Me.tbActividades.Name = "tbActividades"
@@ -169,6 +172,7 @@ Partial Class Principal
         'btnCapturaFechaVencimientoAnterior
         '
         Me.btnCapturaFechaVencimientoAnterior.BackColor = System.Drawing.Color.White
+        Me.btnCapturaFechaVencimientoAnterior.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnCapturaFechaVencimientoAnterior.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCapturaFechaVencimientoAnterior.Location = New System.Drawing.Point(615, 257)
         Me.btnCapturaFechaVencimientoAnterior.Name = "btnCapturaFechaVencimientoAnterior"
@@ -180,6 +184,7 @@ Partial Class Principal
         'btnCapturaFechaVencimientoSiguiente
         '
         Me.btnCapturaFechaVencimientoSiguiente.BackColor = System.Drawing.Color.White
+        Me.btnCapturaFechaVencimientoSiguiente.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnCapturaFechaVencimientoSiguiente.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCapturaFechaVencimientoSiguiente.Location = New System.Drawing.Point(657, 257)
         Me.btnCapturaFechaVencimientoSiguiente.Name = "btnCapturaFechaVencimientoSiguiente"
@@ -191,6 +196,7 @@ Partial Class Principal
         'btnCapturaFechaCreacionAnterior
         '
         Me.btnCapturaFechaCreacionAnterior.BackColor = System.Drawing.Color.White
+        Me.btnCapturaFechaCreacionAnterior.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnCapturaFechaCreacionAnterior.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCapturaFechaCreacionAnterior.Location = New System.Drawing.Point(615, 222)
         Me.btnCapturaFechaCreacionAnterior.Name = "btnCapturaFechaCreacionAnterior"
@@ -202,6 +208,7 @@ Partial Class Principal
         'btnCapturaFechaCreacionSiguiente
         '
         Me.btnCapturaFechaCreacionSiguiente.BackColor = System.Drawing.Color.White
+        Me.btnCapturaFechaCreacionSiguiente.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnCapturaFechaCreacionSiguiente.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCapturaFechaCreacionSiguiente.Location = New System.Drawing.Point(657, 222)
         Me.btnCapturaFechaCreacionSiguiente.Name = "btnCapturaFechaCreacionSiguiente"
@@ -220,7 +227,7 @@ Partial Class Principal
         Me.btnCapturaEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCapturaEliminar.ForeColor = System.Drawing.Color.Black
         Me.btnCapturaEliminar.Image = CType(resources.GetObject("btnCapturaEliminar.Image"), System.Drawing.Image)
-        Me.btnCapturaEliminar.Location = New System.Drawing.Point(578, 324)
+        Me.btnCapturaEliminar.Location = New System.Drawing.Point(578, 434)
         Me.btnCapturaEliminar.Margin = New System.Windows.Forms.Padding(0)
         Me.btnCapturaEliminar.Name = "btnCapturaEliminar"
         Me.btnCapturaEliminar.Size = New System.Drawing.Size(60, 60)
@@ -230,6 +237,7 @@ Partial Class Principal
         'btnCapturaIdAnterior
         '
         Me.btnCapturaIdAnterior.BackColor = System.Drawing.Color.White
+        Me.btnCapturaIdAnterior.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnCapturaIdAnterior.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCapturaIdAnterior.Location = New System.Drawing.Point(615, 15)
         Me.btnCapturaIdAnterior.Name = "btnCapturaIdAnterior"
@@ -241,6 +249,7 @@ Partial Class Principal
         'btnCapturaIdSiguiente
         '
         Me.btnCapturaIdSiguiente.BackColor = System.Drawing.Color.White
+        Me.btnCapturaIdSiguiente.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnCapturaIdSiguiente.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCapturaIdSiguiente.Location = New System.Drawing.Point(657, 15)
         Me.btnCapturaIdSiguiente.Name = "btnCapturaIdSiguiente"
@@ -251,6 +260,7 @@ Partial Class Principal
         '
         'dtpCapturaFechaVencimiento
         '
+        Me.dtpCapturaFechaVencimiento.Cursor = System.Windows.Forms.Cursors.Hand
         Me.dtpCapturaFechaVencimiento.Location = New System.Drawing.Point(247, 257)
         Me.dtpCapturaFechaVencimiento.Name = "dtpCapturaFechaVencimiento"
         Me.dtpCapturaFechaVencimiento.Size = New System.Drawing.Size(363, 29)
@@ -258,6 +268,8 @@ Partial Class Principal
         '
         'dtpCapturaFechaCreacion
         '
+        Me.dtpCapturaFechaCreacion.CalendarFont = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpCapturaFechaCreacion.Cursor = System.Windows.Forms.Cursors.Hand
         Me.dtpCapturaFechaCreacion.Location = New System.Drawing.Point(247, 222)
         Me.dtpCapturaFechaCreacion.Name = "dtpCapturaFechaCreacion"
         Me.dtpCapturaFechaCreacion.Size = New System.Drawing.Size(363, 29)
@@ -273,7 +285,7 @@ Partial Class Principal
         Me.btnCapturaGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCapturaGuardar.ForeColor = System.Drawing.Color.Black
         Me.btnCapturaGuardar.Image = CType(resources.GetObject("btnCapturaGuardar.Image"), System.Drawing.Image)
-        Me.btnCapturaGuardar.Location = New System.Drawing.Point(639, 324)
+        Me.btnCapturaGuardar.Location = New System.Drawing.Point(639, 434)
         Me.btnCapturaGuardar.Margin = New System.Windows.Forms.Padding(0)
         Me.btnCapturaGuardar.Name = "btnCapturaGuardar"
         Me.btnCapturaGuardar.Size = New System.Drawing.Size(60, 60)
@@ -283,7 +295,8 @@ Partial Class Principal
         'chkCapturaEsUrgente
         '
         Me.chkCapturaEsUrgente.AutoSize = True
-        Me.chkCapturaEsUrgente.Location = New System.Drawing.Point(484, 292)
+        Me.chkCapturaEsUrgente.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.chkCapturaEsUrgente.Location = New System.Drawing.Point(247, 292)
         Me.chkCapturaEsUrgente.Name = "chkCapturaEsUrgente"
         Me.chkCapturaEsUrgente.Size = New System.Drawing.Size(215, 28)
         Me.chkCapturaEsUrgente.TabIndex = 10
@@ -369,57 +382,64 @@ Partial Class Principal
         '
         'pnlExterna
         '
-        Me.pnlExterna.Controls.Add(Me.Label11)
+        Me.pnlExterna.Controls.Add(Me.lblUsuarios)
         Me.pnlExterna.Controls.Add(Me.cbUsuarios)
-        Me.pnlExterna.Controls.Add(Me.Label10)
+        Me.pnlExterna.Controls.Add(Me.lblAreas)
         Me.pnlExterna.Controls.Add(Me.cbAreas)
         Me.pnlExterna.Controls.Add(Me.chkCapturaEsExterna)
-        Me.pnlExterna.Location = New System.Drawing.Point(14, 324)
+        Me.pnlExterna.Location = New System.Drawing.Point(247, 322)
         Me.pnlExterna.Name = "pnlExterna"
-        Me.pnlExterna.Size = New System.Drawing.Size(685, 120)
+        Me.pnlExterna.Size = New System.Drawing.Size(452, 110)
         Me.pnlExterna.TabIndex = 21
         '
-        'Label11
+        'lblUsuarios
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(3, 74)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(87, 24)
-        Me.Label11.TabIndex = 5
-        Me.Label11.Text = "Usuario:"
+        Me.lblUsuarios.AutoSize = True
+        Me.lblUsuarios.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblUsuarios.Location = New System.Drawing.Point(3, 74)
+        Me.lblUsuarios.Name = "lblUsuarios"
+        Me.lblUsuarios.Size = New System.Drawing.Size(87, 24)
+        Me.lblUsuarios.TabIndex = 5
+        Me.lblUsuarios.Text = "Usuario:"
+        Me.lblUsuarios.Visible = False
         '
         'cbUsuarios
         '
         Me.cbUsuarios.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cbUsuarios.Cursor = System.Windows.Forms.Cursors.Hand
         Me.cbUsuarios.FormattingEnabled = True
         Me.cbUsuarios.Location = New System.Drawing.Point(96, 71)
         Me.cbUsuarios.Name = "cbUsuarios"
-        Me.cbUsuarios.Size = New System.Drawing.Size(332, 32)
+        Me.cbUsuarios.Size = New System.Drawing.Size(353, 32)
         Me.cbUsuarios.TabIndex = 4
+        Me.cbUsuarios.Visible = False
         '
-        'Label10
+        'lblAreas
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(3, 36)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(60, 24)
-        Me.Label10.TabIndex = 3
-        Me.Label10.Text = "Area:"
+        Me.lblAreas.AutoSize = True
+        Me.lblAreas.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblAreas.Location = New System.Drawing.Point(3, 36)
+        Me.lblAreas.Name = "lblAreas"
+        Me.lblAreas.Size = New System.Drawing.Size(60, 24)
+        Me.lblAreas.TabIndex = 3
+        Me.lblAreas.Text = "Area:"
+        Me.lblAreas.Visible = False
         '
         'cbAreas
         '
         Me.cbAreas.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cbAreas.Cursor = System.Windows.Forms.Cursors.Hand
         Me.cbAreas.FormattingEnabled = True
         Me.cbAreas.Location = New System.Drawing.Point(96, 33)
         Me.cbAreas.Name = "cbAreas"
-        Me.cbAreas.Size = New System.Drawing.Size(332, 32)
+        Me.cbAreas.Size = New System.Drawing.Size(353, 32)
         Me.cbAreas.TabIndex = 1
+        Me.cbAreas.Visible = False
         '
         'chkCapturaEsExterna
         '
         Me.chkCapturaEsExterna.AutoSize = True
+        Me.chkCapturaEsExterna.Cursor = System.Windows.Forms.Cursors.Hand
         Me.chkCapturaEsExterna.Location = New System.Drawing.Point(3, 3)
         Me.chkCapturaEsExterna.Name = "chkCapturaEsExterna"
         Me.chkCapturaEsExterna.Size = New System.Drawing.Size(121, 28)
@@ -481,6 +501,7 @@ Partial Class Principal
         'btnResolucionFechaAnterior
         '
         Me.btnResolucionFechaAnterior.BackColor = System.Drawing.Color.White
+        Me.btnResolucionFechaAnterior.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnResolucionFechaAnterior.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnResolucionFechaAnterior.Location = New System.Drawing.Point(651, 152)
         Me.btnResolucionFechaAnterior.Name = "btnResolucionFechaAnterior"
@@ -492,6 +513,7 @@ Partial Class Principal
         'btnResolucionFechaSiguiente
         '
         Me.btnResolucionFechaSiguiente.BackColor = System.Drawing.Color.White
+        Me.btnResolucionFechaSiguiente.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnResolucionFechaSiguiente.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnResolucionFechaSiguiente.Location = New System.Drawing.Point(693, 152)
         Me.btnResolucionFechaSiguiente.Name = "btnResolucionFechaSiguiente"
@@ -519,6 +541,7 @@ Partial Class Principal
         '
         'dtpResolucionFecha
         '
+        Me.dtpResolucionFecha.Cursor = System.Windows.Forms.Cursors.Hand
         Me.dtpResolucionFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpResolucionFecha.Location = New System.Drawing.Point(283, 152)
         Me.dtpResolucionFecha.Name = "dtpResolucionFecha"
@@ -672,7 +695,7 @@ Partial Class Principal
         Me.lblDescripcionTooltip.AutoSize = True
         Me.lblDescripcionTooltip.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDescripcionTooltip.ForeColor = System.Drawing.Color.White
-        Me.lblDescripcionTooltip.Location = New System.Drawing.Point(101, 17)
+        Me.lblDescripcionTooltip.Location = New System.Drawing.Point(100, 15)
         Me.lblDescripcionTooltip.Name = "lblDescripcionTooltip"
         Me.lblDescripcionTooltip.Size = New System.Drawing.Size(0, 31)
         Me.lblDescripcionTooltip.TabIndex = 3
@@ -752,6 +775,10 @@ Partial Class Principal
         Me.lblEncabezadoPrograma.Size = New System.Drawing.Size(0, 33)
         Me.lblEncabezadoPrograma.TabIndex = 0
         '
+        'temporizador
+        '
+        Me.temporizador.Interval = 1
+        '
         'Principal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -827,10 +854,11 @@ Partial Class Principal
     Private WithEvents lblEncabezadoArea As System.Windows.Forms.Label
     Friend WithEvents pnlExterna As System.Windows.Forms.Panel
     Friend WithEvents chkCapturaEsExterna As System.Windows.Forms.CheckBox
-    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents lblAreas As System.Windows.Forms.Label
     Friend WithEvents cbAreas As System.Windows.Forms.ComboBox
-    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents lblUsuarios As System.Windows.Forms.Label
     Friend WithEvents cbUsuarios As System.Windows.Forms.ComboBox
     Private WithEvents btnAdministrarImagen As System.Windows.Forms.Button
     Friend WithEvents pbImagen As System.Windows.Forms.PictureBox
+    Friend WithEvents temporizador As System.Windows.Forms.Timer
 End Class

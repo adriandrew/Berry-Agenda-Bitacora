@@ -393,37 +393,47 @@ regresa:
 
     Private Sub FormatearSpreadGeneral()
 
-        spNotificaciones.Reset() : Application.DoEvents()
-        spNotificaciones.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell
-        spNotificaciones.Visible = True : Application.DoEvents()
-        spNotificaciones.Font = New Font("Microsoft Sans Serif", 12, FontStyle.Regular) : Application.DoEvents()
-        spNotificaciones.HorizontalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded
-        spNotificaciones.VerticalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded
+        Try
+regresa:
+            spNotificaciones.Reset() : Application.DoEvents()
+            spNotificaciones.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell
+            spNotificaciones.Visible = True : Application.DoEvents()
+            spNotificaciones.Font = New Font("Microsoft Sans Serif", 12, FontStyle.Regular) : Application.DoEvents()
+            spNotificaciones.HorizontalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded
+            spNotificaciones.VerticalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded
+        Catch
+            GoTo regresa
+        End Try
 
     End Sub
 
     Private Sub FormatearSpreadNotificaciones()
 
-        spNotificaciones.ActiveSheet.GrayAreaBackColor = Color.White : Application.DoEvents()
-        spNotificaciones.ActiveSheet.ColumnHeader.Rows(0).Height = 30 : Application.DoEvents()
-        spNotificaciones.ActiveSheet.Rows(-1).Height = 25 : Application.DoEvents()
-        spNotificaciones.ActiveSheet.ColumnHeader.Rows(0).Font = New Font("Microsoft Sans Serif", 12, FontStyle.Bold) : Application.DoEvents()
-        Dim numeracion As Integer = 0
-        spNotificaciones.ActiveSheet.Columns.Count = 4
-        spNotificaciones.ActiveSheet.Rows.Count = 1
-        spNotificaciones.ActiveSheet.Columns(numeracion).Tag = "tipo" : numeracion += 1
-        spNotificaciones.ActiveSheet.Columns(numeracion).Tag = "descripcion" : numeracion += 1
-        spNotificaciones.ActiveSheet.Columns(numeracion).Tag = "usuario" : numeracion += 1
-        spNotificaciones.ActiveSheet.Columns(numeracion).Tag = "fecha" : numeracion += 1
-        spNotificaciones.ActiveSheet.Columns("tipo").Width = 100 : Application.DoEvents()
-        spNotificaciones.ActiveSheet.Columns("descripcion").Width = 600 : Application.DoEvents()
-        spNotificaciones.ActiveSheet.Columns("usuario").Width = 250 : Application.DoEvents()
-        spNotificaciones.ActiveSheet.Columns("fecha").Width = 250 : Application.DoEvents()
-        spNotificaciones.ActiveSheet.ColumnHeader.Cells(0, spNotificaciones.ActiveSheet.Columns("tipo").Index).Value = "Tipo".ToUpper : Application.DoEvents()
-        spNotificaciones.ActiveSheet.ColumnHeader.Cells(0, spNotificaciones.ActiveSheet.Columns("descripcion").Index).Value = "Descripción".ToUpper : Application.DoEvents()
-        spNotificaciones.ActiveSheet.ColumnHeader.Cells(0, spNotificaciones.ActiveSheet.Columns("usuario").Index).Value = "Usuario Enviado".ToUpper : Application.DoEvents()
-        spNotificaciones.ActiveSheet.ColumnHeader.Cells(0, spNotificaciones.ActiveSheet.Columns("fecha").Index).Value = "Fecha".ToUpper : Application.DoEvents()
-        spNotificaciones.ActiveSheet.OperationMode = FarPoint.Win.Spread.OperationMode.SingleSelect : Application.DoEvents()
+        Try
+regresa:
+            spNotificaciones.ActiveSheet.GrayAreaBackColor = Color.White : Application.DoEvents()
+            spNotificaciones.ActiveSheet.ColumnHeader.Rows(0).Height = 30 : Application.DoEvents()
+            spNotificaciones.ActiveSheet.Rows(-1).Height = 25 : Application.DoEvents()
+            spNotificaciones.ActiveSheet.ColumnHeader.Rows(0).Font = New Font("Microsoft Sans Serif", 12, FontStyle.Bold) : Application.DoEvents()
+            Dim numeracion As Integer = 0
+            spNotificaciones.ActiveSheet.Columns.Count = 4
+            spNotificaciones.ActiveSheet.Rows.Count = 1
+            spNotificaciones.ActiveSheet.Columns(numeracion).Tag = "tipo" : numeracion += 1
+            spNotificaciones.ActiveSheet.Columns(numeracion).Tag = "descripcion" : numeracion += 1
+            spNotificaciones.ActiveSheet.Columns(numeracion).Tag = "usuario" : numeracion += 1
+            spNotificaciones.ActiveSheet.Columns(numeracion).Tag = "fecha" : numeracion += 1
+            spNotificaciones.ActiveSheet.Columns("tipo").Width = 100 : Application.DoEvents()
+            spNotificaciones.ActiveSheet.Columns("descripcion").Width = 600 : Application.DoEvents()
+            spNotificaciones.ActiveSheet.Columns("usuario").Width = 250 : Application.DoEvents()
+            spNotificaciones.ActiveSheet.Columns("fecha").Width = 250 : Application.DoEvents()
+            spNotificaciones.ActiveSheet.ColumnHeader.Cells(0, spNotificaciones.ActiveSheet.Columns("tipo").Index).Value = "Tipo".ToUpper : Application.DoEvents()
+            spNotificaciones.ActiveSheet.ColumnHeader.Cells(0, spNotificaciones.ActiveSheet.Columns("descripcion").Index).Value = "Descripción".ToUpper : Application.DoEvents()
+            spNotificaciones.ActiveSheet.ColumnHeader.Cells(0, spNotificaciones.ActiveSheet.Columns("usuario").Index).Value = "Usuario Enviado".ToUpper : Application.DoEvents()
+            spNotificaciones.ActiveSheet.ColumnHeader.Cells(0, spNotificaciones.ActiveSheet.Columns("fecha").Index).Value = "Fecha".ToUpper : Application.DoEvents()
+            spNotificaciones.ActiveSheet.OperationMode = FarPoint.Win.Spread.OperationMode.SingleSelect : Application.DoEvents()
+        Catch
+            GoTo regresa
+        End Try
 
     End Sub
 

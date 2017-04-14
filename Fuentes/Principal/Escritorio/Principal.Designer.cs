@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Principal));
             this.pnlContenido = new System.Windows.Forms.Panel();
             this.pnlIniciarSesion = new System.Windows.Forms.Panel();
@@ -48,6 +49,7 @@
             this.lblEncabezadoUsuario = new System.Windows.Forms.Label();
             this.lblEncabezadoEmpresa = new System.Windows.Forms.Label();
             this.lblEncabezadoPrograma = new System.Windows.Forms.Label();
+            this.temporizador = new System.Windows.Forms.Timer(this.components);
             this.pnlContenido.SuspendLayout();
             this.pnlIniciarSesion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUsuario)).BeginInit();
@@ -229,6 +231,7 @@
             // 
             this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSalir.BackColor = System.Drawing.Color.White;
+            this.btnSalir.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSalir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
@@ -313,6 +316,11 @@
             this.lblEncabezadoPrograma.Size = new System.Drawing.Size(0, 33);
             this.lblEncabezadoPrograma.TabIndex = 0;
             // 
+            // temporizador
+            // 
+            this.temporizador.Interval = 1;
+            this.temporizador.Tick += new System.EventHandler(this.temporizador_Tick);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -323,6 +331,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Principal";
             this.Text = "Iniciar Sesión y Menú";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Principal_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Principal_FormClosed);
             this.Load += new System.EventHandler(this.Principal_Load);
             this.Shown += new System.EventHandler(this.Principal_Shown);
@@ -359,6 +368,7 @@
         private System.Windows.Forms.Label lblEncabezadoUsuario;
         public System.Windows.Forms.Label lblEncabezadoEmpresa;
         internal System.Windows.Forms.Label lblDescripcionTooltip;
+        internal System.Windows.Forms.Timer temporizador;
 
     }
 }

@@ -33,6 +33,7 @@ namespace Escritorio
         public bool esInicioSesion = true;
         public int idEmpresaSesion = 0; public int idUsuarioSesion = 0; public int idModuloSesion = 1;
         public string nombrePrograma = string.Empty;
+        public bool estaCerrando = false; public bool estaAbriendoPrograma = false;
 
         public bool esPrueba = false;
 
@@ -75,8 +76,9 @@ namespace Escritorio
                 List<Entidades.Modulos> lista = new List<Entidades.Modulos>();
                 modulos.Id = this.idModuloSesion;
                 lista = modulos.ObtenerListadoPorId();
-                string nombreModulo = lista[0].Prefijo; 
-                string nombrePrograma = nombreModulo + idPrograma.ToString().PadLeft(2, '0');  
+                string nombreModulo = lista[0].Prefijo;
+                string nombrePrograma = nombreModulo + idPrograma.ToString().PadLeft(2, '0');
+                this.estaAbriendoPrograma = true;
                 AbrirPrograma(nombrePrograma, true);
             }
              
@@ -183,8 +185,22 @@ namespace Escritorio
         private void Principal_FormClosed(object sender, FormClosedEventArgs e)
         {
 
+            this.Cursor = Cursors.WaitCursor; 
+            if (this.estaAbriendoPrograma)
+            {
+                System.Threading.Thread.Sleep(10000);
+            }
             Application.ExitThread();
             Application.Exit();
+            this.Cursor = Cursors.Default;
+
+        }
+
+        private void Principal_FormClosing(object sender, FormClosingEventArgs e)
+        { 
+
+            this.estaCerrando = true;
+            Desvanecer();  
 
         }
 
@@ -244,9 +260,37 @@ namespace Escritorio
 
         }
 
+        private void temporizador_Tick(object sender, EventArgs e)
+        {
+
+            if (this.estaCerrando)
+            {
+                Desvanecer();
+            }
+
+        }
+        
         #endregion
 
         #region Metodos
+
+        private void Desvanecer()
+        {
+
+            temporizador.Interval = 10;
+            temporizador.Enabled = true;
+            temporizador.Start();
+            if (this.Opacity > 0)
+            {
+                this.Opacity -= 0.25; Application.DoEvents();
+            }
+            else
+            {
+                temporizador.Enabled = false;
+                temporizador.Stop();
+            }
+
+        }
 
         private bool ValidarAccesso(int idModulo, int idPrograma)
         { 

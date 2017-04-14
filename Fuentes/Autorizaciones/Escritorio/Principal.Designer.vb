@@ -22,6 +22,7 @@ Partial Class Principal
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Principal))
         Dim EnhancedScrollBarRenderer1 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
         Dim EnhancedScrollBarRenderer2 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
@@ -47,6 +48,7 @@ Partial Class Principal
         Me.lblEncabezadoUsuario = New System.Windows.Forms.Label()
         Me.lblEncabezadoEmpresa = New System.Windows.Forms.Label()
         Me.lblEncabezadoPrograma = New System.Windows.Forms.Label()
+        Me.temporizador = New System.Windows.Forms.Timer(Me.components)
         Me.pnlContenido.SuspendLayout()
         Me.pnlCuerpo.SuspendLayout()
         Me.pnlExterna.SuspendLayout()
@@ -116,6 +118,7 @@ Partial Class Principal
         'cbUsuariosDestino
         '
         Me.cbUsuariosDestino.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cbUsuariosDestino.Cursor = System.Windows.Forms.Cursors.Hand
         Me.cbUsuariosDestino.FormattingEnabled = True
         Me.cbUsuariosDestino.Location = New System.Drawing.Point(534, 41)
         Me.cbUsuariosDestino.Name = "cbUsuariosDestino"
@@ -136,6 +139,7 @@ Partial Class Principal
         'cbAreasDestino
         '
         Me.cbAreasDestino.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cbAreasDestino.Cursor = System.Windows.Forms.Cursors.Hand
         Me.cbAreasDestino.FormattingEnabled = True
         Me.cbAreasDestino.Location = New System.Drawing.Point(143, 41)
         Me.cbAreasDestino.Name = "cbAreasDestino"
@@ -156,6 +160,7 @@ Partial Class Principal
         'cbUsuarios
         '
         Me.cbUsuarios.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cbUsuarios.Cursor = System.Windows.Forms.Cursors.Hand
         Me.cbUsuarios.FormattingEnabled = True
         Me.cbUsuarios.Location = New System.Drawing.Point(534, 4)
         Me.cbUsuarios.Name = "cbUsuarios"
@@ -176,6 +181,7 @@ Partial Class Principal
         'cbAreas
         '
         Me.cbAreas.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cbAreas.Cursor = System.Windows.Forms.Cursors.Hand
         Me.cbAreas.FormattingEnabled = True
         Me.cbAreas.Location = New System.Drawing.Point(143, 4)
         Me.cbAreas.Name = "cbAreas"
@@ -360,6 +366,10 @@ Partial Class Principal
         Me.lblEncabezadoPrograma.Size = New System.Drawing.Size(0, 33)
         Me.lblEncabezadoPrograma.TabIndex = 0
         '
+        'temporizador
+        '
+        Me.temporizador.Interval = 1
+        '
         'Principal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -404,4 +414,5 @@ Partial Class Principal
     Friend WithEvents cbUsuariosDestino As System.Windows.Forms.ComboBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents cbAreasDestino As System.Windows.Forms.ComboBox
+    Friend WithEvents temporizador As System.Windows.Forms.Timer
 End Class

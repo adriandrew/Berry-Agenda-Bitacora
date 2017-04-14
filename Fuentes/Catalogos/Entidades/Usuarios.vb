@@ -113,7 +113,8 @@ Public Class Usuarios
             comando.CommandText = "SELECT Id, Nombre FROM Usuarios WHERE IdEmpresa=@idEmpresa ORDER BY Id"
             comando.Parameters.AddWithValue("@idEmpresa", Me.idEmpresa)
             BaseDatos.conexionInformacion.Open()
-            Dim dataReader As SqlDataReader = comando.ExecuteReader()
+            Dim dataReader As SqlDataReader
+            dataReader = comando.ExecuteReader()
             datos.Load(dataReader)
             BaseDatos.conexionInformacion.Close()
             Return datos
