@@ -70,10 +70,6 @@ C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Mo
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Autorizaciones\Escritorio\obj\x86\Debug\Autorizaciones.Principal.resources
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Autorizaciones\Escritorio\obj\x86\Debug\Escritorio.vbproj.GenerateResource.Cache
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Autorizaciones\Escritorio\obj\x86\Debug\EYE06.exe.licenses
-C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\bin\x86\Debug\EYE05.exe.config
-C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\bin\x86\Debug\EYE05.exe
-C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\bin\x86\Debug\EYE05.pdb
-C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\bin\x86\Debug\EYE05.xml
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\bin\x86\Debug\EntidadesConfiguracionCorreo.dll
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\bin\x86\Debug\LogicaConfiguracionCorreo.dll
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\bin\x86\Debug\EntidadesConfiguracionCorreo.pdb
@@ -84,7 +80,11 @@ C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Mo
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\obj\x86\Debug\ConfiguracionCorreo.Resources.resources
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\obj\x86\Debug\ConfiguracionCorreo.Principal.resources
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\obj\x86\Debug\Escritorio.vbproj.GenerateResource.Cache
-C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\obj\x86\Debug\EYE05.exe.licenses
-C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\obj\x86\Debug\EYE05.exe
-C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\obj\x86\Debug\EYE05.xml
-C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\obj\x86\Debug\EYE05.pdb
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\bin\x86\Debug\EYE02.exe.config
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\bin\x86\Debug\EYE02.exe
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\bin\x86\Debug\EYE02.pdb
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\bin\x86\Debug\EYE02.xml
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\obj\x86\Debug\EYE02.exe.licenses
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\obj\x86\Debug\EYE02.exe
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\obj\x86\Debug\EYE02.xml
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\obj\x86\Debug\EYE02.pdb

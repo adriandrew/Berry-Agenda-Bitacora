@@ -40,12 +40,12 @@ Public Class Principal
         Desvanecer()
 
     End Sub
-
+     
     Private Sub Principal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Centrar()
         AsignarTooltips()
-        ConfigurarConexiones()
+        ConfigurarConexiones() 
         CargarEncabezados()
         CargarTiposDeDatos()
         CargarComboAreas()
@@ -56,9 +56,18 @@ Public Class Principal
 
     End Sub
 
+    Private Sub Principal_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+         
+        If (Not ValidarAccesoTotal()) Then
+            Salir()
+        End If
+        Me.pintado = True
+
+    End Sub
+     
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
 
-        Application.Exit()
+        Salir()
 
     End Sub
 
@@ -133,12 +142,6 @@ Public Class Principal
 
     End Sub
 
-    Private Sub Principal_Paint(sender As Object, e As PaintEventArgs) Handles MyBase.Paint
-
-        Me.pintado = True
-
-    End Sub
-
     Private Sub spAutorizaciones_CellDoubleClick(sender As Object, e As FarPoint.Win.Spread.CellClickEventArgs) Handles spAutorizaciones.CellDoubleClick
 
         Dim filas As Integer = spAutorizaciones.ActiveSheet.Rows.Count
@@ -170,11 +173,63 @@ Public Class Principal
 
     End Sub
 
+    Private Sub btnAyuda_MouseHover(sender As Object, e As EventArgs) Handles btnAyuda.MouseHover
+
+        AsignarTooltips("Ayuda.")
+
+    End Sub
+
+    Private Sub btnAyuda_Click(sender As Object, e As EventArgs) Handles btnAyuda.Click
+
+        MostrarAyuda()
+
+    End Sub
+
 #End Region
 
 #Region "Métodos"
 
 #Region "Genericos"
+
+    Private Sub Salir()
+         
+        Application.Exit()
+
+    End Sub
+
+    Private Sub MostrarAyuda()
+
+        Dim pnlAyuda As New Panel()
+        Dim txtAyuda As New TextBox()
+        If (pnlContenido.Controls.Find("pnlAyuda", True).Count = 0) Then
+            pnlAyuda.Name = "pnlAyuda" : Application.DoEvents()
+            pnlAyuda.Visible = False : Application.DoEvents()
+            pnlContenido.Controls.Add(pnlAyuda) : Application.DoEvents()
+            txtAyuda.Name = "txtAyuda" : Application.DoEvents()
+            pnlAyuda.Controls.Add(txtAyuda) : Application.DoEvents()
+        Else
+            pnlAyuda = pnlContenido.Controls.Find("pnlAyuda", False)(0) : Application.DoEvents()
+            txtAyuda = pnlAyuda.Controls.Find("txtAyuda", False)(0) : Application.DoEvents()
+        End If
+        If (Not pnlAyuda.Visible) Then
+            pnlCuerpo.Visible = False : Application.DoEvents()
+            pnlAyuda.Visible = True : Application.DoEvents()
+            pnlAyuda.Size = pnlCuerpo.Size : Application.DoEvents()
+            pnlAyuda.Location = pnlCuerpo.Location : Application.DoEvents()
+            pnlContenido.Controls.Add(pnlAyuda) : Application.DoEvents()
+            txtAyuda.ScrollBars = ScrollBars.Both : Application.DoEvents()
+            txtAyuda.Multiline = True : Application.DoEvents()
+            txtAyuda.Width = pnlAyuda.Width - 10 : Application.DoEvents()
+            txtAyuda.Height = pnlAyuda.Height - 10 : Application.DoEvents()
+            txtAyuda.Location = New Point(5, 5) : Application.DoEvents()
+            txtAyuda.Text = "Sección de Ayuda: " & vbNewLine & vbNewLine & "* Autorizaciones: " & vbNewLine & "En esta parte se procede a autorizar las actividades externas creadas por usuarios, es decir, las actividades que van con destino a un usuario distinto al que lo creó. " & vbNewLine & "Las actividades se tienen que seleccionar del listado. Para que sea mas facil se pueden filtrar por area y/o usuario origen y/o area destino y/o usuario destino. Al darle un clic se marcan en verde y significan autorizadas, al darle dos clics se marcan en rojo y son rechazadas. Despues se procede a guardar y ya quedan autorizadas o rechazadas según sea el caso." : Application.DoEvents()
+            pnlAyuda.Controls.Add(txtAyuda) : Application.DoEvents()
+        Else
+            pnlCuerpo.Visible = True : Application.DoEvents()
+            pnlAyuda.Visible = False : Application.DoEvents()
+        End If
+
+    End Sub
 
     Private Sub Desvanecer()
 
@@ -251,6 +306,7 @@ Public Class Principal
             'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf"
             Me.datosUsuario.EId = 1
             Me.datosUsuario.EIdArea = 1
+            Me.datosUsuario.EAccesoTotal = True
             Me.datosEmpresa.EId = 1
             LogicaAutorizaciones.DatosEmpresaPrincipal.instanciaSql = "ANDREW-MAC\SQLEXPRESS"
             LogicaAutorizaciones.DatosEmpresaPrincipal.usuarioSql = "AdminBerry"
@@ -288,6 +344,9 @@ Public Class Principal
 
     Private Sub AbrirPrograma(nombre As String, salir As Boolean)
 
+        If (Me.esPrueba) Then
+            Exit Sub
+        End If
         ejecutarProgramaPrincipal.UseShellExecute = True
         ejecutarProgramaPrincipal.FileName = nombre & Convert.ToString(".exe")
         ejecutarProgramaPrincipal.WorkingDirectory = Directory.GetCurrentDirectory()
@@ -307,6 +366,17 @@ Public Class Principal
 
 #Region "Todos"
 
+    Private Function ValidarAccesoTotal() As Boolean
+
+        If ((Not datosUsuario.EAccesoTotal) Or (datosUsuario.EAccesoTotal = 0) Or (datosUsuario.EAccesoTotal = False)) Then
+            MsgBox("No tienes permisos suficientes para acceder a este programa.", MsgBoxStyle.Information, "Permisos insuficientes.")
+            Return False
+        Else
+            Return True
+        End If
+
+    End Function
+
     Private Sub ComenzarCargarAutorizaciones()
 
         FormatearSpreadGeneral()
@@ -319,7 +389,7 @@ Public Class Principal
         ' Actividades externas.
         'spAutorizaciones.ActiveSheetIndex = 1
         Dim listaExterna As New List(Of EntidadesAutorizaciones.ActividadesExternas)
-        If Me.pintado Then
+        If (Me.pintado) Then
             actividadesExternas.EIdArea = cbAreas.SelectedValue
             actividadesExternas.EIdUsuario = cbUsuarios.SelectedValue
             actividadesExternas.EIdAreaDestino = cbAreasDestino.SelectedValue
@@ -350,9 +420,10 @@ Public Class Principal
 
         'spAutorizaciones.ActiveSheetIndex = 1
         spAutorizaciones.ActiveSheet.GrayAreaBackColor = Color.White : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.ColumnHeader.Rows(0).Height = 65 : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.ColumnHeader.Rows(0).Height = 35 : Application.DoEvents()
         spAutorizaciones.ActiveSheet.Rows(-1).Height = 50 : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.ColumnHeader.Rows(0).Font = New Font("Microsoft Sans Serif", 12, FontStyle.Bold) : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.ColumnHeader.RowCount = 2 : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.ColumnHeader.Rows(0, spAutorizaciones.ActiveSheet.ColumnHeader.Rows.Count - 1).Font = New Font("Microsoft Sans Serif", 12, FontStyle.Bold) : Application.DoEvents()
         Dim numeracion As Integer = 0
         spAutorizaciones.ActiveSheet.Columns.Count = cantidadColumnas + 2 ' Es una columna para autorizar y otra para rechazar.
         spAutorizaciones.ActiveSheet.Columns(numeracion).Tag = "id" : numeracion += 1
@@ -376,19 +447,19 @@ Public Class Principal
         spAutorizaciones.ActiveSheet.Columns(numeracion).Tag = "autorizar" : numeracion += 1
         spAutorizaciones.ActiveSheet.Columns(numeracion).Tag = "rechazar" : numeracion += 1
         spAutorizaciones.ActiveSheet.Columns("id").Width = 60 : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.Columns("idArea").Width = 70 : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.Columns("nombreArea").Width = 120 : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.Columns("idUsuario").Width = 100 : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.Columns("nombreUsuario").Width = 110 : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.Columns("idAreaDestino").Width = 100 : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.Columns("nombreAreaDestino").Width = 120 : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.Columns("idUsuarioDestino").Width = 100 : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.Columns("nombreUsuarioDestino").Width = 110 : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.Columns("idArea").Width = 40 : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.Columns("nombreArea").Width = 130 : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.Columns("idUsuario").Width = 40 : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.Columns("nombreUsuario").Width = 130 : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.Columns("idAreaDestino").Width = 40 : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.Columns("nombreAreaDestino").Width = 140 : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.Columns("idUsuarioDestino").Width = 40 : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.Columns("nombreUsuarioDestino").Width = 140 : Application.DoEvents()
         spAutorizaciones.ActiveSheet.Columns("nombre").Width = 300 : Application.DoEvents()
         spAutorizaciones.ActiveSheet.Columns("descripcion").Width = 500 : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.Columns("fechaCreacion").Width = 160 : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.Columns("fechaVencimiento").Width = 170 : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.Columns("esUrgente").Width = 130 : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.Columns("fechaCreacion").Width = 140 : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.Columns("fechaVencimiento").Width = 140 : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.Columns("esUrgente").Width = 110 : Application.DoEvents()
         spAutorizaciones.ActiveSheet.Columns("autorizar").Width = 130 : Application.DoEvents()
         spAutorizaciones.ActiveSheet.Columns("rechazar").Width = 130 : Application.DoEvents()
         spAutorizaciones.ActiveSheet.Columns("esUrgente").CellType = tipoBooleano : Application.DoEvents()
@@ -396,21 +467,37 @@ Public Class Principal
         spAutorizaciones.ActiveSheet.Columns("rechazar").CellType = tipoBooleano : Application.DoEvents()
         spAutorizaciones.ActiveSheet.Columns("nombre").HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify : Application.DoEvents()
         spAutorizaciones.ActiveSheet.Columns("descripcion").HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("id").Index).Value = "Id".ToUpper : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("idArea").Index).Value = "Id Area".ToUpper : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("nombreArea").Index).Value = "Nombre Area".ToUpper : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("idUsuario").Index).Value = "Id Usuario".ToUpper : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("nombreUsuario").Index).Value = "Nombre Usuario".ToUpper : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("idAreaDestino").Index).Value = "Id Area Destino".ToUpper : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("nombreAreaDestino").Index).Value = "Nombre Area Destino".ToUpper : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("idUsuarioDestino").Index).Value = "Id Usuario Destino".ToUpper : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("nombreUsuarioDestino").Index).Value = "Nombre Usuario Destino".ToUpper : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("nombre").Index).Value = "Nombre".ToUpper : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("descripcion").Index).Value = "Descripción".ToUpper : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.AddColumnHeaderSpanCell(0, spAutorizaciones.ActiveSheet.Columns("id").Index, 2, 1) : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("id").Index).Value = "No.".ToUpper : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.AddColumnHeaderSpanCell(0, spAutorizaciones.ActiveSheet.Columns("idArea").Index, 1, 2) : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("idArea").Index).Value = "Area".ToUpper : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(1, spAutorizaciones.ActiveSheet.Columns("idArea").Index).Value = "No.".ToUpper : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(1, spAutorizaciones.ActiveSheet.Columns("nombreArea").Index).Value = "Nombre".ToUpper : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.AddColumnHeaderSpanCell(0, spAutorizaciones.ActiveSheet.Columns("idUsuario").Index, 1, 2) : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("idUsuario").Index).Value = "Usuario".ToUpper : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(1, spAutorizaciones.ActiveSheet.Columns("idUsuario").Index).Value = "No.".ToUpper : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(1, spAutorizaciones.ActiveSheet.Columns("nombreUsuario").Index).Value = "Nombre".ToUpper : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.AddColumnHeaderSpanCell(0, spAutorizaciones.ActiveSheet.Columns("idAreaDestino").Index, 1, 2) : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("idAreaDestino").Index).Value = "Area Destino".ToUpper : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(1, spAutorizaciones.ActiveSheet.Columns("idAreaDestino").Index).Value = "No.".ToUpper : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(1, spAutorizaciones.ActiveSheet.Columns("nombreAreaDestino").Index).Value = "Nombre".ToUpper : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.AddColumnHeaderSpanCell(0, spAutorizaciones.ActiveSheet.Columns("idUsuarioDestino").Index, 1, 2) : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("idUsuarioDestino").Index).Value = "Usuario Destino".ToUpper : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(1, spAutorizaciones.ActiveSheet.Columns("idUsuarioDestino").Index).Value = "No.".ToUpper : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(1, spAutorizaciones.ActiveSheet.Columns("nombreUsuarioDestino").Index).Value = "Nombre".ToUpper : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.AddColumnHeaderSpanCell(0, spAutorizaciones.ActiveSheet.Columns("nombre").Index, 2, 1) : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("nombre").Index).Value = "Nombre".ToUpper : Application.DoEvents()         
+        spAutorizaciones.ActiveSheet.AddColumnHeaderSpanCell(0, spAutorizaciones.ActiveSheet.Columns("descripcion").Index, 2, 1) : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("descripcion").Index).Value = "Descripción".ToUpper : Application.DoEvents() 
+        spAutorizaciones.ActiveSheet.AddColumnHeaderSpanCell(0, spAutorizaciones.ActiveSheet.Columns("fechaCreacion").Index, 2, 1) : Application.DoEvents()
         spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("fechaCreacion").Index).Value = "Fecha de Creación".ToUpper : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.AddColumnHeaderSpanCell(0, spAutorizaciones.ActiveSheet.Columns("fechaVencimiento").Index, 2, 1) : Application.DoEvents()
         spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("fechaVencimiento").Index).Value = "Fecha de Vencimiento".ToUpper : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.AddColumnHeaderSpanCell(0, spAutorizaciones.ActiveSheet.Columns("esUrgente").Index, 2, 1) : Application.DoEvents()
         spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("esUrgente").Index).Value = "Es Urgente?".ToUpper : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.AddColumnHeaderSpanCell(0, spAutorizaciones.ActiveSheet.Columns("autorizar").Index, 2, 1) : Application.DoEvents()
         spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("autorizar").Index).Value = "Autorizar".ToUpper : Application.DoEvents()
+        spAutorizaciones.ActiveSheet.AddColumnHeaderSpanCell(0, spAutorizaciones.ActiveSheet.Columns("rechazar").Index, 2, 1) : Application.DoEvents()
         spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("rechazar").Index).Value = "Rechazar".ToUpper : Application.DoEvents()
         spAutorizaciones.ActiveSheet.Columns("esExterna").Visible = False : Application.DoEvents()
         spAutorizaciones.ActiveSheet.Columns("esAutorizado").Visible = False : Application.DoEvents()

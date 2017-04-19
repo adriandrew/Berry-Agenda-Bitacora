@@ -72,6 +72,7 @@ Partial Class Principal
         Me.spResolverActividades = New FarPoint.Win.Spread.FpSpread()
         Me.spResolverActividades_Sheet1 = New FarPoint.Win.Spread.SheetView()
         Me.pnlPie = New System.Windows.Forms.Panel()
+        Me.btnAyuda = New System.Windows.Forms.Button()
         Me.lblDescripcionTooltip = New System.Windows.Forms.Label()
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.pnlEncabezado = New System.Windows.Forms.Panel()
@@ -131,6 +132,7 @@ Partial Class Principal
         Me.tbActividades.Controls.Add(Me.tpResolverActividades)
         Me.tbActividades.Cursor = System.Windows.Forms.Cursors.Hand
         Me.tbActividades.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbActividades.HotTrack = True
         Me.tbActividades.Location = New System.Drawing.Point(3, 0)
         Me.tbActividades.Name = "tbActividades"
         Me.tbActividades.SelectedIndex = 0
@@ -161,6 +163,7 @@ Partial Class Principal
         Me.tpCapturarActividades.Controls.Add(Me.txtCapturaNombre)
         Me.tpCapturarActividades.Controls.Add(Me.Label1)
         Me.tpCapturarActividades.Controls.Add(Me.pnlExterna)
+        Me.tpCapturarActividades.Cursor = System.Windows.Forms.Cursors.Default
         Me.tpCapturarActividades.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tpCapturarActividades.Location = New System.Drawing.Point(4, 33)
         Me.tpCapturarActividades.Name = "tpCapturarActividades"
@@ -464,6 +467,7 @@ Partial Class Principal
         Me.tpResolverActividades.Controls.Add(Me.txtResolucionMotivoRetraso)
         Me.tpResolverActividades.Controls.Add(Me.Label9)
         Me.tpResolverActividades.Controls.Add(Me.spResolverActividades)
+        Me.tpResolverActividades.Cursor = System.Windows.Forms.Cursors.Default
         Me.tpResolverActividades.Location = New System.Drawing.Point(4, 33)
         Me.tpResolverActividades.Name = "tpResolverActividades"
         Me.tpResolverActividades.Padding = New System.Windows.Forms.Padding(3)
@@ -683,12 +687,30 @@ Partial Class Principal
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlPie.BackColor = System.Drawing.SystemColors.InactiveCaptionText
         Me.pnlPie.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlPie.Controls.Add(Me.btnAyuda)
         Me.pnlPie.Controls.Add(Me.lblDescripcionTooltip)
         Me.pnlPie.Controls.Add(Me.btnSalir)
         Me.pnlPie.Location = New System.Drawing.Point(0, 570)
         Me.pnlPie.Name = "pnlPie"
         Me.pnlPie.Size = New System.Drawing.Size(1035, 60)
         Me.pnlPie.TabIndex = 8
+        '
+        'btnAyuda
+        '
+        Me.btnAyuda.BackColor = System.Drawing.Color.White
+        Me.btnAyuda.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnAyuda.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.btnAyuda.FlatAppearance.BorderSize = 3
+        Me.btnAyuda.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine
+        Me.btnAyuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAyuda.ForeColor = System.Drawing.Color.Black
+        Me.btnAyuda.Image = CType(resources.GetObject("btnAyuda.Image"), System.Drawing.Image)
+        Me.btnAyuda.Location = New System.Drawing.Point(0, 0)
+        Me.btnAyuda.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnAyuda.Name = "btnAyuda"
+        Me.btnAyuda.Size = New System.Drawing.Size(60, 60)
+        Me.btnAyuda.TabIndex = 4
+        Me.btnAyuda.UseVisualStyleBackColor = False
         '
         'lblDescripcionTooltip
         '
@@ -711,7 +733,7 @@ Partial Class Principal
         Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSalir.ForeColor = System.Drawing.Color.Black
         Me.btnSalir.Image = CType(resources.GetObject("btnSalir.Image"), System.Drawing.Image)
-        Me.btnSalir.Location = New System.Drawing.Point(973, -1)
+        Me.btnSalir.Location = New System.Drawing.Point(973, 0)
         Me.btnSalir.Margin = New System.Windows.Forms.Padding(0)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(60, 60)
@@ -861,4 +883,5 @@ Partial Class Principal
     Private WithEvents btnAdministrarImagen As System.Windows.Forms.Button
     Friend WithEvents pbImagen As System.Windows.Forms.PictureBox
     Friend WithEvents temporizador As System.Windows.Forms.Timer
+    Private WithEvents btnAyuda As System.Windows.Forms.Button
 End Class

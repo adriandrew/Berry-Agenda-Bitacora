@@ -23,7 +23,7 @@ Public Class Principal
     Dim rutaTemporal As String = CurDir() & "\ArchivosTemporales"
     Public estaCerrando As Boolean = False
 
-    Public esPrueba As Boolean = False
+    Public esPrueba As Boolean = True
 
 #Region "Eventos"
 
@@ -56,7 +56,7 @@ Public Class Principal
         CargarComboUsuarios()
         CargarComboAreasDestino()
         CargarComboUsuariosDestino()
-        FormatearSpreadGeneral()
+        FormatearSpread()
 
     End Sub
 
@@ -221,11 +221,57 @@ Public Class Principal
 
     End Sub
 
+    Private Sub btnAyuda_Click(sender As Object, e As EventArgs) Handles btnAyuda.Click
+
+        MostrarAyuda()
+
+    End Sub
+
+    Private Sub btnAyuda_MouseHover(sender As Object, e As EventArgs) Handles btnAyuda.MouseHover
+
+        AsignarTooltips("Ayuda.")
+
+    End Sub
+
 #End Region
 
 #Region "Métodos"
 
 #Region "Genericos"
+
+    Private Sub MostrarAyuda()
+
+        Dim pnlAyuda As New Panel()
+        Dim txtAyuda As New TextBox()
+        If (pnlContenido.Controls.Find("pnlAyuda", True).Count = 0) Then
+            pnlAyuda.Name = "pnlAyuda" : Application.DoEvents()
+            pnlAyuda.Visible = False : Application.DoEvents()
+            pnlContenido.Controls.Add(pnlAyuda) : Application.DoEvents()
+            txtAyuda.Name = "txtAyuda" : Application.DoEvents()
+            pnlAyuda.Controls.Add(txtAyuda) : Application.DoEvents()
+        Else
+            pnlAyuda = pnlContenido.Controls.Find("pnlAyuda", False)(0) : Application.DoEvents()
+            txtAyuda = pnlAyuda.Controls.Find("txtAyuda", False)(0) : Application.DoEvents()
+        End If
+        If (Not pnlAyuda.Visible) Then
+            pnlCuerpo.Visible = False : Application.DoEvents()
+            pnlAyuda.Visible = True : Application.DoEvents()
+            pnlAyuda.Size = pnlCuerpo.Size : Application.DoEvents()
+            pnlAyuda.Location = pnlCuerpo.Location : Application.DoEvents()
+            pnlContenido.Controls.Add(pnlAyuda) : Application.DoEvents()
+            txtAyuda.ScrollBars = ScrollBars.Both : Application.DoEvents()
+            txtAyuda.Multiline = True : Application.DoEvents()
+            txtAyuda.Width = pnlAyuda.Width - 10 : Application.DoEvents()
+            txtAyuda.Height = pnlAyuda.Height - 10 : Application.DoEvents()
+            txtAyuda.Location = New Point(5, 5) : Application.DoEvents()
+            txtAyuda.Text = "Sección de Ayuda: " & vbNewLine & vbNewLine & "* Reporte: " & vbNewLine & "En esta pantalla se desplegará el reporte de acuerdo a los filtro que se hayan seleccionado. " & vbNewLine & "En la parte izquierda se puede agregar cualquiera de los filtros. Posteriormente se procede a generar el reporte con los criterios seleccionados. Cuando se termine de generar dicho reporte, se habilitarán las opciones de imprimir, exportar a excel o exportar a pdf, en estas dos últimas el usuario puede guardarlos directamente desde el archivo que se muestra en pantalla si así lo desea, mas no desde el sistema directamente. " : Application.DoEvents()
+            pnlAyuda.Controls.Add(txtAyuda) : Application.DoEvents()
+        Else
+            pnlCuerpo.Visible = True : Application.DoEvents()
+            pnlAyuda.Visible = False : Application.DoEvents()
+        End If
+
+    End Sub
 
     Private Sub Centrar()
 
@@ -689,7 +735,7 @@ Public Class Principal
         End If
         lista = actividades.ObtenerListadoActividades(tipo, estatus, calificacion, aplicaFechaCreacion, aplicaFechaVencimiento, aplicaFechaResolucion)
         spReporte.ActiveSheet.DataSource = lista
-        FormatearSpreadActividades(spReporte.ActiveSheet.Columns.Count)
+        FormatearSpreadReporteActividades(spReporte.ActiveSheet.Columns.Count)
         AlinearFiltrosIzquierda()
         btnImprimir.Enabled = True
         btnExportarExcel.Enabled = True
@@ -698,7 +744,7 @@ Public Class Principal
 
     End Sub
 
-    Private Sub FormatearSpreadGeneral()
+    Private Sub FormatearSpread()
 
         spReporte.Reset() : Application.DoEvents()
         spReporte.Visible = False : Application.DoEvents()
@@ -710,7 +756,7 @@ Public Class Principal
 
     End Sub
 
-    Private Sub FormatearSpreadActividades(ByVal cantidadColumnas As Integer)
+    Private Sub FormatearSpreadReporteActividades(ByVal cantidadColumnas As Integer)
 
         spReporte.Visible = True : Application.DoEvents()
         spReporte.ActiveSheet.GrayAreaBackColor = Color.White : Application.DoEvents()

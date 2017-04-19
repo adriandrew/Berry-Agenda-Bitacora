@@ -53,9 +53,17 @@ Public Class Principal
 
     End Sub
 
+    Private Sub Principal_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+         
+        If (Not ValidarAccesoTotal()) Then
+            Salir()
+        End If
+
+    End Sub
+
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
 
-        Application.Exit()
+        Salir()
 
     End Sub
 
@@ -178,11 +186,63 @@ Public Class Principal
 
     End Sub
 
+    Private Sub btnAyuda_Click(sender As Object, e As EventArgs) Handles btnAyuda.Click
+
+        MostrarAyuda()
+
+    End Sub
+
+    Private Sub btnAyuda_MouseHover(sender As Object, e As EventArgs) Handles btnAyuda.MouseHover
+
+        AsignarTooltips("Ayuda.")
+
+    End Sub
+
 #End Region
 
 #Region "Metodos"
 
 #Region "Genericos"
+
+    Private Sub Salir()
+
+        Application.Exit()
+
+    End Sub
+
+    Private Sub MostrarAyuda()
+
+        Dim pnlAyuda As New Panel()
+        Dim txtAyuda As New TextBox()
+        If (pnlContenido.Controls.Find("pnlAyuda", True).Count = 0) Then
+            pnlAyuda.Name = "pnlAyuda" : Application.DoEvents()
+            pnlAyuda.Visible = False : Application.DoEvents()
+            pnlContenido.Controls.Add(pnlAyuda) : Application.DoEvents()
+            txtAyuda.Name = "txtAyuda" : Application.DoEvents()
+            pnlAyuda.Controls.Add(txtAyuda) : Application.DoEvents()
+        Else
+            pnlAyuda = pnlContenido.Controls.Find("pnlAyuda", False)(0) : Application.DoEvents()
+            txtAyuda = pnlAyuda.Controls.Find("txtAyuda", False)(0) : Application.DoEvents()
+        End If
+        If (Not pnlAyuda.Visible) Then
+            pnlCuerpo.Visible = False : Application.DoEvents()
+            pnlAyuda.Visible = True : Application.DoEvents()
+            pnlAyuda.Size = pnlCuerpo.Size : Application.DoEvents()
+            pnlAyuda.Location = pnlCuerpo.Location : Application.DoEvents()
+            pnlContenido.Controls.Add(pnlAyuda) : Application.DoEvents()
+            txtAyuda.ScrollBars = ScrollBars.Both : Application.DoEvents()
+            txtAyuda.Multiline = True : Application.DoEvents()
+            txtAyuda.Width = pnlAyuda.Width - 10 : Application.DoEvents()
+            txtAyuda.Height = pnlAyuda.Height - 10 : Application.DoEvents()
+            txtAyuda.Location = New Point(5, 5) : Application.DoEvents()
+            txtAyuda.Text = "Sección de Ayuda: " & vbNewLine & vbNewLine & "* Teclas básicas: " & vbNewLine & "F5 sirve para mostrar catálogos. " & vbNewLine & "F6 sirve para eliminar un registro únicamente. " & vbNewLine & "Escape sirve para ocultar catálogos que se encuentren desplegados. " & vbNewLine & vbNewLine & "* Catálogos desplegados: " & vbNewLine & "Cuando se muestra algún catalogo, al seleccionar alguna opción de este, se va mostrando en tiempo real en la captura de donde se originó. Cuando se le da doble clic en alguna opción o a la tecla escape se oculta dicho catalogo. " & vbNewLine & vbNewLine & "* Areas: " & vbNewLine & "En esta pestaña se capturarán todas las areas necesarias. " & vbNewLine & "Existen los botones de guardar/editar y eliminar todo dependiendo lo que se necesite hacer. " & vbNewLine & vbNewLine & "* Correos: " & vbNewLine & "En este apartado se capturarán todos los usuarios con sus respectivos correos para enviarles sus notificaciones de actividades pendientes que se encuentran retrasadas en tiempos. " & vbNewLine & "Existen los botones de guardar/editar y eliminar todo dependiendo lo que se necesite hacer. " : Application.DoEvents()
+            pnlAyuda.Controls.Add(txtAyuda) : Application.DoEvents()
+        Else
+            pnlCuerpo.Visible = True : Application.DoEvents()
+            pnlAyuda.Visible = False : Application.DoEvents()
+        End If
+
+    End Sub
 
     Private Sub Desvanecer()
 
@@ -197,6 +257,17 @@ Public Class Principal
         End If
 
     End Sub
+
+    Private Function ValidarAccesoTotal() As Boolean
+
+        If ((Not datosUsuario.EAccesoTotal) Or (datosUsuario.EAccesoTotal = 0) Or (datosUsuario.EAccesoTotal = False)) Then
+            MsgBox("No tienes permisos suficientes para acceder a este programa.", MsgBoxStyle.Information, "Permisos insuficientes.")
+            Return False
+        Else
+            Return True
+        End If
+
+    End Function
 
     Private Sub Centrar()
 
@@ -257,6 +328,9 @@ Public Class Principal
 
     Private Sub AbrirPrograma(nombre As String, salir As Boolean)
 
+        If (Me.esPrueba) Then
+            Exit Sub
+        End If
         ejecutarProgramaPrincipal.UseShellExecute = True
         ejecutarProgramaPrincipal.FileName = nombre & Convert.ToString(".exe")
         ejecutarProgramaPrincipal.WorkingDirectory = Directory.GetCurrentDirectory()
@@ -405,7 +479,7 @@ Public Class Principal
         spCatalogos.ActiveSheet.Columns("id").Width = 100 : Application.DoEvents()
         spCatalogos.ActiveSheet.Columns("nombre").Width = 250 : Application.DoEvents()
         spCatalogos.ActiveSheet.Columns("clave").Width = 150 : Application.DoEvents()
-        spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("id").Index).Value = "Id".ToUpper : Application.DoEvents()
+        spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("id").Index).Value = "No.".ToUpper : Application.DoEvents()
         spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("nombre").Index).Value = "Nombre".ToUpper : Application.DoEvents()
         spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("clave").Index).Value = "Clave".ToUpper : Application.DoEvents()
         spCatalogos.ActiveSheet.ColumnHeader.Rows(0).Height = 35 : Application.DoEvents()
@@ -478,10 +552,10 @@ Public Class Principal
         spCatalogos.ActiveSheet.Columns(numeracion).Tag = "direccion" : numeracion += 1
         spCatalogos.ActiveSheet.Columns("idUsuario").Width = 70 : Application.DoEvents()
         spCatalogos.ActiveSheet.Columns("nombreUsuario").Width = 210 : Application.DoEvents()
-        spCatalogos.ActiveSheet.Columns("direccion").Width = 300 : Application.DoEvents()
-        spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("idUsuario").Index).Value = "Id".ToUpper : Application.DoEvents()
+        spCatalogos.ActiveSheet.Columns("direccion").Width = 350 : Application.DoEvents()
+        spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("idUsuario").Index).Value = "No.".ToUpper : Application.DoEvents()
         spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("nombreUsuario").Index).Value = "Nombre Usuario".ToUpper : Application.DoEvents()
-        spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("direccion").Index).Value = "Correo".ToUpper : Application.DoEvents()
+        spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("direccion").Index).Value = "Dirección Correo".ToUpper : Application.DoEvents()
         spCatalogos.ActiveSheet.ColumnHeader.Rows(0).Height = 45 : Application.DoEvents()
         spCatalogos.ActiveSheet.Columns("idEmpresa").Visible = False : Application.DoEvents()
         spCatalogos.HorizontalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded : Application.DoEvents()

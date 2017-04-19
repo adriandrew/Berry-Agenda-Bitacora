@@ -50,6 +50,7 @@
             this.lblEncabezadoEmpresa = new System.Windows.Forms.Label();
             this.lblEncabezadoPrograma = new System.Windows.Forms.Label();
             this.temporizador = new System.Windows.Forms.Timer(this.components);
+            this.btnAyuda = new System.Windows.Forms.Button();
             this.pnlContenido.SuspendLayout();
             this.pnlIniciarSesion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUsuario)).BeginInit();
@@ -126,6 +127,8 @@
             this.btnEntrar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnEntrar.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.btnEntrar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEntrar.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnEntrar.FlatAppearance.BorderSize = 3;
             this.btnEntrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
             this.btnEntrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEntrar.ForeColor = System.Drawing.Color.White;
@@ -208,6 +211,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlPie.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.pnlPie.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlPie.Controls.Add(this.btnAyuda);
             this.pnlPie.Controls.Add(this.lblDescripcionTooltip);
             this.pnlPie.Controls.Add(this.btnSalir);
             this.pnlPie.Controls.Add(this.btnCambiarEmpresa);
@@ -232,10 +236,12 @@
             this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSalir.BackColor = System.Drawing.Color.White;
             this.btnSalir.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSalir.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnSalir.FlatAppearance.BorderSize = 3;
             this.btnSalir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
-            this.btnSalir.Location = new System.Drawing.Point(973, -1);
+            this.btnSalir.Location = new System.Drawing.Point(973, 0);
             this.btnSalir.Margin = new System.Windows.Forms.Padding(0);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(60, 60);
@@ -247,9 +253,12 @@
             // btnCambiarEmpresa
             // 
             this.btnCambiarEmpresa.BackColor = System.Drawing.Color.White;
+            this.btnCambiarEmpresa.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnCambiarEmpresa.FlatAppearance.BorderSize = 3;
             this.btnCambiarEmpresa.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
+            this.btnCambiarEmpresa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCambiarEmpresa.Image = ((System.Drawing.Image)(resources.GetObject("btnCambiarEmpresa.Image")));
-            this.btnCambiarEmpresa.Location = new System.Drawing.Point(913, -1);
+            this.btnCambiarEmpresa.Location = new System.Drawing.Point(912, 0);
             this.btnCambiarEmpresa.Margin = new System.Windows.Forms.Padding(0);
             this.btnCambiarEmpresa.Name = "btnCambiarEmpresa";
             this.btnCambiarEmpresa.Size = new System.Drawing.Size(60, 60);
@@ -321,6 +330,25 @@
             this.temporizador.Interval = 1;
             this.temporizador.Tick += new System.EventHandler(this.temporizador_Tick);
             // 
+            // btnAyuda
+            // 
+            this.btnAyuda.BackColor = System.Drawing.Color.White;
+            this.btnAyuda.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAyuda.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnAyuda.FlatAppearance.BorderSize = 3;
+            this.btnAyuda.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
+            this.btnAyuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAyuda.ForeColor = System.Drawing.Color.Black;
+            this.btnAyuda.Image = ((System.Drawing.Image)(resources.GetObject("btnAyuda.Image")));
+            this.btnAyuda.Location = new System.Drawing.Point(0, 0);
+            this.btnAyuda.Margin = new System.Windows.Forms.Padding(0);
+            this.btnAyuda.Name = "btnAyuda";
+            this.btnAyuda.Size = new System.Drawing.Size(60, 60);
+            this.btnAyuda.TabIndex = 5;
+            this.btnAyuda.UseVisualStyleBackColor = false;
+            this.btnAyuda.Click += new System.EventHandler(this.btnAyuda_Click);
+            this.btnAyuda.MouseHover += new System.EventHandler(this.btnAyuda_MouseHover);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -369,6 +397,7 @@
         public System.Windows.Forms.Label lblEncabezadoEmpresa;
         internal System.Windows.Forms.Label lblDescripcionTooltip;
         internal System.Windows.Forms.Timer temporizador;
+        private System.Windows.Forms.Button btnAyuda;
 
     }
 }

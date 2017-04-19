@@ -25,7 +25,7 @@ Public Class Principal
 
     Private Sub Principal_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
 
-        Cerrar()
+        Salir()
 
     End Sub
 
@@ -33,7 +33,7 @@ Public Class Principal
 
         Centrar()
         AsignarTooltips()
-        ConfigurarConexionPrincipal() 
+        ConfigurarConexionPrincipal()
         ConsultarInformacionEmpresaPrincipalPredeterminada()
         ConfigurarConexiones()
         ConsultarInformacionEmpresa()
@@ -46,7 +46,7 @@ Public Class Principal
 
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
 
-        Cerrar()
+        Salir()
 
     End Sub
 
@@ -62,11 +62,57 @@ Public Class Principal
 
     End Sub
 
+    Private Sub btnAyuda_Click(sender As Object, e As EventArgs) Handles btnAyuda.Click
+
+        MostrarAyuda()
+
+    End Sub
+
+    Private Sub btnAyuda_MouseHover(sender As Object, e As EventArgs) Handles btnAyuda.MouseHover
+
+        AsignarTooltips("Ayuda.")
+
+    End Sub
+
 #End Region
 
 #Region "Métodos"
 
 #Region "Genericos"
+
+    Private Sub MostrarAyuda()
+
+        Dim pnlAyuda As New Panel()
+        Dim txtAyuda As New TextBox()
+        If (pnlContenido.Controls.Find("pnlAyuda", True).Count = 0) Then
+            pnlAyuda.Name = "pnlAyuda" : Application.DoEvents()
+            pnlAyuda.Visible = False : Application.DoEvents()
+            pnlContenido.Controls.Add(pnlAyuda) : Application.DoEvents()
+            txtAyuda.Name = "txtAyuda" : Application.DoEvents()
+            pnlAyuda.Controls.Add(txtAyuda) : Application.DoEvents()
+        Else
+            pnlAyuda = pnlContenido.Controls.Find("pnlAyuda", False)(0) : Application.DoEvents()
+            txtAyuda = pnlAyuda.Controls.Find("txtAyuda", False)(0) : Application.DoEvents()
+        End If
+        If (Not pnlAyuda.Visible) Then
+            pnlCuerpo.Visible = False : Application.DoEvents()
+            pnlAyuda.Visible = True : Application.DoEvents()
+            pnlAyuda.Size = pnlCuerpo.Size : Application.DoEvents()
+            pnlAyuda.Location = pnlCuerpo.Location : Application.DoEvents()
+            pnlContenido.Controls.Add(pnlAyuda) : Application.DoEvents()
+            txtAyuda.ScrollBars = ScrollBars.Both : Application.DoEvents()
+            txtAyuda.Multiline = True : Application.DoEvents()
+            txtAyuda.Width = pnlAyuda.Width - 10 : Application.DoEvents()
+            txtAyuda.Height = pnlAyuda.Height - 10 : Application.DoEvents()
+            txtAyuda.Location = New Point(5, 5) : Application.DoEvents()
+            txtAyuda.Text = "Sección de Ayuda: " & vbNewLine & vbNewLine & "* Notificaciones por Correo: " & vbNewLine & "En esta pantalla se despliegan los correos enviados a los distintos usuarios con sus tipos de actividades, internas o externas. " & vbNewLine & "En dado caso de que exista algún error al enviar, en esta misma bitácora se mostrará." : Application.DoEvents()
+            pnlAyuda.Controls.Add(txtAyuda) : Application.DoEvents()
+        Else
+            pnlCuerpo.Visible = True : Application.DoEvents()
+            pnlAyuda.Visible = False : Application.DoEvents()
+        End If
+
+    End Sub
 
     Private Sub AsignarTooltips()
 
@@ -75,7 +121,7 @@ Public Class Principal
         tp.InitialDelay = 0
         tp.ReshowDelay = 100
         tp.ShowAlways = True
-        tp.SetToolTip(Me.btnSalir, "Salir.") 
+        tp.SetToolTip(Me.btnSalir, "Salir.")
 
     End Sub
 
@@ -85,7 +131,7 @@ Public Class Principal
 
     End Sub
 
-    Private Sub Cerrar()
+    Private Sub Salir()
 
         Try
             Application.ExitThread()
@@ -193,11 +239,11 @@ Public Class Principal
             MostrarEnSpread("Todos.", Now, "Falta configurar datos de correo.", "Gerente")
             System.Threading.Thread.Sleep(60000)
             Exit Sub
-        End If 
+        End If
         If (String.IsNullOrEmpty(listaConfiguracionLocal.EDireccion) Or String.IsNullOrEmpty(listaConfiguracionLocal.EContrasena) Or String.IsNullOrEmpty(listaConfiguracionLocal.EServidor) Or String.IsNullOrEmpty(listaConfiguracionLocal.EPuerto)) Then
             MostrarEnSpread("Todos.", Now, "Falta configurar datos de correo.", "Gerente")
             System.Threading.Thread.Sleep(60000)
-            Exit Sub 
+            Exit Sub
         End If
         ' Se recorre cada uno y se envian sus actividades pendientes, internas y externas.
         For fila = 0 To listaUsuarios.Count - 1

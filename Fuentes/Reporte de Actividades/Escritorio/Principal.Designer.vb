@@ -85,6 +85,7 @@ Partial Class Principal
         Me.lblEncabezadoPrograma = New System.Windows.Forms.Label()
         Me.temporizador = New System.Windows.Forms.Timer(Me.components)
         Me.impresor = New System.Windows.Forms.PrintDialog()
+        Me.btnAyuda = New System.Windows.Forms.Button()
         Me.pnlContenido.SuspendLayout()
         Me.pnlCuerpo.SuspendLayout()
         CType(Me.spParaClonar, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -755,6 +756,7 @@ Partial Class Principal
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlPie.BackColor = System.Drawing.SystemColors.InactiveCaptionText
         Me.pnlPie.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlPie.Controls.Add(Me.btnAyuda)
         Me.pnlPie.Controls.Add(Me.btnExportarPdf)
         Me.pnlPie.Controls.Add(Me.lblLeyendaParcial)
         Me.pnlPie.Controls.Add(Me.btnExportarExcel)
@@ -776,7 +778,7 @@ Partial Class Principal
         Me.btnExportarPdf.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine
         Me.btnExportarPdf.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnExportarPdf.Image = CType(resources.GetObject("btnExportarPdf.Image"), System.Drawing.Image)
-        Me.btnExportarPdf.Location = New System.Drawing.Point(186, -1)
+        Me.btnExportarPdf.Location = New System.Drawing.Point(184, -1)
         Me.btnExportarPdf.Name = "btnExportarPdf"
         Me.btnExportarPdf.Size = New System.Drawing.Size(60, 60)
         Me.btnExportarPdf.TabIndex = 53
@@ -790,7 +792,7 @@ Partial Class Principal
         Me.lblLeyendaParcial.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.lblLeyendaParcial.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblLeyendaParcial.ForeColor = System.Drawing.Color.White
-        Me.lblLeyendaParcial.Location = New System.Drawing.Point(221, 15)
+        Me.lblLeyendaParcial.Location = New System.Drawing.Point(219, 15)
         Me.lblLeyendaParcial.Name = "lblLeyendaParcial"
         Me.lblLeyendaParcial.Size = New System.Drawing.Size(0, 20)
         Me.lblLeyendaParcial.TabIndex = 52
@@ -805,7 +807,7 @@ Partial Class Principal
         Me.btnExportarExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine
         Me.btnExportarExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnExportarExcel.Image = CType(resources.GetObject("btnExportarExcel.Image"), System.Drawing.Image)
-        Me.btnExportarExcel.Location = New System.Drawing.Point(125, -1)
+        Me.btnExportarExcel.Location = New System.Drawing.Point(123, -1)
         Me.btnExportarExcel.Name = "btnExportarExcel"
         Me.btnExportarExcel.Size = New System.Drawing.Size(60, 60)
         Me.btnExportarExcel.TabIndex = 50
@@ -821,7 +823,7 @@ Partial Class Principal
         Me.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine
         Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnImprimir.Image = CType(resources.GetObject("btnImprimir.Image"), System.Drawing.Image)
-        Me.btnImprimir.Location = New System.Drawing.Point(64, -1)
+        Me.btnImprimir.Location = New System.Drawing.Point(62, -1)
         Me.btnImprimir.Name = "btnImprimir"
         Me.btnImprimir.Size = New System.Drawing.Size(60, 60)
         Me.btnImprimir.TabIndex = 51
@@ -921,6 +923,23 @@ Partial Class Principal
         '
         Me.impresor.UseEXDialog = True
         '
+        'btnAyuda
+        '
+        Me.btnAyuda.BackColor = System.Drawing.Color.White
+        Me.btnAyuda.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnAyuda.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.btnAyuda.FlatAppearance.BorderSize = 3
+        Me.btnAyuda.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine
+        Me.btnAyuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAyuda.ForeColor = System.Drawing.Color.Black
+        Me.btnAyuda.Image = CType(resources.GetObject("btnAyuda.Image"), System.Drawing.Image)
+        Me.btnAyuda.Location = New System.Drawing.Point(0, 0)
+        Me.btnAyuda.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnAyuda.Name = "btnAyuda"
+        Me.btnAyuda.Size = New System.Drawing.Size(60, 60)
+        Me.btnAyuda.TabIndex = 54
+        Me.btnAyuda.UseVisualStyleBackColor = False
+        '
         'Principal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1011,4 +1030,5 @@ Partial Class Principal
     Friend WithEvents impresor As System.Windows.Forms.PrintDialog
     Friend WithEvents spParaClonar As FarPoint.Win.Spread.FpSpread
     Friend WithEvents spParaClonar_Sheet1 As FarPoint.Win.Spread.SheetView
+    Private WithEvents btnAyuda As System.Windows.Forms.Button
 End Class

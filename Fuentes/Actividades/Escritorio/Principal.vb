@@ -61,7 +61,7 @@ Public Class Principal
 
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
 
-        Application.Exit()
+        Salir()
 
     End Sub
 
@@ -341,11 +341,29 @@ Public Class Principal
 
     End Sub
 
+    Private Sub btnAyuda_Click(sender As Object, e As EventArgs) Handles btnAyuda.Click
+
+        MostrarAyuda()
+
+    End Sub
+
+    Private Sub btnAyuda_MouseHover(sender As Object, e As EventArgs) Handles btnAyuda.MouseHover
+
+        AsignarTooltips("Ayuda.")
+
+    End Sub
+
 #End Region
 
 #Region "Métodos"
 
 #Region "Genericos"
+
+    Private Sub Salir()
+
+        Application.Exit()
+
+    End Sub
 
     Private Sub Desvanecer()
 
@@ -391,6 +409,7 @@ Public Class Principal
         tp.SetToolTip(Me.btnResolucionFechaSiguiente, "Fecha Siguiente.")
         tp.SetToolTip(Me.spResolverActividades, "Click para Seleccionar una Actividad a Resolver.")
         tp.SetToolTip(Me.btnAdministrarImagen, "Administrar Imagenes de Evidencia.")
+        tp.SetToolTip(Me.btnAyuda, "Ayuda.")
 
     End Sub
 
@@ -485,6 +504,40 @@ Public Class Principal
 
     End Sub
 
+    Private Sub MostrarAyuda()
+
+        Dim pnlAyuda As New Panel()
+        Dim txtAyuda As New TextBox()
+        If (pnlContenido.Controls.Find("pnlAyuda", True).Count = 0) Then
+            pnlAyuda.Name = "pnlAyuda" : Application.DoEvents()
+            pnlAyuda.Visible = False : Application.DoEvents()
+            pnlContenido.Controls.Add(pnlAyuda) : Application.DoEvents()
+            txtAyuda.Name = "txtAyuda" : Application.DoEvents()
+            pnlAyuda.Controls.Add(txtAyuda) : Application.DoEvents()
+        Else
+            pnlAyuda = pnlContenido.Controls.Find("pnlAyuda", False)(0) : Application.DoEvents()
+            txtAyuda = pnlAyuda.Controls.Find("txtAyuda", False)(0) : Application.DoEvents()
+        End If
+        If (Not pnlAyuda.Visible) Then
+            pnlCuerpo.Visible = False : Application.DoEvents()
+            pnlAyuda.Visible = True : Application.DoEvents()
+            pnlAyuda.Size = pnlCuerpo.Size : Application.DoEvents()
+            pnlAyuda.Location = pnlCuerpo.Location : Application.DoEvents()
+            pnlContenido.Controls.Add(pnlAyuda) : Application.DoEvents()
+            txtAyuda.ScrollBars = ScrollBars.Both : Application.DoEvents()
+            txtAyuda.Multiline = True : Application.DoEvents()
+            txtAyuda.Width = pnlAyuda.Width - 10 : Application.DoEvents()
+            txtAyuda.Height = pnlAyuda.Height - 10 : Application.DoEvents()
+            txtAyuda.Location = New Point(5, 5) : Application.DoEvents()
+            txtAyuda.Text = "Sección de Ayuda: " & vbNewLine & vbNewLine & "* Capturar Actividades: " & vbNewLine & "En esta pestaña se capturarán todas las actividades, ya sean para un mismo usuario, o para otro. " & vbNewLine & "Cuando la actividad es externa, significa que es para otro usuario, a lo cual se tiene que habilitar la opción llamada Es Externa y te pide especificar su area y a dicho usuario, ambos obligatoriamente. Existen los botones de guardar/editar y eliminar actividades dependiendo lo que se necesite hacer. " & vbNewLine & vbNewLine & "* Resolver Actividades: " & vbNewLine & "En este apartado aparecen todas las actividades separadas por internas y externas. " & vbNewLine & "Para resolver simplemente se selecciona una actividad, se rellenan los datos, además de una imagen obligatoria y se procede a guardar." : Application.DoEvents()
+            pnlAyuda.Controls.Add(txtAyuda) : Application.DoEvents()
+        Else
+            pnlCuerpo.Visible = True : Application.DoEvents()
+            pnlAyuda.Visible = False : Application.DoEvents()
+        End If
+
+    End Sub
+
 #End Region
 
 #Region "Captura de Actividades"
@@ -492,8 +545,8 @@ Public Class Principal
     Private Sub AlinearBotones(ByVal arriba As Boolean)
 
         If (arriba) Then
-            btnCapturaGuardar.Top = 360 : btnCapturaEliminar.Top = 360 : Application.DoEvents() 
-        Else 
+            btnCapturaGuardar.Top = 360 : btnCapturaEliminar.Top = 360 : Application.DoEvents()
+        Else
             btnCapturaGuardar.Top = 434 : btnCapturaEliminar.Top = 434 : Application.DoEvents()
         End If
 
@@ -534,7 +587,7 @@ Public Class Principal
             Else
                 btnCapturaGuardar.Enabled = True
                 btnCapturaEliminar.Enabled = True
-            End If 
+            End If
             txtCapturaNombre.Text = lista(0).ENombre
             txtCapturaDescripcion.Text = lista(0).EDescripcion
             dtpCapturaFechaCreacion.Value = lista(0).EFechaCreacion
@@ -574,7 +627,11 @@ Public Class Principal
         Dim esAutorizado As Boolean = False
         Dim esRechazado As Boolean = False
         Dim estaResuelto As Boolean = False
-        If (id > 0) And (Not String.IsNullOrEmpty(nombre)) And (IsDate(fechaCreacion)) And IsDate(fechaVencimiento) Then
+        If (esExterna And (idAreaDestino <= 0 Or idUsuarioDestino <= 0)) Then
+            MsgBox("Falta definir un area y/o usuario destino, no se puede guardar.", MsgBoxStyle.Exclamation, "No permitido.")
+            Exit Sub
+        End If
+        If ((id > 0) And (Not String.IsNullOrEmpty(nombre)) And (IsDate(fechaCreacion)) And IsDate(fechaVencimiento)) Then
             actividades.EId = id
             actividades.EIdArea = idArea
             actividades.EIdUsuario = idUsuario
@@ -818,7 +875,7 @@ Public Class Principal
         spResolverActividades.Sheets.Count = 2 : Application.DoEvents()
         spResolverActividades.Sheets(0).SheetName = "Internas" : Application.DoEvents()
         spResolverActividades.Sheets(1).SheetName = "Externas" : Application.DoEvents()
-        spResolverActividades.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell : Application.DoEvents() 
+        spResolverActividades.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell : Application.DoEvents()
         spResolverActividades.Visible = True : Application.DoEvents()
         spResolverActividades.Font = New Font("Microsoft Sans Serif", 12, FontStyle.Regular) : Application.DoEvents()
         spResolverActividades.HorizontalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded : Application.DoEvents()
@@ -831,7 +888,7 @@ Public Class Principal
 
         spResolverActividades.ActiveSheetIndex = 0
         spResolverActividades.ActiveSheet.GrayAreaBackColor = Color.White : Application.DoEvents()
-        spResolverActividades.ActiveSheet.Rows(-1).Height = 50 : Application.DoEvents() 
+        spResolverActividades.ActiveSheet.Rows(-1).Height = 50 : Application.DoEvents()
         spResolverActividades.ActiveSheet.ColumnHeader.Rows(0).Font = New Font("Microsoft Sans Serif", 12, FontStyle.Bold) : Application.DoEvents()
         Dim numeracion As Integer = 0
         spResolverActividades.ActiveSheet.Columns.Count = cantidadColumnas
@@ -849,12 +906,12 @@ Public Class Principal
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "esAutorizado" : numeracion += 1
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "esRechazado" : numeracion += 1
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "estaResuelto" : numeracion += 1
-        spResolverActividades.ActiveSheet.Columns("id").Width = 100 : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("id").Width = 60 : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("nombre").Width = 300 : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("descripcion").Width = 500 : Application.DoEvents()
-        spResolverActividades.ActiveSheet.Columns("fechaCreacion").Width = 160 : Application.DoEvents()
-        spResolverActividades.ActiveSheet.Columns("fechaVencimiento").Width = 170 : Application.DoEvents()
-        spResolverActividades.ActiveSheet.Columns("esUrgente").Width = 130 : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("fechaCreacion").Width = 140 : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("fechaVencimiento").Width = 140 : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("esUrgente").Width = 110 : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("esUrgente").CellType = tipoBooleano : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("nombre").HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("descripcion").HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify : Application.DoEvents()
@@ -881,8 +938,10 @@ Public Class Principal
 
         spResolverActividades.ActiveSheetIndex = 1
         spResolverActividades.ActiveSheet.GrayAreaBackColor = Color.White : Application.DoEvents()
-        spResolverActividades.ActiveSheet.Rows(-1).Height = 50 : Application.DoEvents() 
-        spResolverActividades.ActiveSheet.ColumnHeader.Rows(0).Font = New Font("Microsoft Sans Serif", 12, FontStyle.Bold) : Application.DoEvents()
+        spResolverActividades.ActiveSheet.ColumnHeader.Rows(0).Height = 35 : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Rows(-1).Height = 50 : Application.DoEvents()
+        spResolverActividades.ActiveSheet.ColumnHeader.RowCount = 2 : Application.DoEvents()
+        spResolverActividades.ActiveSheet.ColumnHeader.Rows(0, spResolverActividades.ActiveSheet.ColumnHeader.Rows.Count - 1).Font = New Font("Microsoft Sans Serif", 12, FontStyle.Bold) : Application.DoEvents()
         Dim numeracion As Integer = 0
         spResolverActividades.ActiveSheet.Columns.Count = cantidadColumnas
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "id" : numeracion += 1
@@ -901,38 +960,45 @@ Public Class Principal
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "esAutorizado" : numeracion += 1
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "esRechazado" : numeracion += 1
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "estaResuelto" : numeracion += 1
-        spResolverActividades.ActiveSheet.Columns("id").Width = 80 : Application.DoEvents()
-        spResolverActividades.ActiveSheet.Columns("idArea").Width = 110 : Application.DoEvents()
-        spResolverActividades.ActiveSheet.Columns("nombreArea").Width = 160 : Application.DoEvents()
-        spResolverActividades.ActiveSheet.Columns("idUsuario").Width = 130 : Application.DoEvents()
-        spResolverActividades.ActiveSheet.Columns("nombreUsuario").Width = 190 : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("id").Width = 60 : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("idArea").Width = 40 : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("nombreArea").Width = 130 : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("idUsuario").Width = 40 : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("nombreUsuario").Width = 130 : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("nombre").Width = 300 : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("descripcion").Width = 500 : Application.DoEvents()
-        spResolverActividades.ActiveSheet.Columns("fechaCreacion").Width = 160 : Application.DoEvents()
-        spResolverActividades.ActiveSheet.Columns("fechaVencimiento").Width = 170 : Application.DoEvents()
-        spResolverActividades.ActiveSheet.Columns("esUrgente").Width = 130 : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("fechaCreacion").Width = 140 : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("fechaVencimiento").Width = 140 : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("esUrgente").Width = 110 : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("esUrgente").CellType = tipoBooleano : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("nombre").HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify : Application.DoEvents()
-        spResolverActividades.ActiveSheet.Columns("descripcion").HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify : Application.DoEvents()
-        spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("id").Index).Value = "No.".ToUpper : Application.DoEvents()
-        spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("idArea").Index).Value = "No. Area Origen".ToUpper : Application.DoEvents()
-        spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("nombreArea").Index).Value = "Nombre Area Origen".ToUpper : Application.DoEvents()
-        spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("idUsuario").Index).Value = "No. Usuario Origen".ToUpper : Application.DoEvents()
-        spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("nombreUsuario").Index).Value = "Nombre Usuario Origen".ToUpper : Application.DoEvents()
-        spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("nombre").Index).Value = "Nombre".ToUpper : Application.DoEvents()
-        spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("descripcion").Index).Value = "Descripción".ToUpper : Application.DoEvents()
-        spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("fechaCreacion").Index).Value = "Fecha de Creación".ToUpper : Application.DoEvents()
-        spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("fechaVencimiento").Index).Value = "Fecha de Vencimiento".ToUpper : Application.DoEvents()
+        spResolverActividades.ActiveSheet.Columns("descripcion").HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify : Application.DoEvents() 
+        spResolverActividades.ActiveSheet.AddColumnHeaderSpanCell(0, spResolverActividades.ActiveSheet.Columns("id").Index, 2, 1) : Application.DoEvents()
+        spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("id").Index).Value = "No.".ToUpper : Application.DoEvents() 
+        spResolverActividades.ActiveSheet.AddColumnHeaderSpanCell(0, spResolverActividades.ActiveSheet.Columns("idArea").Index, 1, 2) : Application.DoEvents()
+        spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("idArea").Index).Value = "Area Origen".ToUpper : Application.DoEvents()
+        spResolverActividades.ActiveSheet.ColumnHeader.Cells(1, spResolverActividades.ActiveSheet.Columns("idArea").Index).Value = "No.".ToUpper : Application.DoEvents()
+        spResolverActividades.ActiveSheet.ColumnHeader.Cells(1, spResolverActividades.ActiveSheet.Columns("nombreArea").Index).Value = "Nombre".ToUpper : Application.DoEvents() 
+        spResolverActividades.ActiveSheet.AddColumnHeaderSpanCell(0, spResolverActividades.ActiveSheet.Columns("idUsuario").Index, 1, 2) : Application.DoEvents()
+        spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("idUsuario").Index).Value = "Usuario Origen".ToUpper : Application.DoEvents()
+        spResolverActividades.ActiveSheet.ColumnHeader.Cells(1, spResolverActividades.ActiveSheet.Columns("idUsuario").Index).Value = "No.".ToUpper : Application.DoEvents()
+        spResolverActividades.ActiveSheet.ColumnHeader.Cells(1, spResolverActividades.ActiveSheet.Columns("nombreUsuario").Index).Value = "Nombre".ToUpper : Application.DoEvents() 
+        spResolverActividades.ActiveSheet.AddColumnHeaderSpanCell(0, spResolverActividades.ActiveSheet.Columns("nombre").Index, 2, 1) : Application.DoEvents()
+        spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("nombre").Index).Value = "Nombre".ToUpper : Application.DoEvents() 
+        spResolverActividades.ActiveSheet.AddColumnHeaderSpanCell(0, spResolverActividades.ActiveSheet.Columns("descripcion").Index, 2, 1) : Application.DoEvents()
+        spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("descripcion").Index).Value = "Descripción".ToUpper : Application.DoEvents() 
+        spResolverActividades.ActiveSheet.AddColumnHeaderSpanCell(0, spResolverActividades.ActiveSheet.Columns("fechaCreacion").Index, 2, 1) : Application.DoEvents()
+        spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("fechaCreacion").Index).Value = "Fecha de Creación".ToUpper : Application.DoEvents() 
+        spResolverActividades.ActiveSheet.AddColumnHeaderSpanCell(0, spResolverActividades.ActiveSheet.Columns("fechaVencimiento").Index, 2, 1) : Application.DoEvents()
+        spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("fechaVencimiento").Index).Value = "Fecha de Vencimiento".ToUpper : Application.DoEvents() 
+        spResolverActividades.ActiveSheet.AddColumnHeaderSpanCell(0, spResolverActividades.ActiveSheet.Columns("esUrgente").Index, 2, 1) : Application.DoEvents()
         spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("esUrgente").Index).Value = "Es Urgente?".ToUpper : Application.DoEvents()
-        spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("idAreaDestino").Index).Value = "No. Area Externa".ToUpper : Application.DoEvents()
-        spResolverActividades.ActiveSheet.ColumnHeader.Cells(0, spResolverActividades.ActiveSheet.Columns("idUsuarioDestino").Index).Value = "No. Usuario Externo".ToUpper : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("esExterna").Visible = False : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("idAreaDestino").Visible = False : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("idUsuarioDestino").Visible = False : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("esAutorizado").Visible = False : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("esRechazado").Visible = False : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("estaResuelto").Visible = False : Application.DoEvents()
-        spResolverActividades.ActiveSheet.ColumnHeader.Rows(0).Height = 45 : Application.DoEvents()
         spResolverActividades.ActiveSheet.OperationMode = FarPoint.Win.Spread.OperationMode.SingleSelect
 
     End Sub
@@ -994,7 +1060,7 @@ Public Class Principal
 
 #End Region
 
-#Region "Clases"
+#Region "Enumeraciones"
 
     Public Enum OpcionActividades
 
@@ -1004,6 +1070,5 @@ Public Class Principal
     End Enum
 
 #End Region
-
 
 End Class

@@ -12628,6 +12628,11 @@
     <Content Include="Iconos Nuevos\PNG\48\Weather\wind_speed_98_102-48.png" />
     <Content Include="Iconos Nuevos\PNG\48\Weather\wind_speed_less_1-48.png" />
     <Content Include="Iconos Nuevos\SVG_EPS_PDF\How to get SVG EPS and PDF.txt" />
+    <Content Include="Iconos Usados\angle_right-48.png" />
+    <Content Include="Iconos Usados\arrows_long_right-32.png" />
+    <Content Include="Iconos Usados\exit_sign-48.png" />
+    <Content Include="Iconos Usados\save-48.png" />
+    <Content Include="Iconos Usados\user-48.png" />
     <Content Include="Logo.ico" />
     <Content Include="Logo2.ico" />
     <Content Include="Logo3.ico" />

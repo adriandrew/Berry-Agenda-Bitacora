@@ -270,9 +270,78 @@ namespace Escritorio
 
         }
         
+        private void btnAyuda_MouseHover(object sender, EventArgs e)
+        {
+
+            AsignarTooltips("Ayuda.");
+
+        }
+
+        private void btnAyuda_Click(object sender, EventArgs e)
+        {
+
+            MostrarAyuda();
+
+        }
+
         #endregion
 
         #region Metodos
+         
+        private void MostrarAyuda()
+        {
+
+            Panel pnlAyuda = new Panel();
+            TextBox txtAyuda = new TextBox();
+            if (pnlContenido.Controls.Find("pnlAyuda", true).Count() == 0)
+            {
+                pnlAyuda.Name = "pnlAyuda"; Application.DoEvents();
+                pnlAyuda.Visible = false; Application.DoEvents();
+                pnlContenido.Controls.Add(pnlAyuda); Application.DoEvents();
+                txtAyuda.Name = "txtAyuda"; Application.DoEvents();
+                pnlAyuda.Controls.Add(txtAyuda); Application.DoEvents();
+            }
+            else
+            {
+                pnlAyuda = pnlContenido.Controls.Find("pnlAyuda", false).FirstOrDefault() as Panel; Application.DoEvents();
+                txtAyuda = pnlAyuda.Controls.Find("txtAyuda", false).FirstOrDefault() as TextBox; Application.DoEvents();
+            }
+            if ((!pnlAyuda.Visible))
+            {
+                if (this.esInicioSesion)
+                {
+                    pnlIniciarSesion.Visible = false; Application.DoEvents();
+                }
+                else
+                { 
+                    pnlMenu.Visible = false; Application.DoEvents(); 
+                }
+                pnlAyuda.Visible = true; Application.DoEvents();
+                pnlAyuda.Size = pnlMenu.Size; Application.DoEvents();
+                pnlAyuda.Location = pnlMenu.Location; Application.DoEvents();
+                pnlContenido.Controls.Add(pnlAyuda); Application.DoEvents();
+                txtAyuda.ScrollBars = ScrollBars.Both; Application.DoEvents();
+                txtAyuda.Multiline = true; Application.DoEvents();
+                txtAyuda.Width = pnlAyuda.Width - 10; Application.DoEvents();
+                txtAyuda.Height = pnlAyuda.Height - 10; Application.DoEvents();
+                txtAyuda.Location = new Point(5, 5); Application.DoEvents();
+                txtAyuda.Text = "Sección de Ayuda: " + System.Environment.NewLine + System.Environment.NewLine + "* Iniciar Sesión: " + System.Environment.NewLine + "En esta parte se capturarán los datos de usuario y contraseña. " + System.Environment.NewLine + "Se le puede dar enter para avanzar, primero en usuario, luego en contraseña y despues de otro enter iniciará sesión, o en su caso darle clic al botón de la flecha. " + System.Environment.NewLine + System.Environment.NewLine + "* Menú: " + System.Environment.NewLine + "Una vez iniciado sesión, en este apartado aparecen todos los programas en un color distinto y aleatorio. " + System.Environment.NewLine + "Para abrir un programa simplemente hay que darle clic en la opción correspondiente y esperar a que se muestre. Dependiendo los permisos de usuario se podrá acceder o no."; Application.DoEvents();
+                pnlAyuda.Controls.Add(txtAyuda); Application.DoEvents();
+            }
+            else
+            {
+                if (this.esInicioSesion)
+                {
+                    pnlIniciarSesion.Visible = true; Application.DoEvents();
+                }
+                else 
+                { 
+                    pnlMenu.Visible = true; Application.DoEvents(); 
+                }
+                pnlAyuda.Visible = false; Application.DoEvents();
+            }
+
+        } 
 
         private void Desvanecer()
         {
@@ -641,26 +710,43 @@ namespace Escritorio
                 cuadro.MouseHover += new System.EventHandler(cuadro_MouseHover); // Se genera el evento desde codigo.
                 cuadro.MouseLeave += new System.EventHandler(cuadro_MouseLeave); // Se genera el evento desde codigo.
                 pnlMenu.Controls.Add(cuadro); Application.DoEvents();
-                // Se crean las etiquetas de los paneles.
-                Label etiqueta = new Label();
-                etiqueta.Width = ancho; 
+                // Se crean las etiquetas de los nombres de los paneles.
+                Label etiquetaNombre = new Label();
+                etiquetaNombre.Width = ancho; 
                 if (lista[indice - 1].Nombre.ToString().Length > 24)
                 {
-                    etiqueta.Top = cuadro.Height - etiqueta.Height - 45;
-                    etiqueta.Height = 80;
+                    etiquetaNombre.Top = cuadro.Height - etiquetaNombre.Height - 45;
+                    etiquetaNombre.Height = 80;
                 }
                 else
                 { 
-                    etiqueta.Top = cuadro.Height - etiqueta.Height - 15;
-                    etiqueta.Height = 40;
-                }
-                //etiqueta.BackColor = Color.Black; 
-                etiqueta.BorderStyle = BorderStyle.None;
-                etiqueta.Left = 0;
-                etiqueta.Text = lista[indice-1].Nombre.ToString(); //"idEmpresa " + indice; 
-                etiqueta.ForeColor = Color.White;
-                etiqueta.Font = new Font( "Microsoft Sans Serif", 20, FontStyle.Regular);
-                cuadro.Controls.Add(etiqueta); Application.DoEvents();
+                    etiquetaNombre.Top = cuadro.Height - etiquetaNombre.Height - 15;
+                    etiquetaNombre.Height = 40;
+                } 
+                etiquetaNombre.BorderStyle = BorderStyle.None;
+                etiquetaNombre.Left = 0;
+                etiquetaNombre.Text = lista[indice-1].Nombre.ToString(); //"idEmpresa " + indice; 
+                etiquetaNombre.ForeColor = Color.White;
+                etiquetaNombre.Font = new Font( "Microsoft Sans Serif", 20, FontStyle.Regular);
+                cuadro.Controls.Add(etiquetaNombre); Application.DoEvents();
+                //// Se crean las etiquetas de las iniciales de los paneles.
+                //Label etiquetaIniciales = new Label();
+                //etiquetaIniciales.Width = ancho;
+                //etiquetaIniciales.Top = 0;
+                //etiquetaIniciales.Height = 45;
+                ////etiquetaIniciales.BackColor = Color.Black; 
+                //etiquetaIniciales.BorderStyle = BorderStyle.None;
+                //etiquetaIniciales.Left = 0; 
+                //string[] listadoNombres = lista[indice - 1].Nombre.ToString().Split(' ');
+                //string iniciales = string.Empty;
+                //foreach (string s in listadoNombres)
+                //{
+                //    iniciales += (s.Substring(0, 1) + "." + " ").ToUpper();
+                //} 
+                //etiquetaIniciales.Text = iniciales;
+                //etiquetaIniciales.ForeColor = Color.White;
+                //etiquetaIniciales.Font = new Font("Microsoft Sans Serif", 30, FontStyle.Regular);
+                //cuadro.Controls.Add(etiquetaIniciales); Application.DoEvents();
                 // Se calculan y se distribuyen de acuerdo al tamaño del panel del menu.
                 indiceVariable += 1;
                 if (indiceVariable < Convert.ToInt32(cantidadEnAltura))
@@ -747,6 +833,6 @@ namespace Escritorio
         }
 
         #endregion
-
+         
     }
 }

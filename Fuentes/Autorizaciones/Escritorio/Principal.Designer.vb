@@ -49,6 +49,7 @@ Partial Class Principal
         Me.lblEncabezadoEmpresa = New System.Windows.Forms.Label()
         Me.lblEncabezadoPrograma = New System.Windows.Forms.Label()
         Me.temporizador = New System.Windows.Forms.Timer(Me.components)
+        Me.btnAyuda = New System.Windows.Forms.Button()
         Me.pnlContenido.SuspendLayout()
         Me.pnlCuerpo.SuspendLayout()
         Me.pnlExterna.SuspendLayout()
@@ -274,6 +275,7 @@ Partial Class Principal
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlPie.BackColor = System.Drawing.SystemColors.InactiveCaptionText
         Me.pnlPie.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlPie.Controls.Add(Me.btnAyuda)
         Me.pnlPie.Controls.Add(Me.lblDescripcionTooltip)
         Me.pnlPie.Controls.Add(Me.btnSalir)
         Me.pnlPie.Location = New System.Drawing.Point(0, 570)
@@ -302,7 +304,7 @@ Partial Class Principal
         Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSalir.ForeColor = System.Drawing.Color.Black
         Me.btnSalir.Image = CType(resources.GetObject("btnSalir.Image"), System.Drawing.Image)
-        Me.btnSalir.Location = New System.Drawing.Point(973, -1)
+        Me.btnSalir.Location = New System.Drawing.Point(973, 0)
         Me.btnSalir.Margin = New System.Windows.Forms.Padding(0)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(60, 60)
@@ -370,6 +372,23 @@ Partial Class Principal
         '
         Me.temporizador.Interval = 1
         '
+        'btnAyuda
+        '
+        Me.btnAyuda.BackColor = System.Drawing.Color.White
+        Me.btnAyuda.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnAyuda.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.btnAyuda.FlatAppearance.BorderSize = 3
+        Me.btnAyuda.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine
+        Me.btnAyuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAyuda.ForeColor = System.Drawing.Color.Black
+        Me.btnAyuda.Image = CType(resources.GetObject("btnAyuda.Image"), System.Drawing.Image)
+        Me.btnAyuda.Location = New System.Drawing.Point(0, 0)
+        Me.btnAyuda.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnAyuda.Name = "btnAyuda"
+        Me.btnAyuda.Size = New System.Drawing.Size(60, 60)
+        Me.btnAyuda.TabIndex = 5
+        Me.btnAyuda.UseVisualStyleBackColor = False
+        '
         'Principal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -415,4 +434,5 @@ Partial Class Principal
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents cbAreasDestino As System.Windows.Forms.ComboBox
     Friend WithEvents temporizador As System.Windows.Forms.Timer
+    Private WithEvents btnAyuda As System.Windows.Forms.Button
 End Class
