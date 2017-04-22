@@ -23,6 +23,7 @@ Public Class Principal
     Public opcionSeleccionada As Integer = 0
     Dim ejecutarProgramaPrincipal As New ProcessStartInfo()
     Public estaCerrando As Boolean = False
+    Public estaMostrado As Boolean = False
 
     Public esPrueba As Boolean = False
 
@@ -52,7 +53,7 @@ Public Class Principal
         ConfigurarConexiones()
         CargarEncabezados()
         CargarConsecutivoActividades()
-        ComenzarCargarActividadesPendientes()
+        'ComenzarCargarActividadesPendientes()
         CargarTiposDeDatos()
         CargarIndiceActividades()
         AlinearBotones(True)
@@ -68,6 +69,7 @@ Public Class Principal
     Private Sub Principal_Shown(sender As Object, e As EventArgs) Handles Me.Shown
 
         PonerFocoEnControl(txtCapturaId)
+        ComenzarCargarActividadesPendientes()
 
     End Sub
 
@@ -164,7 +166,7 @@ Public Class Principal
             PonerFocoEnControl(txtCapturaId)
         Else
             Me.opcionSeleccionada = OpcionActividades.Resolver
-            ComenzarCargarActividadesPendientes()
+            PonerFocoEnControl(spResolverActividades) 
         End If
 
     End Sub
@@ -177,13 +179,19 @@ Public Class Principal
             spResolverActividades.ActiveSheet.Rows(e.Row).BackColor = Color.GreenYellow
             spResolverActividades.ActiveSheet.ActiveRowIndex = e.Row
             CargarActividadesPendientes()
+            AcomodarSpreadIzquierda()
             If spResolverActividades.ActiveSheetIndex = 1 Then
                 CargarValoresImagenes()
                 Imagen.CargarValores()
                 Imagen.Mostrar()
             End If
-            PonerFocoEnControl(txtResolucionDescripcion)
-        End If
+        End If 
+
+    End Sub
+
+    Private Sub spResolverActividades_CellDoubleClick(sender As Object, e As FarPoint.Win.Spread.CellClickEventArgs) Handles spResolverActividades.CellDoubleClick
+
+        AcomodarSpreadCompleto()
 
     End Sub
 
@@ -197,7 +205,7 @@ Public Class Principal
 
     End Sub
 
-    Private Sub txtResolucionId_KeyDown(sender As Object, e As KeyEventArgs) Handles txtResolucionMotivoRetraso.KeyDown, txtResolucionId.KeyDown, txtResolucionDescripcion.KeyDown, dtpResolucionFecha.KeyDown
+    Private Sub txtResolucionId_KeyDown(sender As Object, e As KeyEventArgs) Handles txtResolucionId.KeyDown, txtResolucionMotivoRetraso.KeyDown, dtpResolucionFecha.KeyDown, btnAdministrarImagen.KeyDown
 
         If e.KeyData = Keys.Enter Then
             e.SuppressKeyPress = True
@@ -208,8 +216,22 @@ Public Class Principal
             ElseIf sender.Equals(txtResolucionMotivoRetraso) Then
                 dtpResolucionFecha.Focus()
             ElseIf sender.Equals(dtpResolucionFecha) Then
-                If IsDate(dtpResolucionFecha.Value) Then
-                    btnResolucionGuardar.Focus()
+                If (IsDate(dtpResolucionFecha.Value)) Then
+                    If (spResolverActividades.ActiveSheetIndex = 1) Then
+                        If (Me.tieneImagen) Then
+                            btnResolucionGuardar.Focus()
+                        Else
+                            btnAdministrarImagen.Focus() 
+                        End If
+                    Else
+                        btnResolucionGuardar.Focus()
+                    End If
+                End If
+            ElseIf sender.Equals(btnAdministrarImagen) Then
+                If (spResolverActividades.ActiveSheetIndex = 1) Then
+                    If (Me.tieneImagen) Then
+                        btnResolucionGuardar.Focus()
+                    End If
                 End If
             End If
         End If
@@ -489,6 +511,9 @@ Public Class Principal
 
     Private Sub AbrirPrograma(nombre As String, salir As Boolean)
 
+        If (Me.esPrueba) Then
+            Exit Sub
+        End If
         ejecutarProgramaPrincipal.UseShellExecute = True
         ejecutarProgramaPrincipal.FileName = nombre & Convert.ToString(".exe")
         ejecutarProgramaPrincipal.WorkingDirectory = Directory.GetCurrentDirectory()
@@ -575,6 +600,7 @@ Public Class Principal
 
     Private Sub CargarActividades()
 
+        Me.Cursor = Cursors.WaitCursor
         Dim lista As New List(Of EntidadesActividades.Actividades)
         actividades.EId = LogicaActividades.Funciones.ValidarNumero(txtCapturaId.Text)
         actividades.EIdArea = Me.datosUsuario.EIdArea
@@ -608,6 +634,7 @@ Public Class Principal
         Else
             LimpiarPantallaActividades()
         End If
+        Me.Cursor = Cursors.Default
 
     End Sub
 
@@ -742,7 +769,7 @@ Public Class Principal
     Private Sub ComenzarCargarActividadesPendientes()
 
         FormatearSpread()
-        CargarActividadesPendientesSpread()
+        CargarActividadesPendientesSpread() 
 
     End Sub
 
@@ -758,6 +785,9 @@ Public Class Principal
 
     Private Sub CargarActividadesPendientesSpread()
 
+        If (Me.opcionSeleccionada = OpcionActividades.Resolver) Then
+            Me.Cursor = Cursors.WaitCursor
+        End If
         ' Actividades internas.
         spResolverActividades.ActiveSheetIndex = 0
         Dim lista As New List(Of EntidadesActividades.Actividades)
@@ -766,6 +796,9 @@ Public Class Principal
         lista = actividades.ObtenerListadoPendientes()
         spResolverActividades.ActiveSheet.DataSource = lista
         FormatearSpreadActividadesPendientes(spResolverActividades.ActiveSheet.Columns.Count)
+        If (Me.opcionSeleccionada = OpcionActividades.Resolver) Then
+            Me.Cursor = Cursors.WaitCursor
+        End If
         ' Actividades externas.
         spResolverActividades.ActiveSheetIndex = 1
         Dim listaExterna As New List(Of EntidadesActividades.ActividadesExternas)
@@ -774,6 +807,9 @@ Public Class Principal
         listaExterna = actividadesExternas.ObtenerListadoPendientesExternas()
         spResolverActividades.ActiveSheet.DataSource = listaExterna
         FormatearSpreadActividadesPendientesExternas(spResolverActividades.ActiveSheet.Columns.Count)
+        If (Me.opcionSeleccionada = OpcionActividades.Resolver) Then
+            Me.Cursor = Cursors.Default
+        End If
 
     End Sub
 
@@ -869,8 +905,34 @@ Public Class Principal
 
     End Sub
 
+    Private Sub AcomodarSpreadCompleto()
+         
+        spResolverActividades.Top = 5 : Application.DoEvents()
+        spResolverActividades.Left = 5 : Application.DoEvents()
+        spResolverActividades.Width = tpResolverActividades.Width - 10 : Application.DoEvents()
+        spResolverActividades.Height = tpResolverActividades.Height - 10 : Application.DoEvents()
+        pnlResolucion.Visible = False : Application.DoEvents()
+
+    End Sub
+
+    Private Sub AcomodarSpreadIzquierda()
+         
+        spResolverActividades.Top = 5 : Application.DoEvents()
+        spResolverActividades.Left = 5 : Application.DoEvents()
+        spResolverActividades.Width = tpResolverActividades.Width - pnlResolucion.Width - 10 : Application.DoEvents()
+        spResolverActividades.Height = tpResolverActividades.Height - 10 : Application.DoEvents()
+        pnlResolucion.Top = 5 : Application.DoEvents()
+        pnlResolucion.Left = spResolverActividades.Width + 5 : Application.DoEvents()
+        pnlResolucion.Height = spResolverActividades.Height : Application.DoEvents()
+        pnlResolucion.Visible = True : Application.DoEvents()
+
+    End Sub
+
     Private Sub FormatearSpread()
 
+        If (Me.opcionSeleccionada = OpcionActividades.Resolver) Then
+            Me.Cursor = Cursors.WaitCursor
+        End If
         spResolverActividades.Reset() : Application.DoEvents()
         spResolverActividades.Sheets.Count = 2 : Application.DoEvents()
         spResolverActividades.Sheets(0).SheetName = "Internas" : Application.DoEvents()
@@ -881,11 +943,18 @@ Public Class Principal
         spResolverActividades.HorizontalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded : Application.DoEvents()
         spResolverActividades.VerticalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded : Application.DoEvents()
         spResolverActividades.TabStrip.DefaultSheetTab.Font = New Font("Microsoft Sans Serif", 10, FontStyle.Bold) : Application.DoEvents()
+        AcomodarSpreadCompleto()
+        If (Me.opcionSeleccionada = OpcionActividades.Resolver) Then
+            Me.Cursor = Cursors.Default
+        End If
 
     End Sub
 
     Private Sub FormatearSpreadActividadesPendientes(ByVal cantidadColumnas As Integer)
 
+        If (Me.opcionSeleccionada = OpcionActividades.Resolver) Then
+            Me.Cursor = Cursors.WaitCursor
+        End If
         spResolverActividades.ActiveSheetIndex = 0
         spResolverActividades.ActiveSheet.GrayAreaBackColor = Color.White : Application.DoEvents()
         spResolverActividades.ActiveSheet.Rows(-1).Height = 50 : Application.DoEvents()
@@ -930,12 +999,18 @@ Public Class Principal
         spResolverActividades.ActiveSheet.Columns("esRechazado").Visible = False : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("estaResuelto").Visible = False : Application.DoEvents()
         spResolverActividades.ActiveSheet.ColumnHeader.Rows(0).Height = 45 : Application.DoEvents()
-        spResolverActividades.ActiveSheet.OperationMode = FarPoint.Win.Spread.OperationMode.SingleSelect
+        spResolverActividades.ActiveSheet.OperationMode = FarPoint.Win.Spread.OperationMode.SingleSelect 
+        If (Me.opcionSeleccionada = OpcionActividades.Resolver) Then
+            Me.Cursor = Cursors.Default
+        End If
 
     End Sub
 
     Private Sub FormatearSpreadActividadesPendientesExternas(ByVal cantidadColumnas As Integer)
 
+        If (Me.opcionSeleccionada = OpcionActividades.Resolver) Then
+            Me.Cursor = Cursors.WaitCursor
+        End If
         spResolverActividades.ActiveSheetIndex = 1
         spResolverActividades.ActiveSheet.GrayAreaBackColor = Color.White : Application.DoEvents()
         spResolverActividades.ActiveSheet.ColumnHeader.Rows(0).Height = 35 : Application.DoEvents()
@@ -999,7 +1074,10 @@ Public Class Principal
         spResolverActividades.ActiveSheet.Columns("esAutorizado").Visible = False : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("esRechazado").Visible = False : Application.DoEvents()
         spResolverActividades.ActiveSheet.Columns("estaResuelto").Visible = False : Application.DoEvents()
-        spResolverActividades.ActiveSheet.OperationMode = FarPoint.Win.Spread.OperationMode.SingleSelect
+        spResolverActividades.ActiveSheet.OperationMode = FarPoint.Win.Spread.OperationMode.SingleSelect : Application.DoEvents()
+        If (Me.opcionSeleccionada = OpcionActividades.Resolver) Then
+            Me.Cursor = Cursors.Default
+        End If
 
     End Sub
 
@@ -1038,7 +1116,8 @@ Public Class Principal
         txtResolucionDescripcion.Clear()
         txtResolucionMotivoRetraso.Clear()
         dtpResolucionFecha.Value = Today
-        pbImagen.Visible = False
+        pbImagen.Image = Nothing
+        Me.tieneImagen = False
         Dim filas As Integer = spResolverActividades.ActiveSheet.Rows.Count
         If filas > 0 Then
             spResolverActividades.ActiveSheet.Rows(0, filas - 1).BackColor = Color.White
@@ -1070,5 +1149,5 @@ Public Class Principal
     End Enum
 
 #End Region
-
+       
 End Class

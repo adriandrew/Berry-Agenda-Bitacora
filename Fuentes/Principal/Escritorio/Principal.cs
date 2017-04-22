@@ -37,13 +37,13 @@ namespace Escritorio
 
         public bool esPrueba = false;
 
-        #region Eventos
-
         public Principal()
         {
             InitializeComponent();
         }
         
+        #region Eventos
+
         private void Principal_Load(object sender, EventArgs e)
         {
 
@@ -55,7 +55,22 @@ namespace Escritorio
             CargarTitulosEmpresa();
 
         }
-        
+
+        private void Principal_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+            Salir();
+
+        }
+
+        private void Principal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            this.estaCerrando = true;
+            Desvanecer();
+
+        }
+
         private void cuadro_Click(object sender, EventArgs e)
         {
 
@@ -69,7 +84,7 @@ namespace Escritorio
                 Panel objetoPanel = new Panel();
                 objetoPanel = (Panel)(pnlMenu.Controls[nombre]);
                 objetoPanel.Enabled = false;
-                MessageBox.Show("No tienes permisos para acceder a este programa.", "No permitido.", MessageBoxButtons.OK);
+                MessageBox.Show("No tienes permisos para acceder a este programa.", "No permitido.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
@@ -86,8 +101,7 @@ namespace Escritorio
 
         private void cuadro_MouseHover(object sender, EventArgs e)
         {
-
-            this.Cursor = Cursors.Hand;
+             
             string nombre = ((Panel)sender).Name;
             Panel objetoPanel = new Panel();
             objetoPanel = (Panel)(pnlMenu.Controls[nombre]);
@@ -97,8 +111,7 @@ namespace Escritorio
 
         private void cuadro_MouseLeave(object sender, EventArgs e)
         {
-
-            this.Cursor = Cursors.Default;
+             
             string nombre = ((Panel)sender).Name;
             Panel objetoPanel = new Panel();
             objetoPanel = (Panel)(pnlMenu.Controls[nombre]);
@@ -161,46 +174,7 @@ namespace Escritorio
         private void btnSalir_Click(object sender, EventArgs e)
         {
 
-            if (this.esInicioSesion)
-            {
-                Application.Exit();
-            }
-            else
-            {
-                pnlContenido.BackgroundImage = global::PrincipalBerry.Properties.Resources.Logo3;
-                pnlContenido.BackgroundImageLayout = ImageLayout.Zoom;
-                pnlContenido.BackColor = Color.DarkSlateGray;
-                //pnlContenido.BackgroundImage = global::Principal.Properties.Resources.hiedra;
-                //pnlContenido.BackgroundImageLayout = ImageLayout.Stretch;
-                pnlMenu.Visible = false;
-                pnlIniciarSesion.Visible = true;
-                txtContraseña.Text = string.Empty;       
-                txtUsuario.Text = string.Empty;
-                txtUsuario.Focus();
-                this.esInicioSesion = true;
-            }
-
-        }
-
-        private void Principal_FormClosed(object sender, FormClosedEventArgs e)
-        {
-
-            this.Cursor = Cursors.WaitCursor; 
-            if (this.estaAbriendoPrograma)
-            {
-                System.Threading.Thread.Sleep(10000);
-            }
-            Application.ExitThread();
-            Application.Exit();
-            this.Cursor = Cursors.Default;
-
-        }
-
-        private void Principal_FormClosing(object sender, FormClosingEventArgs e)
-        { 
-
-            this.estaCerrando = true;
-            Desvanecer();  
+            SalirOVolver();
 
         }
 
@@ -286,8 +260,46 @@ namespace Escritorio
 
         #endregion
 
-        #region Metodos
-         
+        #region Métodos
+
+        private void Salir() 
+        {
+
+            this.Cursor = Cursors.WaitCursor;
+            if (this.estaAbriendoPrograma)
+            {
+                System.Threading.Thread.Sleep(10000);
+            }
+            Application.ExitThread();
+            Application.Exit();
+            this.Cursor = Cursors.Default;
+
+        }
+
+        private void SalirOVolver() 
+        {
+
+            if (this.esInicioSesion)
+            {
+                Application.Exit();
+            }
+            else
+            {
+                pnlContenido.BackgroundImage = global::PrincipalBerry.Properties.Resources.Logo3;
+                pnlContenido.BackgroundImageLayout = ImageLayout.Zoom;
+                pnlContenido.BackColor = Color.DarkSlateGray;
+                //pnlContenido.BackgroundImage = global::Principal.Properties.Resources.hiedra;
+                //pnlContenido.BackgroundImageLayout = ImageLayout.Stretch;
+                pnlMenu.Visible = false;
+                pnlIniciarSesion.Visible = true;
+                txtContraseña.Text = string.Empty;
+                txtUsuario.Text = string.Empty;
+                txtUsuario.Focus();
+                this.esInicioSesion = true;
+            }
+
+        }
+
         private void MostrarAyuda()
         {
 
@@ -377,7 +389,7 @@ namespace Escritorio
         private void ValidarSesion()
         { 
             
-            // Falta agregar lo de la empresa.
+            // Falta agregar lo de la idEmpresa.
             if (!string.IsNullOrEmpty(this.txtUsuario.Text) && !string.IsNullOrEmpty(this.txtContraseña.Text))
             {
                 if ((txtUsuario.Text.ToUpper().Equals("Admin".ToUpper())) && (txtContraseña.Text.Equals("@berry")))
@@ -426,8 +438,8 @@ namespace Escritorio
             pnlIniciarSesion.Visible = false; Application.DoEvents();
             pnlMenu.Visible = true; Application.DoEvents();
             this.esInicioSesion = false;
-            this.idEmpresaSesion = idEmpresa; //Convert.ToInt32(datos[0]);
-            this.idUsuarioSesion = idUsuario; //Convert.ToInt32(datos[1]);
+            this.idEmpresaSesion = idEmpresa; //Convert.ToInt32(lista[0]);
+            this.idUsuarioSesion = idUsuario; //Convert.ToInt32(lista[1]);
             GenerarMenu();
             ConsultarInformacionUsuario(this.idEmpresaSesion, this.idUsuarioSesion);
             ConsultarInformacionArea(datosUsuario.IdArea);
@@ -501,7 +513,7 @@ namespace Escritorio
         private void ConfigurarConexiones() 
         { 
             
-            // Se obtiene si tiene parametros.  
+            // Se obtiene si tieneDatos parametros.  
 	        string[] parametros = Environment.GetCommandLineArgs().ToArray();
 	        if ((parametros.Length > 1)) 
             {
@@ -513,9 +525,7 @@ namespace Escritorio
                 Logica.DatosEmpresaPrincipal.instanciaSql = "ANDREW-MAC\\SQLEXPRESS";
                 Logica.DatosEmpresaPrincipal.usuarioSql = "AdminBerry";
                 Logica.DatosEmpresaPrincipal.contrasenaSql = "@berry";
-                Logica.DatosEmpresaPrincipal.idEmpresa = 1;
-                //ConfigurarConexionPrincipal();
-                //ConsultarInformacionEmpresaPrincipalPredeterminada();
+                Logica.DatosEmpresaPrincipal.idEmpresa = 1; 
                 //string[] activa = InstanciaSql().Split('|'); ' Es para obtener las instancias sql. Nunca se usó ya que no es lo correcto.
                 //string servidor = activa[0];
                 //string instancia = activa[1];
@@ -541,8 +551,10 @@ namespace Escritorio
             } 
             baseDatos.CadenaConexionInformacion = "Informacion";
             baseDatos.CadenaConexionCatalogo = "Catalogos";
+            baseDatos.CadenaConexionAgenda = "Agenda";
             baseDatos.AbrirConexionInformacion();
             baseDatos.AbrirConexionCatalogo();
+            baseDatos.AbrirConexionAgenda();
             if (this.tieneParametros)
             {
                 ConsultarInformacionEmpresa(datosEmpresa.Id);
@@ -550,9 +562,7 @@ namespace Escritorio
             }
             else
             { 
-                ConsultarInformacionEmpresa(Logica.DatosEmpresaPrincipal.idEmpresa);
-                //ConsultarInformacionUsuario(this.idEmpresaSesion, this.idUsuarioSesion);
-                //ConsultarInformacionArea(datosUsuario.IdArea);
+                ConsultarInformacionEmpresa(Logica.DatosEmpresaPrincipal.idEmpresa); 
             }
 
         }
@@ -642,7 +652,7 @@ namespace Escritorio
         {
             areas.Id = idArea;
             List<Entidades.Areas> datos = new List<Entidades.Areas>();
-            datos = areas.ObtenerListaPorId();
+            datos = areas.ObtenerListadoPorId();
             datosArea.Id = datos[0].Id;
             datosArea.Nombre = datos[0].Nombre;
             datosArea.Clave = datos[0].Clave;
@@ -653,10 +663,10 @@ namespace Escritorio
         //{
 
         //    areas.Id = datosUsuario.IdArea;
-        //    string[] datos = areas.ObtenerPorId().Split('|');
-        //    datosArea.Id = Convert.ToInt32(datos[0]);
-        //    datosArea.Nombre = datos[1];
-        //    datosArea.Clave = datos[2];
+        //    string[] lista = areas.ObtenerPorId().Split('|');
+        //    datosArea.Id = Convert.ToInt32(lista[0]);
+        //    datosArea.Nombre = lista[1];
+        //    datosArea.Clave = lista[2];
 
         //}
 
@@ -664,14 +674,14 @@ namespace Escritorio
         //{
 
         //    usuarios.Id = this.idUsuarioSesion;
-        //    string[] datos = usuarios.ObtenerPorId().Split('|');
-        //    datosUsuario.IdEmpresa = Convert.ToInt32(datos[0]);
-        //    datosUsuario.Id = Convert.ToInt32(datos[1]);
-        //    datosUsuario.Nombre = datos[2];
-        //    datosUsuario.Contrasena = datos[3];
-        //    datosUsuario.Nivel = Convert.ToInt32(datos[4]);
-        //    datosUsuario.AccesoTotal = Convert.ToBoolean(datos[5]);
-        //    datosUsuario.IdArea = Convert.ToInt32(datos[6]);
+        //    string[] lista = usuarios.ObtenerPorId().Split('|');
+        //    datosUsuario.IdEmpresa = Convert.ToInt32(lista[0]);
+        //    datosUsuario.Id = Convert.ToInt32(lista[1]);
+        //    datosUsuario.Nombre = lista[2];
+        //    datosUsuario.Contrasena = lista[3];
+        //    datosUsuario.Nivel = Convert.ToInt32(lista[4]);
+        //    datosUsuario.AccesoTotal = Convert.ToBoolean(lista[5]);
+        //    datosUsuario.IdArea = Convert.ToInt32(lista[6]);
 
         //}
 
@@ -702,13 +712,13 @@ namespace Escritorio
                 cuadro.Top = posicionY;
                 cuadro.Left = posicionX;
                 cuadro.BorderStyle = BorderStyle.FixedSingle;
-                cuadro.BackColor = ObtenerColorAleatorio(); 
-                System.Threading.Thread.Sleep(60);
-                //cuadro.BackColor = ControlPaint.Dark(cuadro.BackColor); 
+                cuadro.BackColor = ObtenerColorAleatorio();
+                System.Threading.Thread.Sleep(70);
                 cuadro.Name = "pnlPrograma_1_" + lista[indice-1].Id; // El 1 está fijo, pero corresponde al modulo.
                 cuadro.Click += new System.EventHandler(cuadro_Click); // Se genera el evento desde codigo.
                 cuadro.MouseHover += new System.EventHandler(cuadro_MouseHover); // Se genera el evento desde codigo.
                 cuadro.MouseLeave += new System.EventHandler(cuadro_MouseLeave); // Se genera el evento desde codigo.
+                cuadro.Cursor = Cursors.Hand;
                 pnlMenu.Controls.Add(cuadro); Application.DoEvents();
                 // Se crean las etiquetas de los nombres de los paneles.
                 Label etiquetaNombre = new Label();
@@ -725,9 +735,10 @@ namespace Escritorio
                 } 
                 etiquetaNombre.BorderStyle = BorderStyle.None;
                 etiquetaNombre.Left = 0;
-                etiquetaNombre.Text = lista[indice-1].Nombre.ToString(); //"idEmpresa " + indice; 
+                etiquetaNombre.Text = lista[indice-1].Nombre.ToString();
                 etiquetaNombre.ForeColor = Color.White;
-                etiquetaNombre.Font = new Font( "Microsoft Sans Serif", 20, FontStyle.Regular);
+                etiquetaNombre.Font = new Font("Microsoft Sans Serif", 20, FontStyle.Regular);
+                etiquetaNombre.Cursor = Cursors.Hand;
                 cuadro.Controls.Add(etiquetaNombre); Application.DoEvents();
                 //// Se crean las etiquetas de las iniciales de los paneles.
                 //Label etiquetaIniciales = new Label();
@@ -768,11 +779,11 @@ namespace Escritorio
 
             Random aleatorio = new Random();
             Color opcionColor = new Color();
-            //opcionColor = Color.FromArgb(aleatorio.Next(180), aleatorio.Next(180), aleatorio.Next(180));               
+            //opcionColor = Color.FromArgb(aleatorio.Next(180), aleatorio.Next(180), aleatorio.Next(180));
             KnownColor[] nombres = (KnownColor[])Enum.GetValues(typeof(KnownColor));
             KnownColor nombreAleatorio = nombres[aleatorio.Next(nombres.Length)];
             opcionColor = Color.FromKnownColor(nombreAleatorio); 
-            Color colorOscuro = ControlPaint.Dark(opcionColor);                        
+            Color colorOscuro = ControlPaint.Dark(opcionColor); // Se oscurece.
             return colorOscuro;
 
         }

@@ -76,7 +76,20 @@ namespace Entidades
             {
                 SqlCommand comando = new SqlCommand();
                 comando.Connection = BaseDatos.conexionInformacion;
-                comando.CommandText = "DELETE FROM BloqueoUsuarios WHERE IdEmpresa=@idEmpresa AND IdUsuario=@idUsuario AND IdModulo=@idModulo AND IdPrograma=@idPrograma AND IdSubPrograma=@idSubPrograma";
+                string condiciones = string.Empty;
+                if (this.IdModulo > 0)
+                {
+                    condiciones += " AND IdModulo=@idModulo ";
+                } 
+                if (this.IdPrograma > 0)
+                {
+                    condiciones += " AND IdPrograma=@idPrograma ";
+                }
+                if (this.IdSubPrograma > 0)
+                {
+                    condiciones += " AND IdSubPrograma=@idSubPrograma ";
+                }
+                comando.CommandText = "DELETE FROM BloqueoUsuarios WHERE IdEmpresa=@idEmpresa AND IdUsuario=@idUsuario " + condiciones;
                 comando.Parameters.AddWithValue("@idEmpresa", this.IdEmpresa);
                 comando.Parameters.AddWithValue("@idUsuario", this.IdUsuario);
                 comando.Parameters.AddWithValue("@idModulo", this.IdModulo);

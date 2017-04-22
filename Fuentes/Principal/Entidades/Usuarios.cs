@@ -243,7 +243,7 @@ namespace Entidades
 
         }
 
-        public bool ValidarPorNumero()
+        public bool ValidarPorId()
         {
 
             try
@@ -274,6 +274,40 @@ namespace Entidades
             finally
             {
                 BaseDatos.conexionInformacion.Close();
+            }
+
+        }
+
+        public bool ValidarActividadPorId()
+        {
+
+            try
+            {
+                bool resultado = false;
+                SqlCommand comando = new SqlCommand();
+                comando.Connection = BaseDatos.conexionAgenda;
+                comando.CommandText = "SELECT * FROM Actividades WHERE IdUsuario=@id OR IdUsuarioDestino=@id"; 
+                comando.Parameters.AddWithValue("@id", this.Id);
+                BaseDatos.conexionAgenda.Open();
+                SqlDataReader dataReader = comando.ExecuteReader();
+                if (dataReader.HasRows)
+                {
+                    resultado = true;
+                }
+                else
+                {
+                    resultado = false;
+                }
+                BaseDatos.conexionAgenda.Close();
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                BaseDatos.conexionAgenda.Close();
             }
 
         }

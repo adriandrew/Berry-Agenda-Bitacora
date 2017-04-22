@@ -29,7 +29,7 @@ namespace Entidades
             set { this.clave = value; }
         }
 
-        public List<Areas> ObtenerListaPorId()
+        public List<Areas> ObtenerListadoPorId()
         {
 
             List<Areas> lista = new List<Areas>();

@@ -23,7 +23,7 @@ Public Class Principal
     Dim rutaTemporal As String = CurDir() & "\ArchivosTemporales"
     Public estaCerrando As Boolean = False
 
-    Public esPrueba As Boolean = True
+    Public esPrueba As Boolean = False
 
 #Region "Eventos"
 
@@ -161,7 +161,7 @@ Public Class Principal
 
     End Sub
 
-    Private Sub pnlFiltros_MouseHover(sender As Object, e As EventArgs) Handles pnlFiltros.MouseHover, gbTipo.MouseHover, gbEstatus.MouseHover, gbCalificacion.MouseHover, gbFechas.MouseHover, gbFiltros.MouseHover, chkFechaCreacion.MouseHover, chkFechaResolucion.MouseHover, chkFechaVencimiento.MouseHover, cbAreas.MouseHover, cbAreasDestino.MouseHover, cbUsuarios.MouseHover, cbUsuariosDestino.MouseHover
+    Private Sub pnlFiltros_MouseHover(sender As Object, e As EventArgs) Handles pnlFiltros.MouseHover, gbTipo.MouseHover, gbEstatus.MouseHover, gbCalificacion.MouseHover, gbFechas.MouseHover, gbOtros.MouseHover, chkFechaCreacion.MouseHover, chkFechaResolucion.MouseHover, chkFechaVencimiento.MouseHover, cbAreas.MouseHover, cbAreasDestino.MouseHover, cbUsuarios.MouseHover, cbUsuariosDestino.MouseHover
 
         AlinearFiltrosNormal()
         AsignarTooltips("Filtros para Generar el Reporte.")
@@ -233,6 +233,36 @@ Public Class Principal
 
     End Sub
 
+    Private Sub chkFechaCreacion_CheckedChanged(sender As Object, e As EventArgs) Handles chkFechaCreacion.CheckedChanged
+
+        If (chkFechaCreacion.Checked) Then
+            chkFechaCreacion.Text = "SI"
+        Else
+            chkFechaCreacion.Text = "NO"
+        End If
+
+    End Sub
+
+    Private Sub chkFechaVencimiento_CheckedChanged(sender As Object, e As EventArgs) Handles chkFechaVencimiento.CheckedChanged
+
+        If (chkFechaVencimiento.Checked) Then
+            chkFechaVencimiento.Text = "SI"
+        Else
+            chkFechaVencimiento.Text = "NO"
+        End If
+
+    End Sub
+
+    Private Sub chkFechaResolucion_CheckedChanged(sender As Object, e As EventArgs) Handles chkFechaResolucion.CheckedChanged
+
+        If (chkFechaResolucion.Checked) Then
+            chkFechaResolucion.Text = "SI"
+        Else
+            chkFechaResolucion.Text = "NO"
+        End If
+
+    End Sub
+
 #End Region
 
 #Region "Métodos"
@@ -264,7 +294,7 @@ Public Class Principal
             txtAyuda.Width = pnlAyuda.Width - 10 : Application.DoEvents()
             txtAyuda.Height = pnlAyuda.Height - 10 : Application.DoEvents()
             txtAyuda.Location = New Point(5, 5) : Application.DoEvents()
-            txtAyuda.Text = "Sección de Ayuda: " & vbNewLine & vbNewLine & "* Reporte: " & vbNewLine & "En esta pantalla se desplegará el reporte de acuerdo a los filtro que se hayan seleccionado. " & vbNewLine & "En la parte izquierda se puede agregar cualquiera de los filtros. Posteriormente se procede a generar el reporte con los criterios seleccionados. Cuando se termine de generar dicho reporte, se habilitarán las opciones de imprimir, exportar a excel o exportar a pdf, en estas dos últimas el usuario puede guardarlos directamente desde el archivo que se muestra en pantalla si así lo desea, mas no desde el sistema directamente. " : Application.DoEvents()
+            txtAyuda.Text = "Sección de Ayuda: " & vbNewLine & vbNewLine & "* Reporte: " & vbNewLine & "En esta pantalla se desplegará el reporte de acuerdo a los filtros que se hayan seleccionado. " & vbNewLine & "En la parte izquierda se puede agregar cualquiera de los filtros. Existen unos botones que se encuentran en las fechas que contienen la palabra si o no, si la palabra mostrada es si, el rango de fecha correspondiente se incluirá como filtro para el reporte, esto aplica para todas las opciones de fechas. Posteriormente se procede a generar el reporte con los criterios seleccionados. Cuando se termine de generar dicho reporte, se habilitarán las opciones de imprimir, exportar a excel o exportar a pdf, en estas dos últimas el usuario puede guardarlos directamente desde el archivo que se muestra en pantalla si así lo desea, mas no desde el sistema directamente. " : Application.DoEvents()
             pnlAyuda.Controls.Add(txtAyuda) : Application.DoEvents()
         Else
             pnlCuerpo.Visible = True : Application.DoEvents()
@@ -736,6 +766,14 @@ Public Class Principal
         lista = actividades.ObtenerListadoActividades(tipo, estatus, calificacion, aplicaFechaCreacion, aplicaFechaVencimiento, aplicaFechaResolucion)
         spReporte.ActiveSheet.DataSource = lista
         FormatearSpreadReporteActividades(spReporte.ActiveSheet.Columns.Count)
+
+        '' Intento de reporte grafico en la segunda hoja. (Queda pendiente.)
+        'spReporte.Sheets.Count = 2
+        'spReporte.ActiveSheetIndex = 0
+        'Dim rango As New FarPoint.Win.Spread.Model.CellRange(3, 0, spReporte.ActiveSheet.Rows.Count - 1, 1)
+        'spReporte.ActiveSheetIndex = 1
+        'spReporte.ActiveSheet.AddChart(rango, GetType(FarPoint.Win.Chart.BarSeries), 400, 400, 0, 0)
+         
         AlinearFiltrosIzquierda()
         btnImprimir.Enabled = True
         btnExportarExcel.Enabled = True

@@ -24,8 +24,8 @@ Partial Class Principal
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Principal))
-        Dim EnhancedScrollBarRenderer1 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
-        Dim EnhancedScrollBarRenderer2 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
+        Dim EnhancedScrollBarRenderer3 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
+        Dim EnhancedScrollBarRenderer4 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
         Me.pnlContenido = New System.Windows.Forms.Panel()
         Me.pnlCuerpo = New System.Windows.Forms.Panel()
         Me.tbActividades = New System.Windows.Forms.TabControl()
@@ -56,6 +56,8 @@ Partial Class Principal
         Me.cbAreas = New System.Windows.Forms.ComboBox()
         Me.chkCapturaEsExterna = New System.Windows.Forms.CheckBox()
         Me.tpResolverActividades = New System.Windows.Forms.TabPage()
+        Me.pnlResolucion = New System.Windows.Forms.Panel()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.pbImagen = New System.Windows.Forms.PictureBox()
         Me.btnAdministrarImagen = New System.Windows.Forms.Button()
         Me.btnResolucionFechaAnterior = New System.Windows.Forms.Button()
@@ -87,6 +89,7 @@ Partial Class Principal
         Me.tpCapturarActividades.SuspendLayout()
         Me.pnlExterna.SuspendLayout()
         Me.tpResolverActividades.SuspendLayout()
+        Me.pnlResolucion.SuspendLayout()
         CType(Me.pbImagen, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.spResolverActividades, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.spResolverActividades_Sheet1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -453,19 +456,7 @@ Partial Class Principal
         'tpResolverActividades
         '
         Me.tpResolverActividades.BackColor = System.Drawing.Color.White
-        Me.tpResolverActividades.Controls.Add(Me.pbImagen)
-        Me.tpResolverActividades.Controls.Add(Me.btnAdministrarImagen)
-        Me.tpResolverActividades.Controls.Add(Me.btnResolucionFechaAnterior)
-        Me.tpResolverActividades.Controls.Add(Me.btnResolucionFechaSiguiente)
-        Me.tpResolverActividades.Controls.Add(Me.btnResolucionGuardar)
-        Me.tpResolverActividades.Controls.Add(Me.dtpResolucionFecha)
-        Me.tpResolverActividades.Controls.Add(Me.Label6)
-        Me.tpResolverActividades.Controls.Add(Me.txtResolucionId)
-        Me.tpResolverActividades.Controls.Add(Me.Label7)
-        Me.tpResolverActividades.Controls.Add(Me.txtResolucionDescripcion)
-        Me.tpResolverActividades.Controls.Add(Me.Label8)
-        Me.tpResolverActividades.Controls.Add(Me.txtResolucionMotivoRetraso)
-        Me.tpResolverActividades.Controls.Add(Me.Label9)
+        Me.tpResolverActividades.Controls.Add(Me.pnlResolucion)
         Me.tpResolverActividades.Controls.Add(Me.spResolverActividades)
         Me.tpResolverActividades.Cursor = System.Windows.Forms.Cursors.Default
         Me.tpResolverActividades.Location = New System.Drawing.Point(4, 33)
@@ -475,14 +466,46 @@ Partial Class Principal
         Me.tpResolverActividades.TabIndex = 1
         Me.tpResolverActividades.Text = "Resolver Actividades"
         '
+        'pnlResolucion
+        '
+        Me.pnlResolucion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlResolucion.Controls.Add(Me.Label10)
+        Me.pnlResolucion.Controls.Add(Me.pbImagen)
+        Me.pnlResolucion.Controls.Add(Me.btnAdministrarImagen)
+        Me.pnlResolucion.Controls.Add(Me.btnResolucionFechaAnterior)
+        Me.pnlResolucion.Controls.Add(Me.btnResolucionFechaSiguiente)
+        Me.pnlResolucion.Controls.Add(Me.btnResolucionGuardar)
+        Me.pnlResolucion.Controls.Add(Me.dtpResolucionFecha)
+        Me.pnlResolucion.Controls.Add(Me.Label6)
+        Me.pnlResolucion.Controls.Add(Me.txtResolucionId)
+        Me.pnlResolucion.Controls.Add(Me.Label7)
+        Me.pnlResolucion.Controls.Add(Me.txtResolucionDescripcion)
+        Me.pnlResolucion.Controls.Add(Me.Label8)
+        Me.pnlResolucion.Controls.Add(Me.txtResolucionMotivoRetraso)
+        Me.pnlResolucion.Controls.Add(Me.Label9)
+        Me.pnlResolucion.Location = New System.Drawing.Point(6, 7)
+        Me.pnlResolucion.Name = "pnlResolucion"
+        Me.pnlResolucion.Size = New System.Drawing.Size(677, 334)
+        Me.pnlResolucion.TabIndex = 27
+        Me.pnlResolucion.Visible = False
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(4, 64)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(151, 24)
+        Me.Label10.TabIndex = 40
+        Me.Label10.Text = "de Resolución:"
+        '
         'pbImagen
         '
         Me.pbImagen.BackColor = System.Drawing.Color.Transparent
-        Me.pbImagen.Location = New System.Drawing.Point(823, 18)
+        Me.pbImagen.Location = New System.Drawing.Point(219, 168)
         Me.pbImagen.Name = "pbImagen"
         Me.pbImagen.Size = New System.Drawing.Size(160, 160)
         Me.pbImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pbImagen.TabIndex = 25
+        Me.pbImagen.TabIndex = 39
         Me.pbImagen.TabStop = False
         '
         'btnAdministrarImagen
@@ -495,11 +518,11 @@ Partial Class Principal
         Me.btnAdministrarImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAdministrarImagen.ForeColor = System.Drawing.Color.Black
         Me.btnAdministrarImagen.Image = CType(resources.GetObject("btnAdministrarImagen.Image"), System.Drawing.Image)
-        Me.btnAdministrarImagen.Location = New System.Drawing.Point(750, 18)
+        Me.btnAdministrarImagen.Location = New System.Drawing.Point(382, 172)
         Me.btnAdministrarImagen.Margin = New System.Windows.Forms.Padding(0)
         Me.btnAdministrarImagen.Name = "btnAdministrarImagen"
         Me.btnAdministrarImagen.Size = New System.Drawing.Size(60, 60)
-        Me.btnAdministrarImagen.TabIndex = 24
+        Me.btnAdministrarImagen.TabIndex = 38
         Me.btnAdministrarImagen.UseVisualStyleBackColor = False
         '
         'btnResolucionFechaAnterior
@@ -507,10 +530,10 @@ Partial Class Principal
         Me.btnResolucionFechaAnterior.BackColor = System.Drawing.Color.White
         Me.btnResolucionFechaAnterior.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnResolucionFechaAnterior.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnResolucionFechaAnterior.Location = New System.Drawing.Point(651, 152)
+        Me.btnResolucionFechaAnterior.Location = New System.Drawing.Point(587, 140)
         Me.btnResolucionFechaAnterior.Name = "btnResolucionFechaAnterior"
         Me.btnResolucionFechaAnterior.Size = New System.Drawing.Size(42, 29)
-        Me.btnResolucionFechaAnterior.TabIndex = 23
+        Me.btnResolucionFechaAnterior.TabIndex = 37
         Me.btnResolucionFechaAnterior.Text = "<"
         Me.btnResolucionFechaAnterior.UseVisualStyleBackColor = False
         '
@@ -519,10 +542,10 @@ Partial Class Principal
         Me.btnResolucionFechaSiguiente.BackColor = System.Drawing.Color.White
         Me.btnResolucionFechaSiguiente.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnResolucionFechaSiguiente.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnResolucionFechaSiguiente.Location = New System.Drawing.Point(693, 152)
+        Me.btnResolucionFechaSiguiente.Location = New System.Drawing.Point(629, 140)
         Me.btnResolucionFechaSiguiente.Name = "btnResolucionFechaSiguiente"
         Me.btnResolucionFechaSiguiente.Size = New System.Drawing.Size(42, 29)
-        Me.btnResolucionFechaSiguiente.TabIndex = 22
+        Me.btnResolucionFechaSiguiente.TabIndex = 36
         Me.btnResolucionFechaSiguiente.Text = ">"
         Me.btnResolucionFechaSiguiente.UseVisualStyleBackColor = False
         '
@@ -536,29 +559,29 @@ Partial Class Principal
         Me.btnResolucionGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnResolucionGuardar.ForeColor = System.Drawing.Color.Black
         Me.btnResolucionGuardar.Image = CType(resources.GetObject("btnResolucionGuardar.Image"), System.Drawing.Image)
-        Me.btnResolucionGuardar.Location = New System.Drawing.Point(750, 121)
+        Me.btnResolucionGuardar.Location = New System.Drawing.Point(611, 172)
         Me.btnResolucionGuardar.Margin = New System.Windows.Forms.Padding(0)
         Me.btnResolucionGuardar.Name = "btnResolucionGuardar"
         Me.btnResolucionGuardar.Size = New System.Drawing.Size(60, 60)
-        Me.btnResolucionGuardar.TabIndex = 21
+        Me.btnResolucionGuardar.TabIndex = 35
         Me.btnResolucionGuardar.UseVisualStyleBackColor = False
         '
         'dtpResolucionFecha
         '
         Me.dtpResolucionFecha.Cursor = System.Windows.Forms.Cursors.Hand
         Me.dtpResolucionFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpResolucionFecha.Location = New System.Drawing.Point(283, 152)
+        Me.dtpResolucionFecha.Location = New System.Drawing.Point(219, 140)
         Me.dtpResolucionFecha.Name = "dtpResolucionFecha"
-        Me.dtpResolucionFecha.Size = New System.Drawing.Size(363, 29)
-        Me.dtpResolucionFecha.TabIndex = 20
+        Me.dtpResolucionFecha.Size = New System.Drawing.Size(362, 29)
+        Me.dtpResolucionFecha.TabIndex = 34
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(12, 153)
+        Me.Label6.Location = New System.Drawing.Point(4, 141)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(216, 24)
-        Me.Label6.TabIndex = 19
+        Me.Label6.TabIndex = 33
         Me.Label6.Text = "Fecha de Resolución:"
         '
         'txtResolucionId
@@ -566,57 +589,57 @@ Partial Class Principal
         Me.txtResolucionId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtResolucionId.Enabled = False
         Me.txtResolucionId.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtResolucionId.Location = New System.Drawing.Point(283, 18)
+        Me.txtResolucionId.Location = New System.Drawing.Point(219, 6)
         Me.txtResolucionId.MaxLength = 6
         Me.txtResolucionId.Name = "txtResolucionId"
         Me.txtResolucionId.Size = New System.Drawing.Size(452, 29)
-        Me.txtResolucionId.TabIndex = 18
+        Me.txtResolucionId.TabIndex = 32
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(12, 18)
+        Me.Label7.Location = New System.Drawing.Point(4, 6)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(33, 24)
-        Me.Label7.TabIndex = 17
+        Me.Label7.TabIndex = 31
         Me.Label7.Text = "Id:"
         '
         'txtResolucionDescripcion
         '
         Me.txtResolucionDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtResolucionDescripcion.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtResolucionDescripcion.Location = New System.Drawing.Point(283, 52)
+        Me.txtResolucionDescripcion.Location = New System.Drawing.Point(219, 40)
         Me.txtResolucionDescripcion.Multiline = True
         Me.txtResolucionDescripcion.Name = "txtResolucionDescripcion"
         Me.txtResolucionDescripcion.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.txtResolucionDescripcion.Size = New System.Drawing.Size(452, 59)
-        Me.txtResolucionDescripcion.TabIndex = 16
+        Me.txtResolucionDescripcion.TabIndex = 30
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(12, 52)
+        Me.Label8.Location = New System.Drawing.Point(4, 40)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(268, 24)
-        Me.Label8.TabIndex = 15
-        Me.Label8.Text = "Descripción de Resolución:"
+        Me.Label8.Size = New System.Drawing.Size(121, 24)
+        Me.Label8.TabIndex = 29
+        Me.Label8.Text = "Descripción"
         '
         'txtResolucionMotivoRetraso
         '
         Me.txtResolucionMotivoRetraso.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtResolucionMotivoRetraso.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtResolucionMotivoRetraso.Location = New System.Drawing.Point(283, 117)
+        Me.txtResolucionMotivoRetraso.Location = New System.Drawing.Point(219, 105)
         Me.txtResolucionMotivoRetraso.Name = "txtResolucionMotivoRetraso"
         Me.txtResolucionMotivoRetraso.Size = New System.Drawing.Size(452, 29)
-        Me.txtResolucionMotivoRetraso.TabIndex = 14
+        Me.txtResolucionMotivoRetraso.TabIndex = 28
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(12, 117)
+        Me.Label9.Location = New System.Drawing.Point(4, 105)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(184, 24)
-        Me.Label9.TabIndex = 13
+        Me.Label9.TabIndex = 27
         Me.Label9.Text = "Motivo de Retraso:"
         '
         'spResolverActividades
@@ -628,39 +651,39 @@ Partial Class Principal
         Me.spResolverActividades.BackColor = System.Drawing.Color.White
         Me.spResolverActividades.HorizontalScrollBar.Buttons = New FarPoint.Win.Spread.FpScrollBarButtonCollection("BackwardLineButton,ThumbTrack,ForwardLineButton")
         Me.spResolverActividades.HorizontalScrollBar.Name = ""
-        EnhancedScrollBarRenderer1.ArrowColor = System.Drawing.Color.DarkSlateGray
-        EnhancedScrollBarRenderer1.ArrowHoveredColor = System.Drawing.Color.DarkSlateGray
-        EnhancedScrollBarRenderer1.ArrowSelectedColor = System.Drawing.Color.DarkSlateGray
-        EnhancedScrollBarRenderer1.ButtonBackgroundColor = System.Drawing.Color.CadetBlue
-        EnhancedScrollBarRenderer1.ButtonBorderColor = System.Drawing.Color.SlateGray
-        EnhancedScrollBarRenderer1.ButtonHoveredBackgroundColor = System.Drawing.Color.SlateGray
-        EnhancedScrollBarRenderer1.ButtonHoveredBorderColor = System.Drawing.Color.DarkGray
-        EnhancedScrollBarRenderer1.ButtonSelectedBackgroundColor = System.Drawing.Color.DarkGray
-        EnhancedScrollBarRenderer1.ButtonSelectedBorderColor = System.Drawing.Color.CadetBlue
-        EnhancedScrollBarRenderer1.TrackBarBackgroundColor = System.Drawing.Color.CadetBlue
-        EnhancedScrollBarRenderer1.TrackBarSelectedBackgroundColor = System.Drawing.Color.SlateGray
-        Me.spResolverActividades.HorizontalScrollBar.Renderer = EnhancedScrollBarRenderer1
+        EnhancedScrollBarRenderer3.ArrowColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer3.ArrowHoveredColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer3.ArrowSelectedColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer3.ButtonBackgroundColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer3.ButtonBorderColor = System.Drawing.Color.SlateGray
+        EnhancedScrollBarRenderer3.ButtonHoveredBackgroundColor = System.Drawing.Color.SlateGray
+        EnhancedScrollBarRenderer3.ButtonHoveredBorderColor = System.Drawing.Color.DarkGray
+        EnhancedScrollBarRenderer3.ButtonSelectedBackgroundColor = System.Drawing.Color.DarkGray
+        EnhancedScrollBarRenderer3.ButtonSelectedBorderColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer3.TrackBarBackgroundColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer3.TrackBarSelectedBackgroundColor = System.Drawing.Color.SlateGray
+        Me.spResolverActividades.HorizontalScrollBar.Renderer = EnhancedScrollBarRenderer3
         Me.spResolverActividades.HorizontalScrollBar.TabIndex = 0
-        Me.spResolverActividades.Location = New System.Drawing.Point(6, 187)
+        Me.spResolverActividades.Location = New System.Drawing.Point(6, 347)
         Me.spResolverActividades.Name = "spResolverActividades"
         Me.spResolverActividades.Sheets.AddRange(New FarPoint.Win.Spread.SheetView() {Me.spResolverActividades_Sheet1})
-        Me.spResolverActividades.Size = New System.Drawing.Size(1003, 259)
+        Me.spResolverActividades.Size = New System.Drawing.Size(1003, 99)
         Me.spResolverActividades.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell
         Me.spResolverActividades.TabIndex = 2
         Me.spResolverActividades.VerticalScrollBar.Buttons = New FarPoint.Win.Spread.FpScrollBarButtonCollection("BackwardLineButton,ThumbTrack,ForwardLineButton")
         Me.spResolverActividades.VerticalScrollBar.Name = ""
-        EnhancedScrollBarRenderer2.ArrowColor = System.Drawing.Color.DarkSlateGray
-        EnhancedScrollBarRenderer2.ArrowHoveredColor = System.Drawing.Color.DarkSlateGray
-        EnhancedScrollBarRenderer2.ArrowSelectedColor = System.Drawing.Color.DarkSlateGray
-        EnhancedScrollBarRenderer2.ButtonBackgroundColor = System.Drawing.Color.CadetBlue
-        EnhancedScrollBarRenderer2.ButtonBorderColor = System.Drawing.Color.SlateGray
-        EnhancedScrollBarRenderer2.ButtonHoveredBackgroundColor = System.Drawing.Color.SlateGray
-        EnhancedScrollBarRenderer2.ButtonHoveredBorderColor = System.Drawing.Color.DarkGray
-        EnhancedScrollBarRenderer2.ButtonSelectedBackgroundColor = System.Drawing.Color.DarkGray
-        EnhancedScrollBarRenderer2.ButtonSelectedBorderColor = System.Drawing.Color.CadetBlue
-        EnhancedScrollBarRenderer2.TrackBarBackgroundColor = System.Drawing.Color.CadetBlue
-        EnhancedScrollBarRenderer2.TrackBarSelectedBackgroundColor = System.Drawing.Color.SlateGray
-        Me.spResolverActividades.VerticalScrollBar.Renderer = EnhancedScrollBarRenderer2
+        EnhancedScrollBarRenderer4.ArrowColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer4.ArrowHoveredColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer4.ArrowSelectedColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer4.ButtonBackgroundColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer4.ButtonBorderColor = System.Drawing.Color.SlateGray
+        EnhancedScrollBarRenderer4.ButtonHoveredBackgroundColor = System.Drawing.Color.SlateGray
+        EnhancedScrollBarRenderer4.ButtonHoveredBorderColor = System.Drawing.Color.DarkGray
+        EnhancedScrollBarRenderer4.ButtonSelectedBackgroundColor = System.Drawing.Color.DarkGray
+        EnhancedScrollBarRenderer4.ButtonSelectedBorderColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer4.TrackBarBackgroundColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer4.TrackBarSelectedBackgroundColor = System.Drawing.Color.SlateGray
+        Me.spResolverActividades.VerticalScrollBar.Renderer = EnhancedScrollBarRenderer4
         Me.spResolverActividades.VerticalScrollBar.TabIndex = 1
         '
         'spResolverActividades_Sheet1
@@ -818,7 +841,8 @@ Partial Class Principal
         Me.pnlExterna.ResumeLayout(False)
         Me.pnlExterna.PerformLayout()
         Me.tpResolverActividades.ResumeLayout(False)
-        Me.tpResolverActividades.PerformLayout()
+        Me.pnlResolucion.ResumeLayout(False)
+        Me.pnlResolucion.PerformLayout()
         CType(Me.pbImagen, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.spResolverActividades, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.spResolverActividades_Sheet1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -856,22 +880,11 @@ Partial Class Principal
     Friend WithEvents btnCapturaIdSiguiente As System.Windows.Forms.Button
     Friend WithEvents btnCapturaIdAnterior As System.Windows.Forms.Button
     Private WithEvents btnCapturaEliminar As System.Windows.Forms.Button
-    Friend WithEvents dtpResolucionFecha As System.Windows.Forms.DateTimePicker
-    Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents txtResolucionId As System.Windows.Forms.TextBox
-    Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents txtResolucionDescripcion As System.Windows.Forms.TextBox
-    Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents txtResolucionMotivoRetraso As System.Windows.Forms.TextBox
-    Friend WithEvents Label9 As System.Windows.Forms.Label
-    Private WithEvents btnResolucionGuardar As System.Windows.Forms.Button
     Friend WithEvents lblDescripcionTooltip As System.Windows.Forms.Label
     Friend WithEvents btnCapturaFechaVencimientoAnterior As System.Windows.Forms.Button
     Friend WithEvents btnCapturaFechaVencimientoSiguiente As System.Windows.Forms.Button
     Friend WithEvents btnCapturaFechaCreacionAnterior As System.Windows.Forms.Button
     Friend WithEvents btnCapturaFechaCreacionSiguiente As System.Windows.Forms.Button
-    Friend WithEvents btnResolucionFechaAnterior As System.Windows.Forms.Button
-    Friend WithEvents btnResolucionFechaSiguiente As System.Windows.Forms.Button
     Private WithEvents lblEncabezadoUsuario As System.Windows.Forms.Label
     Private WithEvents lblEncabezadoArea As System.Windows.Forms.Label
     Friend WithEvents pnlExterna As System.Windows.Forms.Panel
@@ -880,8 +893,21 @@ Partial Class Principal
     Friend WithEvents cbAreas As System.Windows.Forms.ComboBox
     Friend WithEvents lblUsuarios As System.Windows.Forms.Label
     Friend WithEvents cbUsuarios As System.Windows.Forms.ComboBox
-    Private WithEvents btnAdministrarImagen As System.Windows.Forms.Button
-    Friend WithEvents pbImagen As System.Windows.Forms.PictureBox
     Friend WithEvents temporizador As System.Windows.Forms.Timer
     Private WithEvents btnAyuda As System.Windows.Forms.Button
+    Friend WithEvents pnlResolucion As System.Windows.Forms.Panel
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents pbImagen As System.Windows.Forms.PictureBox
+    Private WithEvents btnAdministrarImagen As System.Windows.Forms.Button
+    Friend WithEvents btnResolucionFechaAnterior As System.Windows.Forms.Button
+    Friend WithEvents btnResolucionFechaSiguiente As System.Windows.Forms.Button
+    Friend WithEvents dtpResolucionFecha As System.Windows.Forms.DateTimePicker
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents txtResolucionId As System.Windows.Forms.TextBox
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents txtResolucionDescripcion As System.Windows.Forms.TextBox
+    Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents txtResolucionMotivoRetraso As System.Windows.Forms.TextBox
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Public WithEvents btnResolucionGuardar As System.Windows.Forms.Button
 End Class

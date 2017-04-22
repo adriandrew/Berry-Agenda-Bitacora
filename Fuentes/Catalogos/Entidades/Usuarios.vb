@@ -71,6 +71,120 @@ Public Class Usuarios
         End Set
     End Property
 
+
+
+    Public Sub Guardar()
+
+        Try
+            Dim comando As New SqlCommand()
+            comando.Connection = BaseDatos.conexionInformacion
+            comando.CommandText = "INSERT INTO Usuarios VALUES (@idEmpresa, @id, @nombre, @contrasena, @nivel, @accesoTotal, @idArea)"
+            comando.Parameters.AddWithValue("@idEmpresa", Me.IdEmpresa)
+            comando.Parameters.AddWithValue("@id", Me.Id)
+            comando.Parameters.AddWithValue("@nombre", Me.Nombre)
+            comando.Parameters.AddWithValue("@contrasena", Me.Contrasena)
+            comando.Parameters.AddWithValue("@nivel", Me.Nivel)
+            comando.Parameters.AddWithValue("@accesoTotal", Me.AccesoTotal)
+            comando.Parameters.AddWithValue("@idArea", Me.IdArea)
+            BaseDatos.conexionInformacion.Open()
+            comando.ExecuteNonQuery()
+            BaseDatos.conexionInformacion.Close()
+        Catch ex As Exception
+            Throw ex
+        Finally
+            BaseDatos.conexionInformacion.Close()
+        End Try
+
+    End Sub
+
+    Public Sub Editar()
+
+        Try
+            Dim comando As New SqlCommand()
+            comando.Connection = BaseDatos.conexionInformacion
+            comando.CommandText = "UPDATE Usuarios SET Nombre=@nombre, Contrasena=@contrasena, Nivel=@nivel, AccesoTotal=@accesoTotal, IdArea=@idArea WHERE IdEmpresa=@idEmpresa AND Id=@id"
+            comando.Parameters.AddWithValue("@idEmpresa", Me.IdEmpresa)
+            comando.Parameters.AddWithValue("@id", Me.Id)
+            comando.Parameters.AddWithValue("@nombre", Me.Nombre)
+            comando.Parameters.AddWithValue("@contrasena", Me.Contrasena)
+            comando.Parameters.AddWithValue("@nivel", Me.Nivel)
+            comando.Parameters.AddWithValue("@accesoTotal", Me.AccesoTotal)
+            comando.Parameters.AddWithValue("@idArea", Me.IdArea)
+            BaseDatos.conexionInformacion.Close()
+            BaseDatos.conexionInformacion.Open()
+            comando.ExecuteNonQuery()
+            BaseDatos.conexionInformacion.Close()
+        Catch ex As Exception
+            Throw ex
+        Finally
+            BaseDatos.conexionInformacion.Close()
+        End Try
+
+    End Sub
+
+    Public Sub Eliminar()
+
+        Try
+            Dim comando As New SqlCommand()
+            comando.Connection = BaseDatos.conexionInformacion
+            comando.CommandText = "DELETE FROM Usuarios WHERE IdEmpresa=@idEmpresa AND Id=@id"
+            comando.Parameters.AddWithValue("@idEmpresa", Me.IdEmpresa)
+            comando.Parameters.AddWithValue("@id", Me.Id)
+            BaseDatos.conexionInformacion.Open()
+            comando.ExecuteNonQuery()
+            BaseDatos.conexionInformacion.Close()
+        Catch ex As Exception
+            Throw ex
+        Finally
+            BaseDatos.conexionInformacion.Close()
+        End Try
+
+    End Sub
+
+    Public Sub EliminarTodo()
+
+        Try
+            Dim comando As New SqlCommand()
+            comando.Connection = BaseDatos.conexionInformacion
+            comando.CommandText = "DELETE FROM Usuarios WHERE IdEmpresa=@idEmpresa"
+            comando.Parameters.AddWithValue("@idEmpresa", Me.IdEmpresa)
+            BaseDatos.conexionInformacion.Open()
+            comando.ExecuteNonQuery()
+            BaseDatos.conexionInformacion.Close()
+        Catch ex As Exception
+            Throw ex
+        Finally
+            BaseDatos.conexionInformacion.Close()
+        End Try
+
+    End Sub 
+
+    Public Function ValidarPorId() As Boolean
+
+        Try
+            Dim resultado As Boolean = False
+            Dim comando As New SqlCommand()
+            comando.Connection = BaseDatos.conexionInformacion
+            comando.CommandText = "SELECT * FROM Usuarios WHERE IdEmpresa=@idEmpresa AND Id=@id"
+            comando.Parameters.AddWithValue("@idEmpresa", Me.IdEmpresa)
+            comando.Parameters.AddWithValue("@id", Me.Id)
+            BaseDatos.conexionInformacion.Open()
+            Dim dataReader As SqlDataReader = comando.ExecuteReader()
+            If dataReader.HasRows Then
+                resultado = True
+            Else
+                resultado = False
+            End If
+            BaseDatos.conexionInformacion.Close()
+            Return resultado
+        Catch ex As Exception
+            Throw ex
+        Finally
+            BaseDatos.conexionInformacion.Close()
+        End Try
+
+    End Function
+
     Public Function ObtenerListadoPorId() As List(Of Usuarios)
 
         Dim lista As New List(Of Usuarios)()
@@ -122,6 +236,31 @@ Public Class Usuarios
             Throw ex
         Finally
             BaseDatos.conexionInformacion.Close()
+        End Try
+
+    End Function
+
+    Public Function ValidarActividadPorId() As Boolean
+
+        Try
+            Dim resultado As Boolean = False
+            Dim comando As New SqlCommand()
+            comando.Connection = BaseDatos.conexionAgenda
+            comando.CommandText = "SELECT * FROM Actividades WHERE IdUsuario=@id OR IdUsuarioDestino=@id"
+            comando.Parameters.AddWithValue("@id", Me.Id)
+            BaseDatos.conexionAgenda.Open()
+            Dim dataReader As SqlDataReader = comando.ExecuteReader()
+            If dataReader.HasRows Then
+                resultado = True
+            Else
+                resultado = False
+            End If
+            BaseDatos.conexionAgenda.Close()
+            Return resultado
+        Catch ex As Exception
+            Throw ex
+        Finally
+            BaseDatos.conexionAgenda.Close()
         End Try
 
     End Function

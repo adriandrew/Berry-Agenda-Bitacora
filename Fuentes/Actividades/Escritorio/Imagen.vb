@@ -48,8 +48,7 @@ Public Class Imagen
 
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
 
-        Me.Close()
-        Principal.BringToFront()
+        Salir()
 
     End Sub
 
@@ -99,6 +98,16 @@ Public Class Imagen
 
 #Region "Metodos"
 
+    Private Sub Salir()
+
+        Me.Close()
+        If (Principal.tieneImagen) Then
+            Principal.btnResolucionGuardar.Focus() 
+        End If 
+        Principal.BringToFront()
+
+    End Sub
+
     Public Sub Guardar()
          
         Try
@@ -138,7 +147,7 @@ Public Class Imagen
                 Principal.rutaImagen = String.Empty
                 Principal.tieneImagen = False
             End Try
-            Principal.pbImagen.Image = Me.pbImagen.Image
+            Principal.pbImagen.Image = Me.pbImagen.Image : Application.DoEvents()
         End If
 
     End Sub
