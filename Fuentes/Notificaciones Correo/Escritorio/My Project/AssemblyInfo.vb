@@ -9,7 +9,7 @@ Imports System.Runtime.InteropServices
 ' Revisar los valores de los atributos del ensamblado
 
 <Assembly: AssemblyTitle("Notificaciones por Correo")> 
-<Assembly: AssemblyDescription("Notificaciones dedicadas por usuario.")> 
+<Assembly: AssemblyDescription("Notificaciones dedicadas por usuario enviadas al correo.")> 
 <Assembly: AssemblyCompany("Berry")> 
 <Assembly: AssemblyProduct("Notificaciones por Correo")> 
 <Assembly: AssemblyCopyright("Copyright © Berry 2017")> 

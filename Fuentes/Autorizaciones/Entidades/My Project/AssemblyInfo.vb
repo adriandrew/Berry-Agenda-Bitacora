@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("Berry")> 
 <Assembly: AssemblyProduct("Entidades")> 
-<Assembly: AssemblyCopyright("Copyright © Microsoft 2016")> 
+<Assembly: AssemblyCopyright("Copyright © Berry 2017")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>

@@ -24,6 +24,7 @@ namespace Escritorio
         Entidades.Modulos modulos = new Entidades.Modulos();
         Entidades.BloqueoUsuarios bloqueoUsuarios = new Entidades.BloqueoUsuarios();
         Entidades.EmpresasPrincipal empresasPrincipal = new Entidades.EmpresasPrincipal();
+        Entidades.Licencia licencia = new Entidades.Licencia();
         public Logica.DatosEmpresa datosEmpresa = new Logica.DatosEmpresa();
         Logica.DatosUsuario datosUsuario = new Logica.DatosUsuario();
         Logica.DatosArea datosArea = new Logica.DatosArea();
@@ -34,6 +35,7 @@ namespace Escritorio
         public int idEmpresaSesion = 0; public int idUsuarioSesion = 0; public int idModuloSesion = 1;
         public string nombrePrograma = string.Empty;
         public bool estaCerrando = false; public bool estaAbriendoPrograma = false;
+        public int diasDePrueba = 15;
 
         public bool esPrueba = false;
 
@@ -50,9 +52,17 @@ namespace Escritorio
             Centrar();
             AsignarTooltips();
             AsignarFocos();
-            ConfigurarConexiones(); 
+            ConfigurarConexiones();
             CargarEncabezados();
             CargarTitulosEmpresa();
+
+        }
+
+        private void Principal_Shown(object sender, EventArgs e)
+        {
+
+            this.txtUsuario.Focus();
+            VerificarLicencia();
 
         }
 
@@ -126,19 +136,13 @@ namespace Escritorio
             new AdministrarEmpresas().Show();
 
         }
-
-        private void Principal_Shown(object sender, EventArgs e)
-        {
-
-            this.txtUsuario.Focus();
-
-        }
-
+        
         private void txtUsuario_KeyDown(object sender, KeyEventArgs e)
         {
 
             if (e.KeyCode == Keys.Enter)
             {
+                e.SuppressKeyPress = true;
                 if (!string.IsNullOrEmpty(this.txtUsuario.Text))
                 { 
                     this.txtContraseña.Focus();                
@@ -152,6 +156,7 @@ namespace Escritorio
 
             if (e.KeyCode == Keys.Enter)
             {
+                e.SuppressKeyPress = true;
                 if (!string.IsNullOrEmpty(this.txtContraseña.Text))
                 {
                     this.btnEntrar.Focus();
@@ -261,6 +266,65 @@ namespace Escritorio
         #endregion
 
         #region Métodos
+
+        private void VerificarLicencia()
+        {
+
+            List<Entidades.Licencia> lista = new List<Entidades.Licencia>();
+            lista = licencia.ObtenerListado();
+            if (lista.Count > 0)
+            {
+                if (lista[0].EsPrueba)
+                {
+                    DateTime registro; DateTime vencimiento;
+                    if (DateTime.TryParse(lista[0].FechaRegistro.ToString(), out registro) == true)
+                    { 
+                        if (DateTime.TryParse(lista[0].FechaVencimiento.ToString(), out vencimiento) == true)
+                        {
+                            //vencimiento = Convert.ToDateTime("22/04/2017");
+                            if (DateTime.Today.CompareTo(vencimiento) > 0)
+                            {
+                                MessageBox.Show("La versión de prueba ha terminado. Contacte a su proveedor de este sistema para obtener una licencia.", "Versión de prueba.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                SalirOVolver();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (MessageBox.Show("Este programa no se encuentra registrado. Si desea, puede activar la versión de prueba dando clic en aceptar/si.", "Versión de prueba.", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                        {
+                            licencia.EsPrueba = true;
+                            licencia.FechaRegistro = DateTime.Today;
+                            licencia.FechaVencimiento = DateTime.Today.AddDays(this.diasDePrueba);
+                            licencia.Eliminar();
+                            licencia.Guardar();
+                            MessageBox.Show("Activación de versión de prueba de " + this.diasDePrueba + " dias correcta.", "Versión de prueba.", MessageBoxButtons.OK, MessageBoxIcon.None);
+                        }
+                        else
+                        {
+                            SalirOVolver();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (MessageBox.Show("Este programa no se encuentra registrado. Active la versión de prueba dando clic en aceptar/si.", "Versión de prueba.", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    licencia.EsPrueba = true;
+                    licencia.FechaRegistro = DateTime.Today;
+                    licencia.FechaVencimiento = DateTime.Today.AddDays(this.diasDePrueba);
+                    licencia.Eliminar();
+                    licencia.Guardar();
+                    MessageBox.Show("Activación de versión de prueba de " + this.diasDePrueba + " dias correcta.", "Versión de prueba.", MessageBoxButtons.OK, MessageBoxIcon.None);
+                }
+                else
+                {
+                    SalirOVolver();
+                }
+            }
+
+        }
 
         private void Salir() 
         {
@@ -476,6 +540,7 @@ namespace Escritorio
             tp.SetToolTip(this.btnEntrar, "Entrar.");
             tp.SetToolTip(this.btnMostrarOpciones, "Mostrar Opciones.");
             tp.SetToolTip(this.btnSalir, "Salir.");
+            tp.SetToolTip(this.btnAyuda, "Ayuda.");
 
         }
 
@@ -526,6 +591,7 @@ namespace Escritorio
                 Logica.DatosEmpresaPrincipal.usuarioSql = "AdminBerry";
                 Logica.DatosEmpresaPrincipal.contrasenaSql = "@berry";
                 Logica.DatosEmpresaPrincipal.idEmpresa = 1; 
+                ConfigurarConexionPrincipal(); 
                 //string[] activa = InstanciaSql().Split('|'); ' Es para obtener las instancias sql. Nunca se usó ya que no es lo correcto.
                 //string servidor = activa[0];
                 //string instancia = activa[1];

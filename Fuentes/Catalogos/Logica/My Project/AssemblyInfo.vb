@@ -10,9 +10,9 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("LogicaCatalogos")> 
 <Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("Microsoft")> 
+<Assembly: AssemblyCompany("Berry")> 
 <Assembly: AssemblyProduct("LogicaCatalogos")> 
-<Assembly: AssemblyCopyright("Copyright © Microsoft 2016")> 
+<Assembly: AssemblyCopyright("Copyright © Berry 2017")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>

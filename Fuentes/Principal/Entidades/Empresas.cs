@@ -78,7 +78,7 @@ namespace Entidades
             {
                 SqlCommand comando = new SqlCommand();
                 comando.Connection = BaseDatos.conexionInformacion;
-                comando.CommandText = "INSERT INTO Empresas VALUES (@id, @nombre, @descripcion, @domicilio, @localidad, @rfc, @directorio, @logo, @activa, @equipo)";                
+                comando.CommandText = "INSERT INTO Empresas VALUES (@id, @nombre, @descripcion, @domicilio, @localidad, @rfc, @directorio, @logo, @activa, @equipo)";
                 comando.Parameters.AddWithValue("@id", this.Id);
                 comando.Parameters.AddWithValue("@nombre", this.Nombre);
                 comando.Parameters.AddWithValue("@descripcion", this.Descripcion);
@@ -111,7 +111,7 @@ namespace Entidades
             {
                 SqlCommand comando = new SqlCommand();
                 comando.Connection = BaseDatos.conexionInformacion;
-                comando.CommandText = "UPDATE Empresas SET Id=@id, Nombre=@nombre, Descripcion=@descripcion, Domicilio=@domicilio, Localidad=@localidad, Rfc=@rfc, Directorio=@directorio, Logo=@logo, Activa=@activa, Equipo=@equipo WHERE Id=@id";                
+                comando.CommandText = "UPDATE Empresas SET Id=@id, Nombre=@nombre, Descripcion=@descripcion, Domicilio=@domicilio, Localidad=@localidad, Rfc=@rfc, Directorio=@directorio, Logo=@logo, Activa=@activa, Equipo=@equipo WHERE Id=@id";
                 comando.Parameters.AddWithValue("@id", this.Id);
                 comando.Parameters.AddWithValue("@nombre", this.Nombre);
                 comando.Parameters.AddWithValue("@descripcion", this.Descripcion);
@@ -121,7 +121,7 @@ namespace Entidades
                 comando.Parameters.AddWithValue("@directorio", this.Directorio);
                 comando.Parameters.AddWithValue("@logo", this.Logo);
                 comando.Parameters.AddWithValue("@activa", this.Activa);
-                comando.Parameters.AddWithValue("@equipo", this.Equipo);                
+                comando.Parameters.AddWithValue("@equipo", this.Equipo);
                 BaseDatos.conexionInformacion.Open();
                 comando.ExecuteNonQuery();
                 BaseDatos.conexionInformacion.Close();
@@ -144,7 +144,7 @@ namespace Entidades
             {
                 SqlCommand comando = new SqlCommand();
                 comando.Connection = BaseDatos.conexionInformacion;
-                comando.CommandText = "DELETE FROM Empresas WHERE Id=@id";                
+                comando.CommandText = "DELETE FROM Empresas WHERE Id=@id";
                 comando.Parameters.AddWithValue("@id", this.Id);
                 BaseDatos.conexionInformacion.Open();
                 comando.ExecuteNonQuery();
@@ -169,7 +169,7 @@ namespace Entidades
                 bool resultado = false;
                 SqlCommand comando = new SqlCommand();
                 comando.Connection = BaseDatos.conexionInformacion;
-                comando.CommandText = "SELECT * FROM Empresas WHERE Id=@id";                
+                comando.CommandText = "SELECT * FROM Empresas WHERE Id=@id";
                 comando.Parameters.AddWithValue("@id", this.Id);
                 BaseDatos.conexionInformacion.Open();
                 SqlDataReader dataReader = comando.ExecuteReader();
@@ -285,7 +285,7 @@ namespace Entidades
                 BaseDatos.conexionInformacion.Open();
                 comando.ExecuteNonQuery();
                 comando.CommandText = "UPDATE Empresas SET Activa='FALSE' WHERE Id<>@id";
-                comando.ExecuteNonQuery();               
+                comando.ExecuteNonQuery();
                 BaseDatos.conexionInformacion.Close();
             }
             catch (Exception ex)

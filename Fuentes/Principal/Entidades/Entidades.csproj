@@ -71,6 +71,7 @@
     <Compile Include="BaseDatos.cs" />
     <Compile Include="BloqueoUsuarios.cs" />
     <Compile Include="Empresas.cs" />
+    <Compile Include="Licencia.cs" />
     <Compile Include="Modulos.cs" />
     <Compile Include="EmpresasPrincipal.cs" />
     <Compile Include="Programas.cs" />
