@@ -52,8 +52,7 @@ Public Class Principal
         AsignarTooltips()
         ConfigurarConexiones()
         CargarEncabezados()
-        CargarConsecutivoActividades()
-        'ComenzarCargarActividadesPendientes()
+        CargarConsecutivoActividades() 
         CargarTiposDeDatos()
         CargarIndiceActividades()
         AlinearBotones(True)
@@ -68,8 +67,10 @@ Public Class Principal
 
     Private Sub Principal_Shown(sender As Object, e As EventArgs) Handles Me.Shown
 
-        PonerFocoEnControl(txtCapturaId)
-        ComenzarCargarActividadesPendientes()
+        PonerFocoEnControl(txtCapturaId) 
+        FormatearSpread()
+        CargarActividadesPendientesSpread()
+
 
     End Sub
 
@@ -471,13 +472,15 @@ Public Class Principal
     Private Sub ConfigurarConexiones()
 
         If (Me.esPrueba) Then
-            'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf"
-            Me.datosUsuario.EId = 2
+            'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf" 
+            Me.datosUsuario.EId = 201
             Me.datosUsuario.EIdArea = 2
             Me.datosEmpresa.EId = 1
-            LogicaActividades.DatosEmpresaPrincipal.instanciaSql = "ANDREW-MAC\SQLEXPRESS"
+            'LogicaActividades.DatosEmpresaPrincipal.instanciaSql = "ANDREW-MAC\SQLEXPRESS"
+            LogicaActividades.DatosEmpresaPrincipal.instanciaSql = "BERRY1-DELL\SQLEXPRESS2008"
             LogicaActividades.DatosEmpresaPrincipal.usuarioSql = "AdminBerry"
-            LogicaActividades.DatosEmpresaPrincipal.contrasenaSql = "@berry"
+            'LogicaActividades.DatosEmpresaPrincipal.contrasenaSql = "@berry"
+            LogicaActividades.DatosEmpresaPrincipal.contrasenaSql = "@berry2017"
         Else
             'EntidadesActividades.BaseDatos.ECadenaConexionAgenda = datosEmpresa.EDirectorio & "\\Agenda.mdf"
             LogicaActividades.DatosEmpresaPrincipal.ObtenerParametrosInformacionEmpresa()
@@ -497,8 +500,8 @@ Public Class Principal
     Private Sub CargarEncabezados()
 
         lblEncabezadoPrograma.Text = "Programa: " + Me.Text
-        lblEncabezadoEmpresa.Text = "Empresa: " + datosEmpresa.ENombre
-        lblEncabezadoUsuario.Text = "Usuario: " + datosUsuario.ENombre
+        lblEncabezadoEmpresa.Text = "Empresa: " + Me.datosEmpresa.ENombre
+        lblEncabezadoUsuario.Text = "Usuario: " + Me.datosUsuario.ENombre
         lblEncabezadoArea.Text = "Area: " + datosArea.ENombre
 
     End Sub
@@ -607,12 +610,34 @@ Public Class Principal
         actividades.EIdUsuario = Me.datosUsuario.EId
         lista = actividades.ObtenerListadoPorId()
         If lista.Count = 1 Then
-            If (lista(0).EEstaResuelto) Then
+            If (lista(0).EEstaResuelto Or lista(0).EEsRechazado) Then
                 btnCapturaGuardar.Enabled = False
                 btnCapturaEliminar.Enabled = False
             Else
                 btnCapturaGuardar.Enabled = True
                 btnCapturaEliminar.Enabled = True
+            End If
+            If (lista(0).EEsExterna) Then
+                If (lista(0).EEsRechazado) Then
+                    lblCalificacion.Text = "Rechazada"
+                    lblCalificacion.ForeColor = Color.Maroon
+                ElseIf (lista(0).EEsAutorizado) Then
+                    lblCalificacion.Text = "Autorizada"
+                    lblCalificacion.ForeColor = Color.Green
+                Else
+                    lblCalificacion.Text = "Pendiente"
+                    lblCalificacion.ForeColor = Color.Black
+                End If
+            Else
+                lblCalificacion.Text = "No Aplica"
+                lblCalificacion.ForeColor = Color.Gray
+            End If 
+            If (lista(0).EEstaResuelto) Then
+                lblEstatus.Text = "Resuelta"
+                lblEstatus.ForeColor = Color.Maroon
+            ElseIf (lista(0).EEstaResuelto = False) Then
+                lblEstatus.Text = "Abierta"
+                lblEstatus.ForeColor = Color.Green
             End If
             txtCapturaNombre.Text = lista(0).ENombre
             txtCapturaDescripcion.Text = lista(0).EDescripcion
@@ -655,7 +680,11 @@ Public Class Principal
         Dim esRechazado As Boolean = False
         Dim estaResuelto As Boolean = False
         If (esExterna And (idAreaDestino <= 0 Or idUsuarioDestino <= 0)) Then
-            MsgBox("Falta definir un area y/o usuario destino, no se puede guardar.", MsgBoxStyle.Exclamation, "No permitido.")
+            MsgBox("Falta definir area y/o usuario destino, no se puede guardar.", MsgBoxStyle.Exclamation, "No permitido.")
+            Exit Sub
+        End If
+        If ((idAreaDestino = Me.datosUsuario.EIdArea) And (idUsuarioDestino = Me.datosUsuario.EId)) Then
+            MsgBox("No está permitido guardar una actividad externa para ti mismo, tiene que ser para otro usuario.", MsgBoxStyle.Exclamation, "No permitido.")
             Exit Sub
         End If
         If ((id > 0) And (Not String.IsNullOrEmpty(nombre)) And (IsDate(fechaCreacion)) And IsDate(fechaVencimiento)) Then
@@ -689,6 +718,7 @@ Public Class Principal
                     MsgBox("Guardado finalizado.", MsgBoxStyle.ApplicationModal, "Finalizado.")
                     CargarConsecutivoActividades()
                     LimpiarPantallaActividades()
+                    CargarActividadesPendientesSpread()
                 End If
             End If
         End If
@@ -712,6 +742,8 @@ Public Class Principal
         PonerFocoEnControl(txtCapturaId)
         btnCapturaGuardar.Enabled = True
         btnCapturaEliminar.Enabled = True
+        lblCalificacion.Text = String.Empty
+        lblEstatus.Text = String.Empty
         Application.DoEvents()
 
     End Sub
@@ -730,6 +762,7 @@ Public Class Principal
                 actividades.Eliminar()
                 MsgBox("Eliminado finalizado.", MsgBoxStyle.ApplicationModal, "Finalizado.")
                 CargarActividades()
+                CargarActividadesPendientesSpread()
             End If
         End If
 
@@ -750,8 +783,9 @@ Public Class Principal
         Try
             Dim idArea As Integer = cbAreas.SelectedValue()
             Dim lista As New List(Of EntidadesActividades.Usuarios)
-            usuarios.EIdEmpresa = datosEmpresa.EId
+            usuarios.EIdEmpresa = Me.datosEmpresa.EId
             usuarios.EIdArea = idArea
+            usuarios.EId = Me.datosUsuario.EId
             lista = usuarios.ObtenerListadoPorEmpresa()
             cbUsuarios.DataSource = lista
             cbUsuarios.ValueMember = "EId"
@@ -765,13 +799,6 @@ Public Class Principal
 #End Region
 
 #Region "Resolucion de Actividades"
-
-    Private Sub ComenzarCargarActividadesPendientes()
-
-        FormatearSpread()
-        CargarActividadesPendientesSpread() 
-
-    End Sub
 
     Private Sub CargarActividadesPendientes()
 
@@ -822,6 +849,9 @@ Public Class Principal
         Dim descripcion As String = txtResolucionDescripcion.Text
         Dim motivoRetraso As String = txtResolucionMotivoRetraso.Text
         Dim fechaResolucion As Date = dtpResolucionFecha.Text
+        Dim esExterna As Boolean = spResolverActividades.ActiveSheet.Cells(fila, spResolverActividades.ActiveSheet.Columns("esExterna").Index).Value
+        Dim idAreaOrigen As Integer = Me.datosUsuario.EIdArea ' Se toma el area que resuelve.
+        Dim idUsuarioOrigen As Integer = Me.datosUsuario.EId ' Se toma el usuario que resuelve.  
         Dim estaResuelto As Boolean = True
         If (id > 0) And (Not String.IsNullOrEmpty(descripcion)) And IsDate(fechaResolucion) Then
             actividadesResueltas.EId = id
@@ -830,6 +860,10 @@ Public Class Principal
             actividadesResueltas.EDescripcionResolucion = descripcion
             actividadesResueltas.EMotivoRetraso = motivoRetraso
             actividadesResueltas.EFechaResolucion = fechaResolucion
+            If (esExterna) Then
+                actividadesResueltas.EIdAreaOrigen = idAreaOrigen
+                actividadesResueltas.EIdUsuarioOrigen = idUsuarioOrigen
+            End If
             actividadesResueltas.ERutaImagen = Me.rutaImagen
             actividadesResueltas.EEstaResuelto = estaResuelto
             Dim listaLocal As New List(Of EntidadesActividades.Actividades)

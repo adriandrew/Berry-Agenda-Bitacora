@@ -14,3 +14,11 @@ C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Mo
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Actividades\Logica\obj\Release\LogicaActividades.dll
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Actividades\Logica\obj\Release\LogicaActividades.xml
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Actividades\Logica\obj\Release\LogicaActividades.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Logica\bin\Release\LogicaActividades.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Logica\bin\Release\LogicaActividades.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Logica\bin\Release\LogicaActividades.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Logica\obj\Release\LogicaActividades.Resources.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Logica\obj\Release\LogicaActividades.vbproj.GenerateResource.Cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Logica\obj\Release\LogicaActividades.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Logica\obj\Release\LogicaActividades.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Logica\obj\Release\LogicaActividades.pdb

@@ -6,3 +6,11 @@ C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Mo
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Logica\obj\Release\LogicaConfiguracionCorreo.dll
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Logica\obj\Release\LogicaConfiguracionCorreo.xml
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Logica\obj\Release\LogicaConfiguracionCorreo.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Logica\bin\Release\LogicaConfiguracionCorreo.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Logica\bin\Release\LogicaConfiguracionCorreo.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Logica\bin\Release\LogicaConfiguracionCorreo.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Logica\obj\Release\LogicaConfiguracionCorreo.Resources.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Logica\obj\Release\LogicaConfiguracionCorreo.vbproj.GenerateResource.Cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Logica\obj\Release\LogicaConfiguracionCorreo.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Logica\obj\Release\LogicaConfiguracionCorreo.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Logica\obj\Release\LogicaConfiguracionCorreo.pdb

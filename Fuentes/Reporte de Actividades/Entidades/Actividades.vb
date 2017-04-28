@@ -158,9 +158,10 @@ Public Class Actividades
                 "WHEN (V.EstaResuelto='FALSE' OR V.EstaResuelto IS NULL) THEN 'Abierto' " & _
             "END AS Estatus, " & _
             "CASE " & _
-                "WHEN (V.EsAutorizado='TRUE') THEN 'Autorizado' " & _
-                "WHEN (V.EsRechazado='TRUE') THEN 'Rechazado' " & _
-                "WHEN (V.EsAutorizado='FALSE' OR V.EsAutorizado IS NULL AND V.EsRechazado='FALSE' OR V.EsRechazado IS NULL) THEN 'Pendiente' " & _
+                "WHEN (V.EsExterna='FALSE') THEN 'No Aplica' " & _
+                "WHEN ((V.EsAutorizado='TRUE') AND (V.EsExterna = 'TRUE')) THEN 'Autorizado' " & _
+                "WHEN ((V.EsRechazado='TRUE') AND (V.EsExterna = 'TRUE')) THEN 'Rechazado' " & _
+                "WHEN ((V.EsAutorizado='FALSE' OR V.EsAutorizado IS NULL AND V.EsRechazado='FALSE' OR V.EsRechazado IS NULL) AND (V.EsExterna = 'TRUE')) THEN 'Pendiente' " & _
             "END AS Calificacion, V.*" & _
             " FROM " & _
             "(" & _

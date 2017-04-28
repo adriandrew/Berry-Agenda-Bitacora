@@ -185,6 +185,18 @@ Public Class Principal
 
     End Sub
 
+    Private Sub spAutorizaciones_MouseHover(sender As Object, e As EventArgs) Handles spAutorizaciones.MouseHover
+
+        AsignarTooltips("Click para Seleccionar una Actividad a Autorizar o Denegar.")
+
+    End Sub
+
+    Private Sub pnlExterna_MouseHover(sender As Object, e As EventArgs) Handles pnlExterna.MouseHover
+
+        AsignarTooltips("Filtros para Actividades a Autorizar o Denegar.")
+
+    End Sub
+
 #End Region
 
 #Region "Métodos"
@@ -263,7 +275,7 @@ Public Class Principal
         tp.ShowAlways = True
         tp.SetToolTip(Me.btnSalir, "Salir.")
         tp.SetToolTip(Me.btnGuardar, "Guardar o Editar.")
-        tp.SetToolTip(Me.spAutorizaciones, "Click para Seleccionar una Actividad a Resolver.")
+        tp.SetToolTip(Me.spAutorizaciones, "Click para Seleccionar una Actividad a Autorizar o Denegar.")
 
     End Sub
 

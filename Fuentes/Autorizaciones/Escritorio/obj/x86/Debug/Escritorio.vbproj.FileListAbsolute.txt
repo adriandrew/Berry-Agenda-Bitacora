@@ -70,3 +70,5 @@ C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Mo
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Autorizaciones\Escritorio\obj\x86\Debug\EYE03.exe
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Autorizaciones\Escritorio\obj\x86\Debug\EYE03.xml
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Autorizaciones\Escritorio\obj\x86\Debug\EYE03.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Autorizaciones\Escritorio\bin\x86\Debug\EYE03.exe.config
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Autorizaciones\Escritorio\obj\x86\Debug\EYE03.xml

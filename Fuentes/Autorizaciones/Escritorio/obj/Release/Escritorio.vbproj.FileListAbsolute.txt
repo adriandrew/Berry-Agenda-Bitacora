@@ -15,3 +15,4 @@ C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUE
 C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Catalogos\Escritorio\obj\Release\CatalogosBerry.exe
 C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Catalogos\Escritorio\obj\Release\CatalogosBerry.xml
 C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Catalogos\Escritorio\obj\Release\CatalogosBerry.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Autorizaciones\Escritorio\bin\Release\EYE03.exe.config

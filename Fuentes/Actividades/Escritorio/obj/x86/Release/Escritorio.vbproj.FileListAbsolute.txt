@@ -58,3 +58,22 @@ C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Mo
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Actividades\Escritorio\obj\x86\Release\EYE04.exe
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Actividades\Escritorio\obj\x86\Release\EYE04.xml
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Actividades\Escritorio\obj\x86\Release\EYE04.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Escritorio\bin\x86\Release\EYE04.exe.config
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Escritorio\bin\x86\Release\EYE04.exe
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Escritorio\bin\x86\Release\EYE04.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Escritorio\bin\x86\Release\EYE04.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Escritorio\bin\x86\Release\EntidadesActividades.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Escritorio\bin\x86\Release\LogicaActividades.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Escritorio\bin\x86\Release\EntidadesActividades.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Escritorio\bin\x86\Release\EntidadesActividades.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Escritorio\bin\x86\Release\LogicaActividades.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Escritorio\bin\x86\Release\LogicaActividades.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Escritorio\obj\x86\Release\Escritorio.vbprojResolveAssemblyReference.cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Escritorio\obj\x86\Release\Actividades.Imagen.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Escritorio\obj\x86\Release\Actividades.Resources.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Escritorio\obj\x86\Release\Actividades.Principal.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Escritorio\obj\x86\Release\Escritorio.vbproj.GenerateResource.Cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Escritorio\obj\x86\Release\EYE04.exe.licenses
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Escritorio\obj\x86\Release\EYE04.exe
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Escritorio\obj\x86\Release\EYE04.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Escritorio\obj\x86\Release\EYE04.pdb

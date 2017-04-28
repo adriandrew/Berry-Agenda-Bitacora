@@ -34,3 +34,21 @@ C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUE
 C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Catalogos\Escritorio\obj\Debug\CatalogosBerry.exe
 C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Catalogos\Escritorio\obj\Debug\CatalogosBerry.xml
 C:\Users\Administrator\Desktop\PROYECTOS PERSONALES\Proyecto Agenda-Bitacora\FUENTES MODIFICADOS\Catalogos\Escritorio\obj\Debug\CatalogosBerry.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Catalogos\Escritorio\bin\Debug\EYE01.exe.config
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Catalogos\Escritorio\bin\Debug\EYE01.exe
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Catalogos\Escritorio\bin\Debug\EYE01.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Catalogos\Escritorio\bin\Debug\EYE01.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Catalogos\Escritorio\bin\Debug\EntidadesCatalogos.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Catalogos\Escritorio\bin\Debug\LogicaCatalogos.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Catalogos\Escritorio\bin\Debug\EntidadesCatalogos.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Catalogos\Escritorio\bin\Debug\EntidadesCatalogos.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Catalogos\Escritorio\bin\Debug\LogicaCatalogos.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Catalogos\Escritorio\bin\Debug\LogicaCatalogos.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Catalogos\Escritorio\obj\Debug\Escritorio.vbprojResolveAssemblyReference.cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Catalogos\Escritorio\obj\Debug\Catalogos.Resources.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Catalogos\Escritorio\obj\Debug\Catalogos.Principal.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Catalogos\Escritorio\obj\Debug\Escritorio.vbproj.GenerateResource.Cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Catalogos\Escritorio\obj\Debug\EYE01.exe.licenses
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Catalogos\Escritorio\obj\Debug\EYE01.exe
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Catalogos\Escritorio\obj\Debug\EYE01.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Catalogos\Escritorio\obj\Debug\EYE01.pdb

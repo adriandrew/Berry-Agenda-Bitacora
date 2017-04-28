@@ -92,3 +92,21 @@ C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Mo
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\obj\x86\Release\EYE02.exe
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\obj\x86\Release\EYE02.xml
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\obj\x86\Release\EYE02.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Escritorio\bin\x86\Release\EYE02.exe.config
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Escritorio\bin\x86\Release\EYE02.exe
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Escritorio\bin\x86\Release\EYE02.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Escritorio\bin\x86\Release\EYE02.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Escritorio\bin\x86\Release\EntidadesConfiguracionCorreo.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Escritorio\bin\x86\Release\LogicaConfiguracionCorreo.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Escritorio\bin\x86\Release\EntidadesConfiguracionCorreo.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Escritorio\bin\x86\Release\EntidadesConfiguracionCorreo.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Escritorio\bin\x86\Release\LogicaConfiguracionCorreo.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Escritorio\bin\x86\Release\LogicaConfiguracionCorreo.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Escritorio\obj\x86\Release\Escritorio.vbprojResolveAssemblyReference.cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Escritorio\obj\x86\Release\ConfiguracionCorreo.Resources.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Escritorio\obj\x86\Release\ConfiguracionCorreo.Principal.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Escritorio\obj\x86\Release\Escritorio.vbproj.GenerateResource.Cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Escritorio\obj\x86\Release\EYE02.exe.licenses
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Escritorio\obj\x86\Release\EYE02.exe
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Escritorio\obj\x86\Release\EYE02.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Escritorio\obj\x86\Release\EYE02.pdb

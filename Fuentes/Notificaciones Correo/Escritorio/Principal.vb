@@ -152,8 +152,8 @@ Public Class Principal
 
     Private Sub ConfigurarConexionPrincipal()
 
-        If Me.esPrueba Then
-            EntidadesNotificacionesCorreo.BaseDatos.ECadenaConexionPrincipal = "C:\Berry-Bitacora\Principal.sdf"
+        If (Me.esPrueba) Then
+            EntidadesNotificacionesCorreo.BaseDatos.ECadenaConexionPrincipal = "C:\Berry Agenda-Bitacora\Principal.sdf"
         Else
             Dim ruta As String = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase)
             ruta = ruta.Replace("file:\", Nothing)
@@ -295,8 +295,7 @@ Public Class Principal
         While True
             hora = Date.Now.Hour
             minutos = Date.Now.Minute
-            If (minutos = 1) Then
-                'If (minutos Mod 2) = 0 Then
+            If (minutos = 1) Then 
                 esRangoValido = True
             Else
                 If Me.esPrueba Then
@@ -325,9 +324,9 @@ Public Class Principal
         Dim datosExtra As String = String.Empty
         Dim mail As New MailMessage()
         Dim archivoAdjunto As Attachment
-        Dim emisor As String = listaConfiguracion.EDireccion '"aaandrewlopez@gmail.com"
+        Dim emisor As String = listaConfiguracion.EDireccion & listaConfiguracion.EDominio '"aaandrewlopez@gmail.com"
         Dim receptor As String = "yulianapem@gmail.com"
-        Dim contrasena As String = listaConfiguracion.EContrasena '"andrew1007"
+        Dim contrasena As String = listaConfiguracion.EContrasena
         If tipo = TipoActividad.externas Then
             datosExtra = "externas "
         End If
@@ -337,9 +336,7 @@ Public Class Principal
         Dim servidorProveedor As String = listaConfiguracion.EServidor '"smtp.gmail.com"
         Dim puerto As Integer = listaConfiguracion.EPuerto '587
         mail.From = New MailAddress(emisor)
-        mail.Priority = MailPriority.High
-        'mail.To.Add(emisor)
-        'mail.To.Add(receptor)
+        mail.Priority = MailPriority.High 
         Dim listaCorreos As New List(Of EntidadesNotificacionesCorreo.Correos)
         correos.EIdUsuario = idUsuario
         listaCorreos = correos.ObtenerPorIdUsuario()
@@ -361,8 +358,8 @@ Public Class Principal
         ' Se adjunta la imagen del logo de berry.
         Try
             Dim rutaLogoPng As String = String.Empty
-            If Me.esPrueba Then
-                rutaLogoPng = "C:\BERRY-BITACORA\logo3.png"
+            If (Me.esPrueba) Then
+                rutaLogoPng = "C:\BERRY AGENDA-BITACORA\logo3.png"
             Else
                 rutaLogoPng = CurDir() & "\logo3.png"
             End If
@@ -379,8 +376,8 @@ Public Class Principal
         Dim vistaHtml As AlternateView = AlternateView.CreateAlternateViewFromString(mensajeHtml, Encoding.UTF8, MediaTypeNames.Text.Html)
         ' Creamos el recurso a incrustar. Observad que el ID que le asignamos (arbitrario) está referenciado desde el código HTML como origen de la imagen.
         Dim rutaLogoJpg As String = String.Empty
-        If Me.esPrueba Then
-            rutaLogoJpg = "C:\BERRY-BITACORA\logo3.jpg"
+        If (Me.esPrueba) Then
+            rutaLogoJpg = "C:\BERRY AGENDA-BITACORA\logo3.jpg"
         Else
             rutaLogoJpg = CurDir() & "\logo3.jpg"
         End If

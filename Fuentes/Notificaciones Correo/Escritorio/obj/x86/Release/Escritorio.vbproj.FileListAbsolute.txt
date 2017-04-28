@@ -93,3 +93,21 @@ C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Mo
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Correo\Escritorio\obj\x86\Release\NotificacionesCorreo.exe
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Correo\Escritorio\obj\x86\Release\NotificacionesCorreo.xml
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Correo\Escritorio\obj\x86\Release\NotificacionesCorreo.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Escritorio\bin\x86\Release\NotificacionesCorreo.exe.config
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Escritorio\bin\x86\Release\NotificacionesCorreo.exe
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Escritorio\bin\x86\Release\NotificacionesCorreo.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Escritorio\bin\x86\Release\NotificacionesCorreo.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Escritorio\bin\x86\Release\EntidadesNotificacionesCorreo.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Escritorio\bin\x86\Release\LogicaNotificacionesCorreo.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Escritorio\bin\x86\Release\EntidadesNotificacionesCorreo.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Escritorio\bin\x86\Release\EntidadesNotificacionesCorreo.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Escritorio\bin\x86\Release\LogicaNotificacionesCorreo.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Escritorio\bin\x86\Release\LogicaNotificacionesCorreo.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Escritorio\obj\x86\Release\Escritorio.vbprojResolveAssemblyReference.cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Escritorio\obj\x86\Release\NotificacionesCorreo.Resources.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Escritorio\obj\x86\Release\NotificacionesCorreo.Principal.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Escritorio\obj\x86\Release\Escritorio.vbproj.GenerateResource.Cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Escritorio\obj\x86\Release\NotificacionesCorreo.exe.licenses
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Escritorio\obj\x86\Release\NotificacionesCorreo.exe
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Escritorio\obj\x86\Release\NotificacionesCorreo.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Escritorio\obj\x86\Release\NotificacionesCorreo.pdb

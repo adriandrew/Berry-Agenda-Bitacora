@@ -76,9 +76,10 @@ Public Class Usuarios
         Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionInformacion
-            comando.CommandText = "SELECT * FROM Usuarios WHERE IdEmpresa=@idEmpresa AND IdArea=@idArea UNION SELECT -1, -1, 'TODOS', NULL, 0, 'FALSE', 0 FROM Usuarios ORDER BY IdEmpresa, Id ASC"
-            comando.Parameters.AddWithValue("@idEmpresa", Me.idEmpresa)
-            comando.Parameters.AddWithValue("@idArea", Me.idArea)
+            comando.CommandText = "SELECT * FROM Usuarios WHERE IdEmpresa=@idEmpresa AND IdArea=@idArea AND Id<>@idUsuario UNION SELECT -1, -1, 'TODOS', NULL, 0, 'FALSE', 0 FROM Usuarios ORDER BY IdEmpresa, Id ASC"
+            comando.Parameters.AddWithValue("@idEmpresa", Me.EIdEmpresa)
+            comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
+            comando.Parameters.AddWithValue("@idUsuario", Me.EId)
             BaseDatos.conexionInformacion.Open()
             Dim dataReader As SqlDataReader = comando.ExecuteReader()
             Dim usuarios As Usuarios

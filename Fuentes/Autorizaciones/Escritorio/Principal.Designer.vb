@@ -41,6 +41,7 @@ Partial Class Principal
         Me.spAutorizaciones = New FarPoint.Win.Spread.FpSpread()
         Me.spAutorizaciones_Sheet1 = New FarPoint.Win.Spread.SheetView()
         Me.pnlPie = New System.Windows.Forms.Panel()
+        Me.btnAyuda = New System.Windows.Forms.Button()
         Me.lblDescripcionTooltip = New System.Windows.Forms.Label()
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.pnlEncabezado = New System.Windows.Forms.Panel()
@@ -49,7 +50,6 @@ Partial Class Principal
         Me.lblEncabezadoEmpresa = New System.Windows.Forms.Label()
         Me.lblEncabezadoPrograma = New System.Windows.Forms.Label()
         Me.temporizador = New System.Windows.Forms.Timer(Me.components)
-        Me.btnAyuda = New System.Windows.Forms.Button()
         Me.pnlContenido.SuspendLayout()
         Me.pnlCuerpo.SuspendLayout()
         Me.pnlExterna.SuspendLayout()
@@ -232,7 +232,7 @@ Partial Class Principal
         Me.spAutorizaciones.Location = New System.Drawing.Point(5, 86)
         Me.spAutorizaciones.Name = "spAutorizaciones"
         Me.spAutorizaciones.Sheets.AddRange(New FarPoint.Win.Spread.SheetView() {Me.spAutorizaciones_Sheet1})
-        Me.spAutorizaciones.Size = New System.Drawing.Size(1021, 337)
+        Me.spAutorizaciones.Size = New System.Drawing.Size(1021, 400)
         Me.spAutorizaciones.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell
         Me.spAutorizaciones.TabIndex = 3
         Me.spAutorizaciones.VerticalScrollBar.Buttons = New FarPoint.Win.Spread.FpScrollBarButtonCollection("BackwardLineButton,ThumbTrack,ForwardLineButton")
@@ -282,6 +282,23 @@ Partial Class Principal
         Me.pnlPie.Name = "pnlPie"
         Me.pnlPie.Size = New System.Drawing.Size(1035, 60)
         Me.pnlPie.TabIndex = 8
+        '
+        'btnAyuda
+        '
+        Me.btnAyuda.BackColor = System.Drawing.Color.White
+        Me.btnAyuda.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnAyuda.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.btnAyuda.FlatAppearance.BorderSize = 3
+        Me.btnAyuda.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine
+        Me.btnAyuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAyuda.ForeColor = System.Drawing.Color.Black
+        Me.btnAyuda.Image = CType(resources.GetObject("btnAyuda.Image"), System.Drawing.Image)
+        Me.btnAyuda.Location = New System.Drawing.Point(0, 0)
+        Me.btnAyuda.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnAyuda.Name = "btnAyuda"
+        Me.btnAyuda.Size = New System.Drawing.Size(60, 60)
+        Me.btnAyuda.TabIndex = 5
+        Me.btnAyuda.UseVisualStyleBackColor = False
         '
         'lblDescripcionTooltip
         '
@@ -371,23 +388,6 @@ Partial Class Principal
         'temporizador
         '
         Me.temporizador.Interval = 1
-        '
-        'btnAyuda
-        '
-        Me.btnAyuda.BackColor = System.Drawing.Color.White
-        Me.btnAyuda.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnAyuda.FlatAppearance.BorderColor = System.Drawing.Color.Black
-        Me.btnAyuda.FlatAppearance.BorderSize = 3
-        Me.btnAyuda.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine
-        Me.btnAyuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAyuda.ForeColor = System.Drawing.Color.Black
-        Me.btnAyuda.Image = CType(resources.GetObject("btnAyuda.Image"), System.Drawing.Image)
-        Me.btnAyuda.Location = New System.Drawing.Point(0, 0)
-        Me.btnAyuda.Margin = New System.Windows.Forms.Padding(0)
-        Me.btnAyuda.Name = "btnAyuda"
-        Me.btnAyuda.Size = New System.Drawing.Size(60, 60)
-        Me.btnAyuda.TabIndex = 5
-        Me.btnAyuda.UseVisualStyleBackColor = False
         '
         'Principal
         '

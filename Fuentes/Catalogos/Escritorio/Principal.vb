@@ -389,8 +389,10 @@ Public Class Principal
         If (Me.esPrueba) Then
             'EntidadesCatalogos.BaseDatos.ECadenaConexionCatalogo = "C:\\Berry-Agenda\\BD\\PODC\\Catalogos.mdf"
             LogicaCatalogos.DatosEmpresaPrincipal.instanciaSql = "ANDREW-MAC\SQLEXPRESS"
+            LogicaCatalogos.DatosEmpresaPrincipal.instanciaSql = "BERRY1-DELL\SQLEXPRESS2008"
             LogicaCatalogos.DatosEmpresaPrincipal.usuarioSql = "AdminBerry"
-            LogicaCatalogos.DatosEmpresaPrincipal.contrasenaSql = "@berry"
+            'LogicaCatalogos.DatosEmpresaPrincipal.contrasenaSql = "@berry"
+            LogicaCatalogos.DatosEmpresaPrincipal.contrasenaSql = "@berry2017"
             datosUsuario.EAccesoTotal = True
             datosEmpresa.EId = 1
         Else
@@ -444,7 +446,7 @@ Public Class Principal
 
     Private Sub LimpiarSpread()
 
-        spCatalogos.ActiveSheet.ClearRange(0, 0, spCatalogos.ActiveSheet.Rows.Count - 1, spCatalogos.ActiveSheet.Columns.Count - 1, False)
+        spCatalogos.ActiveSheet.ClearRange(0, 0, spCatalogos.ActiveSheet.Rows.Count, spCatalogos.ActiveSheet.Columns.Count, False)
 
     End Sub
 

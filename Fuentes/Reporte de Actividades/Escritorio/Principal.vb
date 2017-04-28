@@ -374,9 +374,11 @@ Public Class Principal
             Me.datosEmpresa.EDomicilio = "Conocido"
             Me.datosEmpresa.ELocalidad = "San José Del Cabo"
             Me.datosEmpresa.ERfc = "RFCXSOMOSCHAVOS"
-            LogicaReporteActividades.DatosEmpresaPrincipal.instanciaSql = "ANDREW-MAC\SQLEXPRESS"
+            'LogicaReporteActividades.DatosEmpresaPrincipal.instanciaSql = "ANDREW-MAC\SQLEXPRESS"
+            LogicaReporteActividades.DatosEmpresaPrincipal.instanciaSql = "BERRY1-DELL\SQLEXPRESS2008"
             LogicaReporteActividades.DatosEmpresaPrincipal.usuarioSql = "AdminBerry"
-            LogicaReporteActividades.DatosEmpresaPrincipal.contrasenaSql = "@berry"
+            'LogicaReporteActividades.DatosEmpresaPrincipal.contrasenaSql = "@berry"
+            LogicaReporteActividades.DatosEmpresaPrincipal.contrasenaSql = "@berry2017"
         Else
             'EntidadesActividades.BaseDatos.ECadenaConexionAgenda = datosEmpresa.EDirectorio & "\\Agenda.mdf"
             LogicaReporteActividades.DatosEmpresaPrincipal.ObtenerParametrosInformacionEmpresa()

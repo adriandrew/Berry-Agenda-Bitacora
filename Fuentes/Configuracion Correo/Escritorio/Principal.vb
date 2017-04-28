@@ -277,9 +277,12 @@ Public Class Principal
             Me.datosUsuario.EId = 1
             Me.datosUsuario.EIdArea = 1
             Me.datosEmpresa.EId = 1
-            LogicaConfiguracionCorreo.DatosEmpresaPrincipal.instanciaSql = "ANDREW-MAC\SQLEXPRESS"
+            Me.datosUsuario.EAccesoTotal = True
+            'LogicaConfiguracionCorreo.DatosEmpresaPrincipal.instanciaSql = "ANDREW-MAC\SQLEXPRESS"
+            LogicaConfiguracionCorreo.DatosEmpresaPrincipal.instanciaSql = "BERRY1-DELL\SQLEXPRESS2008"
             LogicaConfiguracionCorreo.DatosEmpresaPrincipal.usuarioSql = "AdminBerry"
-            LogicaConfiguracionCorreo.DatosEmpresaPrincipal.contrasenaSql = "@berry"
+            'LogicaConfiguracionCorreo.DatosEmpresaPrincipal.contrasenaSql = "@berry"
+            LogicaConfiguracionCorreo.DatosEmpresaPrincipal.contrasenaSql = "@berry2017"
         Else
             'EntidadesActividades.BaseDatos.ECadenaConexionAgenda = datosEmpresa.EDirectorio & "\\Agenda.mdf"
             LogicaConfiguracionCorreo.DatosEmpresaPrincipal.ObtenerParametrosInformacionEmpresa()
@@ -313,6 +316,9 @@ Public Class Principal
 
     Private Sub AbrirPrograma(nombre As String, salir As Boolean)
 
+        If (Me.esPrueba) Then
+            Exit Sub
+        End If
         ejecutarProgramaPrincipal.UseShellExecute = True
         ejecutarProgramaPrincipal.FileName = nombre & Convert.ToString(".exe")
         ejecutarProgramaPrincipal.WorkingDirectory = Directory.GetCurrentDirectory()
@@ -362,14 +368,14 @@ Public Class Principal
             configuracion.EAsunto = asunto
             configuracion.EMensaje = mensaje
             configuracion.EIdProveedor = idProveedor
-            If Me.tieneDatos Then
+            If (Me.tieneDatos) Then
                 configuracion.Editar()
             Else
                 configuracion.Guardar()
             End If
+            MsgBox("Guardado finalizado.", MsgBoxStyle.ApplicationModal, "Finalizado.")
+            CargarConfiguracion() 
         End If
-        MsgBox("Guardado finalizado.", MsgBoxStyle.ApplicationModal, "Finalizado.")
-        CargarConfiguracion()
 
     End Sub
 

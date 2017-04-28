@@ -24,12 +24,13 @@ Partial Class Principal
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Principal))
-        Dim EnhancedScrollBarRenderer3 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
-        Dim EnhancedScrollBarRenderer4 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
+        Dim EnhancedScrollBarRenderer1 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
+        Dim EnhancedScrollBarRenderer2 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
         Me.pnlContenido = New System.Windows.Forms.Panel()
         Me.pnlCuerpo = New System.Windows.Forms.Panel()
         Me.tbActividades = New System.Windows.Forms.TabControl()
         Me.tpCapturarActividades = New System.Windows.Forms.TabPage()
+        Me.lblCalificacion = New System.Windows.Forms.Label()
         Me.btnCapturaFechaVencimientoAnterior = New System.Windows.Forms.Button()
         Me.btnCapturaFechaVencimientoSiguiente = New System.Windows.Forms.Button()
         Me.btnCapturaFechaCreacionAnterior = New System.Windows.Forms.Button()
@@ -83,6 +84,7 @@ Partial Class Principal
         Me.lblEncabezadoEmpresa = New System.Windows.Forms.Label()
         Me.lblEncabezadoPrograma = New System.Windows.Forms.Label()
         Me.temporizador = New System.Windows.Forms.Timer(Me.components)
+        Me.lblEstatus = New System.Windows.Forms.Label()
         Me.pnlContenido.SuspendLayout()
         Me.pnlCuerpo.SuspendLayout()
         Me.tbActividades.SuspendLayout()
@@ -146,6 +148,8 @@ Partial Class Principal
         '
         Me.tpCapturarActividades.AutoScroll = True
         Me.tpCapturarActividades.BackColor = System.Drawing.Color.White
+        Me.tpCapturarActividades.Controls.Add(Me.lblEstatus)
+        Me.tpCapturarActividades.Controls.Add(Me.lblCalificacion)
         Me.tpCapturarActividades.Controls.Add(Me.btnCapturaFechaVencimientoAnterior)
         Me.tpCapturarActividades.Controls.Add(Me.btnCapturaFechaVencimientoSiguiente)
         Me.tpCapturarActividades.Controls.Add(Me.btnCapturaFechaCreacionAnterior)
@@ -174,6 +178,17 @@ Partial Class Principal
         Me.tpCapturarActividades.Size = New System.Drawing.Size(1015, 452)
         Me.tpCapturarActividades.TabIndex = 0
         Me.tpCapturarActividades.Text = "Capturar Actividades"
+        '
+        'lblCalificacion
+        '
+        Me.lblCalificacion.AutoSize = True
+        Me.lblCalificacion.BackColor = System.Drawing.Color.Transparent
+        Me.lblCalificacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCalificacion.ForeColor = System.Drawing.Color.Black
+        Me.lblCalificacion.Location = New System.Drawing.Point(705, 53)
+        Me.lblCalificacion.Name = "lblCalificacion"
+        Me.lblCalificacion.Size = New System.Drawing.Size(0, 24)
+        Me.lblCalificacion.TabIndex = 22
         '
         'btnCapturaFechaVencimientoAnterior
         '
@@ -393,9 +408,9 @@ Partial Class Principal
         Me.pnlExterna.Controls.Add(Me.lblAreas)
         Me.pnlExterna.Controls.Add(Me.cbAreas)
         Me.pnlExterna.Controls.Add(Me.chkCapturaEsExterna)
-        Me.pnlExterna.Location = New System.Drawing.Point(247, 322)
+        Me.pnlExterna.Location = New System.Drawing.Point(241, 322)
         Me.pnlExterna.Name = "pnlExterna"
-        Me.pnlExterna.Size = New System.Drawing.Size(452, 110)
+        Me.pnlExterna.Size = New System.Drawing.Size(462, 110)
         Me.pnlExterna.TabIndex = 21
         '
         'lblUsuarios
@@ -446,7 +461,7 @@ Partial Class Principal
         '
         Me.chkCapturaEsExterna.AutoSize = True
         Me.chkCapturaEsExterna.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.chkCapturaEsExterna.Location = New System.Drawing.Point(3, 3)
+        Me.chkCapturaEsExterna.Location = New System.Drawing.Point(6, 4)
         Me.chkCapturaEsExterna.Name = "chkCapturaEsExterna"
         Me.chkCapturaEsExterna.Size = New System.Drawing.Size(121, 28)
         Me.chkCapturaEsExterna.TabIndex = 0
@@ -651,18 +666,18 @@ Partial Class Principal
         Me.spResolverActividades.BackColor = System.Drawing.Color.White
         Me.spResolverActividades.HorizontalScrollBar.Buttons = New FarPoint.Win.Spread.FpScrollBarButtonCollection("BackwardLineButton,ThumbTrack,ForwardLineButton")
         Me.spResolverActividades.HorizontalScrollBar.Name = ""
-        EnhancedScrollBarRenderer3.ArrowColor = System.Drawing.Color.DarkSlateGray
-        EnhancedScrollBarRenderer3.ArrowHoveredColor = System.Drawing.Color.DarkSlateGray
-        EnhancedScrollBarRenderer3.ArrowSelectedColor = System.Drawing.Color.DarkSlateGray
-        EnhancedScrollBarRenderer3.ButtonBackgroundColor = System.Drawing.Color.CadetBlue
-        EnhancedScrollBarRenderer3.ButtonBorderColor = System.Drawing.Color.SlateGray
-        EnhancedScrollBarRenderer3.ButtonHoveredBackgroundColor = System.Drawing.Color.SlateGray
-        EnhancedScrollBarRenderer3.ButtonHoveredBorderColor = System.Drawing.Color.DarkGray
-        EnhancedScrollBarRenderer3.ButtonSelectedBackgroundColor = System.Drawing.Color.DarkGray
-        EnhancedScrollBarRenderer3.ButtonSelectedBorderColor = System.Drawing.Color.CadetBlue
-        EnhancedScrollBarRenderer3.TrackBarBackgroundColor = System.Drawing.Color.CadetBlue
-        EnhancedScrollBarRenderer3.TrackBarSelectedBackgroundColor = System.Drawing.Color.SlateGray
-        Me.spResolverActividades.HorizontalScrollBar.Renderer = EnhancedScrollBarRenderer3
+        EnhancedScrollBarRenderer1.ArrowColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer1.ArrowHoveredColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer1.ArrowSelectedColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer1.ButtonBackgroundColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer1.ButtonBorderColor = System.Drawing.Color.SlateGray
+        EnhancedScrollBarRenderer1.ButtonHoveredBackgroundColor = System.Drawing.Color.SlateGray
+        EnhancedScrollBarRenderer1.ButtonHoveredBorderColor = System.Drawing.Color.DarkGray
+        EnhancedScrollBarRenderer1.ButtonSelectedBackgroundColor = System.Drawing.Color.DarkGray
+        EnhancedScrollBarRenderer1.ButtonSelectedBorderColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer1.TrackBarBackgroundColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer1.TrackBarSelectedBackgroundColor = System.Drawing.Color.SlateGray
+        Me.spResolverActividades.HorizontalScrollBar.Renderer = EnhancedScrollBarRenderer1
         Me.spResolverActividades.HorizontalScrollBar.TabIndex = 0
         Me.spResolverActividades.Location = New System.Drawing.Point(6, 347)
         Me.spResolverActividades.Name = "spResolverActividades"
@@ -672,18 +687,18 @@ Partial Class Principal
         Me.spResolverActividades.TabIndex = 2
         Me.spResolverActividades.VerticalScrollBar.Buttons = New FarPoint.Win.Spread.FpScrollBarButtonCollection("BackwardLineButton,ThumbTrack,ForwardLineButton")
         Me.spResolverActividades.VerticalScrollBar.Name = ""
-        EnhancedScrollBarRenderer4.ArrowColor = System.Drawing.Color.DarkSlateGray
-        EnhancedScrollBarRenderer4.ArrowHoveredColor = System.Drawing.Color.DarkSlateGray
-        EnhancedScrollBarRenderer4.ArrowSelectedColor = System.Drawing.Color.DarkSlateGray
-        EnhancedScrollBarRenderer4.ButtonBackgroundColor = System.Drawing.Color.CadetBlue
-        EnhancedScrollBarRenderer4.ButtonBorderColor = System.Drawing.Color.SlateGray
-        EnhancedScrollBarRenderer4.ButtonHoveredBackgroundColor = System.Drawing.Color.SlateGray
-        EnhancedScrollBarRenderer4.ButtonHoveredBorderColor = System.Drawing.Color.DarkGray
-        EnhancedScrollBarRenderer4.ButtonSelectedBackgroundColor = System.Drawing.Color.DarkGray
-        EnhancedScrollBarRenderer4.ButtonSelectedBorderColor = System.Drawing.Color.CadetBlue
-        EnhancedScrollBarRenderer4.TrackBarBackgroundColor = System.Drawing.Color.CadetBlue
-        EnhancedScrollBarRenderer4.TrackBarSelectedBackgroundColor = System.Drawing.Color.SlateGray
-        Me.spResolverActividades.VerticalScrollBar.Renderer = EnhancedScrollBarRenderer4
+        EnhancedScrollBarRenderer2.ArrowColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer2.ArrowHoveredColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer2.ArrowSelectedColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer2.ButtonBackgroundColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer2.ButtonBorderColor = System.Drawing.Color.SlateGray
+        EnhancedScrollBarRenderer2.ButtonHoveredBackgroundColor = System.Drawing.Color.SlateGray
+        EnhancedScrollBarRenderer2.ButtonHoveredBorderColor = System.Drawing.Color.DarkGray
+        EnhancedScrollBarRenderer2.ButtonSelectedBackgroundColor = System.Drawing.Color.DarkGray
+        EnhancedScrollBarRenderer2.ButtonSelectedBorderColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer2.TrackBarBackgroundColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer2.TrackBarSelectedBackgroundColor = System.Drawing.Color.SlateGray
+        Me.spResolverActividades.VerticalScrollBar.Renderer = EnhancedScrollBarRenderer2
         Me.spResolverActividades.VerticalScrollBar.TabIndex = 1
         '
         'spResolverActividades_Sheet1
@@ -824,6 +839,17 @@ Partial Class Principal
         '
         Me.temporizador.Interval = 1
         '
+        'lblEstatus
+        '
+        Me.lblEstatus.AutoSize = True
+        Me.lblEstatus.BackColor = System.Drawing.Color.Transparent
+        Me.lblEstatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblEstatus.ForeColor = System.Drawing.Color.Black
+        Me.lblEstatus.Location = New System.Drawing.Point(705, 16)
+        Me.lblEstatus.Name = "lblEstatus"
+        Me.lblEstatus.Size = New System.Drawing.Size(0, 24)
+        Me.lblEstatus.TabIndex = 23
+        '
         'Principal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -910,4 +936,6 @@ Partial Class Principal
     Friend WithEvents txtResolucionMotivoRetraso As System.Windows.Forms.TextBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Public WithEvents btnResolucionGuardar As System.Windows.Forms.Button
+    Friend WithEvents lblCalificacion As System.Windows.Forms.Label
+    Friend WithEvents lblEstatus As System.Windows.Forms.Label
 End Class
