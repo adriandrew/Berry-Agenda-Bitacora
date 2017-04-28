@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Principal));
             this.pnlContenido = new System.Windows.Forms.Panel();
             this.pnlPanelControl = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.chkActivar = new System.Windows.Forms.CheckBox();
             this.pnlPie = new System.Windows.Forms.Panel();
@@ -50,9 +51,6 @@
             this.lblContraseña = new System.Windows.Forms.Label();
             this.lblUsuario = new System.Windows.Forms.Label();
             this.picUsuario = new System.Windows.Forms.PictureBox();
-            this.temporizador = new System.Windows.Forms.Timer(this.components);
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.pnlContenido.SuspendLayout();
             this.pnlPanelControl.SuspendLayout();
             this.pnlPie.SuspendLayout();
@@ -97,6 +95,28 @@
             this.pnlPanelControl.TabIndex = 9;
             this.pnlPanelControl.Visible = false;
             this.pnlPanelControl.MouseHover += new System.EventHandler(this.pnlMenu_MouseHover);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(57, 134);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(155, 31);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "el sistema:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(57, 94);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(269, 31);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "activar o desactivar";
             // 
             // label1
             // 
@@ -349,33 +369,6 @@
             this.picUsuario.TabIndex = 0;
             this.picUsuario.TabStop = false;
             // 
-            // temporizador
-            // 
-            this.temporizador.Interval = 1;
-            this.temporizador.Tick += new System.EventHandler(this.temporizador_Tick);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(57, 94);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(269, 31);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "activar o desactivar";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(57, 134);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(155, 31);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "el sistema:";
-            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -423,7 +416,6 @@
         private System.Windows.Forms.Label lblEncabezadoUsuario;
         public System.Windows.Forms.Label lblEncabezadoEmpresa;
         internal System.Windows.Forms.Label lblDescripcionTooltip;
-        internal System.Windows.Forms.Timer temporizador;
         private System.Windows.Forms.Button btnAyuda;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkActivar;

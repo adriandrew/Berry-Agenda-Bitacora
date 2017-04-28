@@ -65,19 +65,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>KDPHuRuEztTZdWqMOhyVVUmyzvo=</dsig:DigestValue>
+        <dsig:DigestValue>sTf4FZcLzvhYFU/eF5ERrFKHvLM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EntidadesActivador.dll" size="10240">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EntidadesActivador.dll" size="10752">
       <assemblyIdentity name="EntidadesActivador" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>HkPY+G1O+3vlrCU4Geb8gIhkrGs=</dsig:DigestValue>
+        <dsig:DigestValue>ocrpRsCL50pltecJW9bEPwaSzis=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -89,7 +89,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>Hv6KDIXAace/jHVRDtRBlaGS9rI=</dsig:DigestValue>
+        <dsig:DigestValue>2D+yET8XqbPuixV8V1QaHcsxdG4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -117,6 +117,15 @@
       </hash>
     </dependentAssembly>
   </dependency>
+  <file name="Activador.exe.config" size="565">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>sJ9h8kiu1fEp2E7KUYeNiJQ6vYE=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="Iconos Usados\angle_right-48.png" size="259">
     <hash>
       <dsig:Transforms>

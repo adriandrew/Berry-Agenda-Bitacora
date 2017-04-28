@@ -6,9 +6,9 @@
 
     Private Sub Listado_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
 
-        If Not fueVisto Then
+        If (Not fueVisto) Then
             Principal.GuardarVisto(False)
-        End If
+        End If 
 
     End Sub
 

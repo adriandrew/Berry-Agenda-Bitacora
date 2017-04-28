@@ -1,0 +1,4 @@
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Activador\Logica\bin\Debug\LogicaActivador.dll
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Activador\Logica\bin\Debug\LogicaActivador.pdb
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Activador\Logica\obj\Debug\LogicaActivador.dll
+C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Activador\Logica\obj\Debug\LogicaActivador.pdb

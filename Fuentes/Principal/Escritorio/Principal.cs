@@ -602,6 +602,7 @@ namespace Escritorio
                 //string ruta = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
                 //ruta = ruta.Replace("file:\\", null);
                 //baseDatos.CadenaConexionInformacion = string.Format("{0}\\Informacion.mdf", ruta); 
+                ConfigurarConexionPrincipal();
                 if (this.tieneParametros)
                 {
                     Logica.DatosEmpresaPrincipal.ObtenerParametrosInformacionEmpresa();
@@ -611,7 +612,6 @@ namespace Escritorio
                 }
                 else
                 {
-                    ConfigurarConexionPrincipal();
                     ConsultarInformacionEmpresaPrincipalPredeterminada();
                 }
             } 

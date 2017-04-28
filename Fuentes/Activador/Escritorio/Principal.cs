@@ -71,7 +71,6 @@ namespace Escritorio
         {
 
             this.estaCerrando = true;
-            Desvanecer();
 
         }
   
@@ -176,17 +175,7 @@ namespace Escritorio
             AsignarTooltips(string.Empty); 
 
         }
-
-        private void temporizador_Tick(object sender, EventArgs e)
-        {
-
-            if (this.estaCerrando)
-            {
-                Desvanecer();
-            }
-
-        }
-        
+         
         private void btnAyuda_MouseHover(object sender, EventArgs e)
         {
 
@@ -339,24 +328,6 @@ namespace Escritorio
             }
 
         } 
-
-        private void Desvanecer()
-        {
-
-            temporizador.Interval = 10;
-            temporizador.Enabled = true;
-            temporizador.Start();
-            if (this.Opacity > 0)
-            {
-                this.Opacity -= 0.25; Application.DoEvents();
-            }
-            else
-            {
-                temporizador.Enabled = false;
-                temporizador.Stop();
-            }
-
-        }
 
         private void ValidarSesion()
         { 

@@ -18,6 +18,7 @@ Public Class Principal
     Public datosArea As New LogicaNotificacionesPantalla.DatosArea()
     Public tieneParametros As Boolean = False
     Public nombreEsteEquipo As String = My.Computer.Name
+    Public estaMostrado As Boolean = False
 
     Public esPrueba As Boolean = False
 
@@ -27,7 +28,6 @@ Public Class Principal
 
         Centrar()
         ConfigurarConexiones()
-        'CargarEncabezados()
         IniciarProceso()
 
     End Sub
@@ -317,7 +317,7 @@ Public Class Principal
         Dim minutos As Integer = 0
         Dim esPrimeraVezAbierto As Boolean = True ' Es para cuando se abre este programa.
         Dim esRangoValido As Boolean = False ' Es el rango de tiempo valido.
-        Dim esPrimeraVezRango As Boolean = True ' Es el contadador de la primera vez que se entra de nuevo al rango.
+        Dim esPrimeraVezRango As Boolean = True ' Es el contador de la primera vez que se entra de nuevo al rango.
         While True
             hora = Date.Now.Hour
             minutos = Date.Now.Minute
@@ -327,16 +327,31 @@ Public Class Principal
             Else
                 esRangoValido = False
             End If
+            If (Listado.Visible) Then
+                Me.estaMostrado = True
+            Else
+                Me.estaMostrado = False
+            End If
             If ((esRangoValido) And (esPrimeraVezRango)) Or (esPrimeraVezAbierto) Then
                 CargarActividadesVencidas()
                 esPrimeraVezAbierto = False
                 esPrimeraVezRango = False
-                Application.DoEvents()
+                If (Me.estaMostrado) Then
+                    Application.DoEvents()
+                End If
             ElseIf (Not esRangoValido) Then
                 esPrimeraVezRango = True
-                Application.DoEvents()
+                If (Me.estaMostrado) Then
+                    Application.DoEvents()
+                Else
+                    System.Threading.Thread.Sleep(60000)
+                End If
             Else
-                Application.DoEvents()
+                If (Me.estaMostrado) Then
+                    Application.DoEvents()
+                Else
+                    System.Threading.Thread.Sleep(60000)
+                End If
             End If
         End While
 
