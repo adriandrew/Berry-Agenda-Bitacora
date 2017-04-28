@@ -92,3 +92,21 @@ C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Autorizaciones\Escritorio\obj\x
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Autorizaciones\Escritorio\obj\x86\Release\EYE03.exe
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Autorizaciones\Escritorio\obj\x86\Release\EYE03.xml
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Autorizaciones\Escritorio\obj\x86\Release\EYE03.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Escritorio\bin\x86\Release\ACT03.exe.config
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Escritorio\bin\x86\Release\ACT03.exe
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Escritorio\bin\x86\Release\ACT03.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Escritorio\bin\x86\Release\ACT03.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Escritorio\bin\x86\Release\EntidadesAutorizaciones.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Escritorio\bin\x86\Release\LogicaAutorizaciones.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Escritorio\bin\x86\Release\EntidadesAutorizaciones.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Escritorio\bin\x86\Release\EntidadesAutorizaciones.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Escritorio\bin\x86\Release\LogicaAutorizaciones.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Escritorio\bin\x86\Release\LogicaAutorizaciones.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Escritorio\obj\x86\Release\Escritorio.vbprojResolveAssemblyReference.cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Escritorio\obj\x86\Release\Autorizaciones.Resources.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Escritorio\obj\x86\Release\Autorizaciones.Principal.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Escritorio\obj\x86\Release\Escritorio.vbproj.GenerateResource.Cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Escritorio\obj\x86\Release\ACT03.exe.licenses
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Escritorio\obj\x86\Release\ACT03.exe
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Escritorio\obj\x86\Release\ACT03.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Escritorio\obj\x86\Release\ACT03.pdb

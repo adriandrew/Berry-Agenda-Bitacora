@@ -22,3 +22,15 @@ C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Entidades\
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Entidades\obj\Release\EntidadesConfiguracionCorreo.dll
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Entidades\obj\Release\EntidadesConfiguracionCorreo.xml
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Configuracion Correo\Entidades\obj\Release\EntidadesConfiguracionCorreo.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Configuracion Correo\Entidades\bin\Release\EntidadesConfiguracionCorreo.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Configuracion Correo\Entidades\bin\Release\EntidadesConfiguracionCorreo.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Configuracion Correo\Entidades\bin\Release\EntidadesConfiguracionCorreo.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Configuracion Correo\Entidades\bin\Release\LogicaConfiguracionCorreo.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Configuracion Correo\Entidades\bin\Release\LogicaConfiguracionCorreo.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Configuracion Correo\Entidades\bin\Release\LogicaConfiguracionCorreo.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Configuracion Correo\Entidades\obj\Release\EntidadesConfiguracionCorreo.vbprojResolveAssemblyReference.cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Configuracion Correo\Entidades\obj\Release\EntidadesConfiguracionCorreo.Resources.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Configuracion Correo\Entidades\obj\Release\EntidadesConfiguracionCorreo.vbproj.GenerateResource.Cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Configuracion Correo\Entidades\obj\Release\EntidadesConfiguracionCorreo.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Configuracion Correo\Entidades\obj\Release\EntidadesConfiguracionCorreo.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Configuracion Correo\Entidades\obj\Release\EntidadesConfiguracionCorreo.pdb

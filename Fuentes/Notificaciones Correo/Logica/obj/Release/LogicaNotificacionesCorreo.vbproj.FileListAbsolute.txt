@@ -22,3 +22,11 @@ C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Logica\ob
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Logica\obj\Release\LogicaNotificacionesCorreo.dll
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Logica\obj\Release\LogicaNotificacionesCorreo.xml
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Logica\obj\Release\LogicaNotificacionesCorreo.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Correo\Logica\bin\Release\LogicaNotificacionesCorreo.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Correo\Logica\bin\Release\LogicaNotificacionesCorreo.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Correo\Logica\bin\Release\LogicaNotificacionesCorreo.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Correo\Logica\obj\Release\LogicaNotificacionesCorreo.Resources.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Correo\Logica\obj\Release\LogicaNotificacionesCorreo.vbproj.GenerateResource.Cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Correo\Logica\obj\Release\LogicaNotificacionesCorreo.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Correo\Logica\obj\Release\LogicaNotificacionesCorreo.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Correo\Logica\obj\Release\LogicaNotificacionesCorreo.pdb

@@ -90,3 +90,5 @@ C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Mo
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\obj\x86\Debug\EYE05.pdb
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Reporte de Actividades\Escritorio\bin\x86\Debug\EYE05.exe.config
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Reporte de Actividades\Escritorio\obj\x86\Debug\EYE05.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Reporte de Actividades\Escritorio\bin\x86\Debug\EYE05.exe.config
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Reporte de Actividades\Escritorio\obj\x86\Debug\EYE05.xml

@@ -86,3 +86,5 @@ C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Mo
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Principal\Escritorio\obj\x86\Release\PrincipalBerry.exe.licenses
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Principal\Escritorio\obj\x86\Release\PrincipalBerry.exe
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Principal\Escritorio\obj\x86\Release\PrincipalBerry.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Principal\Escritorio\obj\x86\Release\PrincipalBerry.exe
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Principal\Escritorio\obj\x86\Release\PrincipalBerry.pdb

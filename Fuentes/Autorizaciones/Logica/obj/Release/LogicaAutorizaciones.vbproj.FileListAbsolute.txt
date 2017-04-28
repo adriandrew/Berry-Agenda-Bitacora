@@ -22,3 +22,11 @@ C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Autorizaciones\Logica\obj\Relea
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Autorizaciones\Logica\obj\Release\LogicaAutorizaciones.dll
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Autorizaciones\Logica\obj\Release\LogicaAutorizaciones.xml
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Autorizaciones\Logica\obj\Release\LogicaAutorizaciones.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Logica\bin\Release\LogicaAutorizaciones.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Logica\bin\Release\LogicaAutorizaciones.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Logica\bin\Release\LogicaAutorizaciones.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Logica\obj\Release\LogicaAutorizaciones.Resources.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Logica\obj\Release\LogicaAutorizaciones.vbproj.GenerateResource.Cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Logica\obj\Release\LogicaAutorizaciones.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Logica\obj\Release\LogicaAutorizaciones.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Logica\obj\Release\LogicaAutorizaciones.pdb

@@ -22,3 +22,11 @@ C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Logica\obj\Release\
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Logica\obj\Release\LogicaActividades.dll
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Logica\obj\Release\LogicaActividades.xml
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Actividades\Logica\obj\Release\LogicaActividades.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Actividades\Logica\bin\Release\LogicaActividades.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Actividades\Logica\bin\Release\LogicaActividades.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Actividades\Logica\bin\Release\LogicaActividades.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Actividades\Logica\obj\Release\LogicaActividades.Resources.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Actividades\Logica\obj\Release\LogicaActividades.vbproj.GenerateResource.Cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Actividades\Logica\obj\Release\LogicaActividades.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Actividades\Logica\obj\Release\LogicaActividades.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Actividades\Logica\obj\Release\LogicaActividades.pdb
