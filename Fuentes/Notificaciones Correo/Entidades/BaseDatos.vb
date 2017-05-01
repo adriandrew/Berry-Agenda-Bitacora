@@ -47,7 +47,7 @@ Public Module BaseDatos
 
     Public Sub AbrirConexionPrincipal()
 
-        BaseDatos.ECadenaConexionPrincipal = String.Format("Data Source={0};", BaseDatos.ECadenaConexionPrincipal)
+        BaseDatos.ECadenaConexionPrincipal = String.Format("Data Source={0};Password={1}", BaseDatos.ECadenaConexionPrincipal, "@berry2017") ' Contraseña fija.
         conexionPrincipal.ConnectionString = BaseDatos.ECadenaConexionPrincipal
 
     End Sub

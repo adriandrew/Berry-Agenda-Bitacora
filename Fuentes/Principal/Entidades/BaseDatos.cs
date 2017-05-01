@@ -46,7 +46,7 @@ namespace Entidades
         { 
 
             //this.cadenaConexionPrincipal = string.Format("Data Source=.\\SQLEXPRESS;AttachDbFilename={0};Integrated Security=True;Connect Timeout=1", this.cadenaConexionPrincipal); Es para los que sean mdf, que se necesiten adjuntar.
-            this.cadenaConexionPrincipal = string.Format("Data Source={0};", this.cadenaConexionPrincipal); 
+            this.cadenaConexionPrincipal = string.Format("Data Source={0};Password={1}", this.cadenaConexionPrincipal, "@berry2017"); // Contraseña fija.
             conexionPrincipal.ConnectionString = this.cadenaConexionPrincipal; 
 
         }

@@ -41,6 +41,7 @@
             this.picUsuario = new System.Windows.Forms.PictureBox();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.pnlPie = new System.Windows.Forms.Panel();
+            this.btnAyuda = new System.Windows.Forms.Button();
             this.lblDescripcionTooltip = new System.Windows.Forms.Label();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnCambiarEmpresa = new System.Windows.Forms.Button();
@@ -50,12 +51,15 @@
             this.lblEncabezadoEmpresa = new System.Windows.Forms.Label();
             this.lblEncabezadoPrograma = new System.Windows.Forms.Label();
             this.temporizador = new System.Windows.Forms.Timer(this.components);
-            this.btnAyuda = new System.Windows.Forms.Button();
+            this.chkMostrarNotificaciones = new System.Windows.Forms.CheckBox();
+            this.pnlOpciones = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.pnlContenido.SuspendLayout();
             this.pnlIniciarSesion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUsuario)).BeginInit();
             this.pnlPie.SuspendLayout();
             this.pnlEncabezado.SuspendLayout();
+            this.pnlOpciones.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlContenido
@@ -66,6 +70,7 @@
             this.pnlContenido.BackColor = System.Drawing.Color.DarkSlateGray;
             this.pnlContenido.BackgroundImage = global::PrincipalBerry.Properties.Resources.Logo3;
             this.pnlContenido.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pnlContenido.Controls.Add(this.pnlOpciones);
             this.pnlContenido.Controls.Add(this.pnlIniciarSesion);
             this.pnlContenido.Controls.Add(this.pnlMenu);
             this.pnlContenido.Controls.Add(this.pnlPie);
@@ -91,7 +96,7 @@
             this.pnlIniciarSesion.Controls.Add(this.lblUsuario);
             this.pnlIniciarSesion.Controls.Add(this.picUsuario);
             this.pnlIniciarSesion.ForeColor = System.Drawing.Color.Black;
-            this.pnlIniciarSesion.Location = new System.Drawing.Point(303, 225);
+            this.pnlIniciarSesion.Location = new System.Drawing.Point(310, 225);
             this.pnlIniciarSesion.Name = "pnlIniciarSesion";
             this.pnlIniciarSesion.Size = new System.Drawing.Size(422, 206);
             this.pnlIniciarSesion.TabIndex = 6;
@@ -221,6 +226,25 @@
             this.pnlPie.TabIndex = 8;
             this.pnlPie.MouseHover += new System.EventHandler(this.pnlPie_MouseHover);
             // 
+            // btnAyuda
+            // 
+            this.btnAyuda.BackColor = System.Drawing.Color.White;
+            this.btnAyuda.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAyuda.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnAyuda.FlatAppearance.BorderSize = 3;
+            this.btnAyuda.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
+            this.btnAyuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAyuda.ForeColor = System.Drawing.Color.Black;
+            this.btnAyuda.Image = ((System.Drawing.Image)(resources.GetObject("btnAyuda.Image")));
+            this.btnAyuda.Location = new System.Drawing.Point(0, 0);
+            this.btnAyuda.Margin = new System.Windows.Forms.Padding(0);
+            this.btnAyuda.Name = "btnAyuda";
+            this.btnAyuda.Size = new System.Drawing.Size(60, 60);
+            this.btnAyuda.TabIndex = 5;
+            this.btnAyuda.UseVisualStyleBackColor = false;
+            this.btnAyuda.Click += new System.EventHandler(this.btnAyuda_Click);
+            this.btnAyuda.MouseHover += new System.EventHandler(this.btnAyuda_MouseHover);
+            // 
             // lblDescripcionTooltip
             // 
             this.lblDescripcionTooltip.AutoSize = true;
@@ -330,24 +354,50 @@
             this.temporizador.Interval = 1;
             this.temporizador.Tick += new System.EventHandler(this.temporizador_Tick);
             // 
-            // btnAyuda
+            // chkMostrarNotificaciones
             // 
-            this.btnAyuda.BackColor = System.Drawing.Color.White;
-            this.btnAyuda.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAyuda.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnAyuda.FlatAppearance.BorderSize = 3;
-            this.btnAyuda.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine;
-            this.btnAyuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAyuda.ForeColor = System.Drawing.Color.Black;
-            this.btnAyuda.Image = ((System.Drawing.Image)(resources.GetObject("btnAyuda.Image")));
-            this.btnAyuda.Location = new System.Drawing.Point(0, 0);
-            this.btnAyuda.Margin = new System.Windows.Forms.Padding(0);
-            this.btnAyuda.Name = "btnAyuda";
-            this.btnAyuda.Size = new System.Drawing.Size(60, 60);
-            this.btnAyuda.TabIndex = 5;
-            this.btnAyuda.UseVisualStyleBackColor = false;
-            this.btnAyuda.Click += new System.EventHandler(this.btnAyuda_Click);
-            this.btnAyuda.MouseHover += new System.EventHandler(this.btnAyuda_MouseHover);
+            this.chkMostrarNotificaciones.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkMostrarNotificaciones.Checked = true;
+            this.chkMostrarNotificaciones.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMostrarNotificaciones.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chkMostrarNotificaciones.FlatAppearance.BorderSize = 2;
+            this.chkMostrarNotificaciones.FlatAppearance.CheckedBackColor = System.Drawing.Color.LimeGreen;
+            this.chkMostrarNotificaciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkMostrarNotificaciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkMostrarNotificaciones.ForeColor = System.Drawing.Color.White;
+            this.chkMostrarNotificaciones.Location = new System.Drawing.Point(124, 30);
+            this.chkMostrarNotificaciones.Name = "chkMostrarNotificaciones";
+            this.chkMostrarNotificaciones.Size = new System.Drawing.Size(45, 25);
+            this.chkMostrarNotificaciones.TabIndex = 25;
+            this.chkMostrarNotificaciones.Text = "SI";
+            this.chkMostrarNotificaciones.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkMostrarNotificaciones.UseVisualStyleBackColor = true;
+            this.chkMostrarNotificaciones.CheckedChanged += new System.EventHandler(this.chkMostrarNotificaciones_CheckedChanged);
+            // 
+            // pnlOpciones
+            // 
+            this.pnlOpciones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlOpciones.BackColor = System.Drawing.Color.Transparent;
+            this.pnlOpciones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlOpciones.Controls.Add(this.label1);
+            this.pnlOpciones.Controls.Add(this.chkMostrarNotificaciones);
+            this.pnlOpciones.Location = new System.Drawing.Point(854, 78);
+            this.pnlOpciones.Name = "pnlOpciones";
+            this.pnlOpciones.Size = new System.Drawing.Size(175, 489);
+            this.pnlOpciones.TabIndex = 26;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(6, 7);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(168, 16);
+            this.label1.TabIndex = 26;
+            this.label1.Text = "Mostrar notificaciones?";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Principal
             // 
@@ -371,6 +421,8 @@
             this.pnlPie.PerformLayout();
             this.pnlEncabezado.ResumeLayout(false);
             this.pnlEncabezado.PerformLayout();
+            this.pnlOpciones.ResumeLayout(false);
+            this.pnlOpciones.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -398,6 +450,9 @@
         internal System.Windows.Forms.Label lblDescripcionTooltip;
         internal System.Windows.Forms.Timer temporizador;
         private System.Windows.Forms.Button btnAyuda;
+        private System.Windows.Forms.Panel pnlOpciones;
+        internal System.Windows.Forms.CheckBox chkMostrarNotificaciones;
+        private System.Windows.Forms.Label label1;
 
     }
 }

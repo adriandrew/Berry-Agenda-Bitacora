@@ -36,6 +36,7 @@ namespace Escritorio
         public string nombrePrograma = string.Empty;
         public bool estaCerrando = false; public bool estaAbriendoPrograma = false;
         public int diasDePrueba = 15;
+        public Color colorCuadroOriginal = Color.Transparent;
 
         public bool esPrueba = false;
 
@@ -84,48 +85,60 @@ namespace Escritorio
         private void cuadro_Click(object sender, EventArgs e)
         {
 
-            string nombre = ((Panel)sender).Name;
-            string[] nombres = nombre.Split('_');
-            int idModulo = Convert.ToInt32(nombres[1]);
-            int idPrograma = Convert.ToInt32(nombres[2]);
-            bool bloqueado = ValidarAccesso(idModulo, idPrograma);
-            if (bloqueado)
-            {
-                Panel objetoPanel = new Panel();
-                objetoPanel = (Panel)(pnlMenu.Controls[nombre]);
-                objetoPanel.Enabled = false;
-                MessageBox.Show("No tienes permisos para acceder a este programa.", "No permitido.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
-            {
-                List<Entidades.Modulos> lista = new List<Entidades.Modulos>();
-                modulos.Id = this.idModuloSesion;
-                lista = modulos.ObtenerListadoPorId();
-                string nombreModulo = lista[0].Prefijo;
-                string nombrePrograma = nombreModulo + idPrograma.ToString().PadLeft(2, '0');
-                this.estaAbriendoPrograma = true;
-                AbrirPrograma(nombrePrograma, true);
-            }
+            ValidarAbrirPrograma(sender);
              
         }
 
-        private void cuadro_MouseHover(object sender, EventArgs e)
+        private void cuadro_MouseEnter(object sender, EventArgs e)
         {
-             
-            string nombre = ((Panel)sender).Name;
-            Panel objetoPanel = new Panel();
-            objetoPanel = (Panel)(pnlMenu.Controls[nombre]);
-            objetoPanel.BorderStyle = BorderStyle.Fixed3D;
-            
+
+            EventoRatonEncimaCuadro(sender);
+
         }
 
         private void cuadro_MouseLeave(object sender, EventArgs e)
         {
+
+            EventoRatonDejandoCuadro(sender);
              
-            string nombre = ((Panel)sender).Name;
+        }
+
+        private void etiquetaNombre_Click(object sender, EventArgs e)
+        {
+
+            Label objetoEtiqueta = new Label();
+            objetoEtiqueta = (Label)sender;
+            Control objetoControl = new Control();
+            objetoControl = objetoEtiqueta.Parent;
             Panel objetoPanel = new Panel();
-            objetoPanel = (Panel)(pnlMenu.Controls[nombre]);
-            objetoPanel.BorderStyle = BorderStyle.None;
+            objetoPanel = (Panel)objetoControl;
+            ValidarAbrirPrograma(objetoPanel);
+
+        }
+
+        private void etiquetaNombre_MouseEnter(object sender, EventArgs e)
+        {
+             
+            Label objetoEtiqueta = new Label(); 
+            objetoEtiqueta = (Label)sender;
+            Control objetoControl = new Control();
+            objetoControl = objetoEtiqueta.Parent;
+            Panel objetoPanel = new Panel();
+            objetoPanel = (Panel)objetoControl;
+            EventoRatonEncimaCuadro(objetoPanel);
+
+        }
+
+        private void etiquetaNombre_MouseLeave(object sender, EventArgs e)
+        {
+
+            Label objetoEtiqueta = new Label();
+            objetoEtiqueta = (Label)sender;
+            Control objetoControl = new Control();
+            objetoControl = objetoEtiqueta.Parent;
+            Panel objetoPanel = new Panel();
+            objetoPanel = (Panel)objetoControl;
+            EventoRatonDejandoCuadro(objetoPanel);
 
         }
 
@@ -263,6 +276,20 @@ namespace Escritorio
 
         }
 
+        private void chkMostrarNotificaciones_CheckedChanged(object sender, EventArgs e)
+        {
+             
+            if (chkMostrarNotificaciones.Checked) 
+            { 
+                chkMostrarNotificaciones.Text = "SI";
+            }
+            else
+            {
+                chkMostrarNotificaciones.Text = "NO";
+            } 
+
+        }
+
         #endregion
 
         #region Métodos
@@ -356,6 +383,7 @@ namespace Escritorio
                 //pnlContenido.BackgroundImageLayout = ImageLayout.Stretch;
                 pnlMenu.Visible = false;
                 pnlIniciarSesion.Visible = true;
+                pnlOpciones.Visible = true;
                 txtContraseña.Text = string.Empty;
                 txtUsuario.Text = string.Empty;
                 txtUsuario.Focus();
@@ -387,6 +415,7 @@ namespace Escritorio
                 if (this.esInicioSesion)
                 {
                     pnlIniciarSesion.Visible = false; Application.DoEvents();
+                    pnlOpciones.Visible = false; Application.DoEvents();
                 }
                 else
                 { 
@@ -409,6 +438,7 @@ namespace Escritorio
                 if (this.esInicioSesion)
                 {
                     pnlIniciarSesion.Visible = true; Application.DoEvents();
+                    pnlOpciones.Visible = true; Application.DoEvents();
                 }
                 else 
                 { 
@@ -469,7 +499,7 @@ namespace Escritorio
                     string[] datos = usuarios.ObtenerPorNombre().Split('|');
                     if (this.txtContraseña.Text.Equals(datos[3]))
                     {
-                        PermitirAcceso(Convert.ToInt32(datos[0]), Convert.ToInt32(datos[1]), true);
+                        PermitirAcceso(Convert.ToInt32(datos[0]), Convert.ToInt32(datos[1]), chkMostrarNotificaciones.Checked);
                     }
                     else
                     {
@@ -500,6 +530,7 @@ namespace Escritorio
         {
 
             pnlIniciarSesion.Visible = false; Application.DoEvents();
+            pnlOpciones.Visible = false; Application.DoEvents();
             pnlMenu.Visible = true; Application.DoEvents();
             this.esInicioSesion = false;
             this.idEmpresaSesion = idEmpresa; //Convert.ToInt32(lista[0]);
@@ -511,7 +542,7 @@ namespace Escritorio
             CargarTitulosEmpresa();
             if (abrirNotificaciones){
                 CerrarPrograma("NotificacionesPantalla");
-                System.Threading.Thread.Sleep(1000);
+                System.Threading.Thread.Sleep(500);
                 AbrirPrograma("NotificacionesPantalla", false);
             }
 
@@ -563,7 +594,7 @@ namespace Escritorio
 
             if (this.esPrueba)
             {
-                baseDatos.CadenaConexionPrincipal = "C:\\Berry-Bitacora\\Principal.sdf";
+                baseDatos.CadenaConexionPrincipal = "C:\\Berry Agenda-Bitacora\\Principal.sdf";
             }
             else
             {
@@ -586,10 +617,12 @@ namespace Escritorio
 	        } 
             if (this.esPrueba)
             {
-                baseDatos.CadenaConexionPrincipal = "C:\\Berry-Bitacora\\Principal.sdf";
-                Logica.DatosEmpresaPrincipal.instanciaSql = "ANDREW-MAC\\SQLEXPRESS";
+                baseDatos.CadenaConexionPrincipal = "C:\\Berry Agenda-Bitacora\\Principal.sdf";
+                //Logica.DatosEmpresaPrincipal.instanciaSql = "ANDREW-MAC\\SQLEXPRESS";
+                Logica.DatosEmpresaPrincipal.instanciaSql = "BERRY1-DELL\\SQLEXPRESS2008";
                 Logica.DatosEmpresaPrincipal.usuarioSql = "AdminBerry";
-                Logica.DatosEmpresaPrincipal.contrasenaSql = "@berry";
+                //Logica.DatosEmpresaPrincipal.contrasenaSql = "@berry";
+                Logica.DatosEmpresaPrincipal.contrasenaSql = "@berry2017";
                 Logica.DatosEmpresaPrincipal.idEmpresa = 1; 
                 ConfigurarConexionPrincipal(); 
                 //string[] activa = InstanciaSql().Split('|'); ' Es para obtener las instancias sql. Nunca se usó ya que no es lo correcto.
@@ -725,6 +758,59 @@ namespace Escritorio
 
         }
 
+        private void EventoRatonEncimaCuadro(object sender)
+        {
+
+            string nombre = ((Panel)sender).Name;
+            Panel objetoPanel = new Panel();
+            objetoPanel = (Panel)(pnlMenu.Controls[nombre]);
+            objetoPanel.BorderStyle = BorderStyle.Fixed3D;
+            this.colorCuadroOriginal = objetoPanel.BackColor;
+            objetoPanel.BackColor = ControlPaint.Dark(objetoPanel.BackColor); 
+
+        }
+
+        private void EventoRatonDejandoCuadro(object sender)
+        {
+             
+            string nombre = ((Panel)sender).Name;
+            Panel objetoPanel = new Panel();
+            objetoPanel = (Panel)(pnlMenu.Controls[nombre]);
+            objetoPanel.BorderStyle = BorderStyle.FixedSingle;
+            objetoPanel.BackColor = this.colorCuadroOriginal; 
+
+        }
+
+        private void ValidarAbrirPrograma(object sender)
+        {
+
+            this.Cursor = Cursors.WaitCursor;
+            string nombre = ((Panel)sender).Name;
+            string[] nombres = nombre.Split('_');
+            int idModulo = Convert.ToInt32(nombres[1]);
+            int idPrograma = Convert.ToInt32(nombres[2]);
+            bool bloqueado = ValidarAccesso(idModulo, idPrograma);
+            if (bloqueado)
+            {
+                Panel objetoPanel = new Panel();
+                objetoPanel = (Panel)(pnlMenu.Controls[nombre]);
+                objetoPanel.Enabled = false;
+                MessageBox.Show("No tienes permisos para acceder a este programa.", "No permitido.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                List<Entidades.Modulos> lista = new List<Entidades.Modulos>();
+                modulos.Id = this.idModuloSesion;
+                lista = modulos.ObtenerListadoPorId();
+                string nombreModulo = lista[0].Prefijo;
+                string nombrePrograma = nombreModulo + idPrograma.ToString().PadLeft(2, '0');
+                this.estaAbriendoPrograma = true;
+                AbrirPrograma(nombrePrograma, true);
+            }
+            this.Cursor = Cursors.Default;
+
+        }
+
         //private void ConsultarInformacionArea()
         //{
 
@@ -781,8 +867,8 @@ namespace Escritorio
                 cuadro.BackColor = ObtenerColorAleatorio();
                 System.Threading.Thread.Sleep(70);
                 cuadro.Name = "pnlPrograma_1_" + lista[indice-1].Id; // El 1 está fijo, pero corresponde al modulo.
-                cuadro.Click += new System.EventHandler(cuadro_Click); // Se genera el evento desde codigo.
-                cuadro.MouseHover += new System.EventHandler(cuadro_MouseHover); // Se genera el evento desde codigo.
+                cuadro.Click += new System.EventHandler(cuadro_Click); // Se genera el evento desde codigo. 
+                cuadro.MouseEnter += new System.EventHandler(cuadro_MouseEnter); // Se genera el evento desde codigo.
                 cuadro.MouseLeave += new System.EventHandler(cuadro_MouseLeave); // Se genera el evento desde codigo.
                 cuadro.Cursor = Cursors.Hand;
                 pnlMenu.Controls.Add(cuadro); Application.DoEvents();
@@ -804,6 +890,9 @@ namespace Escritorio
                 etiquetaNombre.Text = lista[indice-1].Nombre.ToString();
                 etiquetaNombre.ForeColor = Color.White;
                 etiquetaNombre.Font = new Font("Microsoft Sans Serif", 20, FontStyle.Regular);
+                etiquetaNombre.Click += new System.EventHandler(etiquetaNombre_Click); // Se genera el evento desde codigo.
+                etiquetaNombre.MouseEnter += new System.EventHandler(etiquetaNombre_MouseEnter); // Se genera el evento desde codigo.
+                etiquetaNombre.MouseLeave += new System.EventHandler(etiquetaNombre_MouseLeave); // Se genera el evento desde codigo.
                 etiquetaNombre.Cursor = Cursors.Hand;
                 cuadro.Controls.Add(etiquetaNombre); Application.DoEvents();
                 //// Se crean las etiquetas de las iniciales de los paneles.

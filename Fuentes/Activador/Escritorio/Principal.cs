@@ -422,10 +422,12 @@ namespace Escritorio
              
             if (this.esPrueba)
             {
-                baseDatos.CadenaConexionPrincipal = "C:\\Berry-Bitacora\\Principal.sdf";
-                Logica.DatosEmpresaPrincipal.instanciaSql = "ANDREW-MAC\\SQLEXPRESS";
+                baseDatos.CadenaConexionPrincipal = "C:\\Berry Andrew-Bitacora\\Principal.sdf";
+                //Logica.DatosEmpresaPrincipal.instanciaSql = "ANDREW-MAC\\SQLEXPRESS";
+                Logica.DatosEmpresaPrincipal.instanciaSql = "BERRY1-DELL\\SQLEXPRESS2008";
                 Logica.DatosEmpresaPrincipal.usuarioSql = "AdminBerry";
-                Logica.DatosEmpresaPrincipal.contrasenaSql = "@berry";
+                //Logica.DatosEmpresaPrincipal.contrasenaSql = "@berry";
+                Logica.DatosEmpresaPrincipal.contrasenaSql = "@berry2017";
                 Logica.DatosEmpresaPrincipal.idEmpresa = 1; 
                 ConfigurarConexionPrincipal(); 
             }

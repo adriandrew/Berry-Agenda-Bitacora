@@ -18,3 +18,7 @@ C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Mo
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Principal\Logica\bin\Release\Logica.pdb
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Principal\Logica\obj\Release\Logica.dll
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Principal\Logica\obj\Release\Logica.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Principal\Logica\bin\Release\Logica.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Principal\Logica\bin\Release\Logica.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Principal\Logica\obj\Release\Logica.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Principal\Logica\obj\Release\Logica.pdb

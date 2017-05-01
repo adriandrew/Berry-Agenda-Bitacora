@@ -90,7 +90,7 @@ Public Class Principal
     Private Sub ConfigurarConexionPrincipal()
 
         If Me.esPrueba Then
-            EntidadesNotificacionesPantalla.BaseDatos.ECadenaConexionPrincipal = "C:\Berry-Bitacora\Principal.sdf"
+            EntidadesNotificacionesPantalla.BaseDatos.ECadenaConexionPrincipal = "C:\Berry Agenda-Bitacora\Principal.sdf"
         Else
             Dim ruta As String = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase)
             ruta = ruta.Replace("file:\", Nothing)

@@ -96,9 +96,6 @@ C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Mo
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Escritorio\obj\x86\Release\NotificacionesPantalla.xml
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Escritorio\obj\x86\Release\NotificacionesPantalla.pdb
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Pantalla\Escritorio\bin\x86\Release\NotificacionesPantalla.exe.config
-C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Pantalla\Escritorio\obj\x86\Release\NotificacionesPantalla.exe
-C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Pantalla\Escritorio\obj\x86\Release\NotificacionesPantalla.xml
-C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Pantalla\Escritorio\obj\x86\Release\NotificacionesPantalla.pdb
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Pantalla\Escritorio\bin\x86\Release\NotificacionesPantalla.exe
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Pantalla\Escritorio\bin\x86\Release\NotificacionesPantalla.pdb
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Pantalla\Escritorio\bin\x86\Release\NotificacionesPantalla.xml
@@ -114,3 +111,6 @@ C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Pant
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Pantalla\Escritorio\obj\x86\Release\NotificacionesPantalla.Principal.resources
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Pantalla\Escritorio\obj\x86\Release\Escritorio.vbproj.GenerateResource.Cache
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Pantalla\Escritorio\obj\x86\Release\NotificacionesPantalla.exe.licenses
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Pantalla\Escritorio\obj\x86\Release\NotificacionesPantalla.exe
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Pantalla\Escritorio\obj\x86\Release\NotificacionesPantalla.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Pantalla\Escritorio\obj\x86\Release\NotificacionesPantalla.pdb
