@@ -9,7 +9,7 @@ Public Class Principal
     Dim empresas As New EntidadesNotificacionesPantalla.Empresas()
     Dim usuarios As New EntidadesNotificacionesPantalla.Usuarios()
     Dim areas As New EntidadesNotificacionesPantalla.Areas()
-    Dim registro As New EntidadesNotificacionesPantalla.Registro()
+    Dim registros As New EntidadesNotificacionesPantalla.Registros()
     Dim notificaciones As New EntidadesNotificacionesPantalla.Notificaciones
     Dim actividades As New EntidadesNotificacionesPantalla.Actividades
     Dim actividadesExternas As New EntidadesNotificacionesPantalla.ActividadesExternas
@@ -89,7 +89,7 @@ Public Class Principal
 
     Private Sub ConfigurarConexionPrincipal()
 
-        If Me.esPrueba Then
+        If (Me.esPrueba) Then
             EntidadesNotificacionesPantalla.BaseDatos.ECadenaConexionPrincipal = "C:\Berry Agenda-Bitacora\Principal.sdf"
         Else
             Dim ruta As String = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase)
@@ -117,9 +117,12 @@ Public Class Principal
         Else
             'baseDatos.CadenaConexionInformacion = datosEmpresa.EDirectorio & "\\Agenda.mdf"
             ' Si tiene parametros se toman de ahí.
-            If Me.tieneParametros Then
+            If (Me.tieneParametros) Then
                 LogicaNotificacionesPantalla.DatosEmpresaPrincipal.ObtenerParametrosInformacionEmpresa()
-            Else ' Si no tiene parametros se consulta la empresa por defecto, despues de eso se consulta el equipo, para saber que usuario es.
+                Me.datosEmpresa.ObtenerParametrosInformacionEmpresa()
+                Me.datosUsuario.ObtenerParametrosInformacionUsuario()
+                Me.datosArea.ObtenerParametrosInformacionArea()
+            Else ' Si no tiene parametros se consulta la empresa por defecto, despues de eso se consulta el equipo, para saber que usuario es, que está al final de este método.
                 ConfigurarConexionPrincipal()
                 ConsultarInformacionEmpresaPrincipal()
             End If
@@ -130,32 +133,13 @@ Public Class Principal
         EntidadesNotificacionesPantalla.BaseDatos.AbrirConexionInformacion()
         EntidadesNotificacionesPantalla.BaseDatos.AbrirConexionCatalogo()
         EntidadesNotificacionesPantalla.BaseDatos.AbrirConexionAgenda()
-        CargarParametros() 
-
-    End Sub
-
-    Private Sub CargarParametros()
-
-        If Me.esPrueba Then
-            'Me.datosUsuario.EId = 2
-            'Me.datosUsuario.ENombre = "Adrián Andrew"
-            'Me.datosUsuario.EIdArea = 2
-            ObtenerRegistroPorIdEmpresaYNombreEquipo()
-        Else
-            If Me.tieneParametros Then
-                Me.datosEmpresa.ObtenerParametrosInformacionEmpresa()
-                Me.datosUsuario.ObtenerParametrosInformacionUsuario()
-                Me.datosArea.ObtenerParametrosInformacionArea()
-                ' Se guarda registro de que equipos tienen notificaciones en pantalla.
-                GuardarEditarRegistro()
-            Else
-                ' Se obtienen registros de lo que corresponda a esta empresa y este nombre de equipo.
-                ObtenerRegistroPorIdEmpresaYNombreEquipo()
-            End If
+        If (Not Me.tieneParametros) Then 
+            ' Se obtienen registros de lo que corresponda a esta empresa y este nombre de equipo.
+            ObtenerRegistroPorIdEmpresaYNombreEquipo() 
         End If
 
     End Sub
-
+     
     Private Sub CargarEncabezados()
 
         lblEncabezadoPrograma.Text = "Programa: " + Me.Text
@@ -197,7 +181,7 @@ Public Class Principal
     End Sub
 
     Public Sub ConsultarInformacionUsuario(ByVal idEmpresa As Integer, ByVal idUsuario As Integer)
-         
+
         usuarios.EIdEmpresa = idEmpresa
         usuarios.EId = idUsuario
         Dim datos As New List(Of EntidadesNotificacionesPantalla.Usuarios)
@@ -222,37 +206,14 @@ Public Class Principal
 
     End Sub
 
-    Private Sub GuardarEditarRegistro()
-
-        Dim idEmpresa As Integer = Me.datosEmpresa.EId
-        Dim idUsuario As Integer = Me.datosUsuario.EId
-        Dim idArea As Integer = Me.datosArea.EId
-        Dim idModulo As Integer = 0 ' Aquí van a ir cuando sean distintos modulos.
-        Dim nombreEquipo As String = Me.nombreEsteEquipo
-        If (idEmpresa > 0) And (Not String.IsNullOrEmpty(nombreEquipo)) Then
-            registro.EIdEmpresa = idEmpresa
-            registro.EIdArea = idArea
-            registro.EIdUsuario = idUsuario
-            registro.EIdModulo = idModulo
-            registro.ENombreEquipo = nombreEquipo
-            Dim tieneRegistro As Boolean = registro.ValidarPorId()
-            If tieneRegistro Then
-                registro.Editar()
-            Else
-                registro.Guardar()
-            End If
-        End If
-
-    End Sub
-
     Private Sub ObtenerRegistroPorIdEmpresaYNombreEquipo()
 
-        Dim lista As New List(Of EntidadesNotificacionesPantalla.Registro)
-        registro.EIdEmpresa = LogicaNotificacionesPantalla.DatosEmpresaPrincipal.idEmpresa
-        registro.ENombreEquipo = Me.nombreEsteEquipo
-        lista = registro.ObtenerPorIdEmpresayNombreEquipo()
+        Dim lista As New List(Of EntidadesNotificacionesPantalla.Registros)
+        registros.EIdEmpresa = LogicaNotificacionesPantalla.DatosEmpresaPrincipal.idEmpresa
+        registros.ENombreEquipo = Me.nombreEsteEquipo
+        lista = registros.ObtenerPorIdEmpresayNombreEquipo()
         ConsultarInformacionEmpresa(LogicaNotificacionesPantalla.DatosEmpresaPrincipal.idEmpresa)
-        If lista.Count > 0 Then
+        If (lista.Count > 0) Then
             ConsultarInformacionUsuario(LogicaNotificacionesPantalla.DatosEmpresaPrincipal.idEmpresa, lista(0).EIdUsuario)
             ConsultarInformacionArea(lista(0).EIdArea)
         End If
@@ -359,7 +320,7 @@ Public Class Principal
 
     Public Sub GuardarVisto(ByVal esVisto As Boolean)
 
-        CargarParametros()
+        ObtenerRegistroPorIdEmpresaYNombreEquipo()
         notificaciones.EIdArea = Me.datosUsuario.EIdArea
         notificaciones.EIdUsuario = Me.datosUsuario.EId
         notificaciones.EEsVisto = esVisto

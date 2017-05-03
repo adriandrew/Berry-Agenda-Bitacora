@@ -1,12 +1,13 @@
 ﻿Imports System.Data.SqlClient
 
-Public Class Registro
+Public Class Registros
 
     Private idEmpresa As Integer
     Private idArea As Integer
     Private idUsuario As Integer
     Private idModulo As Integer
     Private nombreEquipo As String
+    Private esSesionIniciada As Boolean
 
     Public Property EIdEmpresa() As Integer
         Get
@@ -48,151 +49,36 @@ Public Class Registro
             nombreEquipo = value
         End Set
     End Property
+    Public Property EEsSesionIniciada() As Boolean
+        Get
+            Return esSesionIniciada
+        End Get
+        Set(value As Boolean)
+            esSesionIniciada = value
+        End Set
+    End Property
+      
+    Public Function ObtenerPorIdEmpresayNombreEquipo() As List(Of Registros)
 
-    Public Sub Guardar()
-
+        Dim lista As New List(Of Registros)
         Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionInformacion
-            comando.CommandText = "INSERT INTO Registro (IdEmpresa, IdArea, IdUsuario, IdModulo, NombreEquipo) VALUES (@idEmpresa, @idArea, @idUsuario, @idModulo, @nombreEquipo)"
-            comando.Parameters.AddWithValue("@idEmpresa", Me.EIdEmpresa)
-            comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
-            comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
-            comando.Parameters.AddWithValue("@idModulo", Me.EIdModulo)
-            comando.Parameters.AddWithValue("@nombreEquipo", Me.ENombreEquipo)
-            BaseDatos.conexionInformacion.Open()
-            comando.ExecuteNonQuery()
-            BaseDatos.conexionInformacion.Close()
-        Catch ex As Exception
-            Throw ex
-        Finally
-            BaseDatos.conexionInformacion.Close()
-        End Try
-
-    End Sub
-
-    Public Sub Editar()
-
-        Try
-            Dim comando As New SqlCommand()
-            comando.Connection = BaseDatos.conexionInformacion
-            comando.CommandText = "UPDATE Registro SET IdUsuario=@idUsuario, IdArea=@idArea, IdModulo=@idModulo WHERE IdEmpresa=@idEmpresa AND NombreEquipo=@nombreEquipo"
-            comando.Parameters.AddWithValue("@idEmpresa", Me.EIdEmpresa)
-            comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
-            comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
-            comando.Parameters.AddWithValue("@idModulo", Me.EIdModulo)
-            comando.Parameters.AddWithValue("@nombreEquipo", Me.ENombreEquipo)
-            BaseDatos.conexionInformacion.Open()
-            comando.ExecuteNonQuery()
-            BaseDatos.conexionInformacion.Close()
-        Catch ex As Exception
-            Throw ex
-        Finally
-            BaseDatos.conexionInformacion.Close()
-        End Try
-
-    End Sub
-
-    Public Sub Eliminar()
-
-        Try
-            Dim comando As New SqlCommand()
-            comando.Connection = BaseDatos.conexionInformacion
-            comando.CommandText = "DELETE FROM Registro WHERE IdEmpresa=@idEmpresa AND NombreEquipo=@nombreEquipo"
-            comando.Parameters.AddWithValue("@idEmpresa", Me.EIdEmpresa)
-            comando.Parameters.AddWithValue("@nombreEquipo", Me.ENombreEquipo)
-            BaseDatos.conexionInformacion.Open()
-            comando.ExecuteNonQuery()
-            BaseDatos.conexionInformacion.Close()
-        Catch ex As Exception
-            Throw ex
-        Finally
-            BaseDatos.conexionInformacion.Close()
-        End Try
-
-    End Sub
-
-    Public Function ValidarPorId() As Boolean
-
-        Try
-            Dim resultado As Boolean = False
-            Dim comando As New SqlCommand()
-            comando.Connection = BaseDatos.conexionInformacion
-            comando.CommandText = "SELECT * FROM Registro WHERE IdEmpresa=@idEmpresa AND NombreEquipo=@nombreEquipo"
+            comando.CommandText = "SELECT * FROM Registros WHERE IdEmpresa=@idEmpresa AND NombreEquipo=@nombreEquipo"
             comando.Parameters.AddWithValue("@idEmpresa", Me.EIdEmpresa)
             comando.Parameters.AddWithValue("@nombreEquipo", Me.ENombreEquipo)
             BaseDatos.conexionInformacion.Open()
             Dim dataReader As SqlDataReader
             dataReader = comando.ExecuteReader()
-            If (dataReader.HasRows) Then
-                resultado = True
-            Else
-                resultado = False
-            End If
-            BaseDatos.conexionInformacion.Close()
-            Return resultado
-        Catch ex As Exception
-            Throw ex
-        Finally
-            BaseDatos.conexionInformacion.Close()
-        End Try
-
-    End Function
-
-    Public Function ObtenerPorIdEmpresaIdUsuarioyNombreEquipo() As List(Of Registro)
-
-        Dim lista As New List(Of Registro)
-        Try
-            Dim comando As New SqlCommand()
-            comando.Connection = BaseDatos.conexionInformacion
-            comando.CommandText = "SELECT * FROM Registro WHERE IdEmpresa=@idEmpresa AND IdUsuario=@idUsuario AND NombreEquipo=@nombreEquipo"
-            comando.Parameters.AddWithValue("@idEmpresa", Me.EIdEmpresa)
-            comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
-            comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
-            comando.Parameters.AddWithValue("@nombreEquipo", Me.ENombreEquipo)
-            BaseDatos.conexionInformacion.Open()
-            Dim dataReader As SqlDataReader
-            dataReader = comando.ExecuteReader()
-            Dim registro As New Registro
+            Dim registro As New Registros
             While (dataReader.Read())
-                registro = New Registro()
-                registro.idEmpresa = Convert.ToInt32(dataReader("IdEmpresa"))
-                registro.idArea = Convert.ToInt32(dataReader("IdArea"))
-                registro.idUsuario = Convert.ToInt32(dataReader("IdUsuario"))
-                registro.idModulo = Convert.ToInt32(dataReader("IdModulo"))
+                registro = New Registros()
+                registro.idEmpresa = Convert.ToInt32(dataReader("IdEmpresa").ToString())
+                registro.idArea = Convert.ToInt32(dataReader("IdArea").ToString())
+                registro.idUsuario = Convert.ToInt32(dataReader("IdUsuario").ToString())
+                registro.idModulo = Convert.ToInt32(dataReader("IdModulo").ToString())
                 registro.nombreEquipo = dataReader("NombreEquipo").ToString()
-                lista.Add(registro)
-            End While
-            BaseDatos.conexionInformacion.Close()
-            Return lista
-        Catch ex As Exception
-            Throw ex
-        Finally
-            BaseDatos.conexionInformacion.Close()
-        End Try
-
-    End Function
-
-    Public Function ObtenerPorIdEmpresayNombreEquipo() As List(Of Registro)
-
-        Dim lista As New List(Of Registro)
-        Try
-            Dim comando As New SqlCommand()
-            comando.Connection = BaseDatos.conexionInformacion
-            comando.CommandText = "SELECT * FROM Registro WHERE IdEmpresa=@idEmpresa AND NombreEquipo=@nombreEquipo"
-            comando.Parameters.AddWithValue("@idEmpresa", Me.EIdEmpresa) 
-            comando.Parameters.AddWithValue("@nombreEquipo", Me.ENombreEquipo)
-            BaseDatos.conexionInformacion.Open()
-            Dim dataReader As SqlDataReader
-            dataReader = comando.ExecuteReader()
-            Dim registro As New Registro
-            While (dataReader.Read())
-                registro = New Registro()
-                registro.idEmpresa = Convert.ToInt32(dataReader("IdEmpresa"))
-                registro.idArea = Convert.ToInt32(dataReader("IdArea"))
-                registro.idUsuario = Convert.ToInt32(dataReader("IdUsuario"))
-                registro.idModulo = Convert.ToInt32(dataReader("IdModulo"))
-                registro.nombreEquipo = dataReader("NombreEquipo").ToString()
+                registro.esSesionIniciada = Convert.ToBoolean(dataReader("EsSesionIniciada").ToString())
                 lista.Add(registro)
             End While
             BaseDatos.conexionInformacion.Close()

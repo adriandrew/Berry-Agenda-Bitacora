@@ -128,3 +128,7 @@ C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Reporte de Activida
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Reporte de Actividades\Escritorio\obj\x86\Release\ACT05.exe
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Reporte de Actividades\Escritorio\obj\x86\Release\ACT05.xml
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Reporte de Actividades\Escritorio\obj\x86\Release\ACT05.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\bin\x86\Release\ACT05.exe.config
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\obj\x86\Release\ACT05.exe
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\obj\x86\Release\ACT05.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\obj\x86\Release\ACT05.pdb

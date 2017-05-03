@@ -96,3 +96,7 @@ C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Actividades\Escrito
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Actividades\Escritorio\obj\x86\Release\ACT04.exe
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Actividades\Escritorio\obj\x86\Release\ACT04.xml
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Actividades\Escritorio\obj\x86\Release\ACT04.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Actividades\Escritorio\bin\x86\Release\ACT04.exe.config
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Actividades\Escritorio\obj\x86\Release\ACT04.exe
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Actividades\Escritorio\obj\x86\Release\ACT04.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Actividades\Escritorio\obj\x86\Release\ACT04.pdb

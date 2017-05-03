@@ -110,3 +110,7 @@ C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Escr
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Escritorio\obj\x86\Release\ACT03.exe
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Escritorio\obj\x86\Release\ACT03.xml
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Escritorio\obj\x86\Release\ACT03.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Autorizaciones\Escritorio\bin\x86\Release\ACT03.exe.config
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Autorizaciones\Escritorio\obj\x86\Release\ACT03.exe
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Autorizaciones\Escritorio\obj\x86\Release\ACT03.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Autorizaciones\Escritorio\obj\x86\Release\ACT03.pdb

@@ -22,3 +22,15 @@ C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Pant
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Pantalla\Entidades\obj\Release\EntidadesNotificacionesPantalla.dll
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Pantalla\Entidades\obj\Release\EntidadesNotificacionesPantalla.xml
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Notificaciones Pantalla\Entidades\obj\Release\EntidadesNotificacionesPantalla.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\bin\Release\EntidadesNotificacionesPantalla.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\bin\Release\EntidadesNotificacionesPantalla.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\bin\Release\EntidadesNotificacionesPantalla.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\bin\Release\LogicaNotificacionesPantalla.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\bin\Release\LogicaNotificacionesPantalla.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\bin\Release\LogicaNotificacionesPantalla.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\obj\Release\EntidadesNotificacionesPantalla.vbprojResolveAssemblyReference.cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\obj\Release\EntidadesNotificacionesPantalla.Resources.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\obj\Release\EntidadesNotificacionesPantalla.vbproj.GenerateResource.Cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\obj\Release\EntidadesNotificacionesPantalla.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\obj\Release\EntidadesNotificacionesPantalla.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Entidades\obj\Release\EntidadesNotificacionesPantalla.pdb

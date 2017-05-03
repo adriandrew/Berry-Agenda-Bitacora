@@ -128,3 +128,7 @@ C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Configuracion Corre
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Configuracion Correo\Escritorio\obj\x86\Release\ACT02.exe
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Configuracion Correo\Escritorio\obj\x86\Release\ACT02.xml
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Configuracion Correo\Escritorio\obj\x86\Release\ACT02.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\bin\x86\Release\ACT02.exe.config
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\obj\x86\Release\ACT02.exe
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\obj\x86\Release\ACT02.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Configuracion Correo\Escritorio\obj\x86\Release\ACT02.pdb

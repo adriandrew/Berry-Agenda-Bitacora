@@ -22,3 +22,8 @@ C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Principal\Logica\bi
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Principal\Logica\bin\Release\Logica.pdb
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Principal\Logica\obj\Release\Logica.dll
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Principal\Logica\obj\Release\Logica.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Principal\Logica\bin\Release\Logica.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Principal\Logica\bin\Release\Logica.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Principal\Logica\obj\Release\Logica.csprojResolveAssemblyReference.cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Principal\Logica\obj\Release\Logica.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Principal\Logica\obj\Release\Logica.pdb

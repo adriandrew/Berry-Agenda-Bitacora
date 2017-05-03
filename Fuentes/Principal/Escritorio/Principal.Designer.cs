@@ -31,6 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Principal));
             this.pnlContenido = new System.Windows.Forms.Panel();
+            this.pnlOpciones = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.chkMostrarNotificaciones = new System.Windows.Forms.CheckBox();
             this.pnlIniciarSesion = new System.Windows.Forms.Panel();
             this.txtContraseña = new System.Windows.Forms.TextBox();
             this.txtUsuario = new System.Windows.Forms.TextBox();
@@ -51,15 +54,12 @@
             this.lblEncabezadoEmpresa = new System.Windows.Forms.Label();
             this.lblEncabezadoPrograma = new System.Windows.Forms.Label();
             this.temporizador = new System.Windows.Forms.Timer(this.components);
-            this.chkMostrarNotificaciones = new System.Windows.Forms.CheckBox();
-            this.pnlOpciones = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.pnlContenido.SuspendLayout();
+            this.pnlOpciones.SuspendLayout();
             this.pnlIniciarSesion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUsuario)).BeginInit();
             this.pnlPie.SuspendLayout();
             this.pnlEncabezado.SuspendLayout();
-            this.pnlOpciones.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlContenido
@@ -81,6 +81,51 @@
             this.pnlContenido.Size = new System.Drawing.Size(1035, 633);
             this.pnlContenido.TabIndex = 1;
             this.pnlContenido.MouseHover += new System.EventHandler(this.pnlContenido_MouseHover);
+            // 
+            // pnlOpciones
+            // 
+            this.pnlOpciones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlOpciones.BackColor = System.Drawing.Color.Transparent;
+            this.pnlOpciones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlOpciones.Controls.Add(this.label1);
+            this.pnlOpciones.Controls.Add(this.chkMostrarNotificaciones);
+            this.pnlOpciones.Location = new System.Drawing.Point(854, 78);
+            this.pnlOpciones.Name = "pnlOpciones";
+            this.pnlOpciones.Size = new System.Drawing.Size(175, 489);
+            this.pnlOpciones.TabIndex = 26;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(6, 7);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(168, 16);
+            this.label1.TabIndex = 26;
+            this.label1.Text = "Mostrar notificaciones?";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // chkMostrarNotificaciones
+            // 
+            this.chkMostrarNotificaciones.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkMostrarNotificaciones.Checked = true;
+            this.chkMostrarNotificaciones.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMostrarNotificaciones.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chkMostrarNotificaciones.FlatAppearance.BorderSize = 2;
+            this.chkMostrarNotificaciones.FlatAppearance.CheckedBackColor = System.Drawing.Color.LimeGreen;
+            this.chkMostrarNotificaciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkMostrarNotificaciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkMostrarNotificaciones.ForeColor = System.Drawing.Color.White;
+            this.chkMostrarNotificaciones.Location = new System.Drawing.Point(124, 30);
+            this.chkMostrarNotificaciones.Name = "chkMostrarNotificaciones";
+            this.chkMostrarNotificaciones.Size = new System.Drawing.Size(45, 25);
+            this.chkMostrarNotificaciones.TabIndex = 25;
+            this.chkMostrarNotificaciones.Text = "SI";
+            this.chkMostrarNotificaciones.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkMostrarNotificaciones.UseVisualStyleBackColor = true;
+            this.chkMostrarNotificaciones.CheckedChanged += new System.EventHandler(this.chkMostrarNotificaciones_CheckedChanged);
             // 
             // pnlIniciarSesion
             // 
@@ -354,51 +399,6 @@
             this.temporizador.Interval = 1;
             this.temporizador.Tick += new System.EventHandler(this.temporizador_Tick);
             // 
-            // chkMostrarNotificaciones
-            // 
-            this.chkMostrarNotificaciones.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkMostrarNotificaciones.Checked = true;
-            this.chkMostrarNotificaciones.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMostrarNotificaciones.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chkMostrarNotificaciones.FlatAppearance.BorderSize = 2;
-            this.chkMostrarNotificaciones.FlatAppearance.CheckedBackColor = System.Drawing.Color.LimeGreen;
-            this.chkMostrarNotificaciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkMostrarNotificaciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkMostrarNotificaciones.ForeColor = System.Drawing.Color.White;
-            this.chkMostrarNotificaciones.Location = new System.Drawing.Point(124, 30);
-            this.chkMostrarNotificaciones.Name = "chkMostrarNotificaciones";
-            this.chkMostrarNotificaciones.Size = new System.Drawing.Size(45, 25);
-            this.chkMostrarNotificaciones.TabIndex = 25;
-            this.chkMostrarNotificaciones.Text = "SI";
-            this.chkMostrarNotificaciones.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkMostrarNotificaciones.UseVisualStyleBackColor = true;
-            this.chkMostrarNotificaciones.CheckedChanged += new System.EventHandler(this.chkMostrarNotificaciones_CheckedChanged);
-            // 
-            // pnlOpciones
-            // 
-            this.pnlOpciones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlOpciones.BackColor = System.Drawing.Color.Transparent;
-            this.pnlOpciones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlOpciones.Controls.Add(this.label1);
-            this.pnlOpciones.Controls.Add(this.chkMostrarNotificaciones);
-            this.pnlOpciones.Location = new System.Drawing.Point(854, 78);
-            this.pnlOpciones.Name = "pnlOpciones";
-            this.pnlOpciones.Size = new System.Drawing.Size(175, 489);
-            this.pnlOpciones.TabIndex = 26;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(6, 7);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(168, 16);
-            this.label1.TabIndex = 26;
-            this.label1.Text = "Mostrar notificaciones?";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -408,12 +408,14 @@
             this.Controls.Add(this.pnlContenido);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Principal";
-            this.Text = "Iniciar Sesión y Menú";
+            this.Text = "Iniciar Sesión y Menú"; 
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Principal_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Principal_FormClosed);
             this.Load += new System.EventHandler(this.Principal_Load);
             this.Shown += new System.EventHandler(this.Principal_Shown);
             this.pnlContenido.ResumeLayout(false);
+            this.pnlOpciones.ResumeLayout(false);
+            this.pnlOpciones.PerformLayout();
             this.pnlIniciarSesion.ResumeLayout(false);
             this.pnlIniciarSesion.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUsuario)).EndInit();
@@ -421,8 +423,6 @@
             this.pnlPie.PerformLayout();
             this.pnlEncabezado.ResumeLayout(false);
             this.pnlEncabezado.PerformLayout();
-            this.pnlOpciones.ResumeLayout(false);
-            this.pnlOpciones.PerformLayout();
             this.ResumeLayout(false);
 
         }

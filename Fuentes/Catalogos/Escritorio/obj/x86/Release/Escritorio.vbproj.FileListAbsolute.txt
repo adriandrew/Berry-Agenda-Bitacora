@@ -70,3 +70,7 @@ C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Catalogos\Escritori
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Catalogos\Escritorio\obj\x86\Release\ACT01.exe
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Catalogos\Escritorio\obj\x86\Release\ACT01.xml
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Catalogos\Escritorio\obj\x86\Release\ACT01.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\bin\x86\Release\ACT01.exe.config
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\obj\x86\Release\ACT01.exe
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\obj\x86\Release\ACT01.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\obj\x86\Release\ACT01.pdb

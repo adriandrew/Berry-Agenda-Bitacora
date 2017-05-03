@@ -9,8 +9,7 @@ Public Class Principal
     Dim empresas As New EntidadesNotificacionesCorreo.Empresas()
     Dim actividades As New EntidadesNotificacionesCorreo.Actividades
     Dim actividadesExternas As New EntidadesNotificacionesCorreo.ActividadesExternas
-    Dim usuarios As New EntidadesNotificacionesCorreo.Usuarios
-    Dim notificaciones As New EntidadesNotificacionesCorreo.Notificaciones
+    Dim usuarios As New EntidadesNotificacionesCorreo.Usuarios 
     Dim configuracionProveedoresCorreo As New EntidadesNotificacionesCorreo.ConfiguracionProveedoresCorreo
     Dim correos As New EntidadesNotificacionesCorreo.Correos
     Public datosEmpresa As New LogicaNotificacionesCorreo.DatosEmpresa()

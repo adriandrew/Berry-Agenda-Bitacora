@@ -203,9 +203,10 @@ namespace Entidades
 
         }
 
-        public string ObtenerPorNombre()
+        public List<Usuarios> ObtenerPorNombre()
         {
 
+            List<Usuarios> lista = new List<Usuarios>();
             try
             {
                 SqlCommand comando = new SqlCommand();
@@ -215,22 +216,21 @@ namespace Entidades
                 comando.Parameters.AddWithValue("@nombre", this.Nombre);
                 BaseDatos.conexionInformacion.Open();
                 SqlDataReader dataReader = comando.ExecuteReader();
+                Usuarios usuarios = default(Usuarios);
                 while (dataReader.Read())
                 {
-                    this.IdEmpresa = Convert.ToInt32(dataReader["idEmpresa"].ToString());
-                    this.Id = Convert.ToInt32(dataReader["id"].ToString());
-                    this.Nombre = dataReader["nombre"].ToString();
-                    this.Contrasena = dataReader["contrasena"].ToString();
-                    this.Nivel = Convert.ToInt32(dataReader["nivel"].ToString());
-                    this.AccesoTotal = Convert.ToBoolean(dataReader["accesoTotal"].ToString());
-                    this.IdArea = Convert.ToInt32(dataReader["idArea"].ToString());
+                    usuarios = new Usuarios();
+                    usuarios.idEmpresa = Convert.ToInt32(dataReader["idEmpresa"].ToString());
+                    usuarios.id = Convert.ToInt32(dataReader["id"].ToString());
+                    usuarios.nombre = dataReader["nombre"].ToString();
+                    usuarios.contrasena = dataReader["contrasena"].ToString();
+                    usuarios.nivel = Convert.ToInt32(dataReader["nivel"].ToString());
+                    usuarios.accesoTotal = Convert.ToBoolean(dataReader["accesoTotal"].ToString());
+                    usuarios.idArea = Convert.ToInt32(dataReader["idArea"].ToString());
+                    lista.Add(usuarios);
                 }
-                if (!dataReader.HasRows)
-                {
-                    return string.Empty + "|" + string.Empty + "|" + string.Empty + "|" + string.Empty + "|" + string.Empty + "|" + string.Empty + "|" + string.Empty;    
-                }
-                BaseDatos.conexionInformacion.Close();                
-                return this.IdEmpresa + "|" + this.Id + "|" + this.Nombre + "|" + this.Contrasena + "|" + this.Nivel + "|" + this.IdArea;
+                BaseDatos.conexionInformacion.Close();
+                return lista;
             }
             catch (Exception ex)
             {
