@@ -130,6 +130,7 @@ Partial Class Listado
         Me.Opacity = 0.9R
         Me.Text = "Notificaciones - Listado de Actividades Vencidas "
         Me.TopMost = True
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.splitContenedor.ResumeLayout(False)
         Me.pnlMarcarVisto.ResumeLayout(False)
         Me.pnlMarcarVisto.PerformLayout()

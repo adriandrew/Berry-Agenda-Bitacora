@@ -72,11 +72,12 @@ Partial Class Principal
         '
         Me.pnlPie.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlPie.BackColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.pnlPie.BackColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(15, Byte), Integer))
         Me.pnlPie.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlPie.Controls.Add(Me.lblDescripcionTooltip)
         Me.pnlPie.Controls.Add(Me.btnSalir)
-        Me.pnlPie.Location = New System.Drawing.Point(0, 570)
+        Me.pnlPie.ForeColor = System.Drawing.Color.White
+        Me.pnlPie.Location = New System.Drawing.Point(0, 573)
         Me.pnlPie.Name = "pnlPie"
         Me.pnlPie.Size = New System.Drawing.Size(1035, 60)
         Me.pnlPie.TabIndex = 8
@@ -112,12 +113,13 @@ Partial Class Principal
         '
         Me.pnlEncabezado.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlEncabezado.BackColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.pnlEncabezado.BackColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(15, Byte), Integer))
         Me.pnlEncabezado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlEncabezado.Controls.Add(Me.lblEncabezadoArea)
         Me.pnlEncabezado.Controls.Add(Me.lblEncabezadoUsuario)
         Me.pnlEncabezado.Controls.Add(Me.lblEncabezadoEmpresa)
         Me.pnlEncabezado.Controls.Add(Me.lblEncabezadoPrograma)
+        Me.pnlEncabezado.ForeColor = System.Drawing.Color.White
         Me.pnlEncabezado.Location = New System.Drawing.Point(0, 0)
         Me.pnlEncabezado.Name = "pnlEncabezado"
         Me.pnlEncabezado.Size = New System.Drawing.Size(1035, 75)

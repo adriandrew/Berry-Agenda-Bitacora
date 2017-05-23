@@ -42,3 +42,15 @@ C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Enti
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Entidades\obj\Release\EntidadesAutorizaciones.dll
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Entidades\obj\Release\EntidadesAutorizaciones.xml
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Autorizaciones\Entidades\obj\Release\EntidadesAutorizaciones.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Autorizaciones\Entidades\bin\Release\EntidadesAutorizaciones.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Autorizaciones\Entidades\bin\Release\EntidadesAutorizaciones.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Autorizaciones\Entidades\bin\Release\EntidadesAutorizaciones.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Autorizaciones\Entidades\bin\Release\LogicaAutorizaciones.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Autorizaciones\Entidades\bin\Release\LogicaAutorizaciones.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Autorizaciones\Entidades\bin\Release\LogicaAutorizaciones.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Autorizaciones\Entidades\obj\Release\EntidadesAutorizaciones.vbprojResolveAssemblyReference.cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Autorizaciones\Entidades\obj\Release\EntidadesAutorizaciones.Resources.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Autorizaciones\Entidades\obj\Release\EntidadesAutorizaciones.vbproj.GenerateResource.Cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Autorizaciones\Entidades\obj\Release\EntidadesAutorizaciones.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Autorizaciones\Entidades\obj\Release\EntidadesAutorizaciones.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Autorizaciones\Entidades\obj\Release\EntidadesAutorizaciones.pdb

@@ -42,7 +42,7 @@ namespace Escritorio
         public Color colorCuadroOriginal = Color.Transparent;
         public string nombreEsteEquipo = System.Environment.MachineName;
 
-        public bool esPrueba = false;
+        public bool esDesarrollo = false;
 
         public Principal()
         {
@@ -58,16 +58,20 @@ namespace Escritorio
             AsignarTooltips();
             AsignarFocos();
             ConfigurarConexiones();
-            CargarEncabezados();
-            CargarTitulosEmpresa();
 
         }
 
         private void Principal_Shown(object sender, EventArgs e)
         {
 
+            this.Cursor = Cursors.WaitCursor;
+            this.Enabled = false;
+            CargarEncabezados();
+            CargarTitulosEmpresa();
             this.txtUsuario.Focus();
             VerificarLicencia();
+            this.Enabled = true;
+            this.Cursor = Cursors.Default;
 
         }
 
@@ -658,7 +662,7 @@ namespace Escritorio
         private void ConfigurarConexionPrincipal() 
         {
 
-            if (this.esPrueba)
+            if (this.esDesarrollo)
             {
                 baseDatos.CadenaConexionPrincipal = "C:\\Berry Agenda-Bitacora\\Principal.sdf";
             }
@@ -681,7 +685,7 @@ namespace Escritorio
             {
 		        this.tieneParametros = true;
 	        } 
-            if (this.esPrueba)
+            if (this.esDesarrollo)
             {
                 baseDatos.CadenaConexionPrincipal = "C:\\Berry Agenda-Bitacora\\Principal.sdf";
                 //Logica.DatosEmpresaPrincipal.instanciaSql = "ANDREW-MAC\\SQLEXPRESS";
@@ -1048,7 +1052,7 @@ namespace Escritorio
         {
 
             //this.SuspendLayout();
-            if (this.esPrueba)
+            if (this.esDesarrollo)
             {
                 return;
             }

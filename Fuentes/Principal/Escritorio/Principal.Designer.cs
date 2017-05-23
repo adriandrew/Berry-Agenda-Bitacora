@@ -259,12 +259,13 @@
             // 
             this.pnlPie.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlPie.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.pnlPie.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
             this.pnlPie.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlPie.Controls.Add(this.btnAyuda);
             this.pnlPie.Controls.Add(this.lblDescripcionTooltip);
             this.pnlPie.Controls.Add(this.btnSalir);
             this.pnlPie.Controls.Add(this.btnCambiarEmpresa);
+            this.pnlPie.ForeColor = System.Drawing.Color.White;
             this.pnlPie.Location = new System.Drawing.Point(0, 570);
             this.pnlPie.Name = "pnlPie";
             this.pnlPie.Size = new System.Drawing.Size(1035, 60);
@@ -340,12 +341,13 @@
             // 
             this.pnlEncabezado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlEncabezado.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.pnlEncabezado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
             this.pnlEncabezado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlEncabezado.Controls.Add(this.lblEncabezadoArea);
             this.pnlEncabezado.Controls.Add(this.lblEncabezadoUsuario);
             this.pnlEncabezado.Controls.Add(this.lblEncabezadoEmpresa);
             this.pnlEncabezado.Controls.Add(this.lblEncabezadoPrograma);
+            this.pnlEncabezado.ForeColor = System.Drawing.Color.White;
             this.pnlEncabezado.Location = new System.Drawing.Point(0, 0);
             this.pnlEncabezado.Name = "pnlEncabezado";
             this.pnlEncabezado.Size = new System.Drawing.Size(1035, 75);
@@ -408,7 +410,8 @@
             this.Controls.Add(this.pnlContenido);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Principal";
-            this.Text = "Iniciar Sesión y Menú"; 
+            this.Text = "Iniciar Sesión y Menú";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Principal_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Principal_FormClosed);
             this.Load += new System.EventHandler(this.Principal_Load);

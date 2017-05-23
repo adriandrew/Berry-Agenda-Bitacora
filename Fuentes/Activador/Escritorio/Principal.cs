@@ -30,7 +30,7 @@ namespace Escritorio
         public int diasDePrueba = 15;
         public bool estaMostrado = false;
 
-        public bool esPrueba = false;
+        public bool esDesarrollo = false;
 
         public Principal()
         {
@@ -403,9 +403,9 @@ namespace Escritorio
         private void ConfigurarConexionPrincipal() 
         {
 
-            if (this.esPrueba)
+            if (this.esDesarrollo)
             {
-                baseDatos.CadenaConexionPrincipal = "C:\\Berry-Bitacora\\Principal.sdf";
+                baseDatos.CadenaConexionPrincipal = "C:\\Berry Agenda-Bitacora\\Principal.sdf";
             }
             else
             {
@@ -420,9 +420,9 @@ namespace Escritorio
         private void ConfigurarConexiones() 
         { 
              
-            if (this.esPrueba)
+            if (this.esDesarrollo)
             {
-                baseDatos.CadenaConexionPrincipal = "C:\\Berry Andrew-Bitacora\\Principal.sdf";
+                baseDatos.CadenaConexionPrincipal = "C:\\Berry Agenda-Bitacora\\Principal.sdf";
                 //Logica.DatosEmpresaPrincipal.instanciaSql = "ANDREW-MAC\\SQLEXPRESS";
                 Logica.DatosEmpresaPrincipal.instanciaSql = "BERRY1-DELL\\SQLEXPRESS2008";
                 Logica.DatosEmpresaPrincipal.usuarioSql = "AdminBerry";

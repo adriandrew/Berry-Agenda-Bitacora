@@ -31,6 +31,7 @@ Partial Class Principal
         Me.spNotificaciones = New FarPoint.Win.Spread.FpSpread()
         Me.spNotificaciones_Sheet1 = New FarPoint.Win.Spread.SheetView()
         Me.pnlPie = New System.Windows.Forms.Panel()
+        Me.btnAyuda = New System.Windows.Forms.Button()
         Me.lblDescripcionTooltip = New System.Windows.Forms.Label()
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.pnlEncabezado = New System.Windows.Forms.Panel()
@@ -39,7 +40,6 @@ Partial Class Principal
         Me.lblEncabezadoEmpresa = New System.Windows.Forms.Label()
         Me.lblEncabezadoPrograma = New System.Windows.Forms.Label()
         Me.notificador = New System.Windows.Forms.NotifyIcon(Me.components)
-        Me.btnAyuda = New System.Windows.Forms.Button()
         Me.pnlContenido.SuspendLayout()
         Me.pnlCuerpo.SuspendLayout()
         CType(Me.spNotificaciones, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -143,15 +143,33 @@ Partial Class Principal
         '
         Me.pnlPie.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlPie.BackColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.pnlPie.BackColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(15, Byte), Integer))
         Me.pnlPie.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlPie.Controls.Add(Me.btnAyuda)
         Me.pnlPie.Controls.Add(Me.lblDescripcionTooltip)
         Me.pnlPie.Controls.Add(Me.btnSalir)
-        Me.pnlPie.Location = New System.Drawing.Point(0, 570)
+        Me.pnlPie.ForeColor = System.Drawing.Color.White
+        Me.pnlPie.Location = New System.Drawing.Point(0, 573)
         Me.pnlPie.Name = "pnlPie"
         Me.pnlPie.Size = New System.Drawing.Size(1035, 60)
         Me.pnlPie.TabIndex = 8
+        '
+        'btnAyuda
+        '
+        Me.btnAyuda.BackColor = System.Drawing.Color.White
+        Me.btnAyuda.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnAyuda.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.btnAyuda.FlatAppearance.BorderSize = 3
+        Me.btnAyuda.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine
+        Me.btnAyuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAyuda.ForeColor = System.Drawing.Color.Black
+        Me.btnAyuda.Image = CType(resources.GetObject("btnAyuda.Image"), System.Drawing.Image)
+        Me.btnAyuda.Location = New System.Drawing.Point(0, 0)
+        Me.btnAyuda.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnAyuda.Name = "btnAyuda"
+        Me.btnAyuda.Size = New System.Drawing.Size(60, 60)
+        Me.btnAyuda.TabIndex = 5
+        Me.btnAyuda.UseVisualStyleBackColor = False
         '
         'lblDescripcionTooltip
         '
@@ -185,12 +203,13 @@ Partial Class Principal
         '
         Me.pnlEncabezado.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlEncabezado.BackColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.pnlEncabezado.BackColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(15, Byte), Integer))
         Me.pnlEncabezado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlEncabezado.Controls.Add(Me.lblEncabezadoArea)
         Me.pnlEncabezado.Controls.Add(Me.lblEncabezadoUsuario)
         Me.pnlEncabezado.Controls.Add(Me.lblEncabezadoEmpresa)
         Me.pnlEncabezado.Controls.Add(Me.lblEncabezadoPrograma)
+        Me.pnlEncabezado.ForeColor = System.Drawing.Color.White
         Me.pnlEncabezado.Location = New System.Drawing.Point(0, 0)
         Me.pnlEncabezado.Name = "pnlEncabezado"
         Me.pnlEncabezado.Size = New System.Drawing.Size(1035, 75)
@@ -244,23 +263,6 @@ Partial Class Principal
         Me.notificador.Text = "Notificaciones"
         Me.notificador.Visible = True
         '
-        'btnAyuda
-        '
-        Me.btnAyuda.BackColor = System.Drawing.Color.White
-        Me.btnAyuda.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnAyuda.FlatAppearance.BorderColor = System.Drawing.Color.Black
-        Me.btnAyuda.FlatAppearance.BorderSize = 3
-        Me.btnAyuda.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine
-        Me.btnAyuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAyuda.ForeColor = System.Drawing.Color.Black
-        Me.btnAyuda.Image = CType(resources.GetObject("btnAyuda.Image"), System.Drawing.Image)
-        Me.btnAyuda.Location = New System.Drawing.Point(0, 0)
-        Me.btnAyuda.Margin = New System.Windows.Forms.Padding(0)
-        Me.btnAyuda.Name = "btnAyuda"
-        Me.btnAyuda.Size = New System.Drawing.Size(60, 60)
-        Me.btnAyuda.TabIndex = 5
-        Me.btnAyuda.UseVisualStyleBackColor = False
-        '
         'Principal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -271,6 +273,7 @@ Partial Class Principal
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Principal"
         Me.Text = "Notificaciones por Correo"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.pnlContenido.ResumeLayout(False)
         Me.pnlCuerpo.ResumeLayout(False)
         CType(Me.spNotificaciones, System.ComponentModel.ISupportInitialize).EndInit()

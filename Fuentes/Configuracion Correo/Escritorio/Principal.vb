@@ -12,7 +12,7 @@ Public Class Principal
     Public tieneDatos As Boolean = False
     Public estaCerrando As Boolean = False
 
-    Public esPrueba As Boolean = False
+    Public esDesarrollo As Boolean = False
 
 #Region "Eventos"
 
@@ -38,17 +38,21 @@ Public Class Principal
         Centrar()
         AsignarTooltips()
         ConfigurarConexiones()
-        CargarEncabezados()
-        CargarComboProveedores()
-        CargarConfiguracion()
 
     End Sub
 
     Private Sub Principal_Shown(sender As Object, e As EventArgs) Handles Me.Shown
 
+        Me.Cursor = Cursors.AppStarting
+        Me.Enabled = False
         If (Not ValidarAccesoTotal()) Then
             Salir()
-        End If 
+        End If
+        CargarEncabezados()
+        CargarComboProveedores()
+        CargarConfiguracion()
+        Me.Enabled = True
+        Me.Cursor = Cursors.Default
 
     End Sub
 
@@ -63,10 +67,10 @@ Public Class Principal
         Guardar()
 
     End Sub
-     
+
     Private Sub btnGuardar_MouseHover(sender As Object, e As EventArgs) Handles btnGuardar.MouseHover
 
-        AsignarTooltips("Guardar.") 
+        AsignarTooltips("Guardar.")
 
     End Sub
 
@@ -272,7 +276,7 @@ Public Class Principal
 
     Private Sub ConfigurarConexiones()
 
-        If (Me.esPrueba) Then
+        If (Me.esDesarrollo) Then
             'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf"
             Me.datosUsuario.EId = 1
             Me.datosUsuario.EIdArea = 1
@@ -316,7 +320,7 @@ Public Class Principal
 
     Private Sub AbrirPrograma(nombre As String, salir As Boolean)
 
-        If (Me.esPrueba) Then
+        If (Me.esDesarrollo) Then
             Exit Sub
         End If
         ejecutarProgramaPrincipal.UseShellExecute = True
@@ -356,7 +360,7 @@ Public Class Principal
     End Sub
 
     Private Sub Guardar()
-         
+
         Dim direccion As String = txtDireccion.Text
         Dim contrasena As String = txtContrasena.Text
         Dim asunto As String = txtAsunto.Text
@@ -374,7 +378,7 @@ Public Class Principal
                 configuracion.Guardar()
             End If
             MsgBox("Guardado finalizado.", MsgBoxStyle.ApplicationModal, "Finalizado.")
-            CargarConfiguracion() 
+            CargarConfiguracion()
         End If
 
     End Sub

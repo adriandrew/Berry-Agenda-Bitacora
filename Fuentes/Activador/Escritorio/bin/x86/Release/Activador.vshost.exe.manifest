@@ -58,14 +58,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Activador.exe" size="1198592">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Activador.exe" size="1198080">
       <assemblyIdentity name="Activador" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>cXvfmNHN4cNaVPy9Pp+tauZamcA=</dsig:DigestValue>
+        <dsig:DigestValue>E/qL8BSlBv6UrrURoEU5t9WutnY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

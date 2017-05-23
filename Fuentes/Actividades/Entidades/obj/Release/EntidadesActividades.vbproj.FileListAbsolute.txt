@@ -42,3 +42,15 @@ C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Actividades\Entidad
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Actividades\Entidades\obj\Release\EntidadesActividades.dll
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Actividades\Entidades\obj\Release\EntidadesActividades.xml
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Actividades\Entidades\obj\Release\EntidadesActividades.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Actividades\Entidades\bin\Release\EntidadesActividades.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Actividades\Entidades\bin\Release\EntidadesActividades.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Actividades\Entidades\bin\Release\EntidadesActividades.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Actividades\Entidades\bin\Release\LogicaActividades.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Actividades\Entidades\bin\Release\LogicaActividades.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Actividades\Entidades\bin\Release\LogicaActividades.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Actividades\Entidades\obj\Release\EntidadesActividades.vbprojResolveAssemblyReference.cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Actividades\Entidades\obj\Release\EntidadesActividades.Resources.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Actividades\Entidades\obj\Release\EntidadesActividades.vbproj.GenerateResource.Cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Actividades\Entidades\obj\Release\EntidadesActividades.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Actividades\Entidades\obj\Release\EntidadesActividades.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Actividades\Entidades\obj\Release\EntidadesActividades.pdb

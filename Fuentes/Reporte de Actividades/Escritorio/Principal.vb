@@ -18,18 +18,18 @@ Public Class Principal
     Public tipoFecha As New FarPoint.Win.Spread.CellType.DateTimeCellType()
     Public tipoBooleano As New FarPoint.Win.Spread.CellType.CheckBoxCellType()
     Public opcionSeleccionada As Integer = 0
-    Public pintado As Boolean = False
+    Public estaMostrado As Boolean = False
     Dim ejecutarProgramaPrincipal As New ProcessStartInfo()
     Dim rutaTemporal As String = CurDir() & "\ArchivosTemporales"
     Public estaCerrando As Boolean = False
 
-    Public esPrueba As Boolean = False
+    Public esDesarrollo As Boolean = False
 
 #Region "Eventos"
 
     Private Sub Principal_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
 
-        Me.Cursor = Cursors.WaitCursor 
+        Me.Cursor = Cursors.WaitCursor
         EliminarArchivosTemporales()
         Dim nombrePrograma As String = "PrincipalBerry"
         AbrirPrograma(nombrePrograma, True)
@@ -44,19 +44,29 @@ Public Class Principal
         Desvanecer()
 
     End Sub
-     
+
     Private Sub Principal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Centrar()
         AsignarTooltips()
         ConfigurarConexiones()
-        CargarEncabezados()
         CargarTiposDeDatos()
+
+    End Sub
+
+    Private Sub Principal_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+
+        Me.Cursor = Cursors.AppStarting
+        Me.Enabled = False
+        CargarEncabezados()
         CargarComboAreas()
         CargarComboUsuarios()
         CargarComboAreasDestino()
         CargarComboUsuariosDestino()
         FormatearSpread()
+        Me.estaMostrado = True
+        Me.Enabled = True
+        Me.Cursor = Cursors.Default
 
     End Sub
 
@@ -80,7 +90,7 @@ Public Class Principal
 
     Private Sub cbAreas_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbAreas.SelectedIndexChanged
 
-        If Me.pintado Then
+        If (Me.estaMostrado) Then
             If cbAreas.Items.Count > 1 Then
                 CargarComboUsuarios()
             End If
@@ -90,17 +100,11 @@ Public Class Principal
 
     Private Sub cbAreasDestino_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbAreasDestino.SelectedIndexChanged
 
-        If Me.pintado Then
+        If (Me.estaMostrado) Then
             If cbAreasDestino.Items.Count > 1 Then
                 CargarComboUsuariosDestino()
             End If
         End If
-
-    End Sub
-
-    Private Sub Principal_Paint(sender As Object, e As PaintEventArgs) Handles MyBase.Paint
-
-        Me.pintado = True
 
     End Sub
 
@@ -364,7 +368,7 @@ Public Class Principal
 
     Private Sub ConfigurarConexiones()
 
-        If (Me.esPrueba) Then
+        If (Me.esDesarrollo) Then
             'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf"
             Me.datosUsuario.EId = 1
             Me.datosUsuario.EIdArea = 1
@@ -412,7 +416,7 @@ Public Class Principal
 
     Private Sub AbrirPrograma(nombre As String, salir As Boolean)
 
-        If (Me.esPrueba) Then
+        If (Me.esDesarrollo) Then
             Exit Sub
         End If
         ejecutarProgramaPrincipal.UseShellExecute = True
@@ -709,7 +713,7 @@ Public Class Principal
 
         Me.Cursor = Cursors.WaitCursor
         Dim lista As New DataTable
-        If (Me.pintado) Then
+        If (Me.estaMostrado) Then
             actividades.EIdArea = cbAreas.SelectedValue
             actividades.EIdUsuario = cbUsuarios.SelectedValue
             actividades.EIdAreaDestino = cbAreasDestino.SelectedValue
@@ -769,13 +773,13 @@ Public Class Principal
         spReporte.ActiveSheet.DataSource = lista
         FormatearSpreadReporteActividades(spReporte.ActiveSheet.Columns.Count)
 
-        '' Intento de reporte grafico en la segunda hoja. (Queda pendiente.)
+        '' Intento de reporte grafico en la segunda hoja. (TODO. Queda pendiente.)
         'spReporte.Sheets.Count = 2
         'spReporte.ActiveSheetIndex = 0
         'Dim rango As New FarPoint.Win.Spread.Model.CellRange(3, 0, spReporte.ActiveSheet.Rows.Count - 1, 1)
         'spReporte.ActiveSheetIndex = 1
         'spReporte.ActiveSheet.AddChart(rango, GetType(FarPoint.Win.Chart.BarSeries), 400, 400, 0, 0)
-         
+
         AlinearFiltrosIzquierda()
         btnImprimir.Enabled = True
         btnExportarExcel.Enabled = True
@@ -939,18 +943,14 @@ Public Class Principal
 
     Private Sub CargarComboUsuarios()
 
-        Try
-            Dim idArea As Integer = cbAreas.SelectedValue()
-            Dim lista As New List(Of EntidadesReporteActividades.Usuarios)
-            usuarios.EIdEmpresa = datosEmpresa.EId
-            usuarios.EIdArea = idArea
-            lista = usuarios.ObtenerListadoPorEmpresa()
-            cbUsuarios.DataSource = lista
-            cbUsuarios.ValueMember = "EId"
-            cbUsuarios.DisplayMember = "ENombre"
-        Catch ex As Exception
-            Throw ex
-        End Try
+        Dim idArea As Integer = cbAreas.SelectedValue()
+        Dim lista As New List(Of EntidadesReporteActividades.Usuarios)
+        usuarios.EIdEmpresa = datosEmpresa.EId
+        usuarios.EIdArea = idArea
+        lista = usuarios.ObtenerListadoPorEmpresa()
+        cbUsuarios.DataSource = lista
+        cbUsuarios.ValueMember = "EId"
+        cbUsuarios.DisplayMember = "ENombre"
 
     End Sub
 
@@ -967,18 +967,14 @@ Public Class Principal
 
     Private Sub CargarComboUsuariosDestino()
 
-        Try
-            Dim idArea As Integer = cbAreasDestino.SelectedValue()
-            Dim lista As New List(Of EntidadesReporteActividades.Usuarios)
-            usuarios.EIdEmpresa = datosEmpresa.EId
-            usuarios.EIdArea = idArea
-            lista = usuarios.ObtenerListadoPorEmpresa()
-            cbUsuariosDestino.DataSource = lista
-            cbUsuariosDestino.ValueMember = "EId"
-            cbUsuariosDestino.DisplayMember = "ENombre"
-        Catch ex As Exception
-            Throw ex
-        End Try
+        Dim idArea As Integer = cbAreasDestino.SelectedValue()
+        Dim lista As New List(Of EntidadesReporteActividades.Usuarios)
+        usuarios.EIdEmpresa = datosEmpresa.EId
+        usuarios.EIdArea = idArea
+        lista = usuarios.ObtenerListadoPorEmpresa()
+        cbUsuariosDestino.DataSource = lista
+        cbUsuariosDestino.ValueMember = "EId"
+        cbUsuariosDestino.DisplayMember = "ENombre"
 
     End Sub
 

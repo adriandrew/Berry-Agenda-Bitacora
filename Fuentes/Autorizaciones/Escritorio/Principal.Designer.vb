@@ -24,8 +24,8 @@ Partial Class Principal
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Principal))
-        Dim EnhancedScrollBarRenderer1 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
-        Dim EnhancedScrollBarRenderer2 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
+        Dim EnhancedScrollBarRenderer3 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
+        Dim EnhancedScrollBarRenderer4 As FarPoint.Win.Spread.EnhancedScrollBarRenderer = New FarPoint.Win.Spread.EnhancedScrollBarRenderer()
         Me.pnlContenido = New System.Windows.Forms.Panel()
         Me.pnlCuerpo = New System.Windows.Forms.Panel()
         Me.pnlExterna = New System.Windows.Forms.Panel()
@@ -100,9 +100,9 @@ Partial Class Principal
         Me.pnlExterna.Controls.Add(Me.cbUsuarios)
         Me.pnlExterna.Controls.Add(Me.Label10)
         Me.pnlExterna.Controls.Add(Me.cbAreas)
-        Me.pnlExterna.Location = New System.Drawing.Point(5, 4)
+        Me.pnlExterna.Location = New System.Drawing.Point(0, 4)
         Me.pnlExterna.Name = "pnlExterna"
-        Me.pnlExterna.Size = New System.Drawing.Size(1021, 76)
+        Me.pnlExterna.Size = New System.Drawing.Size(1026, 76)
         Me.pnlExterna.TabIndex = 22
         '
         'Label1
@@ -200,7 +200,7 @@ Partial Class Principal
         Me.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnGuardar.ForeColor = System.Drawing.Color.Black
         Me.btnGuardar.Image = CType(resources.GetObject("btnGuardar.Image"), System.Drawing.Image)
-        Me.btnGuardar.Location = New System.Drawing.Point(967, 426)
+        Me.btnGuardar.Location = New System.Drawing.Point(967, 429)
         Me.btnGuardar.Margin = New System.Windows.Forms.Padding(0)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(60, 60)
@@ -216,39 +216,39 @@ Partial Class Principal
         Me.spAutorizaciones.BackColor = System.Drawing.Color.White
         Me.spAutorizaciones.HorizontalScrollBar.Buttons = New FarPoint.Win.Spread.FpScrollBarButtonCollection("BackwardLineButton,ThumbTrack,ForwardLineButton")
         Me.spAutorizaciones.HorizontalScrollBar.Name = ""
-        EnhancedScrollBarRenderer1.ArrowColor = System.Drawing.Color.DarkSlateGray
-        EnhancedScrollBarRenderer1.ArrowHoveredColor = System.Drawing.Color.DarkSlateGray
-        EnhancedScrollBarRenderer1.ArrowSelectedColor = System.Drawing.Color.DarkSlateGray
-        EnhancedScrollBarRenderer1.ButtonBackgroundColor = System.Drawing.Color.CadetBlue
-        EnhancedScrollBarRenderer1.ButtonBorderColor = System.Drawing.Color.SlateGray
-        EnhancedScrollBarRenderer1.ButtonHoveredBackgroundColor = System.Drawing.Color.SlateGray
-        EnhancedScrollBarRenderer1.ButtonHoveredBorderColor = System.Drawing.Color.DarkGray
-        EnhancedScrollBarRenderer1.ButtonSelectedBackgroundColor = System.Drawing.Color.DarkGray
-        EnhancedScrollBarRenderer1.ButtonSelectedBorderColor = System.Drawing.Color.CadetBlue
-        EnhancedScrollBarRenderer1.TrackBarBackgroundColor = System.Drawing.Color.CadetBlue
-        EnhancedScrollBarRenderer1.TrackBarSelectedBackgroundColor = System.Drawing.Color.SlateGray
-        Me.spAutorizaciones.HorizontalScrollBar.Renderer = EnhancedScrollBarRenderer1
+        EnhancedScrollBarRenderer3.ArrowColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer3.ArrowHoveredColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer3.ArrowSelectedColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer3.ButtonBackgroundColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer3.ButtonBorderColor = System.Drawing.Color.SlateGray
+        EnhancedScrollBarRenderer3.ButtonHoveredBackgroundColor = System.Drawing.Color.SlateGray
+        EnhancedScrollBarRenderer3.ButtonHoveredBorderColor = System.Drawing.Color.DarkGray
+        EnhancedScrollBarRenderer3.ButtonSelectedBackgroundColor = System.Drawing.Color.DarkGray
+        EnhancedScrollBarRenderer3.ButtonSelectedBorderColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer3.TrackBarBackgroundColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer3.TrackBarSelectedBackgroundColor = System.Drawing.Color.SlateGray
+        Me.spAutorizaciones.HorizontalScrollBar.Renderer = EnhancedScrollBarRenderer3
         Me.spAutorizaciones.HorizontalScrollBar.TabIndex = 0
-        Me.spAutorizaciones.Location = New System.Drawing.Point(5, 86)
+        Me.spAutorizaciones.Location = New System.Drawing.Point(3, 86)
         Me.spAutorizaciones.Name = "spAutorizaciones"
         Me.spAutorizaciones.Sheets.AddRange(New FarPoint.Win.Spread.SheetView() {Me.spAutorizaciones_Sheet1})
-        Me.spAutorizaciones.Size = New System.Drawing.Size(1021, 400)
+        Me.spAutorizaciones.Size = New System.Drawing.Size(1023, 407)
         Me.spAutorizaciones.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell
         Me.spAutorizaciones.TabIndex = 3
         Me.spAutorizaciones.VerticalScrollBar.Buttons = New FarPoint.Win.Spread.FpScrollBarButtonCollection("BackwardLineButton,ThumbTrack,ForwardLineButton")
         Me.spAutorizaciones.VerticalScrollBar.Name = ""
-        EnhancedScrollBarRenderer2.ArrowColor = System.Drawing.Color.DarkSlateGray
-        EnhancedScrollBarRenderer2.ArrowHoveredColor = System.Drawing.Color.DarkSlateGray
-        EnhancedScrollBarRenderer2.ArrowSelectedColor = System.Drawing.Color.DarkSlateGray
-        EnhancedScrollBarRenderer2.ButtonBackgroundColor = System.Drawing.Color.CadetBlue
-        EnhancedScrollBarRenderer2.ButtonBorderColor = System.Drawing.Color.SlateGray
-        EnhancedScrollBarRenderer2.ButtonHoveredBackgroundColor = System.Drawing.Color.SlateGray
-        EnhancedScrollBarRenderer2.ButtonHoveredBorderColor = System.Drawing.Color.DarkGray
-        EnhancedScrollBarRenderer2.ButtonSelectedBackgroundColor = System.Drawing.Color.DarkGray
-        EnhancedScrollBarRenderer2.ButtonSelectedBorderColor = System.Drawing.Color.CadetBlue
-        EnhancedScrollBarRenderer2.TrackBarBackgroundColor = System.Drawing.Color.CadetBlue
-        EnhancedScrollBarRenderer2.TrackBarSelectedBackgroundColor = System.Drawing.Color.SlateGray
-        Me.spAutorizaciones.VerticalScrollBar.Renderer = EnhancedScrollBarRenderer2
+        EnhancedScrollBarRenderer4.ArrowColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer4.ArrowHoveredColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer4.ArrowSelectedColor = System.Drawing.Color.DarkSlateGray
+        EnhancedScrollBarRenderer4.ButtonBackgroundColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer4.ButtonBorderColor = System.Drawing.Color.SlateGray
+        EnhancedScrollBarRenderer4.ButtonHoveredBackgroundColor = System.Drawing.Color.SlateGray
+        EnhancedScrollBarRenderer4.ButtonHoveredBorderColor = System.Drawing.Color.DarkGray
+        EnhancedScrollBarRenderer4.ButtonSelectedBackgroundColor = System.Drawing.Color.DarkGray
+        EnhancedScrollBarRenderer4.ButtonSelectedBorderColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer4.TrackBarBackgroundColor = System.Drawing.Color.CadetBlue
+        EnhancedScrollBarRenderer4.TrackBarSelectedBackgroundColor = System.Drawing.Color.SlateGray
+        Me.spAutorizaciones.VerticalScrollBar.Renderer = EnhancedScrollBarRenderer4
         Me.spAutorizaciones.VerticalScrollBar.TabIndex = 1
         '
         'spAutorizaciones_Sheet1
@@ -273,12 +273,13 @@ Partial Class Principal
         '
         Me.pnlPie.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlPie.BackColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.pnlPie.BackColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(15, Byte), Integer))
         Me.pnlPie.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlPie.Controls.Add(Me.btnAyuda)
         Me.pnlPie.Controls.Add(Me.lblDescripcionTooltip)
         Me.pnlPie.Controls.Add(Me.btnSalir)
-        Me.pnlPie.Location = New System.Drawing.Point(0, 570)
+        Me.pnlPie.ForeColor = System.Drawing.Color.White
+        Me.pnlPie.Location = New System.Drawing.Point(0, 573)
         Me.pnlPie.Name = "pnlPie"
         Me.pnlPie.Size = New System.Drawing.Size(1035, 60)
         Me.pnlPie.TabIndex = 8
@@ -332,12 +333,13 @@ Partial Class Principal
         '
         Me.pnlEncabezado.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlEncabezado.BackColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.pnlEncabezado.BackColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(15, Byte), Integer))
         Me.pnlEncabezado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlEncabezado.Controls.Add(Me.lblEncabezadoArea)
         Me.pnlEncabezado.Controls.Add(Me.lblEncabezadoUsuario)
         Me.pnlEncabezado.Controls.Add(Me.lblEncabezadoEmpresa)
         Me.pnlEncabezado.Controls.Add(Me.lblEncabezadoPrograma)
+        Me.pnlEncabezado.ForeColor = System.Drawing.Color.White
         Me.pnlEncabezado.Location = New System.Drawing.Point(0, 0)
         Me.pnlEncabezado.Name = "pnlEncabezado"
         Me.pnlEncabezado.Size = New System.Drawing.Size(1035, 75)
@@ -398,6 +400,7 @@ Partial Class Principal
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Principal"
         Me.Text = "Autorizaciones"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.pnlContenido.ResumeLayout(False)
         Me.pnlCuerpo.ResumeLayout(False)
         Me.pnlExterna.ResumeLayout(False)

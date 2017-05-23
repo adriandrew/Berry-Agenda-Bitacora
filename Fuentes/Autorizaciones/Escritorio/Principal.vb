@@ -16,11 +16,11 @@ Public Class Principal
     Public tipoFecha As New FarPoint.Win.Spread.CellType.DateTimeCellType()
     Public tipoBooleano As New FarPoint.Win.Spread.CellType.CheckBoxCellType()
     Public opcionSeleccionada As Integer = 0
-    Public pintado As Boolean = False
+    Public estaMostrado As Boolean = False
     Dim ejecutarProgramaPrincipal As New ProcessStartInfo()
     Public estaCerrando As Boolean = False
 
-    Public esPrueba As Boolean = False
+    Public esDesarrollo As Boolean = False
 
 #Region "Eventos"
 
@@ -40,31 +40,35 @@ Public Class Principal
         Desvanecer()
 
     End Sub
-     
+
     Private Sub Principal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Centrar()
         AsignarTooltips()
-        ConfigurarConexiones() 
+        ConfigurarConexiones()
+
+    End Sub
+
+    Private Sub Principal_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+
+        Me.Cursor = Cursors.AppStarting
+        Me.Enabled = False
+        If (Not ValidarAccesoTotal()) Then
+            Salir()
+        End If
         CargarEncabezados()
         CargarTiposDeDatos()
         CargarComboAreas()
         CargarComboUsuarios()
         CargarComboAreasDestino()
         CargarComboUsuariosDestino()
+        Me.estaMostrado = True
         ComenzarCargarAutorizaciones()
+        Me.Enabled = True
+        Me.Cursor = Cursors.Default
 
     End Sub
 
-    Private Sub Principal_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-         
-        If (Not ValidarAccesoTotal()) Then
-            Salir()
-        End If
-        Me.pintado = True
-
-    End Sub
-     
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
 
         Salir()
@@ -111,8 +115,9 @@ Public Class Principal
         If cbAreas.Items.Count > 1 Then
             If cbAreas.SelectedIndex > 0 Then
                 CargarComboUsuarios()
-            Else
-                ComenzarCargarAutorizaciones()
+            Else 
+                LimpiarSpread()
+                CargarAutorizacionesSpread()
             End If
         End If
 
@@ -123,22 +128,25 @@ Public Class Principal
         If cbAreasDestino.Items.Count > 1 Then
             If cbAreasDestino.SelectedIndex > 0 Then
                 CargarComboUsuariosDestino()
-            Else
-                ComenzarCargarAutorizaciones()
+            Else 
+                LimpiarSpread()
+                CargarAutorizacionesSpread()
             End If
         End If
 
     End Sub
 
     Private Sub cbUsuarios_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbUsuarios.SelectedIndexChanged
-
-        ComenzarCargarAutorizaciones()
+         
+        LimpiarSpread()
+        CargarAutorizacionesSpread()
 
     End Sub
 
     Private Sub cbUsuariosDestino_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbUsuariosDestino.SelectedIndexChanged
-
-        ComenzarCargarAutorizaciones()
+         
+        LimpiarSpread()
+        CargarAutorizacionesSpread()
 
     End Sub
 
@@ -204,7 +212,7 @@ Public Class Principal
 #Region "Genericos"
 
     Private Sub Salir()
-         
+
         Application.Exit()
 
     End Sub
@@ -314,15 +322,15 @@ Public Class Principal
 
     Private Sub ConfigurarConexiones()
 
-        If (Me.esPrueba) Then
+        If (Me.esDesarrollo) Then
             'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf"
             Me.datosUsuario.EId = 1
             Me.datosUsuario.EIdArea = 1
             Me.datosUsuario.EAccesoTotal = True
             Me.datosEmpresa.EId = 1
-            LogicaAutorizaciones.DatosEmpresaPrincipal.instanciaSql = "ANDREW-MAC\SQLEXPRESS"
+            LogicaAutorizaciones.DatosEmpresaPrincipal.instanciaSql = "BERRY1-DELL\SQLEXPRESS2008"
             LogicaAutorizaciones.DatosEmpresaPrincipal.usuarioSql = "AdminBerry"
-            LogicaAutorizaciones.DatosEmpresaPrincipal.contrasenaSql = "@berry"
+            LogicaAutorizaciones.DatosEmpresaPrincipal.contrasenaSql = "@berry2017"
         Else
             'EntidadesActividades.BaseDatos.ECadenaConexionAgenda = datosEmpresa.EDirectorio & "\\Agenda.mdf"
             LogicaAutorizaciones.DatosEmpresaPrincipal.ObtenerParametrosInformacionEmpresa()
@@ -356,7 +364,7 @@ Public Class Principal
 
     Private Sub AbrirPrograma(nombre As String, salir As Boolean)
 
-        If (Me.esPrueba) Then
+        If (Me.esDesarrollo) Then
             Exit Sub
         End If
         ejecutarProgramaPrincipal.UseShellExecute = True
@@ -389,27 +397,39 @@ Public Class Principal
 
     End Function
 
+    Private Sub LimpiarSpread()
+
+        If (Me.estaMostrado) Then
+            spAutorizaciones.ActiveSheet.DataSource = Nothing
+        End If
+
+    End Sub
+
     Private Sub ComenzarCargarAutorizaciones()
 
-        FormatearSpreadGeneral()
-        CargarAutorizacionesSpread()
+        If (Me.estaMostrado) Then
+            FormatearSpreadGeneral()
+            CargarAutorizacionesSpread() 
+        End If
 
     End Sub
 
     Private Sub CargarAutorizacionesSpread()
 
-        ' Actividades externas.
-        'spAutorizaciones.ActiveSheetIndex = 1
-        Dim listaExterna As New List(Of EntidadesAutorizaciones.ActividadesExternas)
-        If (Me.pintado) Then
-            actividadesExternas.EIdArea = cbAreas.SelectedValue
-            actividadesExternas.EIdUsuario = cbUsuarios.SelectedValue
-            actividadesExternas.EIdAreaDestino = cbAreasDestino.SelectedValue
-            actividadesExternas.EIdUsuarioDestino = cbUsuariosDestino.SelectedValue
+        If (Me.estaMostrado) Then
+            ' Actividades externas.
+            'spAutorizaciones.ActiveSheetIndex = 1
+            Dim listaExterna As New List(Of EntidadesAutorizaciones.ActividadesExternas)
+            If (Me.estaMostrado) Then
+                actividadesExternas.EIdArea = cbAreas.SelectedValue
+                actividadesExternas.EIdUsuario = cbUsuarios.SelectedValue
+                actividadesExternas.EIdAreaDestino = cbAreasDestino.SelectedValue
+                actividadesExternas.EIdUsuarioDestino = cbUsuariosDestino.SelectedValue
+            End If
+            listaExterna = actividadesExternas.ObtenerListadoPendientesExternas()
+            spAutorizaciones.ActiveSheet.DataSource = listaExterna
+            FormatearSpreadAutorizacionesPendientesExternas(spAutorizaciones.ActiveSheet.Columns.Count)
         End If
-        listaExterna = actividadesExternas.ObtenerListadoPendientesExternas()
-        spAutorizaciones.ActiveSheet.DataSource = listaExterna
-        FormatearSpreadAutorizacionesPendientesExternas(spAutorizaciones.ActiveSheet.Columns.Count)
 
     End Sub
 
@@ -419,8 +439,7 @@ Public Class Principal
         'spAutorizaciones.Sheets.Count = 2
         'spAutorizaciones.Sheets(0).SheetName = "Internas"
         spAutorizaciones.Sheets(0).SheetName = "Externas"
-        spAutorizaciones.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell
-        'ControlarSpreadEnter(spAutorizaciones)
+        spAutorizaciones.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell 
         spAutorizaciones.Visible = True : Application.DoEvents()
         spAutorizaciones.Font = New Font("Microsoft Sans Serif", 12, FontStyle.Regular) : Application.DoEvents()
         spAutorizaciones.HorizontalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded
@@ -498,9 +517,9 @@ Public Class Principal
         spAutorizaciones.ActiveSheet.ColumnHeader.Cells(1, spAutorizaciones.ActiveSheet.Columns("idUsuarioDestino").Index).Value = "No.".ToUpper : Application.DoEvents()
         spAutorizaciones.ActiveSheet.ColumnHeader.Cells(1, spAutorizaciones.ActiveSheet.Columns("nombreUsuarioDestino").Index).Value = "Nombre".ToUpper : Application.DoEvents()
         spAutorizaciones.ActiveSheet.AddColumnHeaderSpanCell(0, spAutorizaciones.ActiveSheet.Columns("nombre").Index, 2, 1) : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("nombre").Index).Value = "Nombre".ToUpper : Application.DoEvents()         
+        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("nombre").Index).Value = "Nombre".ToUpper : Application.DoEvents()
         spAutorizaciones.ActiveSheet.AddColumnHeaderSpanCell(0, spAutorizaciones.ActiveSheet.Columns("descripcion").Index, 2, 1) : Application.DoEvents()
-        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("descripcion").Index).Value = "Descripción".ToUpper : Application.DoEvents() 
+        spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("descripcion").Index).Value = "Descripción".ToUpper : Application.DoEvents()
         spAutorizaciones.ActiveSheet.AddColumnHeaderSpanCell(0, spAutorizaciones.ActiveSheet.Columns("fechaCreacion").Index, 2, 1) : Application.DoEvents()
         spAutorizaciones.ActiveSheet.ColumnHeader.Cells(0, spAutorizaciones.ActiveSheet.Columns("fechaCreacion").Index).Value = "Fecha de Creación".ToUpper : Application.DoEvents()
         spAutorizaciones.ActiveSheet.AddColumnHeaderSpanCell(0, spAutorizaciones.ActiveSheet.Columns("fechaVencimiento").Index, 2, 1) : Application.DoEvents()

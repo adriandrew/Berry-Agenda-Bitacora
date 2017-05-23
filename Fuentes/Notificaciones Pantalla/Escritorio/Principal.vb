@@ -20,7 +20,7 @@ Public Class Principal
     Public nombreEsteEquipo As String = My.Computer.Name
     Public estaMostrado As Boolean = False
 
-    Public esPrueba As Boolean = False
+    Public esDesarrollo As Boolean = False
 
 #Region "Eventos"
 
@@ -89,7 +89,7 @@ Public Class Principal
 
     Private Sub ConfigurarConexionPrincipal()
 
-        If (Me.esPrueba) Then
+        If (Me.esDesarrollo) Then
             EntidadesNotificacionesPantalla.BaseDatos.ECadenaConexionPrincipal = "C:\Berry Agenda-Bitacora\Principal.sdf"
         Else
             Dim ruta As String = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase)
@@ -107,7 +107,7 @@ Public Class Principal
         If (parametros.Length > 1) Then
             Me.tieneParametros = True
         End If
-        If (Me.esPrueba) Then
+        If (Me.esDesarrollo) Then
             'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf"
             'LogicaNotificacionesPantalla.DatosEmpresaPrincipal.instanciaSql = "ANDREW-MAC\SQLEXPRESS"
             'LogicaNotificacionesPantalla.DatosEmpresaPrincipal.usuarioSql = "AdminBerry"
@@ -133,13 +133,13 @@ Public Class Principal
         EntidadesNotificacionesPantalla.BaseDatos.AbrirConexionInformacion()
         EntidadesNotificacionesPantalla.BaseDatos.AbrirConexionCatalogo()
         EntidadesNotificacionesPantalla.BaseDatos.AbrirConexionAgenda()
-        If (Not Me.tieneParametros) Then 
+        If (Not Me.tieneParametros) Then
             ' Se obtienen registros de lo que corresponda a esta empresa y este nombre de equipo.
-            ObtenerRegistroPorIdEmpresaYNombreEquipo() 
+            ObtenerRegistroPorIdEmpresaYNombreEquipo()
         End If
 
     End Sub
-     
+
     Private Sub CargarEncabezados()
 
         lblEncabezadoPrograma.Text = "Programa: " + Me.Text

@@ -26,7 +26,7 @@ Public Class Principal
     Public estaCerrando As Boolean = False 
     Public idEmpresa As Integer = 1 ' Fijo a PODC por ahora.
 
-    Public esPrueba As Boolean = False
+    Public esDesarrollo As Boolean = False
 
 #Region "Eventos"
 
@@ -52,18 +52,22 @@ Public Class Principal
         Centrar()
         AsignarTooltips()
         ConfigurarConexiones()
-        CargarEncabezados()
-        FormatearSpread()
-        SeleccionoAreas()
         CargarTiposDeDatos()
 
     End Sub
 
     Private Sub Principal_Shown(sender As Object, e As EventArgs) Handles Me.Shown
 
+        Me.Cursor = Cursors.AppStarting
+        Me.Enabled = False
         If (Not ValidarAccesoTotal()) Then
             Salir()
         End If
+        CargarEncabezados()
+        FormatearSpread()
+        SeleccionoAreas()
+        Me.Enabled = True
+        Me.Cursor = Cursors.Default
 
     End Sub
 
@@ -386,7 +390,7 @@ Public Class Principal
 
     Private Sub ConfigurarConexiones()
 
-        If (Me.esPrueba) Then
+        If (Me.esDesarrollo) Then
             'EntidadesCatalogos.BaseDatos.ECadenaConexionCatalogo = "C:\\Berry-Agenda\\BD\\PODC\\Catalogos.mdf"
             LogicaCatalogos.DatosEmpresaPrincipal.instanciaSql = "ANDREW-MAC\SQLEXPRESS"
             LogicaCatalogos.DatosEmpresaPrincipal.instanciaSql = "BERRY1-DELL\SQLEXPRESS2008"
@@ -422,7 +426,7 @@ Public Class Principal
 
     Private Sub AbrirPrograma(nombre As String, salir As Boolean)
 
-        If (Me.esPrueba) Then
+        If (Me.esDesarrollo) Then
             Exit Sub
         End If
         ejecutarProgramaPrincipal.UseShellExecute = True
@@ -465,7 +469,7 @@ Public Class Principal
         spCatalogos.Visible = True : Application.DoEvents()
         spCatalogos2.Visible = False : Application.DoEvents()
         spProgramas.Visible = False : Application.DoEvents()
-        spCatalogos.ActiveSheet.GrayAreaBackColor = Color.White : Application.DoEvents() 
+        spCatalogos.ActiveSheet.GrayAreaBackColor = Color.White : Application.DoEvents()
         spProgramas.ActiveSheet.GrayAreaBackColor = Color.White : Application.DoEvents()
         spCatalogos.Font = New Font("Microsoft Sans Serif", 12, FontStyle.Regular) : Application.DoEvents()
         spCatalogos2.Font = New Font("Microsoft Sans Serif", 12, FontStyle.Regular) : Application.DoEvents()
@@ -669,7 +673,7 @@ Public Class Principal
     End Sub
 
     Private Sub FormatearSpreadCorreos()
-         
+
         spCatalogos.ActiveSheet.Columns(0, spCatalogos.ActiveSheet.Columns.Count - 1).Visible = True : Application.DoEvents()
         spCatalogos.ActiveSheet.ColumnHeader.Rows(0).Font = New Font("Microsoft Sans Serif", 12, FontStyle.Bold) : Application.DoEvents()
         spCatalogos.ActiveSheet.ColumnHeader.Rows(0).Height = 35 : Application.DoEvents()
@@ -737,7 +741,7 @@ Public Class Principal
         Me.Cursor = Cursors.Default
 
     End Sub
-     
+
     Private Sub FormatearSpreadCatalogoUsuarios(ByVal izquierda As Boolean)
 
         spCatalogos2.ActiveSheet.ColumnHeader.Rows(0).Font = New Font("Microsoft Sans Serif", 12, FontStyle.Bold) : Application.DoEvents()
@@ -748,7 +752,7 @@ Public Class Principal
             spCatalogos2.Location = New Point(spCatalogos.Width - spCatalogos2.Width, spCatalogos.Location.Y) : Application.DoEvents()
         End If
         spCatalogos2.Visible = True : Application.DoEvents()
-        spCatalogos2.HorizontalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.Never : Application.DoEvents() 
+        spCatalogos2.HorizontalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.Never : Application.DoEvents()
         spCatalogos2.VerticalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded : Application.DoEvents()
         spCatalogos2.ActiveSheet.OperationMode = FarPoint.Win.Spread.OperationMode.SingleSelect : Application.DoEvents()
         spCatalogos2.Height = spCatalogos.Height : Application.DoEvents()

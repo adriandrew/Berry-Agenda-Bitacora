@@ -18,7 +18,7 @@ Public Class Principal
     Public filaActivaSpread As Integer = 0
     Public esDivisible As Boolean = False
 
-    Public esPrueba As Boolean = False
+    Public esDesarrollo As Boolean = False
 
 #Region "Eventos"
 
@@ -36,11 +36,19 @@ Public Class Principal
         ConsultarInformacionEmpresaPrincipalPredeterminada()
         ConfigurarConexiones()
         ConsultarInformacionEmpresa()
+
+    End Sub
+
+    Private Sub Principal_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+
+        Me.Cursor = Cursors.AppStarting
+        Me.Enabled = False
         CargarEncabezados()
         FormatearSpreadGeneral()
         FormatearSpreadNotificaciones()
         IniciarProceso()
-
+        Me.Enabled = True
+        Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
@@ -151,7 +159,7 @@ Public Class Principal
 
     Private Sub ConfigurarConexionPrincipal()
 
-        If (Me.esPrueba) Then
+        If (Me.esDesarrollo) Then
             EntidadesNotificacionesCorreo.BaseDatos.ECadenaConexionPrincipal = "C:\Berry Agenda-Bitacora\Principal.sdf"
         Else
             Dim ruta As String = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase)
@@ -164,7 +172,7 @@ Public Class Principal
 
     Private Sub ConfigurarConexiones()
 
-        If (Me.esPrueba) Then
+        If (Me.esDesarrollo) Then
             'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf" 
         Else
             'baseDatos.CadenaConexionInformacion = datosEmpresa.EDirectorio & "\\Agenda.mdf"  
@@ -294,10 +302,10 @@ Public Class Principal
         While True
             hora = Date.Now.Hour
             minutos = Date.Now.Minute
-            If (minutos = 1) Then 
+            If (minutos = 1) Then
                 esRangoValido = True
             Else
-                If Me.esPrueba Then
+                If Me.esDesarrollo Then
                     esRangoValido = True
                 Else
                     esRangoValido = False
@@ -335,7 +343,7 @@ Public Class Principal
         Dim servidorProveedor As String = listaConfiguracion.EServidor '"smtp.gmail.com"
         Dim puerto As Integer = listaConfiguracion.EPuerto '587
         mail.From = New MailAddress(emisor)
-        mail.Priority = MailPriority.High 
+        mail.Priority = MailPriority.High
         Dim listaCorreos As New List(Of EntidadesNotificacionesCorreo.Correos)
         correos.EIdUsuario = idUsuario
         listaCorreos = correos.ObtenerPorIdUsuario()
@@ -357,7 +365,7 @@ Public Class Principal
         ' Se adjunta la imagen del logo de berry.
         Try
             Dim rutaLogoPng As String = String.Empty
-            If (Me.esPrueba) Then
+            If (Me.esDesarrollo) Then
                 rutaLogoPng = "C:\BERRY AGENDA-BITACORA\logo3.png"
             Else
                 rutaLogoPng = CurDir() & "\logo3.png"
@@ -375,7 +383,7 @@ Public Class Principal
         Dim vistaHtml As AlternateView = AlternateView.CreateAlternateViewFromString(mensajeHtml, Encoding.UTF8, MediaTypeNames.Text.Html)
         ' Creamos el recurso a incrustar. Observad que el ID que le asignamos (arbitrario) está referenciado desde el código HTML como origen de la imagen.
         Dim rutaLogoJpg As String = String.Empty
-        If (Me.esPrueba) Then
+        If (Me.esDesarrollo) Then
             rutaLogoJpg = "C:\BERRY AGENDA-BITACORA\logo3.jpg"
         Else
             rutaLogoJpg = CurDir() & "\logo3.jpg"
