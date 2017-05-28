@@ -86,16 +86,7 @@
 #End Region
 
 #Region "Metodos Publicos"
-
-    Public Sub AcomodarPaneles()
-
-        Me.pnlInternas.Location = New Point(0, 0)
-        Me.pnlInternas.Width = Me.Width / 2 - 20
-        Me.pnlExternas.Location = New Point(Me.pnlInternas.Width + 5, 0)
-        Me.pnlExternas.Width = Me.Width / 2 - 20
-
-    End Sub
-
+     
     Public Sub GenerarListado(ByVal lista As Object, ByVal tipo As Integer)
 
         Me.Cursor = Cursors.WaitCursor
@@ -110,6 +101,29 @@
         Dim margen As Integer = 5
         ' Es la cantidad de controles que caben verticalmente.    
         Dim cantidad As Integer = lista.Count
+        If (cantidad = 0) Then
+            Dim etiqueta As New Label() 
+            etiqueta.BackColor = Color.Transparent
+            etiqueta.BorderStyle = BorderStyle.FixedSingle
+            etiqueta.Font = New Font("Microsoft Sans Serif", 16, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            etiqueta.ForeColor = Color.GreenYellow
+            etiqueta.Top = posicionY
+            etiqueta.Left = posicionX
+            etiqueta.Name = "lbl_SinActividades_" & tipo
+            etiqueta.Size = New Size(ancho, alto)
+            etiqueta.TabIndex = tipo + 1
+            Dim relleno As String = "                    "
+            Dim texto As String = "Sin Actividades Pendientes. Tómate tu tiempo!"
+            etiqueta.Text = relleno & texto
+            etiqueta.AutoSize = False
+            If (tipo = TipoActividad.internas) Then
+                Me.splitContenedor.Panel1.Controls.Add(etiqueta)
+            ElseIf (tipo = TipoActividad.externas) Then
+                'etiqueta.Text = relleno & texto
+                Me.splitContenedor.Panel2.Controls.Add(etiqueta)
+            End If
+            Application.DoEvents()
+        End If
         ' Se utiliza para controlar la cantidad de opciones verticales.
         For indice As Integer = 1 To cantidad
             ' Crea controles.
@@ -119,20 +133,19 @@
             etiqueta.BackColor = Color.Transparent
             etiqueta.BorderStyle = BorderStyle.FixedSingle
             etiqueta.Font = New Font("Microsoft Sans Serif", 16, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Dim diferenciaDias As Integer = DateDiff(DateInterval.Day, CDate(lista(indice - 1).EFechaVencimiento), Now, FirstDayOfWeek.System, FirstWeekOfYear.Jan1)
+            'Dim diferenciaDias As Integer = DateDiff(DateInterval.Day, CDate(lista(indice - 1).EFechaVencimiento), Now, FirstDayOfWeek.System, FirstWeekOfYear.Jan1)
             'If diferenciaDias > 5 Then 
             '    etiqueta.FlatStyle = FlatStyle.Flat
             '    'etiqueta.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumAquamarine
             'End If
-            etiqueta.ForeColor = Color.White
-            etiqueta.AutoSize = True
+            etiqueta.ForeColor = Color.White 
             etiqueta.Top = posicionY
             etiqueta.Left = posicionX
             etiqueta.Name = "lbl_" & tipo & indice
             etiqueta.Size = New Size(ancho, alto)
             etiqueta.TabIndex = indice - 1
             Dim datosExtra As String = String.Empty
-            If tipo = TipoActividad.externas Then
+            If (tipo = TipoActividad.externas) Then
                 datosExtra = "    Solicita " & lista(indice - 1).ENombreUsuario
             End If
             etiqueta.Text = "      " & lista(indice - 1).EFechaVencimiento & datosExtra & "    " & lista(indice - 1).ENombre.ToString() & vbNewLine & lista(indice - 1).EDescripcion.ToString()
@@ -143,12 +156,11 @@
             'etiqueta.Click += New System.EventHandler(etiqueta_Click)
             'RaiseEvent etiqueta.MouseHover += New System.EventHandler(etiquetaInterna_MouseHover)
             'etiqueta.MouseLeave += New System.EventHandler(etiquetaInterna_MouseLeave)
-            If tipo = TipoActividad.internas Then
+            If (tipo = TipoActividad.internas) Then
                 Me.splitContenedor.Panel1.Controls.Add(etiqueta)
-            ElseIf tipo = TipoActividad.externas Then
+            ElseIf (tipo = TipoActividad.externas) Then
                 Me.splitContenedor.Panel2.Controls.Add(etiqueta)
             End If
-            'etiqueta.SendToBack()
             Application.DoEvents()
             System.Threading.Thread.Sleep(10)
             ' Se distribuyen hacia abajo.

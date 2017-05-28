@@ -672,12 +672,13 @@ Public Class Principal
 
     Private Sub AlinearFiltrosIzquierda()
 
-        temporizador.Interval = 10
+        temporizador.Interval = 1
         temporizador.Enabled = True
         temporizador.Start()
         If (pnlFiltros.Location.X > -350) Then
-            pnlFiltros.Location = New Point(pnlFiltros.Location.X - 5, pnlFiltros.Location.Y) : Application.DoEvents()
-            spReporte.Location = New Point(spReporte.Location.X - 5, spReporte.Location.Y) : Application.DoEvents()
+            pnlFiltros.Location = New Point(pnlFiltros.Location.X - 20, pnlFiltros.Location.Y)
+            spReporte.Location = New Point(spReporte.Location.X - 20, spReporte.Location.Y)
+            Application.DoEvents()
         Else
             temporizador.Enabled = False
             temporizador.Stop()
@@ -687,24 +688,23 @@ Public Class Principal
     End Sub
 
     Private Sub AlinearFiltrosIzquierda2()
-
-        'pnlFiltros.Left = -350 : Application.DoEvents()
-        pnlFiltros.BackColor = Color.Gray : Application.DoEvents()
-        btnGenerar.Enabled = False : Application.DoEvents()
-        'System.Threading.Thread.Sleep(250)
-        spReporte.Width = pnlCuerpo.Width - 50 : Application.DoEvents()
-        'spActividades.Location = New Point(50) : Application.DoEvents()
+         
+        pnlFiltros.BackColor = Color.Gray
+        btnGenerar.Enabled = False
+        spReporte.Width = pnlCuerpo.Width - 50
+        Application.DoEvents()
 
     End Sub
 
     Private Sub AlinearFiltrosNormal()
 
-        pnlFiltros.Left = 0 : Application.DoEvents()
-        pnlFiltros.BackColor = Color.FromArgb(64, 64, 64) : Application.DoEvents()
-        btnGenerar.Enabled = True : Application.DoEvents()
+        pnlFiltros.Left = 0
+        pnlFiltros.BackColor = Color.FromArgb(64, 64, 64)
+        btnGenerar.Enabled = True
         System.Threading.Thread.Sleep(250)
-        spReporte.Width = pnlCuerpo.Width - 50 : Application.DoEvents()
-        spReporte.Location = New Point(pnlFiltros.Location.X + pnlFiltros.Width + 10) : Application.DoEvents()
+        spReporte.Width = pnlCuerpo.Width - 50
+        spReporte.Location = New Point(pnlFiltros.Location.X + pnlFiltros.Width + 10)
+        Application.DoEvents()
 
     End Sub
 
@@ -790,26 +790,27 @@ Public Class Principal
 
     Private Sub FormatearSpread()
 
-        spReporte.Reset() : Application.DoEvents()
-        spReporte.Visible = False : Application.DoEvents()
-        spReporte.ActiveSheet.SheetName = "Reporte" : Application.DoEvents()
-        spReporte.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell : Application.DoEvents()
-        spReporte.Font = New Font("Microsoft Sans Serif", 10, FontStyle.Regular) : Application.DoEvents()
-        spReporte.HorizontalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded : Application.DoEvents()
-        spReporte.VerticalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded : Application.DoEvents()
+        spReporte.Reset()
+        spReporte.Visible = False
+        spReporte.ActiveSheet.SheetName = "Reporte"
+        spReporte.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell
+        spReporte.Font = New Font("Microsoft Sans Serif", 10, FontStyle.Regular)
+        spReporte.HorizontalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded
+        spReporte.VerticalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded
+        Application.DoEvents()
 
     End Sub
 
     Private Sub FormatearSpreadReporteActividades(ByVal cantidadColumnas As Integer)
 
-        spReporte.Visible = True : Application.DoEvents()
-        spReporte.ActiveSheet.GrayAreaBackColor = Color.White : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Rows(0).Height = 35 : Application.DoEvents()
-        spReporte.ActiveSheet.Rows(-1).Height = 30 : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.RowCount = 2 : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Rows(0, spReporte.ActiveSheet.ColumnHeader.Rows.Count - 1).Font = New Font("Microsoft Sans Serif", 10, FontStyle.Bold) : Application.DoEvents()
+        spReporte.Visible = True
+        spReporte.ActiveSheet.GrayAreaBackColor = Color.White
+        spReporte.ActiveSheet.ColumnHeader.Rows(0).Height = 35
+        spReporte.ActiveSheet.Rows(-1).Height = 30
+        spReporte.ActiveSheet.ColumnHeader.RowCount = 2
+        spReporte.ActiveSheet.ColumnHeader.Rows(0, spReporte.ActiveSheet.ColumnHeader.Rows.Count - 1).Font = New Font("Microsoft Sans Serif", 10, FontStyle.Bold)
         Dim numeracion As Integer = 0
-        spReporte.ActiveSheet.Columns.Count = cantidadColumnas : Application.DoEvents()
+        spReporte.ActiveSheet.Columns.Count = cantidadColumnas
         spReporte.ActiveSheet.Columns(numeracion).Tag = "tipo" : numeracion += 1
         spReporte.ActiveSheet.Columns(numeracion).Tag = "estatus" : numeracion += 1
         spReporte.ActiveSheet.Columns(numeracion).Tag = "calificacion" : numeracion += 1
@@ -838,96 +839,98 @@ Public Class Principal
         spReporte.ActiveSheet.Columns(numeracion).Tag = "esRechazado" : numeracion += 1
         spReporte.ActiveSheet.Columns(numeracion).Tag = "esExterna" : numeracion += 1
         spReporte.ActiveSheet.Columns(numeracion).Tag = "estaResuelto" : numeracion += 1
-        spReporte.ActiveSheet.Columns("tipo").Width = 100 : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("estatus").Width = 100 : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("calificacion").Width = 120 : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("id").Width = 50 : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("idArea").Width = 40 : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("nombreArea").Width = 110 : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("idUsuario").Width = 40 : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("nombreUsuario").Width = 110 : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("idAreaDestino").Width = 40 : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("nombreAreaDestino").Width = 120 : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("idUsuarioDestino").Width = 40 : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("nombreUsuarioDestino").Width = 110 : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("nombre").Width = 300 : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("descripcion").Width = 500 : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("fechaCreacion").Width = 120 : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("fechaVencimiento").Width = 120 : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("esUrgente").Width = 90 : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("idAreaResolucion").Width = 40 : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("nombreAreaResolucion").Width = 120 : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("idUsuarioResolucion").Width = 40 : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("nombreUsuarioResolucion").Width = 120 : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("descripcionResolucion").Width = 400 : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("motivoRetraso").Width = 150 : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("fechaResolucion").Width = 120 : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("esUrgente").CellType = tipoBooleano : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("nombre").HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("descripcion").HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("descripcionResolucion").HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("motivoRetraso").HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify : Application.DoEvents()
-        spReporte.ActiveSheet.Columns("fechaResolucion").HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify : Application.DoEvents()
-        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("tipo").Index, 2, 1) : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("tipo").Index).Value = "Tipo".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("estatus").Index, 2, 1) : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("estatus").Index).Value = "Estatus".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("calificacion").Index, 2, 1) : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("calificacion").Index).Value = "Calificación".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("id").Index, 2, 1) : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("id").Index).Value = "No.".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("idArea").Index, 1, 2) : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("idArea").Index).Value = "Area".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(1, spReporte.ActiveSheet.Columns("idArea").Index).Value = "No.".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(1, spReporte.ActiveSheet.Columns("nombreArea").Index).Value = "Nombre".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("idUsuario").Index, 1, 2) : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("idUsuario").Index).Value = "Usuario".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(1, spReporte.ActiveSheet.Columns("idUsuario").Index).Value = "No.".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(1, spReporte.ActiveSheet.Columns("nombreUsuario").Index).Value = "Nombre".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("idAreaDestino").Index, 1, 2) : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("idAreaDestino").Index).Value = "Area Destino".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(1, spReporte.ActiveSheet.Columns("idAreaDestino").Index).Value = "No.".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(1, spReporte.ActiveSheet.Columns("nombreAreaDestino").Index).Value = "Nombre".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("idUsuarioDestino").Index, 1, 2) : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("idUsuarioDestino").Index).Value = "Usuario Destino".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(1, spReporte.ActiveSheet.Columns("idUsuarioDestino").Index).Value = "No.".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(1, spReporte.ActiveSheet.Columns("nombreUsuarioDestino").Index).Value = "Nombre".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("nombre").Index, 2, 1) : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("nombre").Index).Value = "Nombre".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("descripcion").Index, 2, 1) : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("descripcion").Index).Value = "Descripción".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("fechaCreacion").Index, 2, 1) : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("fechaCreacion").Index).Value = "Fecha de Creación".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("fechaVencimiento").Index, 2, 1) : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("fechaVencimiento").Index).Value = "Fecha de Vencimiento".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("esUrgente").Index, 2, 1) : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("esUrgente").Index).Value = "Es Urgente?".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("idAreaResolucion").Index, 1, 2) : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("idAreaResolucion").Index).Value = "Area Resolución".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(1, spReporte.ActiveSheet.Columns("idAreaResolucion").Index).Value = "No.".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(1, spReporte.ActiveSheet.Columns("nombreAreaResolucion").Index).Value = "Nombre".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("idUsuarioResolucion").Index, 1, 2) : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("idUsuarioResolucion").Index).Value = "Usuario Resolución".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(1, spReporte.ActiveSheet.Columns("idUsuarioResolucion").Index).Value = "No.".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(1, spReporte.ActiveSheet.Columns("nombreUsuarioResolucion").Index).Value = "Nombre".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("descripcionResolucion").Index, 2, 1) : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("descripcionResolucion").Index).Value = "Descripción Resolución".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("motivoRetraso").Index, 2, 1) : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("motivoRetraso").Index).Value = "Motivo Retraso".ToUpper : Application.DoEvents()
-        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("fechaResolucion").Index, 2, 1) : Application.DoEvents()
-        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("fechaResolucion").Index).Value = "Fecha de Resolución".ToUpper : Application.DoEvents()
+        spReporte.ActiveSheet.Columns("tipo").Width = 100
+        spReporte.ActiveSheet.Columns("estatus").Width = 100
+        spReporte.ActiveSheet.Columns("calificacion").Width = 120
+        spReporte.ActiveSheet.Columns("id").Width = 50
+        spReporte.ActiveSheet.Columns("idArea").Width = 40
+        spReporte.ActiveSheet.Columns("nombreArea").Width = 110
+        spReporte.ActiveSheet.Columns("idUsuario").Width = 40
+        spReporte.ActiveSheet.Columns("nombreUsuario").Width = 110
+        spReporte.ActiveSheet.Columns("idAreaDestino").Width = 40
+        spReporte.ActiveSheet.Columns("nombreAreaDestino").Width = 120
+        spReporte.ActiveSheet.Columns("idUsuarioDestino").Width = 40
+        spReporte.ActiveSheet.Columns("nombreUsuarioDestino").Width = 110
+        spReporte.ActiveSheet.Columns("nombre").Width = 300
+        spReporte.ActiveSheet.Columns("descripcion").Width = 500
+        spReporte.ActiveSheet.Columns("fechaCreacion").Width = 120
+        spReporte.ActiveSheet.Columns("fechaVencimiento").Width = 120
+        spReporte.ActiveSheet.Columns("esUrgente").Width = 90
+        spReporte.ActiveSheet.Columns("idAreaResolucion").Width = 40
+        spReporte.ActiveSheet.Columns("nombreAreaResolucion").Width = 120
+        spReporte.ActiveSheet.Columns("idUsuarioResolucion").Width = 40
+        spReporte.ActiveSheet.Columns("nombreUsuarioResolucion").Width = 120
+        spReporte.ActiveSheet.Columns("descripcionResolucion").Width = 400
+        spReporte.ActiveSheet.Columns("motivoRetraso").Width = 150
+        spReporte.ActiveSheet.Columns("fechaResolucion").Width = 120
+        Application.DoEvents()
+        spReporte.ActiveSheet.Columns("esUrgente").CellType = tipoBooleano
+        spReporte.ActiveSheet.Columns("nombre").HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify
+        spReporte.ActiveSheet.Columns("descripcion").HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify
+        spReporte.ActiveSheet.Columns("descripcionResolucion").HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify
+        spReporte.ActiveSheet.Columns("motivoRetraso").HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify
+        spReporte.ActiveSheet.Columns("fechaResolucion").HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify
+        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("tipo").Index, 2, 1)
+        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("tipo").Index).Value = "Tipo".ToUpper
+        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("estatus").Index, 2, 1)
+        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("estatus").Index).Value = "Estatus".ToUpper
+        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("calificacion").Index, 2, 1)
+        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("calificacion").Index).Value = "Calificación".ToUpper
+        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("id").Index, 2, 1)
+        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("id").Index).Value = "No.".ToUpper
+        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("idArea").Index, 1, 2)
+        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("idArea").Index).Value = "Area".ToUpper
+        spReporte.ActiveSheet.ColumnHeader.Cells(1, spReporte.ActiveSheet.Columns("idArea").Index).Value = "No.".ToUpper
+        spReporte.ActiveSheet.ColumnHeader.Cells(1, spReporte.ActiveSheet.Columns("nombreArea").Index).Value = "Nombre".ToUpper
+        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("idUsuario").Index, 1, 2)
+        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("idUsuario").Index).Value = "Usuario".ToUpper
+        spReporte.ActiveSheet.ColumnHeader.Cells(1, spReporte.ActiveSheet.Columns("idUsuario").Index).Value = "No.".ToUpper
+        spReporte.ActiveSheet.ColumnHeader.Cells(1, spReporte.ActiveSheet.Columns("nombreUsuario").Index).Value = "Nombre".ToUpper
+        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("idAreaDestino").Index, 1, 2)
+        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("idAreaDestino").Index).Value = "Area Destino".ToUpper
+        spReporte.ActiveSheet.ColumnHeader.Cells(1, spReporte.ActiveSheet.Columns("idAreaDestino").Index).Value = "No.".ToUpper
+        spReporte.ActiveSheet.ColumnHeader.Cells(1, spReporte.ActiveSheet.Columns("nombreAreaDestino").Index).Value = "Nombre".ToUpper
+        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("idUsuarioDestino").Index, 1, 2)
+        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("idUsuarioDestino").Index).Value = "Usuario Destino".ToUpper
+        spReporte.ActiveSheet.ColumnHeader.Cells(1, spReporte.ActiveSheet.Columns("idUsuarioDestino").Index).Value = "No.".ToUpper
+        spReporte.ActiveSheet.ColumnHeader.Cells(1, spReporte.ActiveSheet.Columns("nombreUsuarioDestino").Index).Value = "Nombre".ToUpper
+        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("nombre").Index, 2, 1)
+        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("nombre").Index).Value = "Nombre".ToUpper
+        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("descripcion").Index, 2, 1)
+        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("descripcion").Index).Value = "Descripción".ToUpper
+        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("fechaCreacion").Index, 2, 1)
+        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("fechaCreacion").Index).Value = "Fecha de Creación".ToUpper
+        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("fechaVencimiento").Index, 2, 1)
+        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("fechaVencimiento").Index).Value = "Fecha de Vencimiento".ToUpper
+        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("esUrgente").Index, 2, 1)
+        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("esUrgente").Index).Value = "Es Urgente?".ToUpper
+        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("idAreaResolucion").Index, 1, 2)
+        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("idAreaResolucion").Index).Value = "Area Resolución".ToUpper
+        spReporte.ActiveSheet.ColumnHeader.Cells(1, spReporte.ActiveSheet.Columns("idAreaResolucion").Index).Value = "No.".ToUpper
+        spReporte.ActiveSheet.ColumnHeader.Cells(1, spReporte.ActiveSheet.Columns("nombreAreaResolucion").Index).Value = "Nombre".ToUpper
+        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("idUsuarioResolucion").Index, 1, 2)
+        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("idUsuarioResolucion").Index).Value = "Usuario Resolución".ToUpper
+        spReporte.ActiveSheet.ColumnHeader.Cells(1, spReporte.ActiveSheet.Columns("idUsuarioResolucion").Index).Value = "No.".ToUpper
+        spReporte.ActiveSheet.ColumnHeader.Cells(1, spReporte.ActiveSheet.Columns("nombreUsuarioResolucion").Index).Value = "Nombre".ToUpper
+        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("descripcionResolucion").Index, 2, 1)
+        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("descripcionResolucion").Index).Value = "Descripción Resolución".ToUpper
+        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("motivoRetraso").Index, 2, 1)
+        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("motivoRetraso").Index).Value = "Motivo Retraso".ToUpper
+        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("fechaResolucion").Index, 2, 1)
+        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("fechaResolucion").Index).Value = "Fecha de Resolución".ToUpper
         If (rbtnTipoInternas.Checked) Then
-            spReporte.ActiveSheet.Columns(spReporte.ActiveSheet.Columns("idAreaDestino").Index, spReporte.ActiveSheet.Columns("nombreUsuarioDestino").Index).Visible = False : Application.DoEvents()
+            spReporte.ActiveSheet.Columns(spReporte.ActiveSheet.Columns("idAreaDestino").Index, spReporte.ActiveSheet.Columns("nombreUsuarioDestino").Index).Visible = False
         ElseIf (rbtnTipoExternas.Checked Or rbtnTipoTodos.Checked) Then
-            spReporte.ActiveSheet.Columns(spReporte.ActiveSheet.Columns("idAreaDestino").Index, spReporte.ActiveSheet.Columns("nombreUsuarioDestino").Index).Visible = True : Application.DoEvents()
+            spReporte.ActiveSheet.Columns(spReporte.ActiveSheet.Columns("idAreaDestino").Index, spReporte.ActiveSheet.Columns("nombreUsuarioDestino").Index).Visible = True
         End If
         If (rbtnEstatusAbiertas.Checked) Then
-            spReporte.ActiveSheet.Columns(spReporte.ActiveSheet.Columns("idAreaResolucion").Index, spReporte.ActiveSheet.Columns("fechaResolucion").Index).Visible = False : Application.DoEvents()
+            spReporte.ActiveSheet.Columns(spReporte.ActiveSheet.Columns("idAreaResolucion").Index, spReporte.ActiveSheet.Columns("fechaResolucion").Index).Visible = False
         ElseIf (rbtnEstatusResueltas.Checked Or rbtnEstatusTodos.Checked) Then
-            spReporte.ActiveSheet.Columns(spReporte.ActiveSheet.Columns("idAreaResolucion").Index, spReporte.ActiveSheet.Columns("fechaResolucion").Index).Visible = True : Application.DoEvents()
+            spReporte.ActiveSheet.Columns(spReporte.ActiveSheet.Columns("idAreaResolucion").Index, spReporte.ActiveSheet.Columns("fechaResolucion").Index).Visible = True
         End If
-        spReporte.ActiveSheet.Columns(spReporte.ActiveSheet.Columns("esAutorizado").Index, spReporte.ActiveSheet.Columns("estaResuelto").Index).Visible = False : Application.DoEvents()
-        spReporte.ActiveSheet.OperationMode = FarPoint.Win.Spread.OperationMode.SingleSelect : Application.DoEvents()
+        spReporte.ActiveSheet.Columns(spReporte.ActiveSheet.Columns("esAutorizado").Index, spReporte.ActiveSheet.Columns("estaResuelto").Index).Visible = False
+        spReporte.ActiveSheet.OperationMode = FarPoint.Win.Spread.OperationMode.SingleSelect
+        Application.DoEvents()
 
     End Sub
 

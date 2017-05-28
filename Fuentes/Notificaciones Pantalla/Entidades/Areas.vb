@@ -33,8 +33,8 @@ Public Class Areas
 
     Public Function ObtenerPorId() As List(Of Areas)
 
-        Dim lista As New List(Of Areas)
         Try
+            Dim lista As New List(Of Areas)
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionCatalogo
             comando.CommandText = "SELECT * FROM Areas WHERE Id = @id"

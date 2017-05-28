@@ -13,6 +13,7 @@ Public Class Principal
     Dim notificaciones As New EntidadesNotificacionesPantalla.Notificaciones
     Dim actividades As New EntidadesNotificacionesPantalla.Actividades
     Dim actividadesExternas As New EntidadesNotificacionesPantalla.ActividadesExternas
+    Dim horarios As New EntidadesNotificacionesPantalla.Horarios
     Public datosEmpresa As New LogicaNotificacionesPantalla.DatosEmpresa()
     Public datosUsuario As New LogicaNotificacionesPantalla.DatosUsuario()
     Public datosArea As New LogicaNotificacionesPantalla.DatosArea()
@@ -224,39 +225,6 @@ Public Class Principal
 
 #Region "Todos"
 
-    Private Sub CargarActividadesVencidas()
-
-        If Me.Visible Then
-            Me.Hide()
-        End If
-        If Not Listado.Visible Then
-            Listado.Show()
-        Else
-            Listado.Dispose()
-            System.Threading.Thread.Sleep(5000)
-            Listado.Show()
-        End If
-        'Listado.AcomodarPaneles() ' Esta descontinuado.
-        Dim lista As New List(Of EntidadesNotificacionesPantalla.Actividades) : Dim listaExterna As New List(Of EntidadesNotificacionesPantalla.ActividadesExternas)
-        Dim listaLocal As New Object
-        ' Actividades internas.
-        actividades.EIdArea = Me.datosUsuario.EIdArea
-        actividades.EIdUsuario = Me.datosUsuario.EId
-        lista = actividades.ObtenerListadoPendientes()
-        listaLocal = lista
-        Listado.GenerarListado(listaLocal, Listado.TipoActividad.internas)
-        listaLocal = New Object
-        ' Actividades externas.
-        actividadesExternas.EIdArea = Me.datosUsuario.EIdArea
-        actividadesExternas.EIdUsuario = Me.datosUsuario.EId
-        listaExterna = actividadesExternas.ObtenerListadoPendientesExternas()
-        listaLocal = listaExterna
-        Listado.GenerarListado(listaLocal, Listado.TipoActividad.externas)
-        listaLocal = New Object
-        Listado.Text &= "    Usuario: " & Me.datosUsuario.ENombre & "   Area: " & Me.datosArea.ENombre
-
-    End Sub
-
     Private Sub IniciarProceso()
 
         Me.Hide()
@@ -275,19 +243,24 @@ Public Class Principal
     Private Sub CiclarInfinitamente()
 
         Dim hora As Integer = 0
-        Dim minutos As Integer = 0
+        Dim minuto As Integer = 0
         Dim esPrimeraVezAbierto As Boolean = True ' Es para cuando se abre este programa.
         Dim esRangoValido As Boolean = False ' Es el rango de tiempo valido.
         Dim esPrimeraVezRango As Boolean = True ' Es el contador de la primera vez que se entra de nuevo al rango.
+        Dim lista As New List(Of EntidadesNotificacionesPantalla.Horarios)
+        horarios.EIdArea = Me.datosArea.EId
+        lista = horarios.ObtenerListado()
         While True
             hora = Date.Now.Hour
-            minutos = Date.Now.Minute
-            If (minutos >= 1 And minutos <= 30) Then
-                'If (minutos Mod 2) = 0 Then
-                esRangoValido = True
-            Else
-                esRangoValido = False
-            End If
+            minuto = Date.Now.Minute
+            For indice = 0 To lista.Count - 1
+                If ((hora = Convert.ToDateTime(lista(indice).EHora).Hour) And (minuto = Convert.ToDateTime(lista(indice).EHora).Minute)) Then
+                    esRangoValido = True
+                    Exit For
+                Else
+                    esRangoValido = False
+                End If
+            Next
             If (Listado.Visible) Then
                 Me.estaMostrado = True
             Else
@@ -315,6 +288,38 @@ Public Class Principal
                 End If
             End If
         End While
+
+    End Sub
+
+    Private Sub CargarActividadesVencidas()
+
+        If Me.Visible Then
+            Me.Hide()
+        End If
+        If Not Listado.Visible Then
+            Listado.Show()
+        Else
+            Listado.Dispose()
+            System.Threading.Thread.Sleep(5000)
+            Listado.Show()
+        End If 
+        Dim lista As New List(Of EntidadesNotificacionesPantalla.Actividades) : Dim listaExterna As New List(Of EntidadesNotificacionesPantalla.ActividadesExternas)
+        Dim listaLocal As New Object
+        ' Actividades internas.
+        actividades.EIdArea = Me.datosUsuario.EIdArea
+        actividades.EIdUsuario = Me.datosUsuario.EId
+        lista = actividades.ObtenerListadoPendientes()
+        listaLocal = lista
+        Listado.GenerarListado(listaLocal, Listado.TipoActividad.internas)
+        listaLocal = New Object
+        ' Actividades externas.
+        actividadesExternas.EIdArea = Me.datosUsuario.EIdArea
+        actividadesExternas.EIdUsuario = Me.datosUsuario.EId
+        listaExterna = actividadesExternas.ObtenerListadoPendientesExternas()
+        listaLocal = listaExterna
+        Listado.GenerarListado(listaLocal, Listado.TipoActividad.externas)
+        listaLocal = New Object
+        Listado.Text &= "    Usuario: " & Me.datosUsuario.ENombre & "   Area: " & Me.datosArea.ENombre
 
     End Sub
 

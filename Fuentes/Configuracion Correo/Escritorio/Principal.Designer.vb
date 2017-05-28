@@ -30,11 +30,6 @@ Partial Class Principal
         Me.cbProveedores = New System.Windows.Forms.ComboBox()
         Me.txtAsunto = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
-        Me.txtServidor = New System.Windows.Forms.TextBox()
-        Me.txtPuerto = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.txtContrasena = New System.Windows.Forms.TextBox()
         Me.txtDireccion = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -84,11 +79,6 @@ Partial Class Principal
         Me.pnlCuerpo.Controls.Add(Me.cbProveedores)
         Me.pnlCuerpo.Controls.Add(Me.txtAsunto)
         Me.pnlCuerpo.Controls.Add(Me.Label6)
-        Me.pnlCuerpo.Controls.Add(Me.CheckBox2)
-        Me.pnlCuerpo.Controls.Add(Me.txtServidor)
-        Me.pnlCuerpo.Controls.Add(Me.txtPuerto)
-        Me.pnlCuerpo.Controls.Add(Me.Label3)
-        Me.pnlCuerpo.Controls.Add(Me.Label4)
         Me.pnlCuerpo.Controls.Add(Me.txtContrasena)
         Me.pnlCuerpo.Controls.Add(Me.txtDireccion)
         Me.pnlCuerpo.Controls.Add(Me.Label7)
@@ -120,16 +110,16 @@ Partial Class Principal
         Me.cbProveedores.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbProveedores.FormattingEnabled = True
         Me.cbProveedores.Items.AddRange(New Object() {"@gmail.com", "@hotmail.com", "@live.com", "@live.com.mx"})
-        Me.cbProveedores.Location = New System.Drawing.Point(393, 18)
+        Me.cbProveedores.Location = New System.Drawing.Point(408, 18)
         Me.cbProveedores.Name = "cbProveedores"
-        Me.cbProveedores.Size = New System.Drawing.Size(240, 32)
+        Me.cbProveedores.Size = New System.Drawing.Size(225, 32)
         Me.cbProveedores.TabIndex = 96
         '
         'txtAsunto
         '
         Me.txtAsunto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtAsunto.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAsunto.Location = New System.Drawing.Point(139, 89)
+        Me.txtAsunto.Location = New System.Drawing.Point(152, 89)
         Me.txtAsunto.Name = "txtAsunto"
         Me.txtAsunto.Size = New System.Drawing.Size(368, 29)
         Me.txtAsunto.TabIndex = 95
@@ -145,69 +135,11 @@ Partial Class Principal
         Me.Label6.TabIndex = 94
         Me.Label6.Text = "Asunto:"
         '
-        'CheckBox2
-        '
-        Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.CheckBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CheckBox2.ForeColor = System.Drawing.Color.Black
-        Me.CheckBox2.Location = New System.Drawing.Point(912, 20)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(66, 28)
-        Me.CheckBox2.TabIndex = 91
-        Me.CheckBox2.Text = "SSL"
-        Me.CheckBox2.UseVisualStyleBackColor = True
-        Me.CheckBox2.Visible = False
-        '
-        'txtServidor
-        '
-        Me.txtServidor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtServidor.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtServidor.Location = New System.Drawing.Point(817, 53)
-        Me.txtServidor.Name = "txtServidor"
-        Me.txtServidor.Size = New System.Drawing.Size(161, 29)
-        Me.txtServidor.TabIndex = 90
-        Me.txtServidor.Visible = False
-        '
-        'txtPuerto
-        '
-        Me.txtPuerto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtPuerto.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPuerto.Location = New System.Drawing.Point(817, 19)
-        Me.txtPuerto.Name = "txtPuerto"
-        Me.txtPuerto.Size = New System.Drawing.Size(63, 29)
-        Me.txtPuerto.TabIndex = 89
-        Me.txtPuerto.Visible = False
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.Black
-        Me.Label3.Location = New System.Drawing.Point(717, 55)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(94, 24)
-        Me.Label3.TabIndex = 88
-        Me.Label3.Text = "Servidor:"
-        Me.Label3.Visible = False
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.Color.Black
-        Me.Label4.Location = New System.Drawing.Point(717, 24)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(77, 24)
-        Me.Label4.TabIndex = 87
-        Me.Label4.Text = "Puerto:"
-        Me.Label4.Visible = False
-        '
         'txtContrasena
         '
         Me.txtContrasena.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtContrasena.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtContrasena.Location = New System.Drawing.Point(139, 54)
+        Me.txtContrasena.Location = New System.Drawing.Point(152, 54)
         Me.txtContrasena.Name = "txtContrasena"
         Me.txtContrasena.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtContrasena.Size = New System.Drawing.Size(254, 29)
@@ -217,7 +149,7 @@ Partial Class Principal
         '
         Me.txtDireccion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtDireccion.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDireccion.Location = New System.Drawing.Point(139, 19)
+        Me.txtDireccion.Location = New System.Drawing.Point(152, 19)
         Me.txtDireccion.Name = "txtDireccion"
         Me.txtDireccion.Size = New System.Drawing.Size(254, 29)
         Me.txtDireccion.TabIndex = 83
@@ -229,9 +161,9 @@ Partial Class Principal
         Me.Label7.ForeColor = System.Drawing.Color.Black
         Me.Label7.Location = New System.Drawing.Point(12, 56)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(122, 24)
+        Me.Label7.Size = New System.Drawing.Size(136, 24)
         Me.Label7.TabIndex = 82
-        Me.Label7.Text = "Contraseña:"
+        Me.Label7.Text = "Contraseña: *"
         '
         'Label8
         '
@@ -240,15 +172,15 @@ Partial Class Principal
         Me.Label8.ForeColor = System.Drawing.Color.Black
         Me.Label8.Location = New System.Drawing.Point(12, 21)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(80, 24)
+        Me.Label8.Size = New System.Drawing.Size(94, 24)
         Me.Label8.TabIndex = 81
-        Me.Label8.Text = "Correo:"
+        Me.Label8.Text = "Correo: *"
         '
         'txtMensaje
         '
         Me.txtMensaje.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtMensaje.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMensaje.Location = New System.Drawing.Point(139, 124)
+        Me.txtMensaje.Location = New System.Drawing.Point(152, 124)
         Me.txtMensaje.Multiline = True
         Me.txtMensaje.Name = "txtMensaje"
         Me.txtMensaje.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
@@ -265,7 +197,7 @@ Partial Class Principal
         Me.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnGuardar.ForeColor = System.Drawing.Color.Black
         Me.btnGuardar.Image = CType(resources.GetObject("btnGuardar.Image"), System.Drawing.Image)
-        Me.btnGuardar.Location = New System.Drawing.Point(447, 218)
+        Me.btnGuardar.Location = New System.Drawing.Point(460, 218)
         Me.btnGuardar.Margin = New System.Windows.Forms.Padding(0)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(60, 60)
@@ -429,11 +361,6 @@ Partial Class Principal
     Friend WithEvents cbProveedores As System.Windows.Forms.ComboBox
     Friend WithEvents txtAsunto As System.Windows.Forms.TextBox
     Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents CheckBox2 As System.Windows.Forms.CheckBox
-    Friend WithEvents txtServidor As System.Windows.Forms.TextBox
-    Friend WithEvents txtPuerto As System.Windows.Forms.TextBox
-    Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents txtContrasena As System.Windows.Forms.TextBox
     Friend WithEvents txtDireccion As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label

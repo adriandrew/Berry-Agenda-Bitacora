@@ -89,6 +89,7 @@
     <Compile Include="BloqueoUsuarios.vb" />
     <Compile Include="Correos.vb" />
     <Compile Include="CorreosUsuarios.vb" />
+    <Compile Include="HorariosNotificaciones.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

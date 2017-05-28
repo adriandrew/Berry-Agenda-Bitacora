@@ -187,8 +187,8 @@ Public Class Usuarios
 
     Public Function ObtenerListadoPorId() As List(Of Usuarios)
 
-        Dim lista As New List(Of Usuarios)()
         Try
+            Dim lista As New List(Of Usuarios)()
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionInformacion
             comando.CommandText = "SELECT * FROM Usuarios WHERE IdEmpresa=@idEmpresa AND Id=@id"
@@ -218,13 +218,13 @@ Public Class Usuarios
 
     End Function
 
-    Public Function ObtenerListado() As DataTable
+    Public Function ObtenerListadoReporte() As DataTable
 
-        Dim datos As New DataTable
         Try
+            Dim datos As New DataTable
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionInformacion
-            comando.CommandText = "SELECT Id, Nombre FROM Usuarios WHERE IdEmpresa=@idEmpresa ORDER BY Id"
+            comando.CommandText = "SELECT Id, Nombre FROM Usuarios WHERE IdEmpresa=@idEmpresa ORDER BY Id ASC"
             comando.Parameters.AddWithValue("@idEmpresa", Me.idEmpresa)
             BaseDatos.conexionInformacion.Open()
             Dim dataReader As SqlDataReader

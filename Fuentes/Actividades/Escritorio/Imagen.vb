@@ -2,6 +2,7 @@
 
 Public Class Imagen
 
+    Public idTipo As Integer = 0
     Public idArea As Integer = 0
     Public idUsuario As Integer = 0
     Public idActividad As Integer = 0 
@@ -30,7 +31,7 @@ Public Class Imagen
         Centrar()
         AsignarTooltips()
         CargarValores()
-        Cargar()
+        Mostrar()
 
     End Sub
 
@@ -193,6 +194,9 @@ Public Class Imagen
                 Principal.rutaImagen = String.Empty
                 Principal.tieneImagen = False
             Catch ex As Exception
+                Principal.rutaImagen = String.Empty
+                Principal.tieneImagen = False
+                Me.pbImagen.Image = Nothing
             End Try
         Finally
             If (Not pImagen Is Nothing) Then
@@ -208,9 +212,9 @@ Public Class Imagen
 
         Dim ruta As String
         If Principal.esDesarrollo Then
-            ruta = "Z:\"
+            ruta = "X:\"
         Else
-            ruta = CurDir() ' TODO. Descomentar
+            ruta = CurDir()
         End If
         Return ruta
 
@@ -218,17 +222,9 @@ Public Class Imagen
 
     Public Sub CargarValores()
 
-        Me.nombreArchivo = Me.idArea.ToString.PadLeft(2, "0") + "-" + Me.idUsuario.ToString.PadLeft(3, "0").ToString + "-" + Me.idActividad.ToString.PadLeft(6, "0")
+        Me.nombreArchivo = Me.idTipo.ToString.PadLeft(2, "0") + "-" + Me.idArea.ToString.PadLeft(2, "0") + "-" + Me.idUsuario.ToString.PadLeft(3, "0").ToString + "-" + Me.idActividad.ToString.PadLeft(6, "0")
         Me.ruta = ObtenerRutaCarpeta() + "\ImagenesEvidencia\" 
         Me.imagenError = New IO.FileStream(Me.ruta + "NoFoto.jpg", FileMode.OpenOrCreate, FileAccess.Read)
-
-    End Sub
-
-    Private Sub Cargar()
-
-        'If (Me.idActividad > 0) And (Me.idArea > 0) And (Me.idUsuario > 0) Then
-        Mostrar()
-        'End If
 
     End Sub
 

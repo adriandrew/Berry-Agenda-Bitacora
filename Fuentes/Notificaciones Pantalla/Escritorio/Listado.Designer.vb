@@ -71,11 +71,13 @@ Partial Class Listado
         '
         Me.splitContenedor.Panel1.AutoScroll = True
         Me.splitContenedor.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.splitContenedor.Panel1.ForeColor = System.Drawing.Color.White
         '
         'splitContenedor.Panel2
         '
         Me.splitContenedor.Panel2.AutoScroll = True
         Me.splitContenedor.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.splitContenedor.Panel2.ForeColor = System.Drawing.Color.White
         Me.splitContenedor.Size = New System.Drawing.Size(1039, 633)
         Me.splitContenedor.SplitterDistance = 519
         Me.splitContenedor.TabIndex = 2

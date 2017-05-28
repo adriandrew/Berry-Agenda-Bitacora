@@ -91,6 +91,7 @@
     <Compile Include="BaseDatos.vb" />
     <Compile Include="Empresas.vb" />
     <Compile Include="EmpresasPrincipal.vb" />
+    <Compile Include="Horarios.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

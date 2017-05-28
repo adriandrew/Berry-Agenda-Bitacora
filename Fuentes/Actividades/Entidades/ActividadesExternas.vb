@@ -18,6 +18,8 @@ Public Class ActividadesExternas
     Private esAutorizado As Boolean
     Private esRechazado As Boolean
     Private estaResuelto As Boolean
+    Private solicitaAutorizacion As Boolean
+    Private solicitaEvidencia As Boolean
 
     Public Property EId() As Integer
         Get
@@ -147,17 +149,34 @@ Public Class ActividadesExternas
             Me.estaResuelto = value
         End Set
     End Property
+    Public Property ESolicitaAutorizacion() As Boolean
+        Get
+            Return Me.solicitaAutorizacion
+        End Get
+        Set(value As Boolean)
+            Me.solicitaAutorizacion = value
+        End Set
+    End Property
+    Public Property ESolicitaEvidencia() As Boolean
+        Get
+            Return Me.solicitaEvidencia
+        End Get
+        Set(value As Boolean)
+            Me.solicitaEvidencia = value
+        End Set
+    End Property
 
     Public Function ObtenerListadoPendientesExternas() As List(Of ActividadesExternas)
 
-        Dim lista As New List(Of ActividadesExternas)
         Try
+            Dim lista As New List(Of ActividadesExternas)
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
-            comando.CommandText = "SELECT A.Id, A.IdArea, Areas.Nombre AS NombreArea, A.IdUsuario, U.Nombre AS NombreUsuario, A.Nombre, A.Descripcion, A.FechaCreacion, A.FechaVencimiento, A.EsUrgente, A.EsExterna, A.IdAreaDestino, A.IdUsuarioDestino, A.EsAutorizado, A.EsRechazado, A.EstaResuelto " & _
+            'A.EsAutorizado='TRUE' AND ' Si se requiere que se bloquee hasta que sea autorizada, hay que ponerle esto. (Descontinuado a petición de usuario.)
+            comando.CommandText = "SELECT A.Id, A.IdArea, Areas.Nombre AS NombreArea, A.IdUsuario, U.Nombre AS NombreUsuario, A.Nombre, A.Descripcion, A.FechaCreacion, A.FechaVencimiento, A.EsUrgente, A.EsExterna, A.IdAreaDestino, A.IdUsuarioDestino, A.EsAutorizado, A.EsRechazado, A.EstaResuelto, A.SolicitaAutorizacion, A.SolicitaEvidencia " & _
             " FROM ((Actividades AS A LEFT JOIN ActividadesResueltas AS AR ON A.Id = AR.IdActividad AND A.IdArea = AR.IdArea AND A.IdUsuario = AR.IdUsuario) " & _
             " LEFT JOIN [INFORMACION].dbo.Usuarios AS U ON A.IdUsuario = U.Id) LEFT JOIN CATALOGOS.dbo.Areas ON A.IdArea = Areas.Id " & _
-            " WHERE A.EsAutorizado='TRUE' AND A.IdAreaDestino=@idArea AND A.IdUsuarioDestino=@idUsuario AND AR.IdActividad IS NULL AND AR.IdArea IS NULL AND AR.IdUsuario IS NULL"
+            " WHERE A.IdAreaDestino=@idArea AND A.IdUsuarioDestino=@idUsuario AND AR.IdActividad IS NULL AND AR.IdArea IS NULL AND AR.IdUsuario IS NULL"
             comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
             comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
             BaseDatos.conexionAgenda.Open()
@@ -182,6 +201,8 @@ Public Class ActividadesExternas
                 actividades.esAutorizado = IIf(Not IsDBNull(dataReader("EsAutorizado")), dataReader("EsAutorizado"), False)
                 actividades.esRechazado = IIf(Not IsDBNull(dataReader("EsRechazado")), dataReader("EsRechazado"), False)
                 actividades.estaResuelto = IIf(Not IsDBNull(dataReader("EstaResuelto")), dataReader("EstaResuelto"), False)
+                actividades.solicitaAutorizacion = IIf(Not IsDBNull(dataReader("SolicitaAutorizacion")), dataReader("SolicitaAutorizacion"), False)
+                actividades.solicitaEvidencia = IIf(Not IsDBNull(dataReader("SolicitaEvidencia")), dataReader("SolicitaEvidencia"), False)
                 lista.Add(actividades)
             End While
             BaseDatos.conexionAgenda.Close()

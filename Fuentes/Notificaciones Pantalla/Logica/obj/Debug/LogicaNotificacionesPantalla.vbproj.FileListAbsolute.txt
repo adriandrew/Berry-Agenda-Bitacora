@@ -1,0 +1,8 @@
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Logica\bin\Debug\LogicaNotificacionesPantalla.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Logica\bin\Debug\LogicaNotificacionesPantalla.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Logica\bin\Debug\LogicaNotificacionesPantalla.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Logica\obj\Debug\LogicaNotificacionesPantalla.Resources.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Logica\obj\Debug\LogicaNotificacionesPantalla.vbproj.GenerateResource.Cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Logica\obj\Debug\LogicaNotificacionesPantalla.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Logica\obj\Debug\LogicaNotificacionesPantalla.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Pantalla\Logica\obj\Debug\LogicaNotificacionesPantalla.pdb

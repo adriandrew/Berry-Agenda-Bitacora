@@ -68,9 +68,9 @@ namespace Escritorio
             this.Enabled = false;
             CargarEncabezados();
             CargarTitulosEmpresa();
-            this.txtUsuario.Focus();
             VerificarLicencia();
             this.Enabled = true;
+            this.txtUsuario.Focus();
             this.Cursor = Cursors.Default;
 
         }
@@ -599,9 +599,10 @@ namespace Escritorio
         private void PermitirAcceso(int idEmpresa, int idUsuario, bool abrirNotificaciones)
         {
 
-            pnlIniciarSesion.Visible = false; Application.DoEvents();
-            pnlOpciones.Visible = false; Application.DoEvents();
-            pnlMenu.Visible = true; Application.DoEvents();
+            pnlIniciarSesion.Visible = false; 
+            pnlOpciones.Visible = false; 
+            pnlMenu.Visible = true; 
+            Application.DoEvents();
             this.esInicioSesion = false;
             this.idEmpresaSesion = idEmpresa;
             this.idUsuarioSesion = idUsuario;
@@ -684,14 +685,16 @@ namespace Escritorio
 	        if ((parametros.Length > 1)) 
             {
 		        this.tieneParametros = true;
+                pnlIniciarSesion.Visible = false;
+                pnlOpciones.Visible = false;
+                pnlMenu.Visible = true;  
+                Application.DoEvents();
 	        } 
             if (this.esDesarrollo)
             {
-                baseDatos.CadenaConexionPrincipal = "C:\\Berry Agenda-Bitacora\\Principal.sdf";
-                //Logica.DatosEmpresaPrincipal.instanciaSql = "ANDREW-MAC\\SQLEXPRESS";
+                baseDatos.CadenaConexionPrincipal = "C:\\Berry Agenda-Bitacora\\Principal.sdf"; 
                 Logica.DatosEmpresaPrincipal.instanciaSql = "BERRY1-DELL\\SQLEXPRESS2008";
-                Logica.DatosEmpresaPrincipal.usuarioSql = "AdminBerry";
-                //Logica.DatosEmpresaPrincipal.contrasenaSql = "@berry";
+                Logica.DatosEmpresaPrincipal.usuarioSql = "AdminBerry"; 
                 Logica.DatosEmpresaPrincipal.contrasenaSql = "@berry2017";
                 Logica.DatosEmpresaPrincipal.idEmpresa = 1; 
                 ConfigurarConexionPrincipal(); 

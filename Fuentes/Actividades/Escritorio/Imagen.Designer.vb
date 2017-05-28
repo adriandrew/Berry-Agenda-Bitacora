@@ -60,14 +60,14 @@ Partial Class Imagen
         '
         Me.pnlPie.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlPie.BackColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.pnlPie.BackColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(15, Byte), Integer))
         Me.pnlPie.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlPie.Controls.Add(Me.btnEliminarImagen)
         Me.pnlPie.Controls.Add(Me.btnMostrarImagen)
         Me.pnlPie.Controls.Add(Me.btnAgregarImagen)
         Me.pnlPie.Controls.Add(Me.lblDescripcionTooltip)
         Me.pnlPie.Controls.Add(Me.btnSalir)
-        Me.pnlPie.Location = New System.Drawing.Point(0, 571)
+        Me.pnlPie.Location = New System.Drawing.Point(0, 574)
         Me.pnlPie.Name = "pnlPie"
         Me.pnlPie.Size = New System.Drawing.Size(1035, 60)
         Me.pnlPie.TabIndex = 9
@@ -166,9 +166,11 @@ Partial Class Imagen
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1039, 635)
         Me.Controls.Add(Me.pnlContenido)
+        Me.ForeColor = System.Drawing.Color.White
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Imagen"
         Me.Text = "Imagen de evidencia"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.pbImagen, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlPie.ResumeLayout(False)
         Me.pnlPie.PerformLayout()
