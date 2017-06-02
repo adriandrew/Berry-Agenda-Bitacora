@@ -446,7 +446,7 @@ Public Class Principal
         End If
         ejecutarProgramaPrincipal.UseShellExecute = True
         ejecutarProgramaPrincipal.FileName = nombre & Convert.ToString(".exe")
-        ejecutarProgramaPrincipal.WorkingDirectory = Directory.GetCurrentDirectory()
+        ejecutarProgramaPrincipal.WorkingDirectory = Application.StartupPath
         ejecutarProgramaPrincipal.Arguments = LogicaCatalogos.DatosEmpresaPrincipal.idEmpresa.ToString().Trim().Replace(" ", "|") & " " & LogicaCatalogos.DatosEmpresaPrincipal.activa.ToString().Trim().Replace(" ", "|") & " " & LogicaCatalogos.DatosEmpresaPrincipal.instanciaSql.ToString().Trim().Replace(" ", "|") & " " & LogicaCatalogos.DatosEmpresaPrincipal.rutaBd.ToString().Trim().Replace(" ", "|") & " " & LogicaCatalogos.DatosEmpresaPrincipal.usuarioSql.ToString().Trim().Replace(" ", "|") & " " & LogicaCatalogos.DatosEmpresaPrincipal.contrasenaSql.ToString().Trim().Replace(" ", "|") & " " & "Aquí terminan los de empresa principal, indice 7 ;)".Replace(" ", "|") & " " & datosEmpresa.EId.ToString().Trim().Replace(" ", "|") & " " & datosEmpresa.ENombre.Trim().Replace(" ", "|") & " " & datosEmpresa.EDescripcion.Trim().Replace(" ", "|") & " " & datosEmpresa.EDomicilio.Trim().Replace(" ", "|") & " " & datosEmpresa.ELocalidad.Trim().Replace(" ", "|") & " " & datosEmpresa.ERfc.Trim().Replace(" ", "|") & " " & datosEmpresa.EDirectorio.Trim().Replace(" ", "|") & " " & datosEmpresa.ELogo.Trim().Replace(" ", "|") & " " & datosEmpresa.EActiva.ToString().Trim().Replace(" ", "|") & " " & datosEmpresa.EEquipo.Trim().Replace(" ", "|") & " " & "Aquí terminan los de empresa, indice 18 ;)".Replace(" ", "|") & " " & datosUsuario.EId.ToString().Trim().Replace(" ", "|") & " " & datosUsuario.ENombre.Trim().Replace(" ", "|") & " " & datosUsuario.EContrasena.Trim().Replace(" ", "|") & " " & datosUsuario.ENivel.ToString().Trim().Replace(" ", "|") & " " & datosUsuario.EAccesoTotal.ToString().Trim().Replace(" ", "|") & " " & datosUsuario.EIdArea.ToString().Trim().Replace(" ", "|") & " " & "Aquí terminan los de usuario, indice 25 ;)".Replace(" ", "|") & " " & datosArea.EId.ToString().Trim().Replace(" ", "|") & " " & datosArea.ENombre.ToString().Trim().Replace(" ", "|") & " " & datosArea.EClave.ToString().Trim().Replace(" ", "|") & " " & "Aquí terminan los de area, indice 29 ;)".Replace(" ", "|")
         Try
             Process.Start(ejecutarProgramaPrincipal)
@@ -1125,7 +1125,7 @@ Public Class Principal
         For fila As Integer = 0 To spCatalogos.ActiveSheet.Rows.Count - 1
             Dim idArea As Integer = LogicaCatalogos.Funciones.ValidarNumero(spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("idArea").Index).Text)
             Dim nombre As String = spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("nombreArea").Index).Text
-            Dim hora As String = spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("hora").Index).Text.Replace("p. m.", "PM").Replace("a. m.", "AM") 
+            Dim hora As String = spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("hora").Index).Text.Replace("p. m.", "PM").Replace("p.m.", "PM").Replace("pm", "PM").Replace("p m", "PM").Replace("a. m.", "AM").Replace("a.m.", "AM").Replace("am", "AM").Replace("a m", "AM")
             If (idArea > 0 AndAlso Not String.IsNullOrEmpty(hora.ToString)) Then
                 horarios.EIdArea = idArea
                 horarios.EHora = hora
