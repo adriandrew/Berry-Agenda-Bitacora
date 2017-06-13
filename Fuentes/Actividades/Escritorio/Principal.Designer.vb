@@ -30,6 +30,7 @@ Partial Class Principal
         Me.pnlCuerpo = New System.Windows.Forms.Panel()
         Me.tbActividades = New System.Windows.Forms.TabControl()
         Me.tpCapturarActividades = New System.Windows.Forms.TabPage()
+        Me.chkSolicitarEvidencia = New System.Windows.Forms.CheckBox()
         Me.lblEstatus = New System.Windows.Forms.Label()
         Me.lblCalificacion = New System.Windows.Forms.Label()
         Me.btnCapturaFechaVencimientoAnterior = New System.Windows.Forms.Button()
@@ -150,6 +151,7 @@ Partial Class Principal
         '
         Me.tpCapturarActividades.AutoScroll = True
         Me.tpCapturarActividades.BackColor = System.Drawing.Color.White
+        Me.tpCapturarActividades.Controls.Add(Me.chkSolicitarEvidencia)
         Me.tpCapturarActividades.Controls.Add(Me.lblEstatus)
         Me.tpCapturarActividades.Controls.Add(Me.lblCalificacion)
         Me.tpCapturarActividades.Controls.Add(Me.btnCapturaFechaVencimientoAnterior)
@@ -180,6 +182,17 @@ Partial Class Principal
         Me.tpCapturarActividades.Size = New System.Drawing.Size(1015, 452)
         Me.tpCapturarActividades.TabIndex = 0
         Me.tpCapturarActividades.Text = "Capturar Actividades"
+        '
+        'chkSolicitarEvidencia
+        '
+        Me.chkSolicitarEvidencia.AutoSize = True
+        Me.chkSolicitarEvidencia.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.chkSolicitarEvidencia.Location = New System.Drawing.Point(487, 292)
+        Me.chkSolicitarEvidencia.Name = "chkSolicitarEvidencia"
+        Me.chkSolicitarEvidencia.Size = New System.Drawing.Size(182, 28)
+        Me.chkSolicitarEvidencia.TabIndex = 25
+        Me.chkSolicitarEvidencia.Text = "Solicitar Evidencia"
+        Me.chkSolicitarEvidencia.UseVisualStyleBackColor = True
         '
         'lblEstatus
         '
@@ -372,9 +385,9 @@ Partial Class Principal
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.Location = New System.Drawing.Point(5, 18)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(47, 24)
+        Me.Label3.Size = New System.Drawing.Size(57, 24)
         Me.Label3.TabIndex = 4
-        Me.Label3.Text = "Id: *"
+        Me.Label3.Text = "No: *"
         '
         'txtCapturaDescripcion
         '
@@ -453,6 +466,7 @@ Partial Class Principal
         'cbUsuarios
         '
         Me.cbUsuarios.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cbUsuarios.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbUsuarios.Cursor = System.Windows.Forms.Cursors.Hand
         Me.cbUsuarios.FormattingEnabled = True
         Me.cbUsuarios.Location = New System.Drawing.Point(110, 71)
@@ -475,6 +489,7 @@ Partial Class Principal
         'cbAreas
         '
         Me.cbAreas.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cbAreas.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbAreas.Cursor = System.Windows.Forms.Cursors.Hand
         Me.cbAreas.FormattingEnabled = True
         Me.cbAreas.Location = New System.Drawing.Point(110, 33)
@@ -651,9 +666,9 @@ Partial Class Principal
         Me.Label7.AutoSize = True
         Me.Label7.Location = New System.Drawing.Point(1, 6)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(47, 24)
+        Me.Label7.Size = New System.Drawing.Size(57, 24)
         Me.Label7.TabIndex = 31
-        Me.Label7.Text = "Id: *"
+        Me.Label7.Text = "No: *"
         '
         'txtResolucionDescripcion
         '
@@ -968,4 +983,5 @@ Partial Class Principal
     Friend WithEvents lblEstatus As System.Windows.Forms.Label
     Friend WithEvents chkSolicitarAutorizacion As System.Windows.Forms.CheckBox
     Friend WithEvents lblEvidencia As System.Windows.Forms.Label
+    Friend WithEvents chkSolicitarEvidencia As System.Windows.Forms.CheckBox
 End Class

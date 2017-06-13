@@ -1,0 +1,12 @@
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Entidades\bin\Debug\EntidadesReporteActividades.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Entidades\bin\Debug\EntidadesReporteActividades.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Entidades\bin\Debug\EntidadesReporteActividades.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Entidades\bin\Debug\LogicaReporteActividades.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Entidades\bin\Debug\LogicaReporteActividades.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Entidades\bin\Debug\LogicaReporteActividades.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Entidades\obj\Debug\EntidadesReporteActividades.vbprojResolveAssemblyReference.cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Entidades\obj\Debug\EntidadesReporteActividades.Resources.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Entidades\obj\Debug\EntidadesReporteActividades.vbproj.GenerateResource.Cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Entidades\obj\Debug\EntidadesReporteActividades.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Entidades\obj\Debug\EntidadesReporteActividades.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Entidades\obj\Debug\EntidadesReporteActividades.pdb

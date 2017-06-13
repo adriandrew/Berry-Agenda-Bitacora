@@ -66,7 +66,6 @@ Public Class Principal
         AlinearBotones(True)
         AsignarFoco(txtCapturaId)
         FormatearSpread()
-        'CargarActividadesPendientesSpread()
         Me.Enabled = True
         AsignarFoco(txtCapturaId)
         Me.Cursor = Cursors.Default
@@ -488,7 +487,7 @@ Public Class Principal
 
         If (Me.esDesarrollo) Then
             'baseDatos.CadenaConexionInformacion = "C:\\Berry-Agenda\\BD\\PODC\\Agenda.mdf" 
-            Me.datosUsuario.EId = 201
+            Me.datosUsuario.EId = 202
             Me.datosUsuario.EIdArea = 2
             Me.datosEmpresa.EId = 1
             LogicaActividades.DatosEmpresaPrincipal.instanciaSql = "BERRY1-DELL\SQLEXPRESS2008"
@@ -662,14 +661,15 @@ Public Class Principal
             chkCapturaEsUrgente.Checked = lista(0).EEsUrgente
             chkCapturaEsExterna.Checked = lista(0).EEsExterna
             chkSolicitarAutorizacion.Checked = lista(0).ESolicitaAutorizacion
-            If lista(0).EEsExterna Then
+            chkSolicitarEvidencia.Checked = lista(0).ESolicitaEvidencia
+            If (lista(0).EEsExterna) Then
                 cbAreas.SelectedValue = lista(0).EIdAreaDestino
                 cbUsuarios.SelectedValue = lista(0).EIdUsuarioDestino
             Else
-                If cbAreas.Items.Count > 0 Then
+                If (cbAreas.Items.Count > 0) Then
                     cbAreas.SelectedIndex = 0
                 End If
-                If cbUsuarios.Items.Count > 0 Then
+                If (cbUsuarios.Items.Count > 0) Then
                     cbUsuarios.SelectedIndex = 0
                 End If
             End If
@@ -697,7 +697,7 @@ Public Class Principal
         Dim esRechazado As Boolean = False
         Dim estaResuelto As Boolean = False
         Dim solicitaAutorizacion As Boolean = chkSolicitarAutorizacion.Checked
-        Dim solicitaEvidencia As Boolean = False
+        Dim solicitaEvidencia As Boolean = chkSolicitarEvidencia.Checked
         If (esExterna And (idAreaDestino <= 0 Or idUsuarioDestino <= 0)) Then
             MsgBox("Falta definir area y/o usuario destino, no se puede guardar.", MsgBoxStyle.Exclamation, "No permitido.")
             Exit Sub
@@ -754,6 +754,7 @@ Public Class Principal
         dtpCapturaFechaVencimiento.Value = Today
         chkCapturaEsUrgente.Checked = False
         chkCapturaEsExterna.Checked = False
+        chkSolicitarEvidencia.Checked = False
         chkSolicitarAutorizacion.Checked = False
         If (cbAreas.Items.Count > 0) Then
             cbAreas.SelectedIndex = 0
@@ -1213,10 +1214,15 @@ Public Class Principal
 
     Private Sub CargarValoresImagenes()
 
-        'spResolverActividades.ActiveSheetIndex = 1
+        ' TODO. Corregir, ya que se pueden duplicar las imagenes externas, lo cual es erroneo.
+        If (spResolverActividades.ActiveSheetIndex = 0) Then
+            Imagen.idUsuario = Me.datosUsuario.EId
+            Imagen.idArea = Me.datosUsuario.EIdArea
+        ElseIf (spResolverActividades.ActiveSheetIndex = 1) Then 
+            Imagen.idUsuario = spResolverActividades.ActiveSheet.Cells(spResolverActividades.ActiveSheet.ActiveRowIndex, spResolverActividades.ActiveSheet.Columns("idUsuario").Index).Value
+            Imagen.idArea = spResolverActividades.ActiveSheet.Cells(spResolverActividades.ActiveSheet.ActiveRowIndex, spResolverActividades.ActiveSheet.Columns("idArea").Index).Value
+        End If
         Imagen.idActividad = LogicaActividades.Funciones.ValidarNumero(txtResolucionId.Text)
-        Imagen.idUsuario = Me.datosUsuario.EId
-        Imagen.idArea = Me.datosUsuario.EIdArea
         Imagen.idTipo = spResolverActividades.ActiveSheetIndex + 1
 
     End Sub

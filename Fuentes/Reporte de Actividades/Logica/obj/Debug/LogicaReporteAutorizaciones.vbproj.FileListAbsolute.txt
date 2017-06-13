@@ -1,0 +1,8 @@
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Logica\bin\Debug\LogicaReporteActividades.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Logica\bin\Debug\LogicaReporteActividades.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Logica\bin\Debug\LogicaReporteActividades.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Logica\obj\Debug\LogicaReporteActividades.Resources.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Logica\obj\Debug\LogicaReporteAutorizaciones.vbproj.GenerateResource.Cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Logica\obj\Debug\LogicaReporteActividades.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Logica\obj\Debug\LogicaReporteActividades.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Logica\obj\Debug\LogicaReporteActividades.pdb

@@ -172,6 +172,17 @@ Public Class Principal
 
     End Sub
 
+    Private Sub spReporte_CellDoubleClick(sender As Object, e As CellClickEventArgs) Handles spReporte.CellDoubleClick
+
+        Imagen.nombreArchivo = String.Empty
+        Dim ruta As String = LogicaReporteActividades.Funciones.ValidarLetra(spReporte.ActiveSheet.Cells(e.Row, spReporte.ActiveSheet.Columns("rutaImagen").Index).Value)
+        If (Not String.IsNullOrEmpty(ruta)) Then
+            Imagen.nombreArchivo = ruta
+            Imagen.Show()
+        End If
+
+    End Sub
+
     Private Sub spActividades_MouseHover(sender As Object, e As EventArgs) Handles spReporte.MouseHover
 
         AlinearFiltrosIzquierda()
@@ -768,7 +779,7 @@ Public Class Principal
         ElseIf (Not chkFechaResolucion.Checked) Then
             aplicaFechaResolucion = False
         End If
-        lista = actividades.ObtenerListadoActividades(tipo, estatus, calificacion, aplicaFechaCreacion, aplicaFechaVencimiento, aplicaFechaResolucion)
+        lista = actividades.ObtenerListadoReporte(tipo, estatus, calificacion, aplicaFechaCreacion, aplicaFechaVencimiento, aplicaFechaResolucion)
         spReporte.ActiveSheet.DataSource = lista
         FormatearSpreadReporteActividades(spReporte.ActiveSheet.Columns.Count)
 
@@ -783,6 +794,16 @@ Public Class Principal
         btnImprimir.Enabled = True
         btnExportarExcel.Enabled = True
         btnExportarPdf.Enabled = True
+        For fila = 0 To spReporte.ActiveSheet.Rows.Count - 1 ' Se limpian datos innecesarios.
+            For columna = 0 To spReporte.ActiveSheet.Columns.Count - 1
+                If (columna = spReporte.ActiveSheet.Columns("idAreaDestino").Index Or columna = spReporte.ActiveSheet.Columns("idUsuarioDestino").Index Or columna = spReporte.ActiveSheet.Columns("idAreaResolucion").Index Or columna = spReporte.ActiveSheet.Columns("idUsuarioResolucion").Index) Then
+                    Dim valor As Integer = LogicaReporteActividades.Funciones.ValidarNumero(spReporte.ActiveSheet.Cells(fila, columna).Value)
+                    If (valor <= 0) Then
+                        spReporte.ActiveSheet.Cells(fila, columna).Text = String.Empty
+                    End If
+                End If
+            Next
+        Next
         Me.Cursor = Cursors.Default
 
     End Sub
@@ -834,12 +855,15 @@ Public Class Principal
         spReporte.ActiveSheet.Columns(numeracion).Tag = "descripcionResolucion" : numeracion += 1
         spReporte.ActiveSheet.Columns(numeracion).Tag = "motivoRetraso" : numeracion += 1
         spReporte.ActiveSheet.Columns(numeracion).Tag = "fechaResolucion" : numeracion += 1
+        spReporte.ActiveSheet.Columns(numeracion).Tag = "solicitaAutorizacion" : numeracion += 1
+        spReporte.ActiveSheet.Columns(numeracion).Tag = "solicitaEvidencia" : numeracion += 1
+        spReporte.ActiveSheet.Columns(numeracion).Tag = "rutaImagen" : numeracion += 1
         spReporte.ActiveSheet.Columns(numeracion).Tag = "esAutorizado" : numeracion += 1
         spReporte.ActiveSheet.Columns(numeracion).Tag = "esRechazado" : numeracion += 1
         spReporte.ActiveSheet.Columns(numeracion).Tag = "esExterna" : numeracion += 1
         spReporte.ActiveSheet.Columns(numeracion).Tag = "estaResuelto" : numeracion += 1
-        spReporte.ActiveSheet.Columns("tipo").Width = 100
-        spReporte.ActiveSheet.Columns("estatus").Width = 100
+        spReporte.ActiveSheet.Columns("tipo").Width = 70
+        spReporte.ActiveSheet.Columns("estatus").Width = 80
         spReporte.ActiveSheet.Columns("calificacion").Width = 120
         spReporte.ActiveSheet.Columns("id").Width = 50
         spReporte.ActiveSheet.Columns("idArea").Width = 40
@@ -852,7 +876,7 @@ Public Class Principal
         spReporte.ActiveSheet.Columns("nombreUsuarioDestino").Width = 110
         spReporte.ActiveSheet.Columns("nombre").Width = 300
         spReporte.ActiveSheet.Columns("descripcion").Width = 500
-        spReporte.ActiveSheet.Columns("fechaCreacion").Width = 120
+        spReporte.ActiveSheet.Columns("fechaCreacion").Width = 100
         spReporte.ActiveSheet.Columns("fechaVencimiento").Width = 120
         spReporte.ActiveSheet.Columns("esUrgente").Width = 90
         spReporte.ActiveSheet.Columns("idAreaResolucion").Width = 40
@@ -861,9 +885,12 @@ Public Class Principal
         spReporte.ActiveSheet.Columns("nombreUsuarioResolucion").Width = 120
         spReporte.ActiveSheet.Columns("descripcionResolucion").Width = 400
         spReporte.ActiveSheet.Columns("motivoRetraso").Width = 150
-        spReporte.ActiveSheet.Columns("fechaResolucion").Width = 120
-        Application.DoEvents()
+        spReporte.ActiveSheet.Columns("fechaResolucion").Width = 110
+        spReporte.ActiveSheet.Columns("solicitaAutorizacion").Width = 130
+        spReporte.ActiveSheet.Columns("solicitaEvidencia").Width = 110
         spReporte.ActiveSheet.Columns("esUrgente").CellType = tipoBooleano
+        spReporte.ActiveSheet.Columns("solicitaAutorizacion").CellType = tipoBooleano
+        spReporte.ActiveSheet.Columns("solicitaEvidencia").CellType = tipoBooleano
         spReporte.ActiveSheet.Columns("nombre").HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify
         spReporte.ActiveSheet.Columns("descripcion").HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify
         spReporte.ActiveSheet.Columns("descripcionResolucion").HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify
@@ -917,6 +944,10 @@ Public Class Principal
         spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("motivoRetraso").Index).Value = "Motivo Retraso".ToUpper
         spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("fechaResolucion").Index, 2, 1)
         spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("fechaResolucion").Index).Value = "Fecha de Resolución".ToUpper
+        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("solicitaAutorizacion").Index, 2, 1)
+        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("solicitaAutorizacion").Index).Value = "Solicita Autorización?".ToUpper
+        spReporte.ActiveSheet.AddColumnHeaderSpanCell(0, spReporte.ActiveSheet.Columns("solicitaEvidencia").Index, 2, 1)
+        spReporte.ActiveSheet.ColumnHeader.Cells(0, spReporte.ActiveSheet.Columns("solicitaEvidencia").Index).Value = "Solicita Evidencia?".ToUpper
         If (rbtnTipoInternas.Checked) Then
             spReporte.ActiveSheet.Columns(spReporte.ActiveSheet.Columns("idAreaDestino").Index, spReporte.ActiveSheet.Columns("nombreUsuarioDestino").Index).Visible = False
         ElseIf (rbtnTipoExternas.Checked Or rbtnTipoTodos.Checked) Then
@@ -927,7 +958,7 @@ Public Class Principal
         ElseIf (rbtnEstatusResueltas.Checked Or rbtnEstatusTodos.Checked) Then
             spReporte.ActiveSheet.Columns(spReporte.ActiveSheet.Columns("idAreaResolucion").Index, spReporte.ActiveSheet.Columns("fechaResolucion").Index).Visible = True
         End If
-        spReporte.ActiveSheet.Columns(spReporte.ActiveSheet.Columns("esAutorizado").Index, spReporte.ActiveSheet.Columns("estaResuelto").Index).Visible = False
+        spReporte.ActiveSheet.Columns(spReporte.ActiveSheet.Columns("rutaImagen").Index, spReporte.ActiveSheet.Columns("estaResuelto").Index).Visible = False
         spReporte.ActiveSheet.OperationMode = FarPoint.Win.Spread.OperationMode.SingleSelect
         Application.DoEvents()
 
@@ -982,5 +1013,5 @@ Public Class Principal
 #End Region
 
 #End Region
-
+     
 End Class

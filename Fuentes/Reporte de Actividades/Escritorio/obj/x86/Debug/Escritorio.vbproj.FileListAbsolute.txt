@@ -92,3 +92,22 @@ C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Reporte de Actividades\Escritor
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Reporte de Actividades\Escritorio\obj\x86\Debug\EYE05.xml
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Reporte de Actividades\Escritorio\bin\x86\Debug\EYE05.exe.config
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Reporte de Actividades\Escritorio\obj\x86\Debug\EYE05.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\bin\x86\Debug\ACT05.exe.config
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\bin\x86\Debug\ACT05.exe
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\bin\x86\Debug\ACT05.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\bin\x86\Debug\ACT05.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\bin\x86\Debug\EntidadesReporteActividades.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\bin\x86\Debug\LogicaReporteActividades.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\bin\x86\Debug\EntidadesReporteActividades.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\bin\x86\Debug\EntidadesReporteActividades.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\bin\x86\Debug\LogicaReporteActividades.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\bin\x86\Debug\LogicaReporteActividades.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\obj\x86\Debug\Escritorio.vbprojResolveAssemblyReference.cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\obj\x86\Debug\ReporteActividades.Resources.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\obj\x86\Debug\ReporteActividades.Principal.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\obj\x86\Debug\Escritorio.vbproj.GenerateResource.Cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\obj\x86\Debug\ACT05.exe.licenses
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\obj\x86\Debug\ACT05.exe
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\obj\x86\Debug\ACT05.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\obj\x86\Debug\ACT05.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\obj\x86\Debug\ReporteActividades.Imagen.resources

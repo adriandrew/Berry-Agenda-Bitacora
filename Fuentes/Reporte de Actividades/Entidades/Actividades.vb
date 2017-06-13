@@ -103,7 +103,7 @@ Public Class Actividades
         End Set
     End Property
 
-    Public Function ObtenerListadoActividades(ByVal tipo As Integer, ByVal estatus As Integer, ByVal calificacion As Integer, ByVal aplicaFechaCreacion As Boolean, ByVal aplicaFechaVencimiento As Boolean, ByVal aplicaFechaResolucion As Boolean) As DataTable
+    Public Function ObtenerListadoReporte(ByVal tipo As Integer, ByVal estatus As Integer, ByVal calificacion As Integer, ByVal aplicaFechaCreacion As Boolean, ByVal aplicaFechaVencimiento As Boolean, ByVal aplicaFechaResolucion As Boolean) As DataTable
 
         Dim datos As New DataTable
         Try
@@ -143,29 +143,29 @@ Public Class Actividades
                 consultaWhere &= " AND A.FechaCreacion BETWEEN @fechaCreacion AND @fechaCreacion2 "
             End If
             If (aplicaFechaVencimiento) Then
-                consultaWhere &= " AND A.FechaVencimiento BETWEEN @fechaVencimiento AND @fechaVencimiento2 " 
-            End If 
+                consultaWhere &= " AND A.FechaVencimiento BETWEEN @fechaVencimiento AND @fechaVencimiento2 "
+            End If
             If (aplicaFechaResolucion) Then
                 consultaWhere &= " AND AR.FechaResolucion BETWEEN @fechaResolucion AND @fechaResolucion2 "
             End If
             comando.CommandText = "SELECT " & _
             "CASE " & _
-                "WHEN (V.EsExterna='FALSE' OR V.EsExterna IS NULL) THEN 'Interno' " & _
-                "WHEN (V.EsExterna ='TRUE') THEN 'Externo' " & _
+                "WHEN (R.EsExterna='FALSE' OR R.EsExterna IS NULL) THEN 'Interno' " & _
+                "WHEN (R.EsExterna ='TRUE') THEN 'Externo' " & _
             "END AS Tipo, " & _
             "CASE " & _
-                "WHEN (V.EstaResuelto ='TRUE') THEN 'Resuelto' " & _
-                "WHEN (V.EstaResuelto='FALSE' OR V.EstaResuelto IS NULL) THEN 'Abierto' " & _
+                "WHEN (R.EstaResuelto ='TRUE') THEN 'Resuelto' " & _
+                "WHEN (R.EstaResuelto='FALSE' OR R.EstaResuelto IS NULL) THEN 'Abierto' " & _
             "END AS Estatus, " & _
             "CASE " & _
-                "WHEN (V.EsExterna='FALSE') THEN 'No Aplica' " & _
-                "WHEN ((V.EsAutorizado='TRUE') AND (V.EsExterna = 'TRUE')) THEN 'Autorizado' " & _
-                "WHEN ((V.EsRechazado='TRUE') AND (V.EsExterna = 'TRUE')) THEN 'Rechazado' " & _
-                "WHEN ((V.EsAutorizado='FALSE' OR V.EsAutorizado IS NULL AND V.EsRechazado='FALSE' OR V.EsRechazado IS NULL) AND (V.EsExterna = 'TRUE')) THEN 'Pendiente' " & _
-            "END AS Calificacion, V.*" & _
+                "WHEN (R.EsExterna='FALSE') THEN 'No Aplica' " & _
+                "WHEN ((R.EsAutorizado='TRUE') AND (R.EsExterna = 'TRUE')) THEN 'Autorizado' " & _
+                "WHEN ((R.EsRechazado='TRUE') AND (R.EsExterna = 'TRUE')) THEN 'Rechazado' " & _
+                "WHEN ((R.EsAutorizado='FALSE' OR R.EsAutorizado IS NULL AND R.EsRechazado='FALSE' OR R.EsRechazado IS NULL) AND (R.EsExterna = 'TRUE')) THEN 'Pendiente' " & _
+            "END AS Calificacion, R.*" & _
             " FROM " & _
             "(" & _
-                "SELECT A.Id, A.IdArea, Areas.Nombre AS NombreArea, A.IdUsuario, U.Nombre AS NombreUsuario, A.IdAreaDestino, AreasD.Nombre AS NombreAreaDestino, A.IdUsuarioDestino, UD.Nombre AS NombreUsuarioDestino, A.Nombre, A.Descripcion, A.FechaCreacion, A.FechaVencimiento, A.EsUrgente, AR.IdAreaOrigen, AreasR.Nombre AS NombreAreaResuelto, AR.IdUsuarioOrigen, UR.Nombre AS NombreUsuarioResuelto, AR.Descripcion AS DescripcionResolucion, AR.MotivoRetraso, AR.FechaResolucion, A.EsAutorizado, A.EsRechazado, A.EsExterna, A.EstaResuelto " & _
+                "SELECT A.Id, A.IdArea, Areas.Nombre AS NombreArea, A.IdUsuario, U.Nombre AS NombreUsuario, A.IdAreaDestino, AreasD.Nombre AS NombreAreaDestino, A.IdUsuarioDestino, UD.Nombre AS NombreUsuarioDestino, A.Nombre, A.Descripcion, A.FechaCreacion, A.FechaVencimiento, A.EsUrgente, AR.IdAreaOrigen, AreasR.Nombre AS NombreAreaResuelto, AR.IdUsuarioOrigen, UR.Nombre AS NombreUsuarioResuelto, AR.Descripcion AS DescripcionResolucion, AR.MotivoRetraso, AR.FechaResolucion, A.SolicitaAutorizacion, A.SolicitaEvidencia, AR.RutaImagen, A.EsAutorizado, A.EsRechazado, A.EsExterna, A.EstaResuelto " & _
                 " FROM ((((((Actividades AS A LEFT JOIN ActividadesResueltas AS AR ON A.Id = AR.IdActividad AND A.IdArea = AR.IdArea AND A.IdUsuario = AR.IdUsuario) " & _
                 " LEFT JOIN [INFORMACION].dbo.Usuarios AS U ON A.IdUsuario = U.Id) " & _
                 " LEFT JOIN [INFORMACION].dbo.Usuarios AS UD ON A.IdUsuarioDestino = UD.Id) " & _
@@ -174,8 +174,8 @@ Public Class Actividades
                 " LEFT JOIN [CATALOGOS].dbo.Areas AS AreasD ON A.IdAreaDestino = AreasD.Id) " & _
                 " LEFT JOIN [CATALOGOS].dbo.Areas AS AreasR ON AR.IdAreaOrigen = AreasR.Id " & _
                 " WHERE 1=1 " & consultaWhere & _
-            ") AS V" & _
-            " ORDER BY V.IdArea, V.IdUsuario, V.Id ASC"
+            ") AS R" & _
+            " ORDER BY R.IdArea, R.IdUsuario, R.Id ASC"
             comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
             comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
             comando.Parameters.AddWithValue("@idAreaDestino", Me.EIdAreaDestino)

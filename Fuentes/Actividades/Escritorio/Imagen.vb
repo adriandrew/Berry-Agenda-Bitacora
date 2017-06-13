@@ -138,7 +138,12 @@ Public Class Imagen
                         fs.Dispose()
                     End If
                 End Try
-                Principal.rutaImagen = Me.ruta + Me.nombreArchivo + ".jpg"
+                Dim desglose As String() : Dim rutaCorta As String = String.Empty
+                desglose = Me.ruta.Split(":")
+                If (desglose.Count > 1) Then
+                    rutaCorta = desglose(1)
+                End If
+                Principal.rutaImagen = rutaCorta + Me.nombreArchivo + ".jpg"
                 Principal.tieneImagen = True
             Catch ex As Exception
                 Try
@@ -210,7 +215,7 @@ Public Class Imagen
 
     Public Function ObtenerRutaCarpeta() As String
 
-        Dim ruta As String
+        Dim ruta As String = String.Empty
         If (Principal.esDesarrollo) Then
             ruta = "X:\"
         Else
@@ -221,7 +226,7 @@ Public Class Imagen
     End Function
 
     Public Sub CargarValores()
-
+         
         Me.nombreArchivo = Me.idTipo.ToString.PadLeft(2, "0") + "-" + Me.idArea.ToString.PadLeft(2, "0") + "-" + Me.idUsuario.ToString.PadLeft(3, "0").ToString + "-" + Me.idActividad.ToString.PadLeft(6, "0")
         Me.ruta = ObtenerRutaCarpeta() + "\ImagenesEvidencia\" 
         Me.imagenError = New IO.FileStream(Me.ruta + "NoFoto.jpg", FileMode.OpenOrCreate, FileAccess.Read)

@@ -102,6 +102,7 @@ C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Principal\Escritori
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Principal\Escritorio\obj\x86\Release\PrincipalBerry.exe.licenses
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Principal\Escritorio\obj\x86\Release\PrincipalBerry.exe
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes Modificados\Principal\Escritorio\obj\x86\Release\PrincipalBerry.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Principal\Escritorio\bin\x86\Release\PrincipalBerry.exe.config
 C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Principal\Escritorio\bin\x86\Release\PrincipalBerry.exe
 C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Principal\Escritorio\bin\x86\Release\PrincipalBerry.pdb
 C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Principal\Escritorio\bin\x86\Release\Entidades.dll

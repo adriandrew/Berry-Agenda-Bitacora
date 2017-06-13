@@ -139,6 +139,7 @@ C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Rep
 C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\bin\x86\Release\LogicaReporteActividades.pdb
 C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\bin\x86\Release\LogicaReporteActividades.xml
 C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\obj\x86\Release\Escritorio.vbprojResolveAssemblyReference.cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\obj\x86\Release\ReporteActividades.Imagen.resources
 C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\obj\x86\Release\ReporteActividades.Resources.resources
 C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\obj\x86\Release\ReporteActividades.Principal.resources
 C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Reporte de Actividades\Escritorio\obj\x86\Release\Escritorio.vbproj.GenerateResource.Cache

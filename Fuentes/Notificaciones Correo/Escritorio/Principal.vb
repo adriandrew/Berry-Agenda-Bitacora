@@ -302,17 +302,17 @@ Public Class Principal
         While True
             hora = Date.Now.Hour
             minutos = Date.Now.Minute
-            If (minutos = 1) Then
+            If (minutos = 1 And (hora = 10 Or hora = 14)) Then
                 esRangoValido = True
             Else
-                If Me.esDesarrollo Then
+                If (Me.esDesarrollo) Then
                     esRangoValido = True
                 Else
                     esRangoValido = False
                 End If
             End If
             If (esRangoValido) Then
-                If Me.esDivisible Then
+                If (Me.esDivisible) Then
                     Me.esDivisible = False
                 Else
                     Me.esDivisible = True
