@@ -63,7 +63,7 @@ Public Class Principal
         CargarEncabezados()
         CargarConsecutivoActividades()
         CargarIndiceActividades()
-        AlinearBotones(True)
+        'AlinearBotones(True)
         AsignarFoco(txtCapturaId)
         FormatearSpread()
         Me.Enabled = True
@@ -324,10 +324,10 @@ Public Class Principal
         If (chkCapturaEsExterna.Checked) Then
             CargarComboAreas()
             CargarComboUsuarios()
-            AlinearBotones(False)
+            'AlinearBotones(False)
             MostrarExternos(True)
         Else
-            AlinearBotones(True)
+            'AlinearBotones(True)
             MostrarExternos(False)
         End If
 

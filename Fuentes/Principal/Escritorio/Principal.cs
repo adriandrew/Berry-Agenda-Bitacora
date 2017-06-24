@@ -55,6 +55,7 @@ namespace Escritorio
         {
 
             Centrar();
+            ConectarUnidadRed();
             AsignarTooltips();
             AsignarFocos();
             ConfigurarConexiones();
@@ -301,6 +302,42 @@ namespace Escritorio
         #endregion
 
         #region Métodos
+
+        private void ConectarUnidadRed()
+        {
+
+            //MessageBox.Show(Directory.GetDirectories(Application.StartupPath).Count().ToString());
+            if (Directory.GetDirectories(Application.StartupPath).Count() == 0)
+            {
+                try
+                {
+                    // Opcion 1.
+                    //        MessageBox.Show("Intentando conectar con unidad de red.", "Conectando.", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    //        string ruta = Application.StartupPath + "\\Unidades.bat";
+                    //        ProcessStartInfo procesoInicio = new ProcessStartInfo(ruta);
+                    //        System.Diagnostics.Process.Start(procesoInicio);
+                    //        System.Threading.Thread.Sleep(3000);
+                    // Opcion 2.
+                    string unidad = Application.StartupPath;
+                    //MessageBox.Show(unidad);
+                    Process.Start("explorer.exe", @"" + unidad);
+                    System.Threading.Thread.Sleep(2000);
+                    foreach (Process p in Process.GetProcessesByName("explorer"))
+                    {
+                        if (p.MainWindowTitle.ToUpper().Contains(@"" + unidad.Replace("\\", "").Replace("//", "/")) || Application.StartupPath.ToUpper().Equals(p.MainWindowTitle.ToUpper()))
+                        {
+                            p.Kill();
+                        }
+                    }
+                    this.BringToFront();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al intentar conectar a unidad de red. " + ex.Message, "Error.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+        }
 
         private void VerificarLicencia()
         {
@@ -727,6 +764,7 @@ namespace Escritorio
             baseDatos.AbrirConexionInformacion();
             baseDatos.AbrirConexionCatalogo();
             baseDatos.AbrirConexionAgenda();
+            //MessageBox.Show(Entidades.BaseDatos.conexionInformacion.ConnectionString);
             if (this.tieneParametros) // Se permite el acceso ya que con los parametros se sabe cuales son sus datos.
             {
                 ConsultarInformacionEmpresa(datosEmpresa.Id);
