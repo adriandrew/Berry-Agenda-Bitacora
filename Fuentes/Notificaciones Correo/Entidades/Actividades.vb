@@ -13,6 +13,11 @@ Public Class Actividades
     Private esExterna As Boolean
     Private idAreaDestino As Integer
     Private idUsuarioDestino As Integer
+    Private esAutorizado As Boolean
+    Private esRechazado As Boolean
+    Private estaResuelto As Boolean
+    Private solicitaAutorizacion As Boolean
+    Private solicitaEvidencia As Boolean
 
     Public Property EId() As Integer
         Get
@@ -102,6 +107,46 @@ Public Class Actividades
             Me.idUsuarioDestino = value
         End Set
     End Property
+    Public Property EEsAutorizado() As Boolean
+        Get
+            Return Me.esAutorizado
+        End Get
+        Set(value As Boolean)
+            Me.esAutorizado = value
+        End Set
+    End Property
+    Public Property EEsRechazado() As Boolean
+        Get
+            Return Me.esRechazado
+        End Get
+        Set(value As Boolean)
+            Me.esRechazado = value
+        End Set
+    End Property
+    Public Property EEstaResuelto() As Boolean
+        Get
+            Return Me.estaResuelto
+        End Get
+        Set(value As Boolean)
+            Me.estaResuelto = value
+        End Set
+    End Property
+    Public Property ESolicitaAutorizacion() As Boolean
+        Get
+            Return Me.solicitaAutorizacion
+        End Get
+        Set(value As Boolean)
+            Me.solicitaAutorizacion = value
+        End Set
+    End Property
+    Public Property ESolicitaEvidencia() As Boolean
+        Get
+            Return Me.solicitaEvidencia
+        End Get
+        Set(value As Boolean)
+            Me.solicitaEvidencia = value
+        End Set
+    End Property
 
     Public Function ObtenerListadoPendientes() As List(Of Actividades)
 
@@ -132,12 +177,81 @@ Public Class Actividades
                 actividades.esExterna = IIf(Not IsDBNull(dataReader("EsExterna")), dataReader("EsExterna"), False)
                 actividades.idAreaDestino = Convert.ToInt32(IIf(IsNumeric(dataReader("IdAreaDestino")), dataReader("IdAreaDestino"), 0))
                 actividades.idUsuarioDestino = Convert.ToInt32(IIf(IsNumeric(dataReader("IdUsuarioDestino")), dataReader("IdUsuarioDestino"), 0))
+                actividades.esAutorizado = IIf(Not IsDBNull(dataReader("EsAutorizado")), dataReader("EsAutorizado"), False)
+                actividades.esRechazado = IIf(Not IsDBNull(dataReader("EsRechazado")), dataReader("EsRechazado"), False)
+                actividades.estaResuelto = IIf(Not IsDBNull(dataReader("EstaResuelto")), dataReader("EstaResuelto"), False)
+                actividades.solicitaAutorizacion = IIf(Not IsDBNull(dataReader("SolicitaAutorizacion")), dataReader("SolicitaAutorizacion"), False)
+                actividades.solicitaEvidencia = IIf(Not IsDBNull(dataReader("SolicitaEvidencia")), dataReader("SolicitaEvidencia"), False)
                 lista.Add(actividades)
             End While
             BaseDatos.conexionAgenda.Close()
             Return lista
         Catch ex As Exception
             Throw ex
+        End Try
+
+    End Function
+
+    Public Sub Guardar()
+
+        Try
+            Dim comando As New SqlCommand()
+            comando.Connection = BaseDatos.conexionAgenda
+            comando.CommandText = "INSERT INTO Actividades (Id, IdArea, IdUsuario, Nombre, Descripcion, FechaCreacion, FechaVencimiento, EsUrgente, EsExterna, IdAreaDestino, IdUsuarioDestino, EsAutorizado, EsRechazado, EstaResuelto, SolicitaAutorizacion, SolicitaEvidencia) VALUES (@id, @idArea, @idUsuario, @nombre, @descripcion, @fechaCreacion, @fechaVencimiento, @esUrgente, @esExterna, @idAreaDestino, @idUsuarioDestino, @esAutorizado, @esRechazado, @estaResuelto, @solicitaAutorizacion, @solicitaEvidencia)"
+            comando.Parameters.AddWithValue("@id", Me.EId)
+            comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
+            comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
+            comando.Parameters.AddWithValue("@nombre", Me.ENombre)
+            comando.Parameters.AddWithValue("@descripcion", Me.EDescripcion)
+            comando.Parameters.AddWithValue("@fechaCreacion", Me.EFechaCreacion)
+            comando.Parameters.AddWithValue("@fechaVencimiento", Me.EFechaVencimiento)
+            comando.Parameters.AddWithValue("@esUrgente", Me.EEsUrgente)
+            comando.Parameters.AddWithValue("@esExterna", Me.EEsExterna)
+            comando.Parameters.AddWithValue("@idAreaDestino", Me.EIdAreaDestino)
+            comando.Parameters.AddWithValue("@idUsuarioDestino", Me.EIdUsuarioDestino)
+            comando.Parameters.AddWithValue("@esAutorizado", Me.EEsAutorizado)
+            comando.Parameters.AddWithValue("@esRechazado", Me.EEsRechazado)
+            comando.Parameters.AddWithValue("@estaResuelto", Me.EEstaResuelto)
+            comando.Parameters.AddWithValue("@solicitaAutorizacion", Me.ESolicitaAutorizacion)
+            comando.Parameters.AddWithValue("@solicitaEvidencia", Me.ESolicitaEvidencia)
+            BaseDatos.conexionAgenda.Open()
+            comando.ExecuteNonQuery()
+            BaseDatos.conexionAgenda.Close()
+        Catch ex As Exception
+            Throw ex
+        Finally
+            BaseDatos.conexionAgenda.Close()
+        End Try
+
+    End Sub
+
+    Public Function ObtenerMaximo() As Integer
+
+        Try
+            Dim comando As New SqlCommand()
+            comando.Connection = BaseDatos.conexionAgenda
+            comando.CommandText = "SELECT MAX(Id) AS Id FROM Actividades WHERE IdArea=@idArea AND IdUsuario=@idUsuario"
+            comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
+            comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
+            BaseDatos.conexionAgenda.Open()
+            Dim dataReader As SqlDataReader
+            dataReader = comando.ExecuteReader()
+            If (Not dataReader.HasRows) Then
+                Return 1
+            End If
+            While (dataReader.Read())
+                If (String.IsNullOrEmpty(dataReader("Id").ToString())) Then
+                    Me.id = 1
+                Else
+                    Me.id = Convert.ToInt32(dataReader("Id").ToString()) + 1
+                End If
+            End While
+            BaseDatos.conexionAgenda.Close()
+            Return Me.id
+        Catch ex As Exception
+            Throw ex
+        Finally
+            BaseDatos.conexionAgenda.Close()
         End Try
 
     End Function

@@ -1,0 +1,12 @@
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Entidades\bin\Debug\EntidadesCatalogosGenerales.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Entidades\bin\Debug\EntidadesCatalogosGenerales.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Entidades\bin\Debug\EntidadesCatalogosGenerales.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Entidades\bin\Debug\LogicaCatalogosGenerales.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Entidades\bin\Debug\LogicaCatalogosGenerales.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Entidades\bin\Debug\LogicaCatalogosGenerales.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Entidades\obj\Debug\EntidadesCatalogosGenerales.vbprojResolveAssemblyReference.cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Entidades\obj\Debug\EntidadesCatalogosGenerales.Resources.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Entidades\obj\Debug\EntidadesCatalogosGenerales.vbproj.GenerateResource.Cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Entidades\obj\Debug\EntidadesCatalogosGenerales.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Entidades\obj\Debug\EntidadesCatalogosGenerales.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Entidades\obj\Debug\EntidadesCatalogosGenerales.pdb

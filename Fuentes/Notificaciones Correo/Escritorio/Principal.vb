@@ -8,10 +8,11 @@ Public Class Principal
     Dim empresasPrincipal As New EntidadesNotificacionesCorreo.EmpresasPrincipal()
     Dim empresas As New EntidadesNotificacionesCorreo.Empresas()
     Dim actividades As New EntidadesNotificacionesCorreo.Actividades
-    Dim actividadesExternas As New EntidadesNotificacionesCorreo.ActividadesExternas
-    Dim usuarios As New EntidadesNotificacionesCorreo.Usuarios 
-    Dim configuracionProveedoresCorreo As New EntidadesNotificacionesCorreo.ConfiguracionProveedoresCorreo
-    Dim correos As New EntidadesNotificacionesCorreo.Correos
+    Dim actividadesExternas As New EntidadesNotificacionesCorreo.ActividadesExternas()
+    Dim usuarios As New EntidadesNotificacionesCorreo.Usuarios()
+    Dim configuracionProveedoresCorreo As New EntidadesNotificacionesCorreo.ConfiguracionProveedoresCorreo()
+    Dim correos As New EntidadesNotificacionesCorreo.Correos()
+    Dim actividadesFijas As New EntidadesNotificacionesCorreo.ActividadesFijas()
     Public datosEmpresa As New LogicaNotificacionesCorreo.DatosEmpresa()
     Public datosUsuario As New LogicaNotificacionesCorreo.DatosUsuario()
     Public datosArea As New LogicaNotificacionesCorreo.DatosArea()
@@ -261,7 +262,7 @@ Public Class Principal
             actividades.EIdUsuario = listaUsuarios(fila).EId
             listaActividades = actividades.ObtenerListadoPendientes()
             listaActividadesLocal = listaActividades
-            If listaActividades.Count > 0 Then
+            If (listaActividades.Count > 0) Then
                 EnviarCorreo(listaConfiguracionLocal, listaActividadesLocal, TipoActividad.internas, listaUsuarios(fila).EId, listaUsuarios(fila).ENombre, "Internas")
             End If
             System.Threading.Thread.Sleep(5000)
@@ -298,20 +299,21 @@ Public Class Principal
 
         Dim hora As Integer = 0
         Dim minutos As Integer = 0
-        Dim esRangoValido As Boolean = False
+        Dim esRangoValidoCorreos As Boolean = False
+        Dim esRangoValidoFijas As Boolean = False
         While True
             hora = Date.Now.Hour
             minutos = Date.Now.Minute
             If (minutos = 1 And (hora = 10 Or hora = 14)) Then
-                esRangoValido = True
+                esRangoValidoCorreos = True
             Else
                 If (Me.esDesarrollo) Then
-                    esRangoValido = True
+                    esRangoValidoCorreos = True
                 Else
-                    esRangoValido = False
+                    esRangoValidoCorreos = False
                 End If
             End If
-            If (esRangoValido) Then
+            If (esRangoValidoCorreos) Then
                 If (Me.esDivisible) Then
                     Me.esDivisible = False
                 Else
@@ -319,6 +321,14 @@ Public Class Principal
                 End If
                 CargarActividadesVencidas()
                 Application.DoEvents()
+            End If
+            If (hora = 0 And minutos = 5) Then
+                esRangoValidoFijas = True
+            Else
+                esRangoValidoFijas = False
+            End If
+            If (esRangoValidoFijas) Then
+                CrearActividadesFijas()
             End If
         End While
 
@@ -484,6 +494,131 @@ regresa:
         Catch
             GoTo regresa
         End Try
+
+    End Sub
+
+    Private Sub CrearActividadesFijas()
+
+        Dim datos As New DataTable
+        datos = actividadesFijas.ObtenerListado()
+        GuardarEditarActividades(datos)
+        System.Threading.Thread.Sleep(60000)
+
+    End Sub
+
+    Private Sub GuardarEditarActividades(ByVal datos As DataTable)
+
+        For fila = 0 To datos.Rows.Count - 1 
+            Dim idArea As Integer = LogicaNotificacionesCorreo.Funciones.ValidarNumero(datos.Rows(fila).Item("IdArea").ToString())
+            Dim idUsuario As Integer = LogicaNotificacionesCorreo.Funciones.ValidarNumero(datos.Rows(fila).Item("IdUsuario").ToString())
+            actividades.EIdArea = idArea
+            actividades.EIdUsuario = idUsuario
+            Dim id As Integer = actividades.ObtenerMaximo()
+            Dim nombre As String = datos.Rows(fila).Item("Nombre").ToString()
+            Dim descripcion As String = datos.Rows(fila).Item("Descripcion").ToString()
+            ' Se manejan los tiempos de rango de creación.
+            Dim idRangoFijoCreacion As Integer = LogicaNotificacionesCorreo.Funciones.ValidarNumero(datos.Rows(fila).Item("IdRangoFijoCreacion").ToString())
+            Dim fechaRangoCreacion As Date
+            If (idRangoFijoCreacion = 1) Then ' Diario.
+                fechaRangoCreacion = Today
+            ElseIf (idRangoFijoCreacion = 2) Then ' Inicio de semana (lunes).
+                fechaRangoCreacion = Today.AddDays((Today.DayOfWeek - DayOfWeek.Monday) * -1)
+            ElseIf (idRangoFijoCreacion = 3) Then ' Fin de semana (sabado).
+                fechaRangoCreacion = Today.AddDays((Today.DayOfWeek - DayOfWeek.Saturday) * -1)
+            ElseIf (idRangoFijoCreacion = 4) Then ' Inicio de quincena (1 y 16).
+                If (Today.Day > 0 And Today.Day <= 15) Then
+                    fechaRangoCreacion = DateSerial(Year(Today), Month(Today), 1) ' 1
+                ElseIf (Today.Day > 15 And Today.Day <= 31) Then
+                    fechaRangoCreacion = DateSerial(Year(Today), Month(Today), 16) ' 16
+                End If
+            ElseIf (idRangoFijoCreacion = 5) Then ' Fin de quincena (15 y 28, 29, 30, 31).
+                If (Today.Day > 0 And Today.Day <= 15) Then
+                    fechaRangoCreacion = DateSerial(Year(Today), Month(Today), 15) ' 1
+                ElseIf (Today.Day > 15 And Today.Day <= 31) Then
+                    fechaRangoCreacion = DateSerial(Year(Today), Month(Today) + 1, 0) ' 16
+                End If
+            ElseIf (idRangoFijoCreacion = 6) Then ' Inicio de mes (1).
+                fechaRangoCreacion = DateSerial(Year(Today), Month(Today), 1)
+            ElseIf (idRangoFijoCreacion = 7) Then ' Fin de mes (28, 29, 30, 31).
+                fechaRangoCreacion = DateSerial(Year(Today), Month(Today) + 1, 0)
+            ElseIf (idRangoFijoCreacion = 8) Then ' Inicio de año.
+                fechaRangoCreacion = DateSerial(Year(Today), 1, 1)
+            ElseIf (idRangoFijoCreacion = 9) Then ' Fin de año.
+                fechaRangoCreacion = DateSerial(Year(Today), 12, 31)
+            End If
+            ' Se manejan los tiempos de rango de vencimiento.
+            Dim fechaRangoVencimiento As Date
+            Dim idRangoFijoVencimiento As Integer = LogicaNotificacionesCorreo.Funciones.ValidarNumero(datos.Rows(fila).Item("IdRangoFijoVencimiento").ToString())
+            If (idRangoFijoVencimiento = 1) Then ' Diario.
+                fechaRangoVencimiento = Today
+            ElseIf (idRangoFijoVencimiento = 2) Then ' Inicio de semana (lunes).
+                fechaRangoVencimiento = Today.AddDays((Today.DayOfWeek - DayOfWeek.Monday) * -1)
+            ElseIf (idRangoFijoVencimiento = 3) Then ' Fin de semana (sabado).
+                fechaRangoVencimiento = Today.AddDays((Today.DayOfWeek - DayOfWeek.Saturday) * -1)
+            ElseIf (idRangoFijoVencimiento = 4) Then ' Inicio de quincena (1 y 16).
+                If (Today.Day > 0 And Today.Day <= 15) Then
+                    fechaRangoVencimiento = DateSerial(Year(Today), Month(Today), 1) ' 1
+                ElseIf (Today.Day > 15 And Today.Day <= 31) Then
+                    fechaRangoVencimiento = DateSerial(Year(Today), Month(Today), 16) ' 16
+                End If
+            ElseIf (idRangoFijoVencimiento = 5) Then ' Fin de quincena (15 y 28, 29, 30, 31).
+                If (Today.Day > 0 And Today.Day <= 15) Then
+                    fechaRangoVencimiento = DateSerial(Year(Today), Month(Today), 15) ' 1
+                ElseIf (Today.Day > 15 And Today.Day <= 31) Then
+                    fechaRangoVencimiento = DateSerial(Year(Today), Month(Today) + 1, 0) ' 16
+                End If
+            ElseIf (idRangoFijoVencimiento = 6) Then ' Inicio de mes (1).
+                fechaRangoVencimiento = DateSerial(Year(Today), Month(Today), 1)
+            ElseIf (idRangoFijoVencimiento = 7) Then ' Fin de mes (28, 29, 30, 31).
+                fechaRangoVencimiento = DateSerial(Year(Today), Month(Today) + 1, 0)
+            ElseIf (idRangoFijoVencimiento = 8) Then ' Inicio de año.
+                fechaRangoVencimiento = DateSerial(Year(Today), 1, 1)
+            ElseIf (idRangoFijoVencimiento = 9) Then ' Fin de año.
+                fechaRangoVencimiento = DateSerial(Year(Today), 12, 31)
+            End If
+            Dim fechaCreacion As Date = fechaRangoCreacion
+            Dim fechaVencimiento As Date = fechaRangoVencimiento
+            Dim esUrgente As Boolean = datos.Rows(fila).Item("EsUrgente").ToString()
+            Dim esExterna As Boolean = datos.Rows(fila).Item("EsExterna").ToString()
+            Dim idAreaDestino As Integer = datos.Rows(fila).Item("IdAreaDestino").ToString()
+            Dim idUsuarioDestino As Integer = datos.Rows(fila).Item("IdUsuarioDestino").ToString()
+            Dim esAutorizado As Boolean = False
+            Dim esRechazado As Boolean = False
+            Dim estaResuelto As Boolean = False
+            Dim solicitaAutorizacion As Boolean = datos.Rows(fila).Item("SolicitaAutorizacion").ToString()
+            Dim solicitaEvidencia As Boolean = datos.Rows(fila).Item("SolicitaEvidencia").ToString()
+            If (esExterna And (idAreaDestino = Me.datosUsuario.EIdArea) And (idUsuarioDestino = Me.datosUsuario.EId)) Then
+                GoTo salta
+            End If
+            If ((id > 0) And (Not String.IsNullOrEmpty(nombre)) And (IsDate(fechaCreacion)) And IsDate(fechaVencimiento)) Then
+                actividades.EIdArea = idArea
+                actividades.EIdUsuario = idUsuario
+                actividades.EId = id
+                actividades.ENombre = nombre
+                actividades.EDescripcion = descripcion
+                actividades.EFechaCreacion = fechaCreacion
+                actividades.EFechaVencimiento = fechaVencimiento
+                actividades.EEsUrgente = esUrgente
+                actividades.EEsExterna = esExterna
+                actividades.EIdAreaDestino = idAreaDestino
+                actividades.EIdUsuarioDestino = idUsuarioDestino
+                actividades.EEsAutorizado = esAutorizado
+                actividades.EEsRechazado = esRechazado
+                actividades.EEstaResuelto = estaResuelto
+                actividades.ESolicitaAutorizacion = solicitaAutorizacion
+                actividades.ESolicitaEvidencia = solicitaEvidencia
+                If (DateDiff(DateInterval.Day, fechaVencimiento, fechaCreacion) > 0) Then
+                    Dim veamos = String.Empty
+                    GoTo salta
+                ElseIf (fechaCreacion <> Today) Then
+                    Dim veamos = String.Empty
+                    GoTo salta
+                Else
+                    actividades.Guardar()
+                End If
+            End If
+salta:
+        Next
 
     End Sub
 

@@ -87,6 +87,7 @@
   <ItemGroup>
     <Compile Include="Actividades.vb" />
     <Compile Include="ActividadesExternas.vb" />
+    <Compile Include="ActividadesFijas.vb" />
     <Compile Include="BaseDatos.vb" />
     <Compile Include="ConfiguracionProveedoresCorreo.vb" />
     <Compile Include="Correos.vb" />

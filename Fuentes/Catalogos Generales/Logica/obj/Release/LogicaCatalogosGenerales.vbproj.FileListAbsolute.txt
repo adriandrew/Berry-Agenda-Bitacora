@@ -1,0 +1,8 @@
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Logica\bin\Release\LogicaCatalogosGenerales.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Logica\bin\Release\LogicaCatalogosGenerales.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Logica\bin\Release\LogicaCatalogosGenerales.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Logica\obj\Release\LogicaCatalogosGenerales.Resources.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Logica\obj\Release\LogicaCatalogosGenerales.vbproj.GenerateResource.Cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Logica\obj\Release\LogicaCatalogosGenerales.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Logica\obj\Release\LogicaCatalogosGenerales.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Logica\obj\Release\LogicaCatalogosGenerales.pdb
