@@ -249,6 +249,7 @@ Public Class Actividades
         Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
+            comando.CommandText = "INSERT INTO Actividades (Id, IdArea, IdUsuario, Nombre, Descripcion, FechaCreacion, FechaVencimiento, EsUrgente, EsExterna, IdAreaDestino, IdUsuarioDestino, EsAutorizado, EsRechazado, EstaResuelto, SolicitaAutorizacion, SolicitaEvidencia, EsFija) VALUES (@id, @idArea, @idUsuario, @nombre, @descripcion, @fechaCreacion, @fechaVencimiento, @esUrgente, @esExterna, @idAreaDestino, @idUsuarioDestino, @esAutorizado, @esRechazado, @estaResuelto, @solicitaAutorizacion, @solicitaEvidencia, @esFija)"
             comando.Parameters.AddWithValue("@id", Me.EId)
             comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
             comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
