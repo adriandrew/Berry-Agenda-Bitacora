@@ -1,12 +1,13 @@
 ﻿Imports System.IO
 Imports System.ComponentModel
+Imports System.Globalization
 
 Public Class Principal
 
-    Dim usuarios As New EntidadesCatalogosGenerales.Usuarios 
+    Dim usuarios As New EntidadesCatalogosGenerales.Usuarios
     Dim areas As New EntidadesCatalogosGenerales.Areas
     Dim actividadesFijas As New EntidadesCatalogosGenerales.ActividadesFijas
-    Dim rangosFijos As New EntidadesCatalogosGenerales.RangosFijos
+    Dim diasSemana As New EntidadesCatalogosGenerales.DiasSemana
     Public datosEmpresa As New LogicaCatalogosGenerales.DatosEmpresa()
     Public datosUsuario As New LogicaCatalogosGenerales.DatosUsuario()
     Public datosArea As New LogicaCatalogosGenerales.DatosArea()
@@ -18,7 +19,7 @@ Public Class Principal
     Public tipoHora As New FarPoint.Win.Spread.CellType.DateTimeCellType()
     Public tipoFecha As New FarPoint.Win.Spread.CellType.DateTimeCellType()
     Public tipoBooleano As New FarPoint.Win.Spread.CellType.CheckBoxCellType()
-    Public opcionSeleccionada As Integer = 0
+    Public opcionSeleccionadaMenu As Integer = 0 : Public opcionSeleccionadaRango As Integer = 0
     Dim ejecutarProgramaPrincipal As New ProcessStartInfo()
     Public estaCerrando As Boolean = False
     Public estaMostrado As Boolean = False
@@ -56,7 +57,7 @@ Public Class Principal
     Private Sub Principal_Shown(sender As Object, e As EventArgs) Handles Me.Shown
 
         Me.Cursor = Cursors.AppStarting
-        Me.Enabled = False 
+        Me.Enabled = False
         CargarEncabezados()
         FormatearSpread()
         SeleccionoActividadesFijas()
@@ -84,13 +85,14 @@ Public Class Principal
     Private Sub spCatalogos_KeyDown(sender As Object, e As KeyEventArgs) Handles spCatalogos.KeyDown
 
         If e.KeyData = Keys.F5 Then ' Abrir catalogos.
-            If (Me.opcionSeleccionada = Opciones.Fijas) Then 
-                If (spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("idRangoFijoCreacion").Index) Or (spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("nombreRangoFijoCreacion").Index Or spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("idRangoFijoVencimiento").Index) Or (spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("nombreRangoFijoVencimiento").Index) Then
-                    spCatalogos.Enabled = False
-                    pnlMenu.Enabled = False
-                    CargarCatalogoRangosFijos()
-                    spCatalogos2.Focus()
-                ElseIf (spCatalogos.ActiveSheet.Cells(spCatalogos.ActiveSheet.ActiveRowIndex, spCatalogos.ActiveSheet.Columns("esExterna").Index).Value) Then
+            If (Me.opcionSeleccionadaMenu = OpcionMenu.Fijas) Then
+                'If (spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("idDiaSemana").Index) Or (spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("nombreDiaSemana").Index) Then
+                '    spCatalogos.Enabled = False
+                '    pnlMenu.Enabled = False
+                '    CargarCatalogoDiasSemana()
+                '    spCatalogos2.Focus()
+                'End If
+                If (spCatalogos.ActiveSheet.Cells(spCatalogos.ActiveSheet.ActiveRowIndex, spCatalogos.ActiveSheet.Columns("esExterna").Index).Value) Then
                     If (spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("idUsuarioDestino").Index) Or (spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("nombreUsuarioDestino").Index) Then
                         spCatalogos.Enabled = False
                         pnlMenu.Enabled = False
@@ -107,7 +109,7 @@ Public Class Principal
         ElseIf e.KeyData = Keys.F6 Then ' Eliminar un registro.
             If (MessageBox.Show("Confirmas que deseas eliminar el registro seleccionado?", "Confirmación.", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes) Then
                 Dim fila As Integer = spCatalogos.ActiveSheet.ActiveRowIndex
-                If (Me.opcionSeleccionada = Opciones.Fijas) Then
+                If (Me.opcionSeleccionadaMenu = OpcionMenu.Fijas) Then
                     spCatalogos.ActiveSheet.Rows.Remove(fila, 1)
                 End If
             End If
@@ -119,15 +121,17 @@ Public Class Principal
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
 
-        If (Me.opcionSeleccionada = Opciones.Fijas) Then
-            GuardarEditarActividadesFijas()
+        If (Me.opcionSeleccionadaMenu = OpcionMenu.Fijas) Then
+            If (Me.opcionSeleccionadaRango = OpcionRango.DiasRango Or Me.opcionSeleccionadaRango = OpcionRango.DiasFijos) Then
+                GuardarEditarActividadesFijas()
+            End If
         End If
 
     End Sub
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
 
-        If (Me.opcionSeleccionada = Opciones.Fijas) Then
+        If (Me.opcionSeleccionadaMenu = OpcionMenu.Fijas) Then
             EliminarActividadesFijas()
         End If
 
@@ -160,14 +164,12 @@ Public Class Principal
     Private Sub spCatalogos2_CellClick(sender As Object, e As FarPoint.Win.Spread.CellClickEventArgs) Handles spCatalogos2.CellClick
 
         Dim fila As Integer = e.Row
-        If (Me.opcionSeleccionada = Opciones.Fijas) Then
-            If (spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("idRangoFijoCreacion").Index Or spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("nombreRangoFijoCreacion").Index) Then
-                spCatalogos.ActiveSheet.Cells(spCatalogos.ActiveSheet.ActiveRowIndex, spCatalogos.ActiveSheet.Columns("idRangoFijoCreacion").Index).Text = spCatalogos2.ActiveSheet.Cells(fila, spCatalogos2.ActiveSheet.Columns("id").Index).Text
-                spCatalogos.ActiveSheet.Cells(spCatalogos.ActiveSheet.ActiveRowIndex, spCatalogos.ActiveSheet.Columns("nombreRangoFijoCreacion").Index).Text = spCatalogos2.ActiveSheet.Cells(fila, spCatalogos2.ActiveSheet.Columns("nombre").Index).Text
-            ElseIf (spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("idRangoFijoVencimiento").Index Or spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("nombreRangoFijoVencimiento").Index) Then
-                spCatalogos.ActiveSheet.Cells(spCatalogos.ActiveSheet.ActiveRowIndex, spCatalogos.ActiveSheet.Columns("idRangoFijoVencimiento").Index).Text = spCatalogos2.ActiveSheet.Cells(fila, spCatalogos2.ActiveSheet.Columns("id").Index).Text
-                spCatalogos.ActiveSheet.Cells(spCatalogos.ActiveSheet.ActiveRowIndex, spCatalogos.ActiveSheet.Columns("nombreRangoFijoVencimiento").Index).Text = spCatalogos2.ActiveSheet.Cells(fila, spCatalogos2.ActiveSheet.Columns("nombre").Index).Text
-            ElseIf (spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("idAreaDestino").Index Or spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("nombreAreaDestino").Index) Then
+        If (Me.opcionSeleccionadaMenu = OpcionMenu.Fijas) Then
+            'If (spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("idDiaSemana").Index Or spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("nombreDiaSemana").Index) Then
+            '    spCatalogos.ActiveSheet.Cells(spCatalogos.ActiveSheet.ActiveRowIndex, spCatalogos.ActiveSheet.Columns("idDiaSemana").Index).Text = spCatalogos2.ActiveSheet.Cells(fila, spCatalogos2.ActiveSheet.Columns("id").Index).Text
+            '    spCatalogos.ActiveSheet.Cells(spCatalogos.ActiveSheet.ActiveRowIndex, spCatalogos.ActiveSheet.Columns("nombreDiaSemana").Index).Text = spCatalogos2.ActiveSheet.Cells(fila, spCatalogos2.ActiveSheet.Columns("nombre").Index).Text
+            'End If
+            If (spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("idAreaDestino").Index Or spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("nombreAreaDestino").Index) Then
                 spCatalogos.ActiveSheet.Cells(spCatalogos.ActiveSheet.ActiveRowIndex, spCatalogos.ActiveSheet.Columns("idAreaDestino").Index).Text = spCatalogos2.ActiveSheet.Cells(fila, spCatalogos2.ActiveSheet.Columns("id").Index).Text
                 spCatalogos.ActiveSheet.Cells(spCatalogos.ActiveSheet.ActiveRowIndex, spCatalogos.ActiveSheet.Columns("nombreAreaDestino").Index).Text = spCatalogos2.ActiveSheet.Cells(fila, spCatalogos2.ActiveSheet.Columns("nombre").Index).Text
             ElseIf (spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("idUsuarioDestino").Index Or spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("nombreUsuarioDestino").Index) Then
@@ -218,6 +220,24 @@ Public Class Principal
             If (rbtnActividadesFijas.Checked) Then
                 SeleccionoActividadesFijas()
             End If
+        End If
+
+    End Sub
+
+    Private Sub rbtnDiasRango_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnDiasRango.CheckedChanged
+
+        If (rbtnDiasRango.Checked) Then
+            Me.opcionSeleccionadaRango = OpcionRango.DiasRango
+            SeleccionoActividadesFijas()
+        End If
+
+    End Sub
+
+    Private Sub rbtnDiaMesFijo_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnDiaMesFijo.CheckedChanged
+
+        If (rbtnDiaMesFijo.Checked) Then
+            Me.opcionSeleccionadaRango = OpcionRango.DiasFijos
+            SeleccionoActividadesFijas()
         End If
 
     End Sub
@@ -310,14 +330,14 @@ Public Class Principal
 
     Private Sub ConfigurarConexiones()
 
-        If (Me.esDesarrollo) Then  
+        If (Me.esDesarrollo) Then
             LogicaCatalogosGenerales.DatosEmpresaPrincipal.instanciaSql = "BERRY1-DELL\SQLEXPRESS2008"
-            LogicaCatalogosGenerales.DatosEmpresaPrincipal.usuarioSql = "AdminBerry" 
-            LogicaCatalogosGenerales.DatosEmpresaPrincipal.contrasenaSql = "@berry2017" 
+            LogicaCatalogosGenerales.DatosEmpresaPrincipal.usuarioSql = "AdminBerry"
+            LogicaCatalogosGenerales.DatosEmpresaPrincipal.contrasenaSql = "@berry2017"
             datosEmpresa.EId = 1
-            datosUsuario.EIdArea = 1
-            datosUsuario.EId = 1
-        Else 
+            datosUsuario.EIdArea = 2
+            datosUsuario.EId = 201
+        Else
             LogicaCatalogosGenerales.DatosEmpresaPrincipal.ObtenerParametrosInformacionEmpresa()
             Me.datosEmpresa.ObtenerParametrosInformacionEmpresa()
             Me.datosUsuario.ObtenerParametrosInformacionUsuario()
@@ -381,16 +401,16 @@ Public Class Principal
         spCatalogos2.Reset()
         ControlarSpreadEnter(spCatalogos)
         spCatalogos.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Seashell
-        spCatalogos2.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Midnight 
+        spCatalogos2.Skin = FarPoint.Win.Spread.DefaultSpreadSkins.Midnight
         spCatalogos.Visible = False
-        spCatalogos2.Visible = False 
-        spCatalogos.ActiveSheet.GrayAreaBackColor = Color.White 
+        spCatalogos2.Visible = False
+        spCatalogos.ActiveSheet.GrayAreaBackColor = Color.White
         spCatalogos.Font = New Font("Microsoft Sans Serif", 12, FontStyle.Regular)
-        spCatalogos2.Font = New Font("Microsoft Sans Serif", 12, FontStyle.Regular) 
+        spCatalogos2.Font = New Font("Microsoft Sans Serif", 12, FontStyle.Regular)
         spCatalogos.ActiveSheet.ColumnHeader.Rows(0).Height = 45
-        spCatalogos2.ActiveSheet.ColumnHeader.Rows(0).Height = 45 
+        spCatalogos2.ActiveSheet.ColumnHeader.Rows(0).Height = 45
         spCatalogos.ActiveSheet.Rows(-1).Height = 25
-        spCatalogos2.ActiveSheet.Rows(-1).Height = 25 
+        spCatalogos2.ActiveSheet.Rows(-1).Height = 25
         spCatalogos.ActiveSheetIndex = 0
         spCatalogos2.ActiveSheetIndex = 0
         spCatalogos.HorizontalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded
@@ -430,7 +450,7 @@ Public Class Principal
     Private Sub SeleccionoActividadesFijas()
 
         Me.Cursor = Cursors.WaitCursor
-        Me.opcionSeleccionada = Opciones.Fijas
+        Me.opcionSeleccionadaMenu = OpcionMenu.Fijas
         CargarActividadesFijas()
         Me.Cursor = Cursors.Default
 
@@ -438,16 +458,19 @@ Public Class Principal
 
     Private Sub CargarActividadesFijas()
 
-        'LimpiarSpread()
-        Dim datos As New DataTable 
-        actividadesFijas.EIdArea = datosUsuario.EIdArea
-        actividadesFijas.EIdUsuario = datosUsuario.EId
-        datos = actividadesFijas.ObtenerListadoReporte()
-        spCatalogos.ActiveSheet.DataSource = datos
-        spCatalogos.ActiveSheet.Rows.Count += 1
-        'RestaurarAlturaSpread()
-        spCatalogos.Visible = True
-        FormatearSpreadActividadesFijas()
+        If (Me.opcionSeleccionadaRango = OpcionRango.DiasRango Or Me.opcionSeleccionadaRango = OpcionRango.DiasFijos) Then
+            'LimpiarSpread()
+            Dim datos As New DataTable
+            actividadesFijas.EIdArea = datosUsuario.EIdArea
+            actividadesFijas.EIdUsuario = datosUsuario.EId
+            actividadesFijas.EIdRango = Me.opcionSeleccionadaRango
+            datos = actividadesFijas.ObtenerListadoReporte()
+            spCatalogos.ActiveSheet.DataSource = datos
+            spCatalogos.ActiveSheet.Rows.Count += 1
+            'RestaurarAlturaSpread()
+            spCatalogos.Visible = True
+            FormatearSpreadActividadesFijas()
+        End If
 
     End Sub
 
@@ -456,15 +479,19 @@ Public Class Principal
         Me.Cursor = Cursors.WaitCursor
         actividadesFijas.EIdArea = Me.datosUsuario.EIdArea
         actividadesFijas.EIdUsuario = Me.datosUsuario.EId
+        actividadesFijas.EIdRango = Me.opcionSeleccionadaRango
         actividadesFijas.Eliminar()
-        For filaActiva = 0 To spCatalogos.ActiveSheet.Rows.Count - 1 
+        For filaActiva = 0 To spCatalogos.ActiveSheet.Rows.Count - 1
             Dim id As Integer = LogicaCatalogosGenerales.Funciones.ValidarNumero(spCatalogos.ActiveSheet.Cells(filaActiva, spCatalogos.ActiveSheet.Columns("id").Index).Value)
             Dim idUsuario As Integer = Me.datosUsuario.EId
             Dim idArea As Integer = Me.datosUsuario.EIdArea
             Dim nombre As String = spCatalogos.ActiveSheet.Cells(filaActiva, spCatalogos.ActiveSheet.Columns("nombre").Index).Text
             Dim descripcion As String = spCatalogos.ActiveSheet.Cells(filaActiva, spCatalogos.ActiveSheet.Columns("descripcion").Index).Text
-            Dim idRangoFijoCreacion As Integer = LogicaCatalogosGenerales.Funciones.ValidarNumero(spCatalogos.ActiveSheet.Cells(filaActiva, spCatalogos.ActiveSheet.Columns("idRangoFijoCreacion").Index).Value)
-            Dim idRangoFijoVencimiento As Integer = LogicaCatalogosGenerales.Funciones.ValidarNumero(spCatalogos.ActiveSheet.Cells(filaActiva, spCatalogos.ActiveSheet.Columns("idRangoFijoVencimiento").Index).Value)
+            Dim idRango As Integer = Me.opcionSeleccionadaRango 
+            Dim idDiaMes As Integer = LogicaCatalogosGenerales.Funciones.ValidarNumero(spCatalogos.ActiveSheet.Cells(filaActiva, spCatalogos.ActiveSheet.Columns("idDiaMes").Index).Value)
+            Dim fechaInicio As Date = spCatalogos.ActiveSheet.Cells(filaActiva, spCatalogos.ActiveSheet.Columns("fechaInicio").Index).Value
+            Dim cantidadDiasEspera As Integer = LogicaCatalogosGenerales.Funciones.ValidarNumero(spCatalogos.ActiveSheet.Cells(filaActiva, spCatalogos.ActiveSheet.Columns("cantidadDiasEspera").Index).Value)
+            Dim cantidadDiasRecordatorio As Integer = LogicaCatalogosGenerales.Funciones.ValidarNumero(spCatalogos.ActiveSheet.Cells(filaActiva, spCatalogos.ActiveSheet.Columns("cantidadDiasRecordatorio").Index).Value)
             Dim esUrgente As Boolean = spCatalogos.ActiveSheet.Cells(filaActiva, spCatalogos.ActiveSheet.Columns("esUrgente").Index).Value
             Dim esExterna As Boolean = spCatalogos.ActiveSheet.Cells(filaActiva, spCatalogos.ActiveSheet.Columns("esExterna").Index).Value
             Dim idAreaDestino As Integer = LogicaCatalogosGenerales.Funciones.ValidarNumero(spCatalogos.ActiveSheet.Cells(filaActiva, spCatalogos.ActiveSheet.Columns("idAreaDestino").Index).Value)
@@ -478,10 +505,6 @@ Public Class Principal
                 MsgBox("Falta definir area y/o usuario destino, no se guardará el no. " & id, MsgBoxStyle.Exclamation, "No permitido.")
                 GoTo salta
             End If
-            If ((id > 0) And (idRangoFijoCreacion <= 0 Or idRangoFijoVencimiento <= 0)) Then
-                MsgBox("Falta definir rangos de creación y/o vencimientos, no se guardará el no. " & id, MsgBoxStyle.Exclamation, "No permitido.")
-                GoTo salta
-            End If
             If ((id > 0) And (String.IsNullOrEmpty(nombre))) Then
                 MsgBox("Falta definir nombre de actividad, no se guardará el no. " & id, MsgBoxStyle.Exclamation, "No permitido.")
                 GoTo salta
@@ -490,14 +513,21 @@ Public Class Principal
                 MsgBox("No está permitido guardar una actividad externa para ti mismo, tiene que ser para otro usuario.", MsgBoxStyle.Exclamation, "No permitido.")
                 Exit Sub
             End If
-            If ((id > 0) And (Not String.IsNullOrEmpty(nombre)) And (idRangoFijoCreacion > 0) And (idRangoFijoVencimiento > 0)) Then
+            'If ((id > 0) And (idRango = OpcionRango.DiaSemana) And (idDiaSemana <= 0)) Then
+            '    MsgBox("Falta definir dia de la semana, no se guardará el no. " & id, MsgBoxStyle.Exclamation, "No permitido.")
+            '    GoTo salta
+            'End If
+            If ((id > 0) And (Not String.IsNullOrEmpty(nombre)) And (idRango > 0)) Then
                 actividadesFijas.EId = id
                 actividadesFijas.EIdArea = idArea
                 actividadesFijas.EIdUsuario = idUsuario
                 actividadesFijas.ENombre = nombre
                 actividadesFijas.EDescripcion = descripcion
-                actividadesFijas.EIdRangoFijoCreacion = idRangoFijoCreacion
-                actividadesFijas.EIdRangoFijoVencimiento = idRangoFijoVencimiento
+                actividadesFijas.EIdRango = idRango 
+                actividadesFijas.EDiaMes = idDiaMes
+                actividadesFijas.EFechaInicio = fechaInicio
+                actividadesFijas.ECantidadDiasEspera = cantidadDiasEspera
+                actividadesFijas.ECantidadDiasRecordatorio = cantidadDiasRecordatorio
                 actividadesFijas.EEsUrgente = esUrgente
                 actividadesFijas.EEsExterna = esExterna
                 actividadesFijas.EIdAreaDestino = idAreaDestino
@@ -517,9 +547,10 @@ salta:
     Private Sub EliminarActividadesFijas()
 
         If (MessageBox.Show("Confirmas que deseas eliminar todo?", "Confirmación.", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes) Then
-            Me.Cursor = Cursors.WaitCursor 
+            Me.Cursor = Cursors.WaitCursor
             actividadesFijas.EIdArea = Me.datosUsuario.EIdArea
             actividadesFijas.EIdUsuario = Me.datosUsuario.EId
+            actividadesFijas.EIdRango = Me.opcionSeleccionadaRango
             actividadesFijas.Eliminar()
             CargarActividadesFijas()
             Me.Cursor = Cursors.Default
@@ -528,33 +559,33 @@ salta:
     End Sub
 
     Private Sub FormatearSpreadActividadesFijas()
-         
+
         spCatalogos.ActiveSheet.Rows(-1).Height = 50
         spCatalogos.ActiveSheet.ColumnHeader.RowCount = 2
         spCatalogos.ActiveSheet.ColumnHeader.Rows(0, 1).Font = New Font("Microsoft Sans Serif", 12, FontStyle.Bold)
-        Dim numeracion As Integer = 0 
+        Dim numeracion As Integer = 0
         spCatalogos.ActiveSheet.Columns(numeracion).Tag = "id" : numeracion += 1
         spCatalogos.ActiveSheet.Columns(numeracion).Tag = "nombre" : numeracion += 1
-        spCatalogos.ActiveSheet.Columns(numeracion).Tag = "descripcion" : numeracion += 1
-        spCatalogos.ActiveSheet.Columns(numeracion).Tag = "idRangoFijoCreacion" : numeracion += 1
-        spCatalogos.ActiveSheet.Columns(numeracion).Tag = "nombreRangoFijoCreacion" : numeracion += 1
-        spCatalogos.ActiveSheet.Columns(numeracion).Tag = "idRangoFijoVencimiento" : numeracion += 1
-        spCatalogos.ActiveSheet.Columns(numeracion).Tag = "nombreRangoFijoVencimiento" : numeracion += 1
+        spCatalogos.ActiveSheet.Columns(numeracion).Tag = "descripcion" : numeracion += 1 
+        spCatalogos.ActiveSheet.Columns(numeracion).Tag = "idDiaMes" : numeracion += 1
+        spCatalogos.ActiveSheet.Columns(numeracion).Tag = "fechaInicio" : numeracion += 1
+        spCatalogos.ActiveSheet.Columns(numeracion).Tag = "cantidadDiasEspera" : numeracion += 1
+        spCatalogos.ActiveSheet.Columns(numeracion).Tag = "cantidadDiasRecordatorio" : numeracion += 1
         spCatalogos.ActiveSheet.Columns(numeracion).Tag = "esUrgente" : numeracion += 1
         spCatalogos.ActiveSheet.Columns(numeracion).Tag = "esExterna" : numeracion += 1
         spCatalogos.ActiveSheet.Columns(numeracion).Tag = "idAreaDestino" : numeracion += 1
         spCatalogos.ActiveSheet.Columns(numeracion).Tag = "nombreAreaDestino" : numeracion += 1
         spCatalogos.ActiveSheet.Columns(numeracion).Tag = "idUsuarioDestino" : numeracion += 1
-        spCatalogos.ActiveSheet.Columns(numeracion).Tag = "nombreUsuarioDestino" : numeracion += 1 
+        spCatalogos.ActiveSheet.Columns(numeracion).Tag = "nombreUsuarioDestino" : numeracion += 1
         spCatalogos.ActiveSheet.Columns(numeracion).Tag = "solicitaAutorizacion" : numeracion += 1
         spCatalogos.ActiveSheet.Columns(numeracion).Tag = "solicitaEvidencia" : numeracion += 1
         spCatalogos.ActiveSheet.Columns("id").Width = 60
         spCatalogos.ActiveSheet.Columns("nombre").Width = 300
-        spCatalogos.ActiveSheet.Columns("descripcion").Width = 500
-        spCatalogos.ActiveSheet.Columns("idRangoFijoCreacion").Width = 50
-        spCatalogos.ActiveSheet.Columns("nombreRangoFijoCreacion").Width = 120
-        spCatalogos.ActiveSheet.Columns("idRangoFijoVencimiento").Width = 50
-        spCatalogos.ActiveSheet.Columns("nombreRangoFijoVencimiento").Width = 120
+        spCatalogos.ActiveSheet.Columns("descripcion").Width = 500 
+        spCatalogos.ActiveSheet.Columns("idDiaMes").Width = 100
+        spCatalogos.ActiveSheet.Columns("fechaInicio").Width = 110
+        spCatalogos.ActiveSheet.Columns("cantidadDiasEspera").Width = 130
+        spCatalogos.ActiveSheet.Columns("cantidadDiasRecordatorio").Width = 170
         spCatalogos.ActiveSheet.Columns("esUrgente").Width = 110
         spCatalogos.ActiveSheet.Columns("esExterna").Width = 110
         spCatalogos.ActiveSheet.Columns("idAreaDestino").Width = 50
@@ -573,15 +604,15 @@ salta:
         spCatalogos.ActiveSheet.AddColumnHeaderSpanCell(0, spCatalogos.ActiveSheet.Columns("nombre").Index, 2, 1)
         spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("nombre").Index).Value = "Nombre *".ToUpper
         spCatalogos.ActiveSheet.AddColumnHeaderSpanCell(0, spCatalogos.ActiveSheet.Columns("descripcion").Index, 2, 1)
-        spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("descripcion").Index).Value = "Descripción".ToUpper
-        spCatalogos.ActiveSheet.AddColumnHeaderSpanCell(0, spCatalogos.ActiveSheet.Columns("idRangoFijoCreacion").Index, 1, 2)
-        spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("idRangoFijoCreacion").Index).Value = "Rango de Creación *".ToUpper
-        spCatalogos.ActiveSheet.ColumnHeader.Cells(1, spCatalogos.ActiveSheet.Columns("idRangoFijoCreacion").Index).Value = "No.".ToUpper
-        spCatalogos.ActiveSheet.ColumnHeader.Cells(1, spCatalogos.ActiveSheet.Columns("nombreRangoFijoCreacion").Index).Value = "Nombre".ToUpper
-        spCatalogos.ActiveSheet.AddColumnHeaderSpanCell(0, spCatalogos.ActiveSheet.Columns("idRangoFijoVencimiento").Index, 1, 2)
-        spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("idRangoFijoVencimiento").Index).Value = "Rango de Vencimiento *".ToUpper
-        spCatalogos.ActiveSheet.ColumnHeader.Cells(1, spCatalogos.ActiveSheet.Columns("idRangoFijoVencimiento").Index).Value = "No.".ToUpper
-        spCatalogos.ActiveSheet.ColumnHeader.Cells(1, spCatalogos.ActiveSheet.Columns("nombreRangoFijoVencimiento").Index).Value = "Nombre".ToUpper
+        spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("descripcion").Index).Value = "Descripción".ToUpper 
+        spCatalogos.ActiveSheet.AddColumnHeaderSpanCell(0, spCatalogos.ActiveSheet.Columns("idDiaMes").Index, 2, 1)
+        spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("idDiaMes").Index).Value = "Dia del Mes *".ToUpper
+        spCatalogos.ActiveSheet.AddColumnHeaderSpanCell(0, spCatalogos.ActiveSheet.Columns("fechaInicio").Index, 2, 1)
+        spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("fechaInicio").Index).Value = "A Partir de *".ToUpper
+        spCatalogos.ActiveSheet.AddColumnHeaderSpanCell(0, spCatalogos.ActiveSheet.Columns("cantidadDiasEspera").Index, 2, 1)
+        spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("cantidadDiasEspera").Index).Value = "Cada Cuantos Dias? *".ToUpper
+        spCatalogos.ActiveSheet.AddColumnHeaderSpanCell(0, spCatalogos.ActiveSheet.Columns("cantidadDiasRecordatorio").Index, 2, 1)
+        spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("cantidadDiasRecordatorio").Index).Value = "Dias de Recordatorio *".ToUpper
         spCatalogos.ActiveSheet.AddColumnHeaderSpanCell(0, spCatalogos.ActiveSheet.Columns("esUrgente").Index, 2, 1)
         spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("esUrgente").Index).Value = "Es Urgente?".ToUpper
         spCatalogos.ActiveSheet.AddColumnHeaderSpanCell(0, spCatalogos.ActiveSheet.Columns("esExterna").Index, 2, 1)
@@ -593,12 +624,19 @@ salta:
         spCatalogos.ActiveSheet.AddColumnHeaderSpanCell(0, spCatalogos.ActiveSheet.Columns("idUsuarioDestino").Index, 1, 2)
         spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("idUsuarioDestino").Index).Value = "Usuario Destino".ToUpper
         spCatalogos.ActiveSheet.ColumnHeader.Cells(1, spCatalogos.ActiveSheet.Columns("idUsuarioDestino").Index).Value = "No.".ToUpper
-        spCatalogos.ActiveSheet.ColumnHeader.Cells(1, spCatalogos.ActiveSheet.Columns("nombreUsuarioDestino").Index).Value = "Nombre".ToUpper 
+        spCatalogos.ActiveSheet.ColumnHeader.Cells(1, spCatalogos.ActiveSheet.Columns("nombreUsuarioDestino").Index).Value = "Nombre".ToUpper
         spCatalogos.ActiveSheet.AddColumnHeaderSpanCell(0, spCatalogos.ActiveSheet.Columns("solicitaAutorizacion").Index, 2, 1)
         spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("solicitaAutorizacion").Index).Value = "Solicita Autorización?".ToUpper
         spCatalogos.ActiveSheet.AddColumnHeaderSpanCell(0, spCatalogos.ActiveSheet.Columns("solicitaEvidencia").Index, 2, 1)
-        spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("solicitaEvidencia").Index).Value = "Solicita Evidencia?".ToUpper       
+        spCatalogos.ActiveSheet.ColumnHeader.Cells(0, spCatalogos.ActiveSheet.Columns("solicitaEvidencia").Index).Value = "Solicita Evidencia?".ToUpper
         spCatalogos.ActiveSheet.ColumnHeader.Rows(0).Height = 45
+        If (Me.opcionSeleccionadaRango = OpcionRango.DiasRango) Then  
+            spCatalogos.ActiveSheet.Columns("idDiaMes").Visible = False
+            spCatalogos.ActiveSheet.Columns("cantidadDiasEspera").Visible = True 
+        ElseIf (Me.opcionSeleccionadaRango = OpcionRango.DiasFijos) Then  
+            spCatalogos.ActiveSheet.Columns("idDiaMes").Visible = True
+            spCatalogos.ActiveSheet.Columns("cantidadDiasEspera").Visible = False
+        End If
         Application.DoEvents()
 
     End Sub
@@ -610,36 +648,56 @@ salta:
             spCatalogos.ActiveSheet.Rows.Count += 1
         End If
         Dim fila As Integer = spCatalogos.ActiveSheet.ActiveRowIndex
-        If (Me.opcionSeleccionada = Opciones.Fijas) Then
-            If (spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("idRangoFijoCreacion").Index) Then
-                Dim idRangoCreacion As Integer = LogicaCatalogosGenerales.Funciones.ValidarNumero(spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("idRangoFijoCreacion").Index).Text.ToString())
-                If (idRangoCreacion > 0) Then
-                    rangosFijos.EId = idRangoCreacion
-                    Dim lista As New List(Of EntidadesCatalogosGenerales.RangosFijos)
-                    lista = rangosFijos.ObtenerListadoPorId()
-                    If (lista.Count > 0) Then
-                        spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("nombreRangoFijoCreacion").Index).Value = lista(0).ENombre
-                    Else
-                        spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("idRangoFijoCreacion").Index).Value = String.Empty
-                        spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("nombreRangoFijoCreacion").Index).Value = String.Empty
-                        spCatalogos.ActiveSheet.SetActiveCell(fila, spCatalogos.ActiveSheet.Columns("idRangoFijoCreacion").Index - 1)
+        If (Me.opcionSeleccionadaMenu = OpcionMenu.Fijas) Then
+            If (spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("id").Index) Then
+                Dim id As Integer = LogicaCatalogosGenerales.Funciones.ValidarNumero(spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("id").Index).Text.ToString())
+                actividadesFijas.EId = id
+                actividadesFijas.EIdArea = Me.datosUsuario.EIdArea
+                actividadesFijas.EIdUsuario = Me.datosUsuario.EId
+                Dim resultado As Boolean = actividadesFijas.ValidarPorId()
+                If (resultado) Then
+                    MsgBox("Este número ya existe, favor de agregar otro.", MsgBoxStyle.Information, "No permitido.")
+                    spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("id").Index).Value = String.Empty
+                    'spCatalogos.ActiveSheet.SetActiveCell(fila, 0)
+                End If
+                'ElseIf (spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("idDiaSemana").Index) Then
+                '    Dim idDiaSemana As Integer = LogicaCatalogosGenerales.Funciones.ValidarNumero(spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("idDiaSemana").Index).Text.ToString())
+                '    If (idDiaSemana > 0) Then
+                '        diasSemana.EId = idDiaSemana
+                '        Dim lista As New List(Of EntidadesCatalogosGenerales.DiasSemana)
+                '        lista = diasSemana.ObtenerListadoPorId()
+                '        If (lista.Count > 0) Then
+                '            spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("nombreDiaSemana").Index).Value = lista(0).ENombre
+                '        Else
+                '            spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("idDiaSemana").Index).Value = String.Empty
+                '            spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("nombreDiaSemana").Index).Value = String.Empty
+                '            spCatalogos.ActiveSheet.SetActiveCell(fila, spCatalogos.ActiveSheet.Columns("nombreDiaSemana").Index - 1)
+                '        End If
+                '    End If
+            ElseIf (spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("fechaInicio").Index) Then
+                If (String.IsNullOrEmpty(spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("fechaInicio").Index).Text)) Then
+                    spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("fechaInicio").Index).Text = Today
+                    'Else
+                    '    If (Me.opcionSeleccionadaRango = OpcionRango.DiaSemana) Then
+                    '        Dim idDiaSemana As Integer = LogicaCatalogosGenerales.Funciones.ValidarNumero(spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("idDiaSemana").Index).Text.ToString())
+                    '        Dim nombreDiaSemana As String = EliminarAcentos(spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("nombreDiaSemana").Index).Text.ToString())
+                    '        Dim fechaInicio As Date = spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("fechaInicio").Index).Value
+                    '        Dim nombreDiaSemanaFecha As String = EliminarAcentos(fechaInicio.ToString("dddd", New CultureInfo("es-ES")))
+                    '        If (Not nombreDiaSemanaFecha.Trim.ToUpper.Equals(nombreDiaSemana.Trim.ToUpper)) Then
+                    '            MsgBox("Esta fecha no corresponde al día específicado.", MsgBoxStyle.Information, "No permitido.")
+                    '            spCatalogos.ActiveSheet.SetActiveCell(fila, spCatalogos.ActiveSheet.Columns("fechaInicio").Index - 1)
+                    '        End If
+                    'End If
+                End If
+            ElseIf (spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("cantidadDiasRecordatorio").Index) Then
+                If (Me.opcionSeleccionadaRango = OpcionRango.DiasRango) Then
+                    Dim cantidadDiasRecordatorio As Integer = LogicaCatalogosGenerales.Funciones.ValidarNumero(spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("cantidadDiasRecordatorio").Index).Text.ToString())
+                    Dim cantidadDiasEspera As Integer = LogicaCatalogosGenerales.Funciones.ValidarNumero(spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("cantidadDiasEspera").Index).Text.ToString())
+                    If (cantidadDiasRecordatorio > cantidadDiasEspera) Then
+                        spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("cantidadDiasRecordatorio").Index).Text = cantidadDiasEspera
                     End If
                 End If
-            ElseIf (spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("idRangoFijoVencimiento").Index) Then
-                Dim idRangoVencimiento As Integer = LogicaCatalogosGenerales.Funciones.ValidarNumero(spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("idRangoFijoVencimiento").Index).Text.ToString())
-                If (idRangoVencimiento > 0) Then
-                    rangosFijos.EId = idRangoVencimiento
-                    Dim lista As New List(Of EntidadesCatalogosGenerales.RangosFijos)
-                    lista = rangosFijos.ObtenerListadoPorId()
-                    If (lista.Count > 0) Then
-                        spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("nombreRangoFijoVencimiento").Index).Value = lista(0).ENombre
-                    Else
-                        spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("idRangoFijoVencimiento").Index).Value = String.Empty
-                        spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("nombreRangoFijoVencimiento").Index).Value = String.Empty
-                        spCatalogos.ActiveSheet.SetActiveCell(fila, spCatalogos.ActiveSheet.Columns("idRangoFijoVencimiento").Index - 1)
-                    End If
-                End If
-            ElseIf (spCatalogos.ActiveSheet.Cells(spCatalogos.ActiveSheet.ActiveRowIndex, spCatalogos.ActiveSheet.Columns("esExterna").Index).Value) Then 
+            ElseIf (spCatalogos.ActiveSheet.Cells(spCatalogos.ActiveSheet.ActiveRowIndex, spCatalogos.ActiveSheet.Columns("esExterna").Index).Value) Then
                 If (spCatalogos.ActiveSheet.ActiveColumnIndex = spCatalogos.ActiveSheet.Columns("idAreaDestino").Index) Then
                     Dim idAreaDestino As Integer = LogicaCatalogosGenerales.Funciones.ValidarNumero(spCatalogos.ActiveSheet.Cells(fila, spCatalogos.ActiveSheet.Columns("idAreaDestino").Index).Text.ToString())
                     If (idAreaDestino > 0) Then
@@ -677,11 +735,19 @@ salta:
 
     End Sub
 
+    Public Function EliminarAcentos(ByVal accentedStr As String) As String
+
+        Dim tempBytes As Byte()
+        tempBytes = System.Text.Encoding.GetEncoding("ISO-8859-8").GetBytes(accentedStr)
+        Return System.Text.Encoding.UTF8.GetString(tempBytes)
+
+    End Function
+
     Private Sub FormatearSpreadCatalogoUsuarios()
 
         spCatalogos2.ActiveSheet.ColumnHeader.Rows(0).Font = New Font("Microsoft Sans Serif", 12, FontStyle.Bold)
         spCatalogos2.Width = 300
-        If (Me.opcionSeleccionada = Opciones.Fijas) Then
+        If (Me.opcionSeleccionadaMenu = OpcionMenu.Fijas) Then
             spCatalogos2.Location = New Point(spCatalogos.Location.X, spCatalogos.Location.Y)
             'Else
             '    spCatalogos2.Location = New Point(spCatalogos.Width - spCatalogos2.Width, spCatalogos.Location.Y)
@@ -719,7 +785,7 @@ salta:
         spCatalogos2.Height = spCatalogos.Height
         spCatalogos2.Width = 310
         spCatalogos2.ActiveSheet.ColumnHeader.Rows(0).Font = New Font("Microsoft Sans Serif", 12, FontStyle.Bold)
-        If (Me.opcionSeleccionada = Opciones.Fijas) Then
+        If (Me.opcionSeleccionadaMenu = OpcionMenu.Fijas) Then
             spCatalogos2.Location = New Point(spCatalogos.Location.X, spCatalogos.Location.Y)
             'ElseIf (Me.opcionSeleccionada = Opciones.Horarios) Then
             '    spCatalogos2.Location = New Point(spCatalogos.Width - spCatalogos2.Width, spCatalogos.Location.Y)
@@ -750,12 +816,12 @@ salta:
         FormatearSpreadCatalogoAreas()
 
     End Sub
-     
+
     Private Sub FormatearSpreadCatalogoRangosFijos()
 
         spCatalogos2.ActiveSheet.ColumnHeader.Rows(0).Font = New Font("Microsoft Sans Serif", 12, FontStyle.Bold)
         spCatalogos2.Width = 300
-        If (Me.opcionSeleccionada = Opciones.Fijas) Then
+        If (Me.opcionSeleccionadaMenu = OpcionMenu.Fijas) Then
             spCatalogos2.Location = New Point(spCatalogos.Location.X, spCatalogos.Location.Y)
             'Else
             '    spCatalogos2.Location = New Point(spCatalogos.Width - spCatalogos2.Width, spCatalogos.Location.Y)
@@ -777,9 +843,9 @@ salta:
 
     End Sub
 
-    Private Sub CargarCatalogoRangosFijos()
-          
-        spCatalogos2.ActiveSheet.DataSource = rangosFijos.ObtenerListadoReporte()
+    Private Sub CargarCatalogoDiasSemana()
+
+        spCatalogos2.ActiveSheet.DataSource = diasSemana.ObtenerListadoReporte()
         spCatalogos2.Focus()
         FormatearSpreadCatalogoRangosFijos()
 
@@ -790,7 +856,7 @@ salta:
         pnlMenu.Enabled = True
         spCatalogos.Enabled = True
         spCatalogos.Focus()
-        If (Me.opcionSeleccionada = Opciones.Fijas) Then
+        If (Me.opcionSeleccionadaMenu = OpcionMenu.Fijas) Then
             spCatalogos.ActiveSheet.SetActiveCell(spCatalogos.ActiveSheet.ActiveRowIndex, spCatalogos.ActiveSheet.ActiveColumnIndex)
         End If
         spCatalogos2.Visible = False
@@ -798,7 +864,7 @@ salta:
     End Sub
 
     Private Sub RestaurarAlturaSpread()
-         
+
         spCatalogos.Height = pnlCuerpo.Height - pnlMenu.Height : Application.DoEvents()
 
     End Sub
@@ -809,29 +875,19 @@ salta:
 
 #Region "Enumeraciones"
 
-    Public Enum Opciones
+    Public Enum OpcionMenu
 
         Fijas = 1
 
     End Enum
 
+    Public Enum OpcionRango
+
+        DiasRango = 1
+        DiasFijos = 2
+
+    End Enum
+
 #End Region
-
-    Private Sub spCatalogos_CellClick(sender As Object, e As FarPoint.Win.Spread.CellClickEventArgs) Handles spCatalogos.CellClick
-
-        'Dim columnaActiva As Integer = spCatalogos.ActiveSheet.ActiveColumnIndex
-        'Dim filaActiva As Integer = e.Row
-        'If (Me.opcionSeleccionada = Opciones.Fijas) Then
-        '    If (columnaActiva = spCatalogos.ActiveSheet.Columns("esExterna").Index) Then
-        '        Dim esExterna As Boolean = spCatalogos.ActiveSheet.Cells(filaActiva, spCatalogos.ActiveSheet.Columns("esExterna").Index).Value
-        '        If (esExterna) Then
-        '            spCatalogos.ActiveSheet.Columns(spCatalogos.ActiveSheet.Columns("idAreaDestino").Index, spCatalogos.ActiveSheet.Columns("nombreUsuarioDestino").Index).Visible = True
-        '        Else
-        '            spCatalogos.ActiveSheet.Columns(spCatalogos.ActiveSheet.Columns("idAreaDestino").Index, spCatalogos.ActiveSheet.Columns("nombreUsuarioDestino").Index).Visible = False
-        '        End If
-        '    End If
-        'End If
-
-    End Sub
 
 End Class

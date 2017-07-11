@@ -1,6 +1,6 @@
 ﻿Imports System.Data.SqlClient
 
-Public Class RangosFijos
+Public Class DiasSemana
 
     Private id As Integer
     Private nombre As String
@@ -22,23 +22,23 @@ Public Class RangosFijos
         End Set
     End Property
 
-    Public Function ObtenerListadoPorId() As List(Of RangosFijos)
+    Public Function ObtenerListadoPorId() As List(Of DiasSemana)
 
-        Dim lista As New List(Of RangosFijos)()
+        Dim lista As New List(Of DiasSemana)()
         Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionCatalogo
-            comando.CommandText = "SELECT * FROM RangosFijos WHERE Id=@id"
+            comando.CommandText = "SELECT * FROM DiasSemana WHERE Id=@id"
             comando.Parameters.AddWithValue("@id", Me.id)
             BaseDatos.conexionCatalogo.Open()
             Dim dataReader As SqlDataReader = Nothing
             dataReader = comando.ExecuteReader()
-            Dim rangos As New RangosFijos()
+            Dim diasSemana As New DiasSemana()
             While (dataReader.Read())
-                rangos = New RangosFijos()
-                rangos.id = Convert.ToInt32(dataReader("Id"))
-                rangos.nombre = dataReader("Nombre").ToString()
-                lista.Add(rangos)
+                diasSemana = New DiasSemana()
+                diasSemana.id = Convert.ToInt32(dataReader("Id"))
+                diasSemana.nombre = dataReader("Nombre").ToString()
+                lista.Add(diasSemana)
             End While
             BaseDatos.conexionCatalogo.Close()
             Return lista
@@ -56,7 +56,7 @@ Public Class RangosFijos
             Dim datos As New DataTable
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionCatalogo
-            comando.CommandText = "SELECT Id, Nombre FROM RangosFijos ORDER BY Id ASC"
+            comando.CommandText = "SELECT Id, Nombre FROM DiasSemana ORDER BY Id ASC"
             comando.Parameters.AddWithValue("@id", Me.EId)
             BaseDatos.conexionCatalogo.Open()
             Dim dataReader As SqlDataReader

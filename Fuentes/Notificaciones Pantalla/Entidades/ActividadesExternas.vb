@@ -130,7 +130,7 @@ Public Class ActividadesExternas
             comando.CommandText = "SELECT A.Id, A.IdArea, Areas.Nombre AS NombreArea, A.IdUsuario, U.Nombre AS NombreUsuario, A.Nombre, A.Descripcion, A.FechaCreacion, A.FechaVencimiento, A.EsUrgente, A.EsExterna, A.IdAreaDestino, A.IdUsuarioDestino " & _
             " FROM ((Actividades AS A LEFT JOIN ActividadesResueltas AS AR ON A.Id = AR.IdActividad AND A.IdArea = AR.IdArea AND A.IdUsuario = AR.IdUsuario) " & _
             " LEFT JOIN [INFORMACION].dbo.Usuarios AS U ON A.IdUsuario = U.Id) LEFT JOIN CATALOGOS.dbo.Areas ON A.IdArea = Areas.Id " & _
-            " WHERE A.EsAutorizado='TRUE' AND A.IdAreaDestino=@idArea AND A.IdUsuarioDestino=@idUsuario AND AR.IdActividad IS NULL AND AR.IdArea IS NULL AND AR.IdUsuario IS NULL AND CONVERT(CHAR(10), A.FechaVencimiento, 121) < CONVERT(CHAR(10), GETDATE(), 121) " & _
+            " WHERE ( A.IdAreaDestino=@idArea AND A.IdUsuarioDestino=@idUsuario AND (A.EsFija IS NULL OR A.EsFija ='FALSE') AND AR.IdActividad IS NULL AND AR.IdArea IS NULL AND AR.IdUsuario IS NULL AND CONVERT(CHAR(10), A.FechaVencimiento, 121) < CONVERT(CHAR(10), GETDATE(), 121) ) OR ( A.IdAreaDestino=@idArea AND A.IdUsuarioDestino=@idUsuario AND A.EsFija = 'TRUE' AND (A.EstaResuelto IS NULL OR A.EstaResuelto = 'FALSE') AND CONVERT(CHAR(10), A.FechaCreacion, 121) <= CONVERT(CHAR(10), GETDATE(), 121) )" & _
             " ORDER BY A.FechaVencimiento ASC"
             comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
             comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)

@@ -35,20 +35,3 @@ C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Mo
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\obj\x86\Debug\EYE01.xml
 C:\Users\Andrew\Desktop\Proyectos Personales\Proyecto Agenda-Bitacora\Fuentes Modificados\Catalogos\Escritorio\obj\x86\Debug\EYE01.pdb
 C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Escritorio\bin\x86\Debug\ACT07.exe.config
-C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Escritorio\bin\x86\Debug\ACT07.exe
-C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Escritorio\bin\x86\Debug\ACT07.pdb
-C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Escritorio\bin\x86\Debug\ACT07.xml
-C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Escritorio\bin\x86\Debug\EntidadesCatalogosGenerales.dll
-C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Escritorio\bin\x86\Debug\LogicaCatalogosGenerales.dll
-C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Escritorio\bin\x86\Debug\EntidadesCatalogosGenerales.pdb
-C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Escritorio\bin\x86\Debug\EntidadesCatalogosGenerales.xml
-C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Escritorio\bin\x86\Debug\LogicaCatalogosGenerales.pdb
-C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Escritorio\bin\x86\Debug\LogicaCatalogosGenerales.xml
-C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Escritorio\obj\x86\Debug\Escritorio.vbprojResolveAssemblyReference.cache
-C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Escritorio\obj\x86\Debug\CatalogosGenerales.Resources.resources
-C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Escritorio\obj\x86\Debug\CatalogosGenerales.Principal.resources
-C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Escritorio\obj\x86\Debug\Escritorio.vbproj.GenerateResource.Cache
-C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Escritorio\obj\x86\Debug\ACT07.exe.licenses
-C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Escritorio\obj\x86\Debug\ACT07.exe
-C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Escritorio\obj\x86\Debug\ACT07.xml
-C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Escritorio\obj\x86\Debug\ACT07.pdb

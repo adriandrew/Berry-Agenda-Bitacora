@@ -6,3 +6,11 @@ C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Logica\ob
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Logica\obj\Debug\LogicaNotificacionesCorreo.dll
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Logica\obj\Debug\LogicaNotificacionesCorreo.xml
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Logica\obj\Debug\LogicaNotificacionesCorreo.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Correo\Logica\bin\Debug\LogicaNotificacionesCorreo.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Correo\Logica\bin\Debug\LogicaNotificacionesCorreo.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Correo\Logica\bin\Debug\LogicaNotificacionesCorreo.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Correo\Logica\obj\Debug\LogicaNotificacionesCorreo.Resources.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Correo\Logica\obj\Debug\LogicaNotificacionesCorreo.vbproj.GenerateResource.Cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Correo\Logica\obj\Debug\LogicaNotificacionesCorreo.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Correo\Logica\obj\Debug\LogicaNotificacionesCorreo.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Correo\Logica\obj\Debug\LogicaNotificacionesCorreo.pdb

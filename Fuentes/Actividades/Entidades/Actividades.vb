@@ -18,6 +18,7 @@ Public Class Actividades
     Private estaResuelto As Boolean
     Private solicitaAutorizacion As Boolean
     Private solicitaEvidencia As Boolean
+    Private esFija As Boolean 
 
     Public Property EId() As Integer
         Get
@@ -147,6 +148,14 @@ Public Class Actividades
             Me.solicitaEvidencia = value
         End Set
     End Property
+    Public Property EEsFija() As Boolean
+        Get
+            Return Me.esFija
+        End Get
+        Set(value As Boolean)
+            Me.esFija = value
+        End Set
+    End Property 
 
     Public Function ObtenerListadoPendientes() As List(Of Actividades)
 
@@ -154,7 +163,7 @@ Public Class Actividades
             Dim lista As New List(Of Actividades)
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
-            comando.CommandText = "SELECT A.* FROM Actividades AS A LEFT JOIN ActividadesResueltas AS AR ON A.Id = AR.IdActividad AND A.IdArea = AR.IdArea AND A.IdUsuario = AR.IdUsuario " & _
+            comando.CommandText = "SELECT A.Id, A.IdArea, A.IdUsuario, A.Nombre, A.Descripcion, A.FechaCreacion, A.FechaVencimiento, A.EsUrgente, A.EsExterna, A.IdAreaDestino, A.IdUsuarioDestino, A.EsAutorizado, A.EsRechazado, A.EstaResuelto, A.SolicitaAutorizacion, A.SolicitaEvidencia FROM Actividades AS A LEFT JOIN ActividadesResueltas AS AR ON A.Id = AR.IdActividad AND A.IdArea = AR.IdArea AND A.IdUsuario = AR.IdUsuario " & _
             " WHERE A.IdArea=@idArea AND A.IdUsuario=@idUsuario AND AR.IdActividad IS NULL AND AR.IdArea IS NULL AND AR.IdUsuario IS NULL AND A.EsRechazado='FALSE'"
             comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
             comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
@@ -179,7 +188,7 @@ Public Class Actividades
                 actividades.esRechazado = IIf(Not IsDBNull(dataReader("EsRechazado")), dataReader("EsRechazado"), False)
                 actividades.estaResuelto = IIf(Not IsDBNull(dataReader("EstaResuelto")), dataReader("EstaResuelto"), False)
                 actividades.solicitaAutorizacion = IIf(Not IsDBNull(dataReader("SolicitaAutorizacion")), dataReader("SolicitaAutorizacion"), False)
-                actividades.solicitaEvidencia = IIf(Not IsDBNull(dataReader("SolicitaEvidencia")), dataReader("SolicitaEvidencia"), False)
+                actividades.solicitaEvidencia = IIf(Not IsDBNull(dataReader("SolicitaEvidencia")), dataReader("SolicitaEvidencia"), False) 
                 lista.Add(actividades)
             End While
             BaseDatos.conexionAgenda.Close()
@@ -240,7 +249,6 @@ Public Class Actividades
         Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
-            comando.CommandText = "INSERT INTO Actividades (Id, IdArea, IdUsuario, Nombre, Descripcion, FechaCreacion, FechaVencimiento, EsUrgente, EsExterna, IdAreaDestino, IdUsuarioDestino, EsAutorizado, EsRechazado, EstaResuelto, SolicitaAutorizacion, SolicitaEvidencia) VALUES (@id, @idArea, @idUsuario, @nombre, @descripcion, @fechaCreacion, @fechaVencimiento, @esUrgente, @esExterna, @idAreaDestino, @idUsuarioDestino, @esAutorizado, @esRechazado, @estaResuelto, @solicitaAutorizacion, @solicitaEvidencia)"
             comando.Parameters.AddWithValue("@id", Me.EId)
             comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
             comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
@@ -257,6 +265,7 @@ Public Class Actividades
             comando.Parameters.AddWithValue("@estaResuelto", Me.EEstaResuelto)
             comando.Parameters.AddWithValue("@solicitaAutorizacion", Me.ESolicitaAutorizacion)
             comando.Parameters.AddWithValue("@solicitaEvidencia", Me.ESolicitaEvidencia)
+            comando.Parameters.AddWithValue("@esFija", Me.EEsFija) 
             BaseDatos.conexionAgenda.Open()
             comando.ExecuteNonQuery()
             BaseDatos.conexionAgenda.Close()

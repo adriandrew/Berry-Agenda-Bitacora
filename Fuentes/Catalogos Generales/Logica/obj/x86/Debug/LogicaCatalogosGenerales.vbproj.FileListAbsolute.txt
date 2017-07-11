@@ -1,8 +1,0 @@
-C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Logica\bin\x86\Debug\LogicaCatalogosGenerales.dll
-C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Logica\bin\x86\Debug\LogicaCatalogosGenerales.pdb
-C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Logica\bin\x86\Debug\LogicaCatalogosGenerales.xml
-C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Logica\obj\x86\Debug\LogicaCatalogosGenerales.Resources.resources
-C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Logica\obj\x86\Debug\LogicaCatalogosGenerales.vbproj.GenerateResource.Cache
-C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Logica\obj\x86\Debug\LogicaCatalogosGenerales.dll
-C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Logica\obj\x86\Debug\LogicaCatalogosGenerales.xml
-C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Catalogos Generales\Logica\obj\x86\Debug\LogicaCatalogosGenerales.pdb

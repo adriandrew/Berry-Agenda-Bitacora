@@ -18,6 +18,7 @@ Public Class Actividades
     Private estaResuelto As Boolean
     Private solicitaAutorizacion As Boolean
     Private solicitaEvidencia As Boolean
+    Private esFija As Boolean 
 
     Public Property EId() As Integer
         Get
@@ -147,6 +148,14 @@ Public Class Actividades
             Me.solicitaEvidencia = value
         End Set
     End Property
+    Public Property EEsFija() As Integer
+        Get
+            Return Me.esFija
+        End Get
+        Set(value As Integer)
+            Me.esFija = value
+        End Set
+    End Property 
 
     Public Function ObtenerListadoPendientes() As List(Of Actividades)
 
@@ -156,7 +165,7 @@ Public Class Actividades
             comando.Connection = BaseDatos.conexionAgenda
             comando.CommandText = "SELECT A.* " & _
             " FROM Actividades AS A LEFT JOIN ActividadesResueltas AS AR ON A.Id = AR.IdActividad AND A.IdArea = AR.IdArea AND A.IdUsuario = AR.IdUsuario " & _
-            " WHERE A.IdArea=@idArea AND A.IdUsuario=@idUsuario AND AR.IdActividad IS NULL AND AR.IdArea IS NULL AND AR.IdUsuario IS NULL AND CONVERT(CHAR(10), A.FechaVencimiento, 121) < CONVERT(CHAR(10), GETDATE(), 121) " & _
+            " WHERE ( A.IdArea=@idArea AND A.IdUsuario=@idUsuario AND (A.EsFija IS NULL OR A.EsFija ='FALSE') AND AR.IdActividad IS NULL AND AR.IdArea IS NULL AND AR.IdUsuario IS NULL AND CONVERT(CHAR(10), A.FechaVencimiento, 121) < CONVERT(CHAR(10), GETDATE(), 121) ) OR ( A.IdArea=@idArea AND A.IdUsuario=@idUsuario AND A.EsFija = 'TRUE' AND (A.EstaResuelto IS NULL OR A.EstaResuelto = 'FALSE') AND CONVERT(CHAR(10), A.FechaCreacion, 121) <= CONVERT(CHAR(10), GETDATE(), 121) ) " & _
             " ORDER BY A.FechaVencimiento ASC"
             comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
             comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
@@ -197,7 +206,7 @@ Public Class Actividades
         Try
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
-            comando.CommandText = "INSERT INTO Actividades (Id, IdArea, IdUsuario, Nombre, Descripcion, FechaCreacion, FechaVencimiento, EsUrgente, EsExterna, IdAreaDestino, IdUsuarioDestino, EsAutorizado, EsRechazado, EstaResuelto, SolicitaAutorizacion, SolicitaEvidencia) VALUES (@id, @idArea, @idUsuario, @nombre, @descripcion, @fechaCreacion, @fechaVencimiento, @esUrgente, @esExterna, @idAreaDestino, @idUsuarioDestino, @esAutorizado, @esRechazado, @estaResuelto, @solicitaAutorizacion, @solicitaEvidencia)"
+            comando.CommandText = "INSERT INTO Actividades (Id, IdArea, IdUsuario, Nombre, Descripcion, FechaCreacion, FechaVencimiento, EsUrgente, EsExterna, IdAreaDestino, IdUsuarioDestino, EsAutorizado, EsRechazado, EstaResuelto, SolicitaAutorizacion, SolicitaEvidencia, EsFija) VALUES (@id, @idArea, @idUsuario, @nombre, @descripcion, @fechaCreacion, @fechaVencimiento, @esUrgente, @esExterna, @idAreaDestino, @idUsuarioDestino, @esAutorizado, @esRechazado, @estaResuelto, @solicitaAutorizacion, @solicitaEvidencia, @esFija)"
             comando.Parameters.AddWithValue("@id", Me.EId)
             comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
             comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
@@ -214,6 +223,7 @@ Public Class Actividades
             comando.Parameters.AddWithValue("@estaResuelto", Me.EEstaResuelto)
             comando.Parameters.AddWithValue("@solicitaAutorizacion", Me.ESolicitaAutorizacion)
             comando.Parameters.AddWithValue("@solicitaEvidencia", Me.ESolicitaEvidencia)
+            comando.Parameters.AddWithValue("@esFija", Me.EEsFija) 
             BaseDatos.conexionAgenda.Open()
             comando.ExecuteNonQuery()
             BaseDatos.conexionAgenda.Close()

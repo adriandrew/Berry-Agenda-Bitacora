@@ -13,6 +13,7 @@ Public Class Actividades
     Private esExterna As Boolean
     Private idAreaDestino As Integer
     Private idUsuarioDestino As Integer
+    Private esFija As Boolean
 
     Public Property EId() As Integer
         Get
@@ -102,6 +103,14 @@ Public Class Actividades
             Me.idUsuarioDestino = value
         End Set
     End Property
+    Public Property EEsFija() As Boolean
+        Get
+            Return Me.esFija
+        End Get
+        Set(value As Boolean)
+            Me.esFija = value
+        End Set
+    End Property
 
     Public Function ObtenerListadoPendientes() As List(Of Actividades)
 
@@ -110,7 +119,7 @@ Public Class Actividades
             Dim comando As New SqlCommand()
             comando.Connection = BaseDatos.conexionAgenda
             comando.CommandText = "SELECT A.* FROM Actividades AS A LEFT JOIN ActividadesResueltas AS AR ON A.Id = AR.IdActividad AND A.IdArea = AR.IdArea AND A.IdUsuario = AR.IdUsuario " & _
-            " WHERE A.IdArea=@idArea AND A.IdUsuario=@idUsuario AND AR.IdActividad IS NULL AND AR.IdArea IS NULL AND AR.IdUsuario IS NULL AND CONVERT(CHAR(10), A.FechaVencimiento, 121) < CONVERT(CHAR(10), GETDATE(), 121) " & _
+            " WHERE ( A.IdArea=@idArea AND A.IdUsuario=@idUsuario AND (A.EsFija IS NULL OR A.EsFija ='FALSE') AND AR.IdActividad IS NULL AND AR.IdArea IS NULL AND AR.IdUsuario IS NULL AND CONVERT(CHAR(10), A.FechaVencimiento, 121) < CONVERT(CHAR(10), GETDATE(), 121) ) OR ( A.IdArea=@idArea AND A.IdUsuario=@idUsuario AND A.EsFija = 'TRUE' AND (A.EstaResuelto IS NULL OR A.EstaResuelto = 'FALSE') AND CONVERT(CHAR(10), A.FechaCreacion, 121) <= CONVERT(CHAR(10), GETDATE(), 121) )" & _
             " ORDER BY A.FechaVencimiento ASC"
             comando.Parameters.AddWithValue("@idArea", Me.EIdArea)
             comando.Parameters.AddWithValue("@idUsuario", Me.EIdUsuario)
@@ -131,6 +140,7 @@ Public Class Actividades
                 actividades.esExterna = IIf(Not IsDBNull(dataReader("EsExterna")), dataReader("EsExterna"), False)
                 actividades.idAreaDestino = Convert.ToInt32(IIf(IsNumeric(dataReader("IdAreaDestino")), dataReader("IdAreaDestino"), 0))
                 actividades.idUsuarioDestino = Convert.ToInt32(IIf(IsNumeric(dataReader("IdUsuarioDestino")), dataReader("IdUsuarioDestino"), 0))
+                actividades.esFija = IIf(Not IsDBNull(dataReader("EsFija")), dataReader("EsFija"), False)
                 lista.Add(actividades)
             End While
             BaseDatos.conexionAgenda.Close()

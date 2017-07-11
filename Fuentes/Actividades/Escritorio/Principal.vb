@@ -698,6 +698,7 @@ Public Class Principal
         Dim estaResuelto As Boolean = False
         Dim solicitaAutorizacion As Boolean = chkSolicitarAutorizacion.Checked
         Dim solicitaEvidencia As Boolean = chkSolicitarEvidencia.Checked
+        Dim esFija As Boolean = False 
         If (esExterna And (idAreaDestino <= 0 Or idUsuarioDestino <= 0)) Then
             MsgBox("Falta definir area y/o usuario destino, no se puede guardar.", MsgBoxStyle.Exclamation, "No permitido.")
             Exit Sub
@@ -723,6 +724,7 @@ Public Class Principal
             actividades.EEstaResuelto = estaResuelto
             actividades.ESolicitaAutorizacion = solicitaAutorizacion
             actividades.ESolicitaEvidencia = solicitaEvidencia
+            actividades.EEsFija = esFija 
             Dim estaResuelta As Boolean = actividades.ValidarResueltaPorId()
             If (estaResuelta) Then
                 MsgBox("Actividad resuelta, no se puede guardar.", MsgBoxStyle.Exclamation, "No permitido.")
@@ -1042,6 +1044,7 @@ Public Class Principal
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "estaResuelto" : numeracion += 1
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "solicitaAutorizacion" : numeracion += 1
         spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "solicitaEvidencia" : numeracion += 1
+        spResolverActividades.ActiveSheet.Columns(numeracion).Tag = "esFija" : numeracion += 1 
         spResolverActividades.ActiveSheet.Columns("id").Width = 60
         spResolverActividades.ActiveSheet.Columns("nombre").Width = 300
         spResolverActividades.ActiveSheet.Columns("descripcion").Width = 500
@@ -1072,6 +1075,7 @@ Public Class Principal
         spResolverActividades.ActiveSheet.Columns("esAutorizado").Visible = False
         spResolverActividades.ActiveSheet.Columns("esRechazado").Visible = False
         spResolverActividades.ActiveSheet.Columns("estaResuelto").Visible = False
+        spResolverActividades.ActiveSheet.Columns("esFija").Visible = False 
         spResolverActividades.ActiveSheet.ColumnHeader.Rows(0).Height = 45
         If (Me.opcionSeleccionada = OpcionActividades.Resolver) Then
             Me.Cursor = Cursors.Default

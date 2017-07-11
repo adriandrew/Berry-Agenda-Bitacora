@@ -10,3 +10,15 @@ C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Entidades
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Entidades\obj\Debug\EntidadesNotificacionesCorreo.dll
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Entidades\obj\Debug\EntidadesNotificacionesCorreo.xml
 C:\Users\Berry 1\Desktop\Proyectos Berry\Fuentes\Notificaciones Correo\Entidades\obj\Debug\EntidadesNotificacionesCorreo.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Correo\Entidades\bin\Debug\EntidadesNotificacionesCorreo.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Correo\Entidades\bin\Debug\EntidadesNotificacionesCorreo.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Correo\Entidades\bin\Debug\EntidadesNotificacionesCorreo.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Correo\Entidades\bin\Debug\LogicaNotificacionesCorreo.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Correo\Entidades\bin\Debug\LogicaNotificacionesCorreo.pdb
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Correo\Entidades\bin\Debug\LogicaNotificacionesCorreo.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Correo\Entidades\obj\Debug\EntidadesNotificacionesCorreo.vbprojResolveAssemblyReference.cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Correo\Entidades\obj\Debug\EntidadesNotificacionesCorreo.Resources.resources
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Correo\Entidades\obj\Debug\EntidadesNotificacionesCorreo.vbproj.GenerateResource.Cache
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Correo\Entidades\obj\Debug\EntidadesNotificacionesCorreo.dll
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Correo\Entidades\obj\Debug\EntidadesNotificacionesCorreo.xml
+C:\Users\Berry 1\Desktop\Proyectos Berry\Agenda-Bitacora\Fuentes Modificados\Notificaciones Correo\Entidades\obj\Debug\EntidadesNotificacionesCorreo.pdb
